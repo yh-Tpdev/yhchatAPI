@@ -1,5 +1,5 @@
 ## 登录云湖账户-获取登录token(手机号)
-#### /v1/user/verification-login
+#### POST-/v1/user/verification-login
 
 #### 请求数据(json)
 ```json
