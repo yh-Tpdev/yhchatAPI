@@ -66,7 +66,7 @@ data {
   id: "用户id"
   name: "用户名"
   avatar_url: "头像URL"
-  avatar_id: 头像ID(数字)
+  avatar_id: 头像ID(整数)
   phone: "手机号"
   email: "邮箱"
   coin: 金币数
@@ -94,6 +94,86 @@ message info {
         string invitation_code = 12; // 邀请码
     }
     Data data = 2;
+}
+```
+:::
+
+## 获取用户信息
+
+POST /v1/user/get-user
+
+请求头:  
+
+|名称|必须|备注|
+|---|---|---|
+|token|是|可以瞎写一个|
+
+请求体:  
+```ProtoBuf
+id: "用户id"
+```
+::: details ProtoBuf数据结构
+```proto
+message get_user_send {
+    string id = 2;
+}
+```
+:::
+
+响应体:  
+```ProtoBuf
+status {
+  number: 123456
+  code: 1
+  msg: "success"
+}
+data {
+  id: "用户ID"
+  name: "用户名"
+  unknown: 不知道干啥的
+  avatar_url: "头像URL"
+  avatar_id: 头像ID(整数)
+  medal {
+    order: 1
+    text: "内测用户"
+    id: 100
+  }
+  medal {
+    order: 6
+    text: "100000用户"
+    id: 500
+  }
+  registered_time: "注册时间(YYYY-MM-DD hh:mm:ss"
+  online_day: 在线时长(整数)
+  continue_online_day: 连续在线时长(整数)
+  vip_expired_time: unix时间戳
+}
+```
+::: details ProtoBuf数据结构
+```proto
+// 勋章信息
+message Medal_info {
+    uint64 order = 1;
+    string text = 2;
+    uint64 id = 5;   
+}
+
+// 获取用户信息
+message get_user {
+    Status status = 1; // 状态码
+    Data data = 2; //数据
+    message Data {
+        string id = 1; // 用户id
+        string name = 2; // 用户名
+        uint64 unknown = 3; // 不知道干啥的
+        string avatar_url = 4; //头像URL
+        uint64 avatar_id = 5; // 头像ID
+        repeated Medal_info medal = 6; // 勋章信息
+        string registered_time = 7; // 注册时间,格式: YYYY-MM-DD hh:mm:ss
+        uint64 online_day = 11; // 在线天数
+        uint64 continue_online_day = 12; // 连续在线天数
+        uint64 vip_expired_time = 14; // VIP过期时间(时间戳)
+    }
 }
 ```
 :::
