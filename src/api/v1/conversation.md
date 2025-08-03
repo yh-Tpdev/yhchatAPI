@@ -20,7 +20,7 @@ POST /v1/conversation/dismiss-notification
 响应体:  
 ```JSON
 {
- "code": 1, // (响应码,1为正常,数字)
- "msg": "success" // (响应信息)
+ "code": 1, // 响应码,1为正常,数字
+ "msg": "success" // 响应信息
 }
 ```
