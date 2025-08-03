@@ -143,7 +143,7 @@ data {
     text: "100000用户"
     id: 500
   }
-  registered_time: "注册时间(YYYY-MM-DD hh:mm:ss"
+  registered_time: "注册时间(YYYY-MM-DD hh:mm:ss)"
   online_day: 在线时长(整数)
   continue_online_day: 连续在线时长(整数)
   vip_expired_time: unix时间戳
@@ -174,6 +174,52 @@ message get_user {
         uint64 continue_online_day = 12; // 连续在线天数
         uint64 vip_expired_time = 14; // VIP过期时间(时间戳)
     }
+}
+```
+:::
+
+## 用户勋章
+
+POST /v1/user/medal
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|空|
+
+响应体:  
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+medal {
+  order: 1
+  text: "内测用户"
+  id: 100
+}
+medal {
+  order: 6
+  text: "100000用户"
+  id: 500
+}
+```
+
+::: details ProtoBuf数据结构
+```proto
+// 勋章
+message medal {
+    Status status = 1; // 状态信息
+    repeated Medal_info medal = 2; // 勋章信息
+}
+
+// 勋章信息
+message Medal_info {
+    uint64 order = 1; // 勋章序列
+    string text = 2; // 勋章文本
+    uint64 id = 5; // 勋章ID? 不确定
 }
 ```
 :::
