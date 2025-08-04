@@ -164,7 +164,7 @@ POST /v1/group/live-room
         "status": "房间状态码，此值为数值",
         "createBy": "{房间创建用户ID}",
         "createTime": "房间创建时间戳，此值为数值",
-        "nickname": "{用户名称}",
+        "nickname": "{房间创建用户名称}",
         "count": "房间内人数，此值为数值",
         "avatarUrl": "{房间头像url}"
     }
