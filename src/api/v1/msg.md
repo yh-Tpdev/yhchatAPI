@@ -44,15 +44,15 @@ message send_message_send {
     string chat_type = 4; // 欲发送到的信息对象的类别，1-用户，2-群聊，3-机器人
     Data data = 5;
     message data {
-      string msg_text = 1; // 信息文本
-      string quote_msg_text = 8; // 引用信息文本
-      string image_key = 9; // 欲发送图片key
-      string msg_text1 = 11; // 信息文本
-      string msg_text2 = 12; // 信息文本
-      string temp_text1 = 16; // 不知道干啥的
-      string temp_text2 = 17; // 不知道干啥的
-      string temp_text3 = 23; // 不知道干啥的
-      uint64 temp_code1 = 24; // 不知道干啥的
+        string msg_text = 1; // 信息文本
+        string quote_msg_text = 8; // 引用信息文本
+        string image_key = 9; // 欲发送图片key
+        string msg_text1 = 11; // 信息文本
+        string msg_text2 = 12; // 信息文本
+        string temp_text1 = 16; // 不知道干啥的
+        string temp_text2 = 17; // 不知道干啥的
+        string temp_text3 = 23; // 不知道干啥的
+        uint64 temp_code1 = 24; // 不知道干啥的
     }
     uint64 msg_type = 6; // 信息类别，1-文本，2-图片，3-markdown，4-文件，5-表单，6-文章，7-表情，8-html
     uint64 temp_code = 7; // 不知道干啥的
