@@ -34,3 +34,24 @@ POST /v1/expression/list
   "msg": "success"
 }
 ```
+
+## 添加图片到个人表情收藏
+
+POST /v1/expression/create  
+
+请求头:  
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体:  
+```JSON
+{
+  "url": "图片URL,例如https://chat-img.jwznb.com/123456789.jpg"
+}
+```
+
+响应体:  
+```JSON
+{"code":1,"msg":"success"}
+```

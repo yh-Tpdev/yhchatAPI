@@ -35,7 +35,7 @@ data {
   member: 群人数(数值)
   create_by: "创建者ID"
   direct_join: 进群免审核,1为开启
-  permisson_level: 权限等级(普通用户无此项,群主100,管理员2)
+  permisson_level: 权限等级(普通用户无此项(据说数值为0),群主100,管理员2)
   history_msg: 历史消息,1为开启
   category_name: "分类名"
   category_id: 分类ID
