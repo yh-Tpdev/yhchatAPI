@@ -15,7 +15,7 @@ POST /v1/msg/send-message
 |---|---|---|
 |token|是|无|
 
-请求体:  (在发送单种类别的信息是，其余类别的信息属性不需用存在，例如语音信息不存在引用信息)
+请求体:  
 ```ProtoBuf
 msg_id: "信息ID"
 chat_id: "欲发送到的信息对象"
@@ -60,6 +60,10 @@ message send_message_send {
     string temp_text = 9; // 不知道干啥的
 }
 ```
+:::
+
+::: warning
+在发送单种类别的信息时，其余类别的信息属性不存在，例如语音信息不存在引用信息.
 :::
 
 响应体:  
