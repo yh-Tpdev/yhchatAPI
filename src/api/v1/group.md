@@ -141,7 +141,7 @@ POST /v1/group/live-room
 
 |名称|必须|备注|
 |---|---|---|
-|token|是|可以瞎写一个|
+|token|是|无|
 
 请求体:  
 ```JSON
