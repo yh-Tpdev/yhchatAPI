@@ -38,7 +38,7 @@ temp_text: ""
 ```
 ::: details ProtoBuf数据结构
 ```proto
-message send-message_send {
+message send_message_send {
     string msg_id = 2; // 信息ID
     string chat_id = 3; // 欲发送到的信息对象
     string chat_type = 4; // 欲发送到的信息对象的类别，1-用户，2-群聊，3-机器人
