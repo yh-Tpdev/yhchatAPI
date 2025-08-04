@@ -258,7 +258,7 @@ status {
 ::: details ProtoBuf数据结构
 ```proto
 // 更改名称状态信息
-message medal {
+message edit_nickname {
     Status status = 1; // 状态信息
 }
 ```
@@ -280,7 +280,7 @@ url: "用户头像url"
 ```
 ::: details ProtoBuf数据结构
 ```proto
-message edit_nickname_send {
+message edit_avatar_send {
     string url = 2;
 }
 ```
@@ -298,7 +298,7 @@ status {
 ::: details ProtoBuf数据结构
 ```proto
 // 更改名称状态信息
-message medal {
+message edit_avatar {
     Status status = 1; // 状态信息
 }
 ```
