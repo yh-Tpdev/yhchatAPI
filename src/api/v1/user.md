@@ -263,3 +263,43 @@ message medal {
 }
 ```
 :::
+
+## 更改用户头像
+
+POST /v1/user/edit-avatar
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|空|
+
+请求体:  
+```ProtoBuf
+url: "用户头像url"
+```
+::: details ProtoBuf数据结构
+```proto
+message edit_nickname_send {
+    string url = 2;
+}
+```
+:::
+
+响应体:  
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+```
+
+::: details ProtoBuf数据结构
+```proto
+// 更改名称状态信息
+message medal {
+    Status status = 1; // 状态信息
+}
+```
+:::
