@@ -135,12 +135,12 @@ data {
   avatar_id: 头像ID(整数)
   medal {
     id: 1
-    text: "内测用户"
+    name: "内测用户"
     sort: 100
   }
   medal {
     id: 6
-    text: "100000用户"
+    name: "100000用户"
     sort: 500
   }
   register_time: "注册时间(YYYY-MM-DD hh:mm:ss)"
@@ -154,7 +154,7 @@ data {
 // 勋章信息
 message Medal_info {
     uint64 id = 1;
-    string text = 2;
+    string name = 2;
     uint64 sort = 5;   
 }
 
@@ -197,12 +197,12 @@ status {
 }
 medal {
   id: 1
-  text: "内测用户"
+  name: "内测用户"
   sort: 100
 }
 medal {
   id: 6
-  text: "100000用户"
+  name: "100000用户"
   sort: 500
 }
 ```
@@ -218,7 +218,7 @@ message medal {
 // 勋章信息
 message Medal_info {
     uint64 id = 1; // 勋章ID
-    string text = 2; // 勋章文本
+    string name = 2; // 勋章名
     uint64 sort = 5; // 勋章排列相关?
 }
 ```
