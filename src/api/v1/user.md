@@ -134,18 +134,18 @@ data {
   avatar_url: "头像URL"
   avatar_id: 头像ID(整数)
   medal {
-    order: 1
+    id: 1
     text: "内测用户"
-    id: 100
+    sort: 100
   }
   medal {
-    order: 6
+    id: 6
     text: "100000用户"
-    id: 500
+    sort: 500
   }
-  registered_time: "注册时间(YYYY-MM-DD hh:mm:ss)"
+  register_time: "注册时间(YYYY-MM-DD hh:mm:ss)"
   online_day: 在线时长(整数)
-  continue_online_day: 连续在线时长(整数)
+  continuous_online_day: 连续在线时长(整数)
   vip_expired_time: unix时间戳
 }
 ```
@@ -153,9 +153,9 @@ data {
 ```proto
 // 勋章信息
 message Medal_info {
-    uint64 order = 1;
+    uint64 id = 1;
     string text = 2;
-    uint64 id = 5;   
+    uint64 sort = 5;   
 }
 
 // 获取用户信息
@@ -169,9 +169,9 @@ message get_user {
         string avatar_url = 4; //头像URL
         uint64 avatar_id = 5; // 头像ID
         repeated Medal_info medal = 6; // 勋章信息
-        string registered_time = 7; // 注册时间,格式: YYYY-MM-DD hh:mm:ss
+        string register_time = 7; // 注册时间,格式: YYYY-MM-DD hh:mm:ss
         uint64 online_day = 11; // 在线天数
-        uint64 continue_online_day = 12; // 连续在线天数
+        uint64 continuous_online_day = 12; // 连续在线天数
         uint64 vip_expired_time = 14; // VIP过期时间(时间戳)
     }
 }
@@ -196,14 +196,14 @@ status {
   msg: "success"
 }
 medal {
-  order: 1
+  id: 1
   text: "内测用户"
-  id: 100
+  sort: 100
 }
 medal {
-  order: 6
+  id: 6
   text: "100000用户"
-  id: 500
+  sort: 500
 }
 ```
 
@@ -217,9 +217,9 @@ message medal {
 
 // 勋章信息
 message Medal_info {
-    uint64 order = 1; // 勋章序列
+    uint64 id = 1; // 勋章ID
     string text = 2; // 勋章文本
-    uint64 id = 5; // 勋章ID? 不确定
+    uint64 sort = 5; // 勋章排列相关?
 }
 ```
 :::
