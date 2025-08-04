@@ -12,7 +12,7 @@ POST /v1/user/captcha
 响应数据:  
 ```JSON
 {
-  "code": "请求状态码，1为正常 此值为数值",
+  "code": "请求状态码，1为正常，此值为数值",
   "data": {
     "b64s": "{人机验证图片base64，image//png;base64}",
     "id": "{人机验证ID}"
