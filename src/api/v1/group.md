@@ -33,7 +33,7 @@ data {
   avatar_id: 头像ID(数值)
   introduction: "群聊简介"
   member: 群人数(数值)
-  created_by: "创建者ID"
+  create_by: "创建者ID"
   direct_join: 进群免审核,1为开启
   permisson_level: 权限等级(普通用户无此项,群主100,管理员2)
   history_msg: 历史消息,1为开启
@@ -62,8 +62,8 @@ history_bot {
   avatar_url: "头像URL"
   avatar_id: 头像ID(数值)
   introduction: "机器人简介"
-  created_by: "创建者ID"
-  created_time: 创建时间戳
+  create_by: "创建者ID"
+  create_time: 创建时间戳
   user_number: 使用人数(数值)
   private: 1表示私有机器人.
 }
@@ -89,7 +89,7 @@ message info {
         uint64 avatar_id = 4; // 头像ID
         string introduction = 5;
         uint64 member = 6; // 群人数
-        string created_by = 7;
+        string create_by = 7;
         uint64 direct_join = 8; // 进群免审核
         uint64 permisson_level = 9; // 权限等级
         uint64 history_msg = 10; // 历史消息
@@ -123,8 +123,8 @@ message info {
         string avatar_url = 4;
         uint64 avatar_id = 5;
         string introduction = 6;
-        string created_by = 7;
-        uint64 created_time = 8;
+        string create_by = 7;
+        uint64 create_time = 8;
         uint64 user_number = 9; // 使用人数
         uint64 private = 10; // 是否为私有机器人
     }
