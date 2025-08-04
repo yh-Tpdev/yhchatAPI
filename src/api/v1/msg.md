@@ -26,10 +26,10 @@ data {
   image_key: "欲发送图片key"
   msg_text1: "信息文本"
   msg_text2: "信息文本"
-  temp_text: ""
-  temp_text: ""
-  temp_text: ""
-  temp_code: 0
+  temp_text1: ""
+  temp_text2: ""
+  temp_text3: ""
+  temp_code1: 0
 }
 msg_type: 1
 temp_code: 0
@@ -49,10 +49,10 @@ message send_message_send {
       string image_key = 9; // 欲发送图片key
       string msg_text1 = 11; // 信息文本
       string msg_text2 = 12; // 信息文本
-      string temp_text = 16; // 不知道干啥的
-      string temp_text = 17; // 不知道干啥的
-      string temp_text = 23; // 不知道干啥的
-      uint64 temp_code = 24; // 不知道干啥的
+      string temp_text1 = 16; // 不知道干啥的
+      string temp_text2 = 17; // 不知道干啥的
+      string temp_text3 = 23; // 不知道干啥的
+      uint64 temp_code1 = 24; // 不知道干啥的
     }
     uint64 msg_type = 6; // 信息类别，1-文本，2-图片，3-markdown，4-文件，5-表单，6-文章，7-表情，8-html
     uint64 temp_code = 7; // 不知道干啥的
