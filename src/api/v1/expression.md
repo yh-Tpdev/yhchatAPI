@@ -26,7 +26,7 @@ POST /v1/expression/list
         "url": "expression/abcdef123456789abcdef123456789ab.jpg", // 需要前面加上 https://chat-img.jwznb.com/
         "urlOriginal": "https://chat-img.jwznb.com/123456789abcdefabcf43bce54e4e242.jpg", // 来源URL
         "delFlag": 0,
-        "createTime": 创建时间戳,
+        "createTime": 114514, // 创建时间戳
         "createBy": "创建者"
       }
     ]
@@ -49,6 +49,46 @@ POST /v1/expression/create
 {
   "url": "图片URL,例如https://chat-img.jwznb.com/123456789.jpg"
 }
+```
+
+响应体:  
+```JSON
+{"code":1,"msg":"success"}
+```
+
+## 删除个人表情收藏中的表情
+
+POST /v1/expression/delete
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体:  
+```JSON
+{"id": 114514(表情ID)}
+```
+
+响应体:  
+```JSON
+{"code":1,"msg":"success"}
+```
+
+## 置顶个人表情收藏中的表情
+
+POST /v1/expression/topping  
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体:  
+```JSON
+{"id": 114514(表情ID)}
 ```
 
 响应体:  

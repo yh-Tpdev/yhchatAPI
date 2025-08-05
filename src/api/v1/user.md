@@ -130,7 +130,7 @@ status {
 data {
   id: "用户ID"
   name: "用户名"
-  unknown: 不知道干啥的
+  name_id: 名称ID
   avatar_url: "头像URL"
   avatar_id: 头像ID(整数)
   medal {
@@ -165,7 +165,7 @@ message get_user {
     message Data {
         string id = 1; // 用户id
         string name = 2; // 用户名
-        uint64 unknown = 3; // 不知道干啥的
+        uint64 name_id = 3; // 名称ID
         string avatar_url = 4; //头像URL
         uint64 avatar_id = 5; // 头像ID
         repeated Medal_info medal = 6; // 勋章信息

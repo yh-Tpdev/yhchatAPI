@@ -58,7 +58,7 @@ data {
 history_bot {
   id: "机器人ID"
   name: "机器人名称"
-  order: 机器人序列(数据库中第N个用户/机器人/群组)
+  name_id: 机器人名称的序列(数据库中第N个用户/机器人/群组)
   avatar_url: "头像URL"
   avatar_id: 头像ID(数值)
   introduction: "机器人简介"
@@ -119,7 +119,11 @@ message info {
     message Bot_data {
         string id = 1;
         string name = 2;
-        uint64 order = 3; // 数据库中序列,包括用户,群聊,机器人
+
+        uint64 name_id = 3; // 机器人名称在数据库中序列,包括用户,群聊,机器人
+
+
+
         string avatar_url = 4;
         uint64 avatar_id = 5;
         string introduction = 6;
