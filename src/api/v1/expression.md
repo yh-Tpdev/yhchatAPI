@@ -18,21 +18,20 @@ POST /v1/expression/list
 响应体:  
 ```JSONC
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "expression": [
       {
         "id": 114514,
-        "url": "expression/...", // 需要在前面加上 https://chat-img.jwznb.com/
-        "urlOriginal": "https://...", // 来源URL
-        "delFlag": 0, // 未知
+        "url": "expression/abcdef123456789abcdef123456789ab.jpg", // 需要前面加上 https://chat-img.jwznb.com/
+        "urlOriginal": "https://chat-img.jwznb.com/123456789abcdefabcf43bce54e4e242.jpg", // 来源URL
+        "delFlag": 0,
         "createTime": 114514, // 创建时间戳
-        "createBy": "123" // 创建者ID
+        "createBy": "7356666" // 创建者ID
       }
-      // ...
     ]
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -48,16 +47,13 @@ POST /v1/expression/create
 请求体:  
 ```JSONC
 {
-  "url": "https://..." // 图片URL
+  "url": "https://chat-img.jwznb.com/......" // 图片URL
 }
 ```
 
 响应体:  
 ```JSONC
-{
-  "code":1, // 请求状态码，1为正常
-  "msg":"success" // 返回消息
-}
+{"code":1,"msg":"success"}
 ```
 
 ## 删除个人表情收藏中的表情
@@ -72,17 +68,12 @@ POST /v1/expression/delete
 
 请求体:  
 ```JSONC
-{
-  "id": 114514 // 表情ID
-}
+{"id": 114514} // 要删除的表情ID
 ```
 
 响应体:  
 ```JSONC
-{
-  "code":1 ,// 请求状态码，1为正常
-  "msg":"success" // 返回消息
-}
+{"code":1,"msg":"success"}
 ```
 
 ## 置顶个人表情收藏中的表情
@@ -97,15 +88,10 @@ POST /v1/expression/topping
 
 请求体:  
 ```JSONC
-{
-"id": 114514 // 表情包ID
-}
+{"id": 114514} // 要置顶的表情ID
 ```
 
 响应体:  
 ```JSONC
-{
-  "code":1, // 请求状态码，1为正常
-  "msg":"success" // 返回消息
-}
+{"code":1,"msg":"success"}
 ```

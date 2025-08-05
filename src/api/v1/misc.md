@@ -7,7 +7,7 @@ title: misc
 
 ## 获取个人表情收藏
 
-get /v1/misc/configure-distribution
+GET /v1/misc/configure-distribution
 
 请求头:  
 
