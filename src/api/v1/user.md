@@ -10,14 +10,14 @@ title: user
 POST /v1/user/captcha  
 
 响应数据:  
-```JSON
+```JSONC
 {
-  "code": "请求状态码，1为正常，此值为数值",
+  "code": 1, // 请求状态码，1为正常
   "data": {
-    "b64s": "{人机验证图片base64，image//png;base64}",
-    "id": "{人机验证ID}"
+    "b64s": "image//png;base64...", // 人机验证图片base64
+    "id": "123" // 人机验证ID
   },
-  "msg": "{返回消息}"
+  "msg": "success" // 返回消息 
 }
 ```
 
@@ -26,23 +26,23 @@ POST /v1/user/captcha
 POST /v1/user/verification-login
 
 请求体:  
-```JSON
+```JSONC
 {  
-  "mobile": "{登录手机号}",
-  "captcha": "{手机验证码}",
-  "deviceId": "{要登陆设备的唯一标识符}",
-  "platform": "{登陆平台名称,一般为windows,web等可自定义}"
+  "mobile": "12312312300", // 登录手机号
+  "captcha": "123123", // 手机验证码
+  "deviceId": "awa", // 登陆设备唯一标识符，可自定义
+  "platform": "windows" // 登陆平台名称,一般为windows,web等可自定义
 }
 ```
 
 响应体:  
-```json
+```JSONC
 {
-  "code": "请求状态码，1为正常,此值为数值",
+  "code": 1, // 请求状态码，1为正常
   "data": {
-    "token": "{账户登录token}"
-  }
-  "msg": "{返回消息}"
+    "token": "f87TJHF9-****-****-************" // 账户登录token
+  },
+  "msg": "success" // 返回消息
 }
 ```
 
@@ -63,15 +63,15 @@ status {
   msg: "success"
 }
 data {
-  id: "用户id"
-  name: "用户名"
-  avatar_url: "头像URL"
-  avatar_id: 头像ID(整数)
-  phone: "手机号"
-  email: "邮箱"
-  coin: 金币数
-  vip_expired_time: VIP过期时间(时间戳)
-  invitation_code: "邀请码"
+  id: "123" // 用户id
+  name: "测试用户" // 用户名
+  avatar_url: "https://..." // 头像URL
+  avatar_id: 123 //头像ID 
+  phone: "12312312300" // 手机号
+  email: "123@123.com" // 邮箱
+  coin: 123 // 金币数
+  vip_expired_time: 1231231230 // VIP过期时间
+  invitation_code: "123" // 邀请码
 }
 ```
 
@@ -128,25 +128,21 @@ status {
   msg: "success"
 }
 data {
-  id: "用户ID"
-  name: "用户名"
-  name_id: 名称ID
-  avatar_url: "头像URL"
-  avatar_id: 头像ID(整数)
+  id: "123" // 用户ID
+  name: "测试用户" // 用户名
+  name_id: 123 // 名称ID
+  avatar_url: "https://..." // 头像URL
+  avatar_id: 123 // 头像ID
   medal {
-    id: 1
-    name: "内测用户"
-    sort: 100
+    id: 1 // 勋章ID
+    name: "测试勋章" // 勋章名称
+    sort: 100 // 未知
   }
-  medal {
-    id: 6
-    name: "100000用户"
-    sort: 500
-  }
-  register_time: "注册时间(YYYY-MM-DD hh:mm:ss)"
-  online_day: 在线时长(整数)
-  continuous_online_day: 连续在线时长(整数)
-  vip_expired_time: unix时间戳
+  // ...
+  register_time: "1234-12-12 12:12:12" // 注册时间(YYYY-MM-DD hh:mm:ss)
+  online_day: 123 // 在线时长
+  continuous_online_day: 123 // 连续在线时长
+  vip_expired_time: 123 // vip的unix时间戳
 }
 ```
 ::: details ProtoBuf数据结构
@@ -196,14 +192,9 @@ status {
   msg: "success"
 }
 medal {
-  id: 1
-  name: "内测用户"
+  id: 1 // 勋章ID
+  name: "测试勋章" // 勋章名称
   sort: 100
-}
-medal {
-  id: 6
-  name: "100000用户"
-  sort: 500
 }
 ```
 
@@ -236,7 +227,7 @@ POST /v1/user/edit-nickname
 
 请求体:  
 ```ProtoBuf
-name: "用户名称"
+name: "123" // 用户名称
 ```
 ::: details ProtoBuf数据结构
 ```proto
@@ -276,7 +267,7 @@ POST /v1/user/edit-avatar
 
 请求体:  
 ```ProtoBuf
-url: "用户头像url"
+url: "https://..." // 用户头像url
 ```
 ::: details ProtoBuf数据结构
 ```proto
