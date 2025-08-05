@@ -27,45 +27,45 @@ status {
   msg: "success"
 }
 data {
-  id: "群聊ID"
-  name: "群聊名称"
-  avatar_url: "头像URL"
-  avatar_id: 头像ID(数值)
-  introduction: "群聊简介"
-  member: 群人数(数值)
-  create_by: "创建者ID"
-  direct_join: 进群免审核,1为开启
-  permisson_level: 权限等级(普通用户无此项(据说数值为0),群主100,管理员2)
-  history_msg: 历史消息,1为开启
-  category_name: "分类名"
-  category_id: 分类ID
-  private: 是否私有,1为私有
-  do_not_disturb: 免打扰,1为开启
-  community_id: 加入社区的ID
-  community_name: "加入社区的名称"
-  top: 置顶会话,1为开启
-  admin: "管理员ID,可以有多个"
-  limited_msg_type: "被限制的消息类型,如1,2,3"
-  owner: "群主ID"
-  recommandation: 是否加入群推荐,1为开启
-  tag_old: "标签"
+  id: "123" //群聊ID
+  name: "测试群聊" // 群聊名称
+  avatar_url: "https://..." // 头像url
+  avatar_id: 123 // 头像ID
+  introduction: "测试群聊" // 群聊简介
+  member: 123 // 群人数
+  create_by: "123" // 创建者ID
+  direct_join: 0 // 进群免审核,1为开启
+  permisson_level: 2 // 权限等级(普通用户无此项(数值为0或无此项),群主100,管理员2)
+  history_msg: 1 // 历史消息,1为开启
+  category_name: "无" // 分类名
+  category_id: 40 // 分类ID
+  private: 0 // 是否私有,1为私有
+  do_not_disturb: 1 // 免打扰,1为开启
+  community_id: 123 // 加入社区的ID
+  community_name: "云湖" // 加入社区的名称
+  top: 0 // 置顶会话,1为开启
+  admin: "123" // 管理员ID,可以有多个
+  limited_msg_type: "" // 被限制的消息类型,如1,2,3,使用","分格
+  owner: "123" // 群主ID
+  recommandation: 1 // 是否加入群推荐,1为开启
+  tag_old: "冲刺一百万用户！" // 标签
   tag {
-    id: 标签id(数值)
-    text: "标签文字"
-    color: "#FFFFFFFF"
+    id: 123 // 标签id
+    text: "" // 标签文字
+    color: "#FFFFFFFF" // 标签颜色
   }
 }
 history_bot {
-  id: "机器人ID"
-  name: "机器人名称"
-  name_id: 机器人名称的序列(数据库中第N个用户/机器人/群组)
-  avatar_url: "头像URL"
-  avatar_id: 头像ID(数值)
-  introduction: "机器人简介"
-  create_by: "创建者ID"
-  create_time: 创建时间戳
-  user_number: 使用人数(数值)
-  private: 1表示私有机器人.
+  id: "123" // 机器人ID
+  name: "测试" // 机器人名称
+  name_id: 123 // 机器人名称的序列(数据库中第N个用户/机器人/群组)
+  avatar_url: "https://..." // 头像URL
+  avatar_id: 123 // 头像ID
+  introduction: "测试机器人" // 机器人简介
+  create_by: "123" // 创建者ID
+  create_time: 1231231230 // 创建时间戳
+  user_number: 123 // 使用人数
+  private: 1 // 1表示私有机器人.
 }
 ```
 
@@ -119,11 +119,7 @@ message info {
     message Bot_data {
         string id = 1;
         string name = 2;
-
         uint64 name_id = 3; // 机器人名称在数据库中序列,包括用户,群聊,机器人
-
-
-
         string avatar_url = 4;
         uint64 avatar_id = 5;
         string introduction = 6;
@@ -132,7 +128,6 @@ message info {
         uint64 user_number = 9; // 使用人数
         uint64 private = 10; // 是否为私有机器人
     }
-
 }
 ```
 :::
@@ -148,31 +143,99 @@ POST /v1/group/live-room
 |token|是|无|
 
 请求体:  
-```JSON
+```JSONC
 {
-  "group_id": "群聊id"
+  "group_id": "123" // 群聊id
 }
 ```
 
 响应数据:  
-```JSON
+```JSONC
 {
-  "code": "请求状态码，1为正常，此值为数值",
+  "code": 1,  // 请求状态码，1为正常
   "data": {
-    {
-    "userId": "8372435",
-        "roomId": "{房间ID}",
-        "chatId": "{房间所属对象ID}",
-        "title": "{房间名称}",
-        "chatType": "房间所属对象类别，一般为2-群聊，此值为数值",
-        "status": "房间状态码，此值为数值",
-        "createBy": "{房间创建用户ID}",
-        "createTime": "房间创建时间戳，此值为数值",
-        "nickname": "{房间创建用户名称}",
-        "count": "房间内人数，此值为数值",
-        "avatarUrl": "{房间头像url}"
-    }
+    "rooms": [
+      {
+        "userId": "123", // 房间管理员用户ID
+        "roomId": "123", // 房间ID
+        "chatId": "123", // 房间所属对象ID
+        "title": "测试房间", // 房间名称
+        "chatType": 2, // 房间所属对象类别，一般为2-群聊
+        "status": 0, // 房间状态码
+        "createBy": "123", // 房间创建用户ID
+        "createTime": 1231231230, //房间创建时间戳
+        "nickname": "测试用户", // 房间创建用户名称
+        "count": 123, // 房间内人数
+        "avatarUrl": "https://..." // 房间头像url
+      }
+    ]
   },
-  "msg": "{返回消息}"
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取群指令列表
+
+POST /v1/group/instruction-list
+
+请求头:  
+
+|名称|必须|备注|
+|---|---|---|
+|token|是|无|
+
+请求体:  
+```JSONC
+{
+  "groupId": "big" // 目标群聊
+}
+```
+
+响应数据:  
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "instructions": [
+      {
+        "botId": "123", // 机器人ID
+        "botName": "测试机器人", // 机器人名称
+        "name": "测试指令", // 指令名称
+        "desc": "测试指令简介", // 指令简介
+        "id": 123, // 指令ID
+        "sort": 0, // 未知
+        "auth": 0 // 可用状态，0-所有人可用，1-所有人禁用，2-群主可用，3-群主管理员可用
+      },
+      // ...
+    ]
+  },
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 邀请加入群聊
+
+POST /v1/group/invite
+
+请求头:  
+
+|名称|必须|备注|
+|---|---|---|
+|token|是|无|
+
+请求体:  
+```JSONC
+{
+  "chatId": "123", // 邀请成员ID
+  "chatType": 1, // 邀请成员类别，1-用户，3-机器人
+  "groupId": "123" // 目标群聊
+}
+```
+
+响应数据:  
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
 }
 ```
