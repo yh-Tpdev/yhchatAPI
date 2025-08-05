@@ -13,14 +13,16 @@ POST /v1/conversation/dismiss-notification
 |token|是|无|
 
 请求体:  
-```JSON
-{"chatId": "用户/机器人/群组ID,类型str"}
+```JSONC
+{
+ "chatId": "123" // 用户/机器人/群组ID
+}
 ```
 
 响应体:  
-```JSON
+```JSONC
 {
- "code": 1, // 响应码,1为正常,数字
- "msg": "success" // 响应信息
+ "code": 1, // 返回状态码,1为正常
+ "msg": "success" // 返回信息
 }
 ```
