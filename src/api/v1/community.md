@@ -180,7 +180,7 @@ GET /v1/community/posts/edit
 {
   "postId": 123, // 文章ID
   "title": "测试文章标题",
-  "content": "测试文章内存", // 文章内容
+  "content": "测试文章内容", // 文章内容
   "contentType": 2 // 文章内容类别，1-文本，2-markdown
 }
 ```
