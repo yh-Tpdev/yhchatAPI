@@ -10,7 +10,7 @@ export default navbar([
         {
         text: "v1",
         link: "v1/"
-        }
+        },
         {
         text: "wss",
         link: "wss/"
