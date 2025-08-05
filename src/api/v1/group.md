@@ -119,7 +119,11 @@ message info {
     message Bot_data {
         string id = 1;
         string name = 2;
+
         uint64 name_id = 3; // 机器人名称在数据库中序列,包括用户,群聊,机器人
+
+
+
         string avatar_url = 4;
         uint64 avatar_id = 5;
         string introduction = 6;
