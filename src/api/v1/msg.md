@@ -195,12 +195,12 @@ message list_message_by_seq {
             string sticker_url = 9; // 表情URL
             string post_id = 10; // 文章ID
             string post_title = 11; // 文章标题
-            uint64 post_content = 12; // 文章内容
+            string post_content = 12; // 文章内容
             string post_content_type = 13; // 文章类型
             string expression_id = 15; // 个人表情ID(不知道为啥为STR)
             uint64 file_size = 18; // 文件/图片大小(字节)
             string video_url = 19; // 视频URL
-            string audio_url = 21; // 编辑时间
+            string audio_url = 21; // 语音URL
             uint64 audio_time = 22; // 语音时长
             uint64 sticker_item_id = 25; // 表情ID
             uint64 sticker_pack_id = 26; // 表情包ID
