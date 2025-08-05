@@ -190,7 +190,7 @@ GET /v1/community/posts/edit
 {
   "code": 1, // 请求状态码，1为正常
   "data": {
-    "id": 30822 // 文章ID(不知道为什么要再返回一遍)
+    "id": 123 // 文章ID(不知道为什么要再返回一遍)
   },
   "msg": "success" // 返回消息
 }
