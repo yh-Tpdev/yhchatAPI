@@ -25,7 +25,7 @@ POST /v1/expression/list
         "id": 114514,
         "url": "expression/...", // 需要在前面加上 https://chat-img.jwznb.com/
         "urlOriginal": "https://...", // 来源URL
-        "delFlag": 0,
+        "delFlag": 0, // 未知
         "createTime": 114514, // 创建时间戳
         "createBy": "123" // 创建者ID
       }
