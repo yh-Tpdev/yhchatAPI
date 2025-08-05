@@ -68,7 +68,7 @@ POST /v1/coin/task/my-task-info
 无
 
 响应体:
-'''JSONC
+```JSONC
 {
   "code": 1, // 请求状态码，1为正常
   "data": {
@@ -79,4 +79,4 @@ POST /v1/coin/task/my-task-info
   },
   "msg": "success" // 返回消息
 }
-'''
+```
