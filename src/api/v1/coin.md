@@ -5,8 +5,9 @@ title: coin
 未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
 没写请求/响应项目表示不需要相关参数.  
 
-## 获取
+# 商品获取
 
+### 获取
 POST /v1/coin/shop/product-recommend
 
 请求头:  
@@ -35,7 +36,7 @@ POST /v1/coin/shop/product-recommend
         "cycle": 7, //会员持续时间（持续7天
         "info": "7", 
         "name": "【云湖】会员7天", // 商品名
-        "imageUrls": "[\"https://chat-img.jwznb.com/999955a351c67b761ed078dc40d28ede.png\"]", //商品图片url，为json数组，需转意后才可使用
+        "imageUrls": "[\"https://chat-img.jwznb.com/999955a351c67b761ed078dc40d28ede.png\"]", // 商品图片url，为json数组，需转意后才可使用
         "price": 100, // 价格（单位为金币）
         "priceVip": 90, // vip专项价格
         "stock": 49, // 商品库存
@@ -51,3 +52,31 @@ POST /v1/coin/shop/product-recommend
   "msg": "success" // 返回消息
 }
 ```
+
+# 我的金币任务获取
+
+### 获取
+POST /v1/coin/task/my-task-info
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体:  
+无
+
+响应体:
+'''JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "adsWatchNumber": 5,  // 广告观看次数
+    "avatarEditNumber": 0, // 判断是否改了头像，0是未更改，1是已更改
+    "nicknameEditNumber": 1, // 判断是否改了名字，同上
+    "raffleTimes": 1 // 抽奖时间（来自bing翻译
+  },
+  "msg": "success" // 返回消息
+}
+'''
