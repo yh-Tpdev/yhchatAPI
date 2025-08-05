@@ -18,7 +18,7 @@ POST /v1/vip/vip-product-list
 请求体:  
 ```JSONC
 {
-  "platform": "Web"  // 识别请求标识
+  "platform": "Web"  // 平台标识码，为web/Windows/android等
 }
 ```
 
@@ -37,6 +37,7 @@ POST /v1/vip/vip-product-list
         "day": 31, // vip持续时间
         "productId": "" // 产品id（？
       }
+      // ...
     ],
     "qrCodeUrl": "https://www.yhchat.com/" // 二维码(QRCode)获取地址（？
   },
@@ -66,6 +67,7 @@ GET /v1/vip/vip-benefits-list
         "target": "", //  针对xxx
         "sort": 100 // 排序
       }
+      // ...
     ]
   },
   "msg": "success" // 返回消息
