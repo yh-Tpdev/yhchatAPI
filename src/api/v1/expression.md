@@ -18,7 +18,7 @@ POST /v1/expression/list
 响应体:  
 ```JSONC
 {
-  "code": 1,
+  "code": 1, // 请求状态码，1为正常
   "data": {
     "expression": [
       {
@@ -32,7 +32,7 @@ POST /v1/expression/list
       // ...
     ]
   },
-  "msg": "success"
+  "msg": "success" // 返回消息
 }
 ```
 
@@ -55,8 +55,8 @@ POST /v1/expression/create
 响应体:  
 ```JSONC
 {
-  "code":1,
-  "msg":"success"
+  "code":1, // 请求状态码，1为正常
+  "msg":"success" // 返回消息
 }
 ```
 
@@ -80,8 +80,8 @@ POST /v1/expression/delete
 响应体:  
 ```JSONC
 {
-  "code":1,
-  "msg":"success"
+  "code":1 ,// 请求状态码，1为正常
+  "msg":"success" // 返回消息
 }
 ```
 
@@ -105,7 +105,7 @@ POST /v1/expression/topping
 响应体:  
 ```JSONC
 {
-  "code":1,
-  "msg":"success"
+  "code":1, // 请求状态码，1为正常
+  "msg":"success" // 返回消息
 }
 ```
