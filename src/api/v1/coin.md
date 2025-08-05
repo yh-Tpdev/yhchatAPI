@@ -7,7 +7,6 @@ title: coin
 
 # 商品获取
 
-### 获取
 POST /v1/coin/shop/product-recommend
 
 请求头:  
@@ -63,9 +62,6 @@ POST /v1/coin/task/my-task-info
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
-
-请求体:  
-无
 
 响应体:
 ```JSONC
