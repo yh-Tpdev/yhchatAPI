@@ -114,3 +114,84 @@ GET /v1/community/comment/comment-reward
   "msg": "success" // 返回消息
 }
 ```
+
+## 点赞/取消点赞文章
+
+GET /v1/community/posts/post-like
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体:  
+```JSONC
+{
+  "id": 123, // 文章ID
+}
+```
+
+响应体:  
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 收藏/取消收藏文章
+
+GET /v1/community/posts/post-collect
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体:  
+```JSONC
+{
+  "id": 123, // 文章ID
+}
+```
+
+响应体:  
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 编辑收藏文章
+
+GET /v1/community/posts/edit
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体:  
+```JSONC
+{
+  "postId": 123, // 文章ID
+  "title": "测试文章标题",
+  "content": "测试文章内存", // 文章内容
+  "contentType": 2 // 文章内容类别，1-文本，2-markdown
+}
+```
+
+响应体:  
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "id": 30822 // 文章ID(不知道为什么要再返回一遍)
+  },
+  "msg": "success" // 返回消息
+}
+```
