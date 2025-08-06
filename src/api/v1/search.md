@@ -24,7 +24,7 @@ POST /v1/search/home-search
 响应体：
 ```JSONC
 {
-  "code": 1,
+  "code": 1, // 请求状态码，1为正常
   "data": {
     "list": [
       {
