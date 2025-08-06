@@ -300,8 +300,8 @@ message edit_avatar {
 
 POST /v1/user/email-login
 
-请求体 (JSON)：
-```json
+请求体：
+```JSONC
 {
     "email": "123456@example.com", // 登录邮箱
     "password": "123456", // 登录密码
@@ -311,7 +311,7 @@ POST /v1/user/email-login
 ```
 
 响应体：
-```json
+```JSONC
 {
     "code": 1, // 状态码，正常为1
     "data": {
