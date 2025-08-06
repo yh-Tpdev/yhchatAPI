@@ -310,13 +310,30 @@ POST /v1/user/email-login
 }
 ```
 
-响应体：
+响应体:  
 ```JSONC
 {
     "code": 1, // 状态码，正常为1
     "data": {
         "token": "abcdefg1-xxxx-xxxx-xxxxxxxxxx" // 登录效验令牌
     },
+    "msg": "success" // 状态信息
+}
+```
+
+### 退出登录
+
+POST /v1/user/logout
+
+请求头:  
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|空|
+
+响应体：
+```JSONC
+{
+    "code": 1, // 状态码，正常为1
     "msg": "success" // 状态信息
 }
 ```
