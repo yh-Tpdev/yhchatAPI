@@ -467,7 +467,7 @@ POST /v1/group/recommend/list
 请求头:  
 |名称|必须|备注|
 |---|---|---|
-|token|是|必须为群聊管理员token|
+|token|是|无|
 
 请求体:  
 ```JSONC
