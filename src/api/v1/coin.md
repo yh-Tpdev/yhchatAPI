@@ -89,11 +89,11 @@ POST /v1/coin/shop/product-detail
 |token|是|无|
 
 请求体：
-'''JSONC
+```JSONC
 {
   "id": 1 // 商品id
 }
-'''
+```
 
 响应体:
 ```JSONC
@@ -119,3 +119,4 @@ POST /v1/coin/shop/product-detail
   },
   "msg": "success" // 返回消息
 }
+```
