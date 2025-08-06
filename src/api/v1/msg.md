@@ -45,19 +45,38 @@ message send_message_send {
     Data data = 5;
     message data {
         string msg_text = 1; // 信息文本
+        string file_name = 4; // 欲发送文件名称
+        string file_key = 5; // 欲发送文件key
+        string msg_text = 6; // @用户ID
+        string temp_text1 = 7; // 未知
         string quote_msg_text = 8; // 引用信息文本
         string image_key = 9; // 欲发送图片key
         string msg_text1 = 11; // 信息文本
         string msg_text2 = 12; // 信息文本
-        string temp_text1 = 16; // 不知道干啥的
-        string temp_text2 = 17; // 不知道干啥的
-        string temp_text3 = 23; // 不知道干啥的
-        uint64 temp_code1 = 24; // 不知道干啥的
+        string temp_text2 = 16; // 未知
+        string temp_text3 = 17; // 未知
+        uint64 file_size = 18; // 欲发送文件大小
+        string vidoe_key = 19; // 欲发送视频key
+        string audio_key = 21; // 语音key
+        uint64 audio_time = 22; // 语音秒数
+        string temp_text4 = 23; // 未知
+        uint64 temp_code1 = 24; // 未知
+        string room_name = 29; // 语音房间发送显示信息的文本
     }
-    uint64 msg_type = 6; // 信息类别，1-文本，2-图片，3-markdown，4-文件，5-表单，6-文章，7-表情，8-html
-    uint64 temp_code = 7; // 不知道干啥的
+    uint64 msg_type = 6; // 信息类别，1-文本，2-图片，3-markdown，4-文件，5-表单，6-文章，7-表情，8-html，11-语音，13-语音通话
+    uint64 command_id = 7; // 所使用命令ID
     string quote_msg_id = 8; // 引用信息ID
-    string temp_text = 9; // 不知道干啥的
+    Data_2 data_2 = 9;
+    message data_2 { // 在data_2发送对象为，图片/音频/视频
+        string data_key = 1; // 发送对象key
+        string data_Hash = 2; // 发送对象上传返回哈希
+        string data_type = 3; // 发送对象类别，image/jpeg-图片，video/mp4-音频
+        uint64 image_height = 5; // 图片高度
+        uint64 image_width = 6; // 图片宽度
+        uint64 data_size = 7; // 发送对象大小
+        string data_key = 8; // 发送对象key
+        string data_suffix = 9; // 发送对象后缀名
+    }
 }
 ```
 :::
