@@ -387,6 +387,8 @@ POST /v1/group-tag/create
 
 ## 删除群组标签
 
+POST /v1/group-tag/delete
+
 请求头:  
 |名称|必须|备注|
 |---|---|---|
@@ -408,6 +410,8 @@ POST /v1/group-tag/create
 ```
 
 ## 踢出用户
+
+POST /v1/group/remove-member
 
 请求头:  
 |名称|必须|备注|
@@ -432,6 +436,8 @@ POST /v1/group-tag/create
 
 ## 禁言用户
 
+POST /v1/group/gag-member
+
 请求头:  
 |名称|必须|备注|
 |---|---|---|
@@ -455,6 +461,8 @@ POST /v1/group-tag/create
 ```
 
 ## 搜索推荐群聊
+
+POST /v1/group/recommend/list
 
 请求头:  
 |名称|必须|备注|
