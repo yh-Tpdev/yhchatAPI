@@ -303,10 +303,10 @@ POST /v1/user/email-login
 请求体 (JSON)：
 ```json
 {
-    "email": "123456@example.com",// 登录邮箱
-    "password": "123456",// 登录密码
-    "deviceId": "awa",// 登录设备唯一标识符
-    "platform": "android"// 登录平台名称
+    "email": "123456@example.com", // 登录邮箱
+    "password": "123456", // 登录密码
+    "deviceId": "awa", // 登录设备唯一标识符
+    "platform": "android" // 登录平台名称
 }
 ```
 
