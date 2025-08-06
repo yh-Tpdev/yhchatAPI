@@ -441,7 +441,7 @@ POST /v1/group-tag/create
 ```JSONC
 {
   "groupId": "123", // 目标群聊ID
-  "userId": "123" // 踢出用户ID
+  "userId": "123", // 踢出用户ID
   "gag": 0 // 禁言时间，0-取消禁言
 }
 ```
