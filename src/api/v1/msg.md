@@ -16,6 +16,7 @@ POST /v1/msg/send-message
 |token|是|无|
 
 请求体:  
+建议参考proto文件中的内容.  
 ```ProtoBuf
 msg_id: "信息ID"
 chat_id: "欲发送到的信息对象"
@@ -38,16 +39,17 @@ temp_text: ""
 ```
 ::: details ProtoBuf数据结构
 ```proto
+// 发送消息
 message send_message_send {
     string msg_id = 2; // 信息ID
     string chat_id = 3; // 欲发送到的信息对象
     string chat_type = 4; // 欲发送到的信息对象的类别，1-用户，2-群聊，3-机器人
     Data data = 5;
-    message data {
+    message Data {
         string msg_text = 1; // 信息文本
         string file_name = 4; // 欲发送文件名称
         string file_key = 5; // 欲发送文件key
-        string msg_text = 6; // @用户ID
+        string mentioned_id = 6; // @用户ID
         string temp_text1 = 7; // 未知
         string quote_msg_text = 8; // 引用信息文本
         string image_key = 9; // 欲发送图片key
@@ -66,16 +68,16 @@ message send_message_send {
     uint64 msg_type = 6; // 信息类别，1-文本，2-图片，3-markdown，4-文件，5-表单，6-文章，7-表情，8-html，11-语音，13-语音通话
     uint64 command_id = 7; // 所使用命令ID
     string quote_msg_id = 8; // 引用信息ID
-    Data_2 data_2 = 9;
-    message data_2 { // 在data_2发送对象为，图片/音频/视频
-        string data_key = 1; // 发送对象key
-        string data_Hash = 2; // 发送对象上传返回哈希
-        string data_type = 3; // 发送对象类别，image/jpeg-图片，video/mp4-音频
+    Media media = 9;
+    message Media { // 在media发送对象为，图片/音频/视频
+        string file_key = 1; // 发送对象key(就是上传后七牛对象存储给你返回的file_key)
+        string file_hash = 2; // 发送对象上传返回哈希
+        string file_type = 3; // 发送对象类别，image/jpeg-图片，video/mp4-音频
         uint64 image_height = 5; // 图片高度
         uint64 image_width = 6; // 图片宽度
-        uint64 data_size = 7; // 发送对象大小
-        string data_key = 8; // 发送对象key
-        string data_suffix = 9; // 发送对象后缀名
+        uint64 file_size = 7; // 发送对象大小
+        string file_key2 = 8; // 发送对象key,和1一样,据说不写会报错
+        string file_suffix = 9; // 发送对象后缀名
     }
 }
 ```
