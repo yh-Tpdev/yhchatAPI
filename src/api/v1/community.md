@@ -265,10 +265,10 @@ POST /v1/community/posts/post-list
           "gagBy": "", // 禁言者
           "msgTypeLimit": "" // 消息类型限制
         },
-        "isLiked": "0", // 你有没有给这个文章点赞
-        "isCollected": 0, // 你有没有收藏这个文章
-        "isReward": 0, // 你有没有给这个文章投币
-        "isVip": 0 // 文章作者是不是vip
+        "isLiked": "0", // 你有没有给这个文章点赞（1为是，0则不是）
+        "isCollected": 0, // 你有没有收藏这个文章（1为是，0则不是）
+        "isReward": 0, // 你有没有给这个文章投币 （1为是，0则不是）
+        "isVip": 0 // 你是不是vip（1为是，0则不是）
       }
     // ...
     ],
