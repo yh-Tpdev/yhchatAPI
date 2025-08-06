@@ -412,3 +412,36 @@ POST /v1/user/recommend-list
   },
   "msg": "success" // 状态信息
 }
+```
+### 获取机器人推荐列表
+
+POST /v1/user/recommend
+
+请求头:  
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|空
+
+响应体：
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "botList": [
+      {
+        "chatId": "30473864", // 机器人id
+        "chatType": "3", // 识别对象类别，1-用户，2-群聊，3-机器人
+        "headcount": "115190", // 使用人数
+        "nickname": "云湖AI助手", // 机器人名称
+        "introduction": "官方的机器人，AI机器人。本机器人所有输出内容均由AI生成。", // 机器人简介
+        "introductions": "",
+        "avatarUrl": "https://chat-img.jwznb.com/cb1a825a1f7e4c5f782dc79200961907.png", // 机器人头像url
+        "isAdd": 1, // 是否添加（1为可添加，0为不可添加）
+        "isApply": 0, // 是否应用
+        "alwaysAgree": 0 // 是否总是同意
+      }
+    // ...
+    ]
+  },
+  "msg": "success" // 返回消息
+}
