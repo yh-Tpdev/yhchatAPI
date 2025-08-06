@@ -453,3 +453,51 @@ POST /v1/group-tag/create
   "msg": "success" // 返回状态消息
 }
 ```
+
+## 搜索推荐群聊
+
+请求头:  
+|名称|必须|备注|
+|---|---|---|
+|token|是|必须为群聊管理员token|
+
+请求体:  
+```JSONC
+{
+  "categoryId": 22, // 群聊分类id
+  "keyword": "114514" // 搜索关键词
+}
+```
+
+响应体：
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "groups": [
+      {
+        "id": 9910,
+        "groupId": "114514", 
+        "name": "这是群聊名字",
+        "introduction": "这是个群聊介绍",
+        "createBy": "114514", // 创建者id
+        "createTime": 1754113069, // 创建时间戳
+        "avatarId": 43821, // 头像id
+        "del_flag": 0,
+        "avatarUrl": "https://chat-img.jwznb.com/3d805b635cc54829e461102ab315381b.gif", // 群头像url
+        "headcount": 16, // 群聊人数
+        "readHistory": 1, // 是否开启新成员查看消息历史记录（1为开启，0为关闭）
+        "alwaysAgree": 1, // 是否直接进群（1为开启，0为关闭）
+        "categoryId": 22, // 群聊分类id
+        "category": "技术-IT/互联网", // 群聊分类名称
+        "private": 0, // 群聊是否私有（1为开启，0为关闭）
+        "banId": 0, // 
+        "gag": 0,  // 是否禁言（1为开启，0为关闭）
+        "gagBy": "", // 被禁言的id
+        "msgTypeLimit": "" // 消息类型限制
+      },
+    // ...
+    ]
+  },
+  "msg": "success" // 返回状态消息
+}
