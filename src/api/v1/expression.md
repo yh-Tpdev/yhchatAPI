@@ -53,7 +53,10 @@ POST /v1/expression/create
 
 响应体:  
 ```JSONC
-{"code":1,"msg":"success"}
+{
+    "code": 1, // 状态码，正常为1
+    "msg": "success" // 状态信息
+}
 ```
 
 ## 删除个人表情收藏中的表情
@@ -68,12 +71,17 @@ POST /v1/expression/delete
 
 请求体:  
 ```JSONC
-{"id": 114514} // 要删除的表情ID
+{
+  "id": 114514 // // 要删除的表情ID
+}
 ```
 
 响应体:  
 ```JSONC
-{"code":1,"msg":"success"}
+{
+    "code": 1, // 状态码，正常为1
+    "msg": "success" // 状态信息
+}
 ```
 
 ## 置顶个人表情收藏中的表情
@@ -88,10 +96,15 @@ POST /v1/expression/topping
 
 请求体:  
 ```JSONC
-{"id": 114514} // 要置顶的表情ID
+{
+  "id": 114514 // 要置顶的表情ID
+}
 ```
 
 响应体:  
 ```JSONC
-{"code":1,"msg":"success"}
+{
+    "code": 1, // 状态码，正常为1
+    "msg": "success" // 状态信息
+}
 ```
