@@ -228,7 +228,7 @@ message list_message_by_seq {
 ```
 :::
 
-## 通过消息序列列出消息
+## 通过消息ID列出消息
 
 POST /v1/msg/list-message  
 
@@ -261,6 +261,7 @@ message list_message_send {
 :::
 
 响应体:  
+列出的是指定消息ID前的消息.  
 ```ProtoBuf
 status {
   number: 114514
