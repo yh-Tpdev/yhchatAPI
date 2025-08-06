@@ -337,3 +337,78 @@ POST /v1/user/logout
     "msg": "success" // 状态信息
 }
 ```
+
+### 获取发现群聊分区
+
+POST /v1/user/recommend-category-list
+
+请求头:  
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|空|
+
+请求体：
+```JSONC
+{
+ "appChannel": "default"
+}
+```
+
+响应体：
+```JSONC
+{
+  "code": 1, // 状态码，正常为1
+  "data": {
+    "categories": [ // 群聊类别
+      "精选",
+      "粉丝群",
+      "地区",
+      "IT/互联网",
+      "玩机",
+      "游戏",
+      "资讯订阅"
+    ]
+  },
+  "msg": "success" // 状态信息
+}
+```
+
+### 获取发现群聊列表
+
+POST /v1/user/recommend-list
+
+请求头:  
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|空|
+
+请求体：
+```JSONC
+{
+  "category": "精选", // 群聊类别
+  "keyword": "", // 关键词
+  "size": 30, // 尺寸
+  "page": 1 // 页码
+}
+```
+
+响应体：
+```JSONC
+{
+  "code": 1, // 状态码，正常为1
+  "data": {
+    "groupList": [
+      {
+        "chatId": "787149149", // 群聊id
+        "banId": 0, // 顾名思义
+        "nickname": "小说交流群", // 群聊名字
+        "introduction": "小说交流群", // 群聊介绍
+        "avatarUrl": "https://chat-img.jwznb.com/e96780b45546654e0774d48727432b05.jpeg", // 群聊头像
+        "headcount": 71, // 群聊内人数
+        "createTime": 1751264890 // 创建时间戳
+      }
+     // ...
+    ]
+  },
+  "msg": "success" // 状态信息
+}
