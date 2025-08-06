@@ -73,3 +73,72 @@ POST /v1/bot/new-list
   "msg": "success" // 返回消息
 }
 ```
+
+#### 使用该机器人的群组(该注释含有较多不知道的字段，请谨慎使用)
+
+POST /v1/bot/bot-detail
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+```JSONC
+{
+  "id": "30473864" // 机器人id
+}
+```
+
+响应体：
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "bot": {
+      "id": 1, // 排序id（？
+      "botId": "30473864", // 机器人id
+      "nickname": "云湖AI助手",  //机器人名字
+      "nicknameId": 151394, // 名称id
+      "avatarId": 29016, // 头像id
+      "avatarUrl": "https://chat-img.jwznb.com/cb1a825a1f7e4c5f782dc79200961907.png", // 头像url
+      "type": 0,  // 类型
+      "introduction": "官方的机器人，AI机器人。本机器人所有输出内容均由AI生成。", // 机器人介绍
+      "createBy": "7058262", // 机器人创建者id
+      "createTime": 1639670120, // 机器人创建时间戳
+      "headcount": 115177, // 机器人使用人数
+      "private": 0, // 是否私有（0为否，1为私人）
+      "isStop": 0, // 是否停用（0为启用，1为停用）
+      "settingJson": "",  // 设置json
+      "del_flag": 0, 
+      "alwaysAgree": 1, // 是否总是同意添加群聊
+      "banId": 0, // 顾名思义
+      "uri": "https://chat-go.jwzhd.com/open-apis/v1/bot/send?token=" // 机器人发送消息url（？
+    },
+    "groups": [ 
+      {
+        "id": 0, // 排序 （不知道为什么很多字段没有值，而客户端加入这个群显示群聊信息正常）
+        "groupId": "161466900", // 群组id
+        "name": "每日科技", // 群聊名字
+        "introduction": "每天分享互联网科技信息", // 群聊介绍
+        "createBy": "", // 群聊创建者id
+        "createTime": 0, // 群聊创建时间
+        "avatarId": 0, // 群聊头像id
+        "del_flag": 0,
+        "avatarUrl": "https://chat-img.jwznb.com/6eedb15cae0e7ddc59e8ae19a234c33c.png", // 群聊头像url
+        "headcount": 0, // 群聊人数
+        "readHistory": 0, // 是否启用新成员查看历史记录
+        "alwaysAgree": 0, // 是否总是直接加入群聊
+        "categoryId": 0, // 类别id
+        "category": "", // 类别
+        "private": 0, // 群聊是否私有
+        "banId": 0, // ban人的id
+        "gag": 0,
+        "gagBy": "",
+        "msgTypeLimit": ""
+      },
+    // ...
+  },
+  "msg": "success" // 返回消息
+}
