@@ -149,9 +149,9 @@ data {
 ```proto
 // 勋章信息
 message Medal_info {
-    uint64 id = 1;
-    string name = 2;
-    uint64 sort = 5;   
+    uint64 id = 1; // 勋章ID
+    string name = 2; // 勋章名称
+    uint64 sort = 5;  // 勋章顺序
 }
 
 // 获取用户信息
