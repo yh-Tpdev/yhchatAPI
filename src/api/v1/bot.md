@@ -25,7 +25,7 @@ POST /v1/bot/banner
         "id": 6, // banner的id
         "title": "机器人开发指南", // 标题
         "introduction": "依托开放的服务接口，用户可以打造属于自己的机器人，提升工作生活效率", // 介绍
-        "targetId": "", // "查看详情"跳转的链接
+        "targetId": "", // "查看详情"点击后的id
         "targetUrl": "https://www.yhchat.com/document/1-3", // "查看详情"跳转的链接
         "imageUrl": "https://chat-img.jwznb.com/ca2b3753a9e7dbb94881b5f9364f7ffc.tmp", // banner背景图
         "sort": 40, // 排列顺序
