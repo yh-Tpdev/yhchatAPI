@@ -317,3 +317,47 @@ POST /v1/community/ba/info
   "msg": "success" // 返回消息
 }
 ```
+
+## 获取分区列表
+
+POST /v1/community/ba/following-ba-list
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+```JSONC
+{
+  "typ": 2, // 类型
+  "size": 20, // 排序
+  "page": 1 // 页数
+}
+```
+
+响应体：
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "ba": [
+      {
+        "id": 41, // 分区id
+        "name": "云湖", // 分区名字
+        "avatar": "https://chat-img2.jwznb.com/FoHHKnX-QNuD33-NnGWlq74xkgpg.webp", // 分区头像url
+        "delTime": 0, // 删除时间
+        "createTime": 1665233353, // 创建时间
+        "lastActive": 1754474179, // 上次活跃时间
+        "memberNum": 1053, // 该分区的成员数
+        "postNum": 9656, // 该分区的文章数
+        "groupNum": 55, // 该分区绑定的群聊数
+        "createTimeText": "2022-10-08 20:49:13" // 分区创建时间
+      }
+    // ...
+    ],
+    "total": 11 // 总共的分区数量（共11个）
+  },
+  "msg": "success" // 返回消息
+}
