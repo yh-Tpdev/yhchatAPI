@@ -10,7 +10,6 @@ title: group
 POST /v1/group/info  
 
 请求头:  
-
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
@@ -137,7 +136,6 @@ message info {
 POST /v1/group/live-room
 
 请求头:  
-
 |名称|必须|备注|
 |---|---|---|
 |token|是|无|
@@ -179,7 +177,6 @@ POST /v1/group/live-room
 POST /v1/group/instruction-list
 
 请求头:  
-
 |名称|必须|备注|
 |---|---|---|
 |token|是|无|
@@ -218,7 +215,6 @@ POST /v1/group/instruction-list
 POST /v1/group/invite
 
 请求头:  
-
 |名称|必须|备注|
 |---|---|---|
 |token|是|无|
@@ -245,13 +241,11 @@ POST /v1/group/invite
 POST /v1/group-tag/list
 
 请求头:  
-
 |名称|必须|备注|
 |---|---|---|
 |token|是|无|
 
-请求体：
-
+请求体:  
 ```JSONC
 {
     "groupId": "123456789", //要获取的群聊ID
@@ -261,8 +255,7 @@ POST /v1/group-tag/list
 }
 ```
 
-响应体：
-
+响应体:  
 ```JSONC
 {
     "code": 1,
@@ -289,12 +282,11 @@ POST /v1/group-tag/list
 POST /v1/group-tag/relate
 
 请求头:  
-
 |名称|必须|备注|
 |---|---|---|
-|token|是|无|
+|token|是|必须为群聊管理员token|
 
-请求体：
+请求体:  
 ```JSONC
 {
     "userId": "1234567", // 要关联的用户ID
@@ -302,7 +294,7 @@ POST /v1/group-tag/relate
 }
 ```
 
-响应体：
+响应体:  
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -315,12 +307,11 @@ POST /v1/group-tag/relate
 POST /v1/group-tag/relate-cancel
 
 请求头:  
-
 |名称|必须|备注|
 |---|---|---|
-|token|是|无|
+|token|是|必须为群聊管理员token|
 
-请求体：
+请求体:  
 ```JSONC
 {
     "userId": "1234567", // 要关联的用户ID
@@ -328,7 +319,7 @@ POST /v1/group-tag/relate-cancel
 }
 ```
 
-响应体：
+响应体:  
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -341,13 +332,11 @@ POST /v1/group-tag/relate-cancel
 POST /v1/group-tag/edit
 
 请求头:  
-
 |名称|必须|备注|
 |---|---|---|
-|token|是|无|
+|token|是|必须为群聊管理员token|
 
-请求体：
-
+请求体:  
 ```JSONC
 {
     "id": 1234, // 要更改的标签ID
@@ -359,7 +348,7 @@ POST /v1/group-tag/edit
 }
 ```
 
-响应体：
+响应体:  
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -372,13 +361,11 @@ POST /v1/group-tag/edit
 POST /v1/group-tag/create
 
 请求头:  
-
 |名称|必须|备注|
 |---|---|---|
-|token|是|无|
+|token|是|必须为群聊管理员token|
 
 请求体：
-
 ```JSONC
 {
     "groupId": "123456789", // 要创建标签的群聊ID
@@ -401,20 +388,65 @@ POST /v1/group-tag/create
 ## 删除群组标签
 
 请求头:  
-
 |名称|必须|备注|
 |---|---|---|
-|token|是|无|
+|token|是|必须为群聊管理员token|
 
-请求体：
-
+请求体:  
 ```JSONC
 {
     "id": 1234 // 要删除的标签ID
 }
 ```
 
-响应体：
+响应体:  
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 踢出用户
+
+请求头:  
+|名称|必须|备注|
+|---|---|---|
+|token|是|必须为群聊管理员token|
+
+请求体:  
+```JSONC
+{
+  "groupId": "123", // 目标群聊ID
+  "userId": "123" // 踢出用户ID
+}
+```
+
+响应体:  
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 禁言用户
+
+请求头:  
+|名称|必须|备注|
+|---|---|---|
+|token|是|必须为群聊管理员token|
+
+请求体:  
+```JSONC
+{
+  "groupId": "123", // 目标群聊ID
+  "userId": "123" // 踢出用户ID
+  "gag": 0 // 禁言时间，0-取消禁言
+}
+```
+
+响应体:  
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
