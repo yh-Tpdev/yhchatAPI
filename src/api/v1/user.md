@@ -9,7 +9,7 @@ title: user
 
 POST /v1/user/captcha  
 
-响应数据:  
+响应体:  
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -50,12 +50,12 @@ POST /v1/user/verification-login
 
 GET /v1/user/info  
 
-请求头参数:  
+请求头:  
 |名称|必须|备注|
 |-----|------|-----|
 |token|是|无|
 
-响应数据:  
+响应体:  
 ```ProtoBuf
 status {
   number: 114514
@@ -320,4 +320,3 @@ POST /v1/user/email-login
     "msg": "success" // 状态信息
 }
 ```
-
