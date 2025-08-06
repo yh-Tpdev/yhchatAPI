@@ -59,8 +59,8 @@ GET /v1/user/info
 ```ProtoBuf
 status {
   number: 114514
-  code: 1
-  msg: "success"
+  code: 1 // 请求状态码，1为正常
+  msg: "success" // 返回消息
 }
 data {
   id: "123" // 用户id
@@ -124,8 +124,8 @@ message get_user_send {
 ```ProtoBuf
 status {
   number: 123456
-  code: 1
-  msg: "success"
+  code: 1 // 请求状态码，1为正常
+  msg: "success" // 返回消息
 }
 data {
   id: "123" // 用户ID
@@ -188,8 +188,8 @@ POST /v1/user/medal
 ```ProtoBuf
 status {
   number: 114514
-  code: 1
-  msg: "success"
+  code: 1 // 请求状态码，1为正常
+  msg: "success" // 返回消息
 }
 medal {
   id: 1 // 勋章ID
@@ -241,8 +241,8 @@ message edit_nickname_send {
 ```ProtoBuf
 status {
   number: 114514
-  code: 1
-  msg: "success"
+  code: 1 // 请求状态码，1为正常
+  msg: "success" // 返回消息
 }
 ```
 
@@ -281,8 +281,8 @@ message edit_avatar_send {
 ```ProtoBuf
 status {
   number: 114514
-  code: 1
-  msg: "success"
+  code: 1 // 请求状态码，1为正常
+  msg: "success" // 返回消息
 }
 ```
 
@@ -313,11 +313,11 @@ POST /v1/user/email-login
 响应体:  
 ```JSONC
 {
-    "code": 1, // 状态码，正常为1
+    "code": 1, // 请求状态码，1为正常
     "data": {
         "token": "abcdefg1-xxxx-xxxx-xxxxxxxxxx" // 登录效验令牌
     },
-    "msg": "success" // 状态信息
+    "msg": "success" // 返回消息
 }
 ```
 
@@ -333,7 +333,7 @@ POST /v1/user/logout
 响应体：
 ```JSONC
 {
-    "code": 1, // 状态码，正常为1
-    "msg": "success" // 状态信息
+    "code": 1, // 请求状态码，1为正常
+    "msg": "success" // 返回消息
 }
 ```
