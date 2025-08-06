@@ -20,7 +20,7 @@ POST /v1/msg/send-message
 ```ProtoBuf
 msg_id: "信息ID"
 chat_id: "欲发送到的信息对象"
-chat_type: "欲发送到的信息对象的类别，1-用户，2-群聊，3-机器人"
+chat_type: 1 // 欲发送到的信息对象的类别，1-用户，2-群聊，3-机器人
 data {
   msg_text: "信息文本"
   quote_msg_text: "引用信息文本"
@@ -43,7 +43,7 @@ temp_text: ""
 message send_message_send {
     string msg_id = 2; // 信息ID
     string chat_id = 3; // 欲发送到的信息对象
-    string chat_type = 4; // 欲发送到的信息对象的类别，1-用户，2-群聊，3-机器人
+    uint64 chat_type = 4; // 欲发送到的信息对象的类别，1-用户，2-群聊，3-机器人
     Data data = 5;
     message Data {
         string msg_text = 1; // 信息文本
@@ -99,7 +99,7 @@ status {
 ```proto
 
 // 信息发送是否成功状态信息
-message get_user {
+message send_message {
     Status status = 1; // 状态码
 }
 ```
