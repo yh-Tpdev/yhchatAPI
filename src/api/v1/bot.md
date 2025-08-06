@@ -139,6 +139,82 @@ POST /v1/bot/bot-detail
         "msgTypeLimit": ""
       },
     // ...
+  ],
+  "msg": "success" // 返回消息
+}
+```
+
+#### 获取创建的所有机器人信息
+
+POST /v1/bot/bot-group-list
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+响应体：
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "botsTotal": 1, // 机器人数量
+    "list": {
+      "bots": [
+        {
+          "id": 0, // 机器人排列位置ID
+          "botId": "123", // 机器人ID
+          "nickname": "测试机器人名称", // 机器人名称
+          "nicknameId": 0, // 机器人名称ID
+          "avatarId": 0, // 机器人头像ID
+          "avatarUrl": "https://...", // 机器人头像ID
+          "token": "123123123123123123123", // 机器人token
+          "link": "", // 未知
+          "type": 0, // 未知
+          "introduction": "测试机器人简介", // 机器人简介
+          "createBy": "", // 未知
+          "createTime": 0, // 未知
+          "headcount": 0, // 未知
+          "private": 0, // 未知
+          "isStop": 0, // 未知
+          "settingJson": "", // 机器人设置json，需转意
+          "del_flag": 0, // 未知
+          "alwaysAgree": 0, // 未知
+          "groupLimit": 0, // 未知
+          "banId": 0, // 未知
+          "linkStop": 0, // 未知
+          "uri": "https://chat-go.jwzhd.com/open-apis/v1/bot/send?token=" // 机器人示例API接口
+        },
+      ]
+    }
   },
   "msg": "success" // 返回消息
 }
+```
+
+#### 更改机器人设置
+
+POST /v1/bot/edit-setting-json
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+```JSONC
+{
+  "id": "123", // 机器人id
+  "settingJson": "[]" // 机器人设置json，需转意
+}
+```
+
+响应体：
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
