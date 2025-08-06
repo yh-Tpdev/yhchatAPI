@@ -3,3 +3,14 @@
 所有路由需要在最前补全https://chat-go.jwzhd.com 域名后再请求
 
 **所有API信息只做为公开参考**
+
+建议提交前先本地预览一下有没有问题  
+命令相关参照vuepress-theme-hope文档
+补全依赖
+```
+pnpm install --lockfile
+```
+启动本地开发服务器
+```
+pnpm docs:dev
+```
