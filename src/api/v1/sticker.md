@@ -10,13 +10,12 @@ title: sticker
 POST /v1/sticker/list
 
 请求头:  
-
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
 响应体:  
-```JSON
+```JSONC
 {
  "code": 1,
  "data": {
@@ -55,20 +54,19 @@ POST /v1/sticker/list
 POST /v1/sticker/detail
 
 请求头:  
-
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
 请求体:  
-```JSON
+```JSONC
 {
-  "id": 894 // 表情包ID
+  "id": 123 // 表情包ID
 }
 ```
 
 响应体:  
-```JSON
+```JSONC
 {
     "code": 1,
     "data": {
@@ -112,21 +110,23 @@ POST /v1/sticker/detail
 POST /v1/sticker/add
 
 请求头:  
-
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
 请求体:  
-```JSON
+```JSONC
 {
   "id": 894 // 表情包ID
 }
 ```
 
 响应体:  
-```JSON
-{"code": 1,"msg": "success"}
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
 ```
 
 ## 移除收藏表情包
@@ -134,21 +134,23 @@ POST /v1/sticker/add
 POST /v1/sticker/remove-sticker-pack  
 
 请求头:  
-
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
 请求体:  
-```JSON
+```JSONC
 {
-  "id": 52 // 要移除的表情包的ID
+  "id": 123 // 要移除的表情包的ID
 }
 ```
 
 响应体:  
-```JSON
-{"code":1,"msg":"success"}
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
 ```
 
 ## 更改收藏表情包的排序  
@@ -156,13 +158,12 @@ POST /v1/sticker/remove-sticker-pack
 POST /v1/sticker/sort  
 
 请求头:  
-
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
 请求体:  
-```JSON
+```JSONC
 {
   "sort": "[
     {
@@ -177,9 +178,6 @@ POST /v1/sticker/sort
     ]"
 }
 ```
-
-云湖的抽象玩意.  
-把数列转字符串发.  
 
 ::: details 备注: 使用Python请求代码
 ```Python
@@ -197,7 +195,11 @@ response = httpx.post("https://chat-go.jwzhd.com/v1/sticker/sort", headers = hea
 print(response.text)
 ```
 :::
+
 响应体:  
-```JSON
-{"code":1,"msg":"success"}
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
 ```
