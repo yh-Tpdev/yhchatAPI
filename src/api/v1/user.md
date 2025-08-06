@@ -294,3 +294,30 @@ message edit_avatar {
 }
 ```
 :::
+
+
+### 用户邮箱密码登录
+
+POST /v1/user/email-login
+
+请求体 (JSON)：
+```json
+{
+    "email": "123456@example.com",// 登录邮箱
+    "password": "123456",// 登录密码
+    "deviceId": "awa",// 登录设备唯一标识符
+    "platform": "android"// 登录平台名称
+}
+```
+
+响应体：
+```json
+{
+    "code": 1, // 状态码，正常为1
+    "data": {
+        "token": "abcdefg1-xxxx-xxxx-xxxxxxxxxx" // 登录效验令牌
+    },
+    "msg": "success" // 状态信息
+}
+```
+
