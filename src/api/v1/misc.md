@@ -61,7 +61,7 @@ GET /v1/misc/qiniu-token-audio
 
 |名称|必须|备注|
 |-----|-----|-----|
-|token|是|无|
+|token|否|无|
 
 响应体:  
 ```JSONC
@@ -132,6 +132,47 @@ GET /v1/misc/qiniu-token-group-disk
   "code": 1, // 请求状态码，1为正常
   "data": {
     "token": "123:123" // 群文件上传token
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取云端设置
+
+GET /v1/misc/setting
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|否|无|
+
+响应体:  
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "fileSizeLimitNormal": 40, // 非vip用户文件上传大小，单位MB
+    "fileeSizeLimitVip": 1024, // VIP用户文件上传大小 /单位MB
+    "imageSizeLimitNormal": 40, // 非vip用户图片上传大小，单位MB
+    "imageSizeLimitVip": 50, // vip用户图片上传大小，单位MB
+    "videoSizeLimitNormal": 40, // 非vip用户视频上传大小，单位MB
+    "videoSizeLimitVip": 200 // vip用户视频上传大小，单位MB
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取灰色状态
+
+GET /v1/misc/gray-status
+
+响应体:  
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "status": 0 // 0-不为灰色状态，1-灰色状态，处于灰色状态下云湖窗口将加上一层灰色滤镜
   },
   "msg": "success" // 返回消息
 }
