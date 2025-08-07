@@ -22,7 +22,7 @@ msg_id: "信息ID"
 chat_id: "欲发送到的信息对象"
 chat_type: 1 // 欲发送到的信息对象的类别，1-用户，2-群聊，3-机器人
 data {
-  msg_text: "信息文本"
+  text: "信息文本"
   quote_msg_text: "引用信息文本"
   image_key: "欲发送图片key"
   msg_text1: "信息文本"
@@ -46,7 +46,8 @@ message send_message_send {
     uint64 chat_type = 4; // 欲发送到的信息对象的类别，1-用户，2-群聊，3-机器人
     Data data = 5;
     message Data {
-        string msg_text = 1; // 信息文本
+        string text = 1; // 信息文本
+        string buttons = 2; // 按钮
         string file_name = 4; // 欲发送文件名称
         string file_key = 5; // 欲发送文件key
         repeated string mentioned_id = 6; // @用户ID，可重复多个本属性
@@ -165,7 +166,7 @@ msg {
   direction: "left" // 在聊天中的位置(左边/右边)
   msg_type: 1 // 消息类型
   msg_content {
-    content: "ok" // 消息内容
+    text: "ok" // 消息内容
     // 剩下的建议看ProtoBuf序列文件,太多不写了
   }
   send_time: 123456789 // 发送时间(毫秒时间戳)
@@ -213,7 +214,7 @@ message list_message_by_seq {
         }
         // 消息
         message Msg_content {
-            string content = 1; // 消息内容
+            string text = 1; // 消息内容
             string buttons = 2; // 按钮
             string image_url = 3; // 图像URL
             string file_name = 4; // 文件名
@@ -235,7 +236,6 @@ message list_message_by_seq {
             string call_status_text = 32; // 语音通话状态文字
             uint64 width = 33; // 图片的宽度
             uint64 height = 34; // 图片的高度
-            
         }
         // 发送者信息
         message Sender {
@@ -310,7 +310,7 @@ msg {
   direction: "left" // 在聊天中的位置(左边/右边)
   msg_type: 1 // 消息类型
   msg_content {
-    content: "ok" // 消息内容
+    text: "ok" // 消息内容
     // 剩下的建议看ProtoBuf序列文件,太多不写了
   }
   send_time: 123456789 // 发送时间(毫秒时间戳)
@@ -353,7 +353,7 @@ message Msg {
     }
     // 消息
     message Msg_content {
-        string content = 1; // 消息内容
+        string text = 1; // 消息内容
         string buttons = 2; // 按钮
         string image_url = 3;
         string file_name = 4;
