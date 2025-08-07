@@ -36,6 +36,7 @@ POST /v1/disk/create-folder
 ## 获取群网盘文件列表
 
 POST /v1/disk/file-list
+
 请求头:  
 
 |名称|必须|备注|
@@ -47,7 +48,7 @@ POST /v1/disk/file-list
 {
   "chatId": "群聊id",
   "chatType": 2, // 会话类型
-  "folderId": 0, // 文件夹id
+  "folderId": 0, // 文件夹id（在根目录就是0）
   "sort": "name_asc" // 排序
 }
 ```
@@ -73,3 +74,36 @@ POST /v1/disk/file-list
   },
   "msg": "success" // 返回消息
 }
+```
+
+## 上传文件（需搭配[获取上传文件token](https://github.com/yh-Tpdev/yhchatAPI/blob/main/src/api/v1/misc.md)使用）
+
+POST /v1/disk/upload-file
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体:  
+```JSONC
+{
+  "chatId": "群聊id",
+  "chatType": 2, // 会话类型
+  "fileSize": 124080, // 文件大小（单位是KB）
+  "fileName": "1114514.png", // 文件名
+  "fileMd5": "6b14eab6a86c93c802de85e09561cb5c.png", // 文件的md5+文件拓展名（你的文件上传到云端文件名就是“文件的md5.文件拓展名”）
+  "fileEtag": "FqhRXAMU8qSP_omDntW7D6BUk50q", // Etag
+  "qiniuKey": "disk/6b14eab6a86c93c802de85e09561cb5c.png", // 千牛云key（目测在千牛云文件的路径）
+  "folderId": 0 // 文件夹id（在根目录就是0）
+}
+```
+
+响应体：
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
