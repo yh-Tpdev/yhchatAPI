@@ -67,7 +67,7 @@ data {
   certification_level: 1 // 认证相关,1是官方,2是地区
 }
 // ...
-count: 8 // 会话数目
+total: 8 // 会话数目
 request_id: "abcdef"
 
 ```
@@ -77,7 +77,7 @@ request_id: "abcdef"
 message list {
     Status status = 1;
     repeated Data data = 2;
-    uint64 count = 3; // 列表中对话的数量
+    uint64 total = 3; // 列表中对话的数量
     string request_id = 4; // 似乎是请求ID
     
     message Data {

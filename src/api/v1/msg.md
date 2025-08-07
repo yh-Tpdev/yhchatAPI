@@ -49,7 +49,7 @@ message send_message_send {
         string msg_text = 1; // 信息文本
         string file_name = 4; // 欲发送文件名称
         string file_key = 5; // 欲发送文件key
-        string mentioned_id = 6; // @用户ID，可重复多个本属性
+        repeated string mentioned_id = 6; // @用户ID，可重复多个本属性
         string temp_text1 = 7; // 未知
         string quote_msg_text = 8; // 引用信息文本
         string image_key = 9; // 欲发送图片key
@@ -177,7 +177,7 @@ msg {
   edit_time: 1234 // 最后编辑时间
 }
 // ...
-msg_count: 23 // 获取的消息数量,貌似最大31个
+total: 23 // 获取的消息数量,貌似最大31个
 ```
 ::: details ProtoBuf数据结构
 ```proto
