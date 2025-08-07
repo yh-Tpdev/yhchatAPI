@@ -2,7 +2,7 @@
 title: chat-ws-go.jwzhd.com
 ---
 
-本文章下所有wss请求域名均为 wss://chat-ws-go.jwzhd.com
+本文章下所有wss请求地址均为 wss://chat-ws-go.jwzhd.com/ws
 没写请求/响应项目表示不需要相关参数,使用以下功能前必须先链接wss并 **登录云湖账号**.  
 
 ## 登录云湖账号
@@ -45,7 +45,7 @@ data: {
 message heartbeat_ack_info {
     Data data = 1; //数据
     message Data {
-        string id = seq; // 请求标识码，可以随便写
+        string id = 1; // 请求标识码，可以随便写
         string cmd = 2; // 为heartbeat，代表心跳包
     }
 }
