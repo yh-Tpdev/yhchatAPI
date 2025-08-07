@@ -265,7 +265,7 @@ POST /v1/msg/list-message
 |-----|-----|-----|
 |token|是|无|
 
-请求头:  
+请求体:  
 ```ProtoBuf
 msg_count: 233 // 获取的消息数
 msg_id: "abcdef" // 从指定消息id开始,可不写
@@ -325,6 +325,7 @@ msg {
 }
 // ...
 ```
+
 ::: details ProtoBuf数据结构
 ```proto
 // 标签
@@ -422,7 +423,7 @@ POST /v1/msg/list-message-edit-record
     "list": [
       {
         "id": 1018684, // 信息编辑ID
-        "msgId": "1bceae7bccfc447283304bbcbc9e9c1b", // 信息ID
+        "msgId": "123123123123123123123123", // 信息ID
         "contentType": 1, // 信息类别
         "contentOld": "{\"text\":\"测试原始编辑文本\"}", // 信息文本，转意后json数据
         "createTime": 1231231231230, // 信息创建时间戳
@@ -435,3 +436,53 @@ POST /v1/msg/list-message-edit-record
   "msg": "success" // 返回消息
 }
 ```
+
+### 发送按钮点击事件
+
+POST /v1/msg/button-report
+
+请求头:  
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|空
+
+请求体:  
+```ProtoBuf
+msg_id: "123123123123123123" // 信息ID
+chat_type: 2 // 对象类型, 1-用户 2-群聊 3-机器人
+chat_id: "123" // 对象ID
+user_id: "123" // 按钮事件发送者ID
+button_text: "测试按钮文本" // 欲点击按钮的文本标题
+```
+
+::: details ProtoBuf数据结构
+```proto
+// 通过消息序列列出消息
+message button_report_send {
+    string msg_id = 2; // 信息ID
+    uint64 chat_type = 3; // 对象类型, 1-用户 2-群聊 3-机器人
+    string chat_id = 4; // 对象ID
+    string user_id = 5; // 按钮事件发送者ID
+    string button_text = 6; // 欲点击按钮的文本标题
+}
+```
+:::
+
+响应体:  
+列出的是指定消息ID前的消息.  
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+```
+
+::: details ProtoBuf数据结构
+```proto
+// 按钮事件点击返回状态信息
+message button_report {
+    Status status = 1;
+}
+```
+:::
