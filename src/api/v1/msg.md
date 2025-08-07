@@ -395,3 +395,43 @@ message list_message { // 其实可以和 list-message-by-seq共用的。
 }
 ```
 :::
+
+### 获取信息历史编辑内容
+
+POST /v1/msg/list-message-edit-record
+
+请求头:  
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|空
+
+请求体：
+```JSONC
+{
+  "msgId": "12312312312312312312312313", // 信息ID
+  "size": 10, // 获取的历史编辑内容数
+  "page": 1 // 页面数
+}
+```
+
+响应体：
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "id": 1018684, // 信息编辑ID
+        "msgId": "1bceae7bccfc447283304bbcbc9e9c1b", // 信息ID
+        "contentType": 1, // 信息类别
+        "contentOld": "{\"text\":\"测试原始编辑文本\"}", // 信息文本，转意后json数据
+        "createTime": 1231231231230, // 信息创建时间戳
+        "msgTime": 1231231231230 // 编辑时间戳
+      }
+      // ...
+    ],
+    "total": 1 // 历史编辑总数
+  },
+  "msg": "success" // 返回消息
+}
+```
