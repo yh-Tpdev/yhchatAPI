@@ -52,13 +52,13 @@ message send_message_send {
         repeated string mentioned_id = 6; // @用户ID，可重复多个本属性
         string temp_text1 = 7; // 未知
         string quote_msg_text = 8; // 引用信息文本
-        string image_key = 9; // 欲发送图片key
+        string image = 9; // 欲发送图片key/url(expression/abcdef.jpg)
         string msg_text1 = 11; // 信息文本
         string msg_text2 = 12; // 信息文本
         string temp_text2 = 16; // 未知
         string temp_text3 = 17; // 未知
         uint64 file_size = 18; // 欲发送文件大小
-        string vidoe_key = 19; // 欲发送视频key
+        string video_key = 19; // 欲发送视频key
         string audio_key = 21; // 语音key
         uint64 audio_time = 22; // 语音秒数
         string temp_text4 = 23; // 未知

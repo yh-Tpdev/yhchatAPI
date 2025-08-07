@@ -132,7 +132,7 @@ data {
 ::: details ProtoBuf数据结构
 ```proto
 // 聊天对话列表
-message info {
+message address_book_list {
   Status status = 1;
   repeated Data data = 2;
 
@@ -144,11 +144,11 @@ message info {
     // 聊天对象数据
     message Data_list {
       chat_id = 1; // 聊天对象ID
-      chat_name = 2; // 聊天对象名称
-      chat_avatar_url = 3; // 聊天对象头像url
+      name = 2; // 聊天对象名称
+      avatar_url = 3; // 聊天对象头像url
       permisson_level = 4; // 群权限等级(普通用户无此项(数值为0或无此项),群主100,管理员2),只有群列表才有此项
       temp_text1 = 5; // 未知
-      chat_name_up = 6; // 聊天对象名称
+      // name_up = 6; // 聊天对象名称,和2重了
     }
   }
 }
