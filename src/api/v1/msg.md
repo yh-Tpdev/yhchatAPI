@@ -58,11 +58,13 @@ message send_message_send {
         string temp_text2 = 16; // 未知
         string temp_text3 = 17; // 未知
         uint64 file_size = 18; // 欲发送文件大小
-        string video_key = 19; // 欲发送视频key
-        string audio_key = 21; // 语音key
+        string video = 19; // 欲发送视频key/url(123.mp4)
+        string audio = 21; // 语音key/url(123.m4a)
         uint64 audio_time = 22; // 语音秒数
         string temp_text4 = 23; // 未知
         uint64 temp_code1 = 24; // 未知
+        uint64 sticker_item_id = 25; // 表情ID
+        uint64 sticker_pack_id = 26; // 表情包ID
         string room_name = 29; // 语音房间发送显示信息的文本
     }
     uint64 msg_type = 6; // 信息类别，1-文本，2-图片，3-markdown，4-文件，5-表单，6-文章，7-表情，8-html，11-语音，13-语音通话
