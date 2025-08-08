@@ -2,6 +2,9 @@
 title: conversation
 ---
 
+未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
+没写请求/响应项目表示不需要相关参数.  
+
 ## 将对话设为已读  
 
 POST /v1/conversation/dismiss-notification
