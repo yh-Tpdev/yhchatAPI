@@ -27,7 +27,7 @@ data {
   image_key: "欲发送图片key"
   msg_text1: "信息文本"
   msg_text2: "信息文本"
-  temp_text1: ""
+  form: "" // 表单消息
   temp_text2: ""
   temp_text3: ""
   temp_code1: 0
@@ -51,7 +51,7 @@ message send_message_send {
         string file_name = 4; // 欲发送文件名称
         string file_key = 5; // 欲发送文件key
         repeated string mentioned_id = 6; // @用户ID，可重复多个本属性
-        string temp_text1 = 7; // 未知
+        string form = 7; // 表单消息
         string quote_msg_text = 8; // 引用信息文本
         string image = 9; // 欲发送图片key/url(expression/abcdef.jpg)
         string msg_text1 = 11; // 信息文本
@@ -176,7 +176,7 @@ msg {
   }
   msg_delete_time: 8888 // 消息撤回时间(毫秒时间戳)
   quote_msg_id: "abcdef" // 引用消息的ID
-  msg_order: 6666 // 消息序列
+  msg_seq: 6666 // 消息序列
   edit_time: 1234 // 最后编辑时间
 }
 // ...
@@ -205,7 +205,7 @@ message list_message_by_seq {
         Cmd cmd = 7; // 指令
         uint64 msg_delete_time = 8; // 消息撤回时间
         string quote_msg_id = 9; // 引用消息ID
-        uint64 msg_order = 10;
+        uint64 msg_seq = 10;
         uint64 edit_time = 12; // 最后编辑时间
         
         message Cmd {
@@ -219,6 +219,7 @@ message list_message_by_seq {
             string image_url = 3; // 图像URL
             string file_name = 4; // 文件名
             string file_url = 5; // 文件URL
+            string form = 7; // 表单消息
             string quote_msg_text = 8; // 引用消息文字
             string sticker_url = 9; // 表情URL
             string post_id = 10; // 文章ID
@@ -272,7 +273,7 @@ msg_id: "abcdef" // 从指定消息id开始,可不写
 chat_type: 2 // 对象类型,1-用户 2-群聊 3-机器人
 chat_id: "big" // 对象ID
 ```
-::: ProtoBuf数据结构
+::: details ProtoBuf数据结构
 ```proto
 message list_message_send {
     uint64 msg_count = 2; // 获取消息数
@@ -320,7 +321,7 @@ msg {
   }
   msg_delete_time: 8888 // 消息撤回时间(毫秒时间戳)
   quote_msg_id: "abcdef" // 引用消息的ID
-  msg_order: 6666 // 消息序列
+  msg_seq: 6666 // 消息序列
   edit_time: 1234 // 最后编辑时间
 }
 // ...
@@ -345,7 +346,7 @@ message Msg {
     Cmd cmd = 7; // 指令
     uint64 msg_delete_time = 8; // 消息撤回时间
     string quote_msg_id = 9; // 引用消息ID
-    uint64 msg_order = 10;
+    uint64 msg_seq = 10;
     uint64 edit_time = 12; // 最后编辑时间
         
     message Cmd {
@@ -359,6 +360,7 @@ message Msg {
         string image_url = 3;
         string file_name = 4;
         string file_url = 5;
+        string form = 7; // 表单消息
         string quote_msg_text = 8; // 引用消息文字
         string sticker_url = 9; // 表情URL
         string post_id = 10; // 文章ID

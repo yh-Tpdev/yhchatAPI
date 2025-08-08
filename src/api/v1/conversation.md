@@ -62,7 +62,7 @@ data {
     mentioned_in: "8826666" // @消息所属的对话ID,例如群ID
     mentioner_id: "8827777" // 发起@的对象的ID
     mentioner_name: "测试" // 发起@的对象的名称
-    msg_order: 1234 // 消息序列
+    msg_seq: 1234 // 消息序列
   }
   certification_level: 1 // 认证相关,1是官方,2是地区
 }
@@ -103,7 +103,7 @@ message list {
             string mentioned_in = 4; // @消息所属的对话ID(例如群ID),感觉还没啥用
             string mentioner_id = 6; // 发起@的对象ID
             string mentioner_name = 7; // 发起@对象的名称
-            uint64 msg_order = 8; // 发起@的消息序列
+            uint64 msg_seq = 8; // 发起@的消息序列
         }
     }
 }
