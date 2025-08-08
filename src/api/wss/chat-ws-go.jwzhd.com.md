@@ -170,6 +170,7 @@ message push_message {
                 string image_url = 3;
                 string file_name = 4;
                 string file_url = 5;
+                string form = 7; // 表单消息
                 string quote_msg_text = 8; // 引用消息文字
                 string sticker_url = 9; // 表情URL
                 string post_id = 10; // 文章ID
