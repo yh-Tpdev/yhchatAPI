@@ -488,3 +488,48 @@ message button_report {
 }
 ```
 :::
+
+### 撤回信息
+
+POST /v1/msg/recall-msg
+
+请求头:  
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|空
+
+请求体:  
+```ProtoBuf
+msg_id: "123123123123123123" // 信息ID
+chat_id: "123" // 信息所属对象ID
+chat_type: 2 // 信息所属对象类型, 1-用户 2-群聊 3-机器人
+```
+
+::: details ProtoBuf数据结构
+```proto
+// 通过消息序列列出消息
+message button_report_send {
+    string msg_id = 2; // 信息ID
+    string chat_id = 3; // 信息所属对象ID
+    uint64 chat_type = 4; // 信息所属对象类型, 1-用户 2-群聊 3-机器人
+}
+```
+:::
+
+响应体:  
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+```
+
+::: details ProtoBuf数据结构
+```proto
+// 按钮事件点击返回状态信息
+message button_report {
+    Status status = 1;
+}
+```
+:::
