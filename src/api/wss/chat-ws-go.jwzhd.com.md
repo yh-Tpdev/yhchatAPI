@@ -111,6 +111,7 @@ data {
   }
 }
 ```
+
 ::: details ProtoBuf数据结构
 ```proto
 // 共用区
@@ -189,6 +190,58 @@ message push_message {
             }
         }
     }
+}
+```
+:::
+
+## 推送超级文件分享 
+
+返回数据:  
+```ProtoBuf
+info {
+  seq: "1234567abcd" // 请求表示码
+  cmd: "file_send_message" // 推送超级文件分享
+}
+
+data {
+  cmd: "type.googleapis.com/proto.PushMessage" // 操作类型?
+  file_send: {
+      send_user_id: "123" // 分享者用户ID
+      user_id: "123" // 接收者用户ID
+      temp_code: 1 // 未知
+      send_type: "candidate" // 分享类别区分文本
+      data: "{}" // 经过转意后的json格式发送数据
+      send_deviceId: "123123123123" // 发送者设备唯一标识符
+    }
+}
+```
+
+::: details ProtoBuf数据结构
+```proto
+// 信息
+message INFO {
+    string seq = 1; // 请求标识码
+    string cmd = 2; // 操作类型
+}
+
+// ws推送消息
+message file_send_message {
+  INFO info = 1;
+  Data data = 2;
+
+  message Data {
+    string cmd = 1;
+    Msg msg = 2;
+        
+    message file_send_message {
+      string send_user_id = 1; // 分享者用户ID
+      string user_id = 2; // 接收者用户ID
+      uint64 temp_code = 3; // 未知
+      string send_type = 4; // 分享类别区分文本
+      string data = 5; // 经过转意后的json格式发送数据
+      string send_deviceId = 6; // 发送者设备唯一标识符
+    }
+  }
 }
 ```
 :::
