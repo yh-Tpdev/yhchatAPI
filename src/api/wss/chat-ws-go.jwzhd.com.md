@@ -148,7 +148,9 @@ message push_message {
             uint64 msg_type = 7;
             uint64 timestamp = 8; // 时间戳(毫秒)
             Cmd cmd = 9; // 指令
-            uint64 msg_seq = 12; // 消息序列
+            uint64 delete_timestamp = 10; // 撤回消息时间,和8差别不大
+            string quote_msg_id = 11; // 引用消息ID
+            uint64 msg_seq = 12; // 消息序列,在撤回时也是被撤回消息的序列
             
             message Cmd {
                 uint64 id = 1; // 命令ID
