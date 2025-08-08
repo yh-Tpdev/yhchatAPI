@@ -67,7 +67,7 @@ POST /v1/disk/file-list
         "uploadTime": 1754534188, // 更新时间
         "uploadBy": "114514", // 上传者id
         "uploadByName": "上传者名称",
-        "qiniuKey": "" // 千牛云密钥
+        "qiniuKey": "" // 七牛云密钥
       }
      // ...
     ]
@@ -95,7 +95,7 @@ POST /v1/disk/upload-file
   "fileName": "1114514.png", // 文件名
   "fileMd5": "6b14eab6a86c93c802de85e09561cb5c.png", // 文件的md5+文件拓展名（你的文件上传到云端文件名就是“文件的md5.文件拓展名”）
   "fileEtag": "FqhRXAMU8qSP_omDntW7D6BUk50q", // Etag
-  "qiniuKey": "disk/6b14eab6a86c93c802de85e09561cb5c.png", // 千牛云key（目测在千牛云文件的路径）
+  "qiniuKey": "disk/6b14eab6a86c93c802de85e09561cb5c.png", // 七牛云key（目测在七牛云文件的路径）
   "folderId": 0 // 文件夹id（在根目录就是0）
 }
 ```
