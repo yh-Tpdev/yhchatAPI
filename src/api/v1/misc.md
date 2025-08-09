@@ -177,3 +177,28 @@ GET /v1/misc/gray-status
   "msg": "success" // 返回消息
 }
 ```
+
+## 获取自动更新最新版本
+
+GET /v1/misc/auto-update
+
+参数:  
+```
+platform=windows // 目标平台标识符，windows，android，macos，ios
+userId=123 // 获取更新的用户ID
+```
+
+响应体:  
+```XML
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>云湖社交</title>
+    <description>云湖社交更新中</description>
+    <item>
+      <enclosure url="" sparkle:dsaSignature="" sparkle:version="+0" sparkle:os="windows" length="0" type="application/octet-stream"></enclosure>
+// url属性为更新安装包网址，参数platform为macos，ios是此值可能为空
+// version属性为版本号
+    </item>
+  </channel>
+</rss>
+```
