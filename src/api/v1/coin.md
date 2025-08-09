@@ -35,7 +35,7 @@ POST /v1/coin/shop/product-recommend
         "cycle": 7, //会员持续时间（持续7天
         "info": "7", 
         "name": "【云湖】会员7天", // 商品名
-        "imageUrls": "[\"https://chat-img.jwznb.com/999955a351c67b761ed078dc40d28ede.png\"]", // 商品图片url，为json数组，需转意后才可使用
+        "imageUrls": "[\"https://chat-img.jwznb.com/999955a351c67b761ed078dc40d28ede.png\"]", // 商品图片url，为json数组，需转义后才可使用
         "price": 100, // 价格（单位为金币）
         "priceVip": 90, // vip专项价格
         "stock": 49, // 商品库存
@@ -106,7 +106,7 @@ POST /v1/coin/shop/product-detail
       "cycle": 7, //会员持续时间（持续7天
       "info": "7",
       "name": "【云湖】会员7天", // 商品名
-      "imageUrls": "[\"https://chat-img.jwznb.com/999955a351c67b761ed078dc40d28ede.png\"]", // 商品图片url，为json数组，需转意后才可使用
+      "imageUrls": "[\"https://chat-img.jwznb.com/999955a351c67b761ed078dc40d28ede.png\"]", // 商品图片url，为json数组，需转义后才可使用
       "price": 100, // 价格（单位为金币）
       "priceVip": 90, // vip专项价格
       "stock": 49, // 商品库存

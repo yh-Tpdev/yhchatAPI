@@ -427,7 +427,7 @@ POST /v1/msg/list-message-edit-record
         "id": 1018684, // 信息编辑ID
         "msgId": "123123123123123123123123", // 信息ID
         "contentType": 1, // 信息类别
-        "contentOld": "{\"text\":\"测试原始编辑文本\"}", // 信息文本，转意后json数据
+        "contentOld": "{\"text\":\"测试原始编辑文本\"}", // 信息文本，转义后json数据
         "createTime": 1231231231230, // 信息创建时间戳
         "msgTime": 1231231231230 // 编辑时间戳
       }

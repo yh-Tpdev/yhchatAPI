@@ -178,7 +178,7 @@ POST /v1/bot/bot-group-list
           "headcount": 0, // 未知
           "private": 0, // 未知
           "isStop": 0, // 未知
-          "settingJson": "", // 机器人设置json，需转意
+          "settingJson": "", // 机器人设置json，需转义
           "del_flag": 0, // 未知
           "alwaysAgree": 0, // 未知
           "groupLimit": 0, // 未知
@@ -207,7 +207,7 @@ POST /v1/bot/edit-setting-json
 ```JSONC
 {
   "id": "123", // 机器人id
-  "settingJson": "[]" // 机器人设置json，需转意
+  "settingJson": "[]" // 机器人设置json，需转义
 }
 ```
 
