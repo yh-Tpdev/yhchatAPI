@@ -5,7 +5,7 @@ title: bot
 未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
 没写请求/响应项目表示不需要相关参数.  
 
-# 机器人商店banner
+## 机器人商店banner
 
 POST /v1/bot/banner
 
@@ -42,7 +42,7 @@ POST /v1/bot/banner
 }
 ```
 
-# 机器人商店列表
+## 机器人商店列表
 
 POST /v1/bot/new-list
 
@@ -74,7 +74,7 @@ POST /v1/bot/new-list
 }
 ```
 
-#### 使用该机器人的群组(该注释含有较多不知道的字段，请谨慎使用)
+## 使用该机器人的群组(该注释含有较多不知道的字段，请谨慎使用)
 
 POST /v1/bot/bot-detail
 
@@ -144,7 +144,7 @@ POST /v1/bot/bot-detail
 }
 ```
 
-#### 获取创建的所有机器人信息
+## 获取创建的所有机器人信息
 
 POST /v1/bot/bot-group-list
 
@@ -193,7 +193,7 @@ POST /v1/bot/bot-group-list
 }
 ```
 
-#### 更改机器人设置
+## 更改机器人设置
 
 POST /v1/bot/edit-setting-json
 
