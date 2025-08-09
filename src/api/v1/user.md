@@ -445,3 +445,94 @@ POST /v1/user/recommend
   },
   "msg": "success" // 返回消息
 }
+```
+
+## 模块忽略信息获取
+
+POST /v1/user/module-ignore-info
+
+请求头:  
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|空
+
+响应体：
+```JSONC
+{
+ "deviceId": "设备id"
+}
+```
+
+(因为没有vip，这里为示例，请实际情况为准)
+响应体：
+```JSONC
+{
+  "code": -1, // 请求状态码，1为正常
+  "msg": "此功能仅限VIP用户使用"
+}
+```
+
+## 获取通知状态
+
+POST /v1/user/notification-status
+
+请求头:  
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|空
+
+请求体：
+```JSONC
+{
+  "deviceId": "1114514", // 设备id
+  "registrationId": "114514" // 注册id
+}
+```
+
+响应体：
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "notification": { // 通知json
+      "id": 110061, // 注册id
+      "userId": "114514", // 用户id
+      "deviceId": "114514", // 设备id
+      "registrationId": "114514", // 通知注册id
+      "isOpen": 1, // 是否开放（1为开放）
+      "type": 2, // 类型
+      "delFlag": 0, 
+      "createTime": 1743426921, // 创建时间戳
+      "updateTime": 1754705620 // 更新时间戳
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取通知注册信息
+
+POST /v1/user/notification-info
+
+请求头:  
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|空
+
+请求体：
+```JSONC
+{
+  "deviceId": "114514", // 设备id
+  "registrationId": "114514", // 注册通知id
+  "isOpen": 1, // 是否开放（1为开放）
+  "type": 2 // 类型
+}
+```
+
+响应体：
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
