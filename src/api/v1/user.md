@@ -524,7 +524,7 @@ POST /v1/user/notification-info
 {
   "deviceId": "114514", // 设备id
   "registrationId": "114514", // 注册通知id
-  "isOpen": 1, // 是否开放（1为开放）
+  "isOpen": 1, // // 是否打开系统消息通知（设置”系统消息通知“选项可控制这个数值，1-打开，0-关闭）
   "type": 2 // 类型
 }
 ```
