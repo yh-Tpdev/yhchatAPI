@@ -8,6 +8,7 @@ title: check
 ## 获取云湖新版本（Android版本）
 
 POST /v1/check/check-version-mobile
+POST /v1/check/get-latest-version
 
 请求体:  
 ```JSONC
