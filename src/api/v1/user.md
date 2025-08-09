@@ -536,3 +536,46 @@ POST /v1/user/notification-info
   "msg": "success" // 返回消息
 }
 ```
+
+## 金币增减记录
+
+POST /v1/user/gold-coin-increase-decrease-record
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+响应体：
+```JSONC
+{
+  "size": 20, // 尺寸
+  "page": 1 // 页数
+}
+```
+
+响应体：
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "goldCoinRecord": [
+      {
+        "id": 193275, // 金币记录id
+        "userId": "用户id",
+        "typ": 8, // 类型
+        "beforeAmount": 55.01, // 之前金币数量
+        "afterAmount": 57.01, // 之后的金币数量
+        "changeAmount": 2, // 增加/减少的金币数量
+        "reason": "抽奖金币", // 增加/减少金币的原因
+        "remark": "", // 备注
+        "createTime": 1754669040 // 创建时间戳
+      }
+    // ...
+    ],
+    "total": 243 // 总共的金币记录
+  },
+  "msg": "success" // 返回消息
+}
+```
