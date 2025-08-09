@@ -13,7 +13,7 @@ POST /v1/check/get-latest-version
 请求体:  
 ```JSONC
 {
- "packageInfo":"{\"appName\":\"云湖\",\"packageName\":\"com.yhchat.app\",\"version\":\"1.4.83\",\"buildNumber\":\"347\"}", // 当前应用信息，为json数组，需转意后才可使用
+ "packageInfo":"{\"appName\":\"云湖\",\"packageName\":\"com.yhchat.app\",\"version\":\"1.4.83\",\"buildNumber\":\"347\"}", // 当前应用信息，为json数组，需转义后才可使用
  "platform":"android", // 设备标识
  "deviceinfo":"", // 这里填写设备信息
  "deviceId":"114514", // 设备id
