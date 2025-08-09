@@ -499,7 +499,7 @@ POST /v1/user/notification-status
       "userId": "114514", // 用户id
       "deviceId": "114514", // 设备id
       "registrationId": "114514", // 通知注册id
-      "isOpen": 1, // 是否开放（1为开放）
+      "isOpen": 1, // 是否打开系统消息通知（设置”系统消息通知“选项可控制这个数值，1-打开，0-关闭）
       "type": 2, // 类型
       "delFlag": 0, 
       "createTime": 1743426921, // 创建时间戳
