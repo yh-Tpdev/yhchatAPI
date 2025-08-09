@@ -361,3 +361,95 @@ POST /v1/community/ba/following-ba-list
   },
   "msg": "success" // 返回消息
 }
+```
+
+## 获取文章打赏记录
+
+POST /v1/community/reward-record
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+```JSONC
+{
+  "typ": "post", // 类型（post-文章,comment-评论）
+  "size": 20, // 尺寸
+  "page": 1 // 页数
+}
+```
+
+响应体：
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "rewards": [
+      {
+        "id": 1474, // 打赏id
+        "senderId": "打赏者id",
+        "recvId": "文章作者id",
+        "postId": 文章id,
+        "commentId": 评论id,
+        "amount": 0.01, // 打赏者减少金币的数量
+        "recvAmount": 0.01, // 收到的金币数量
+        "createTime": 1753427517,
+        "reason": "打赏文章扣金币", // 扣大赏者金币原因
+        "remark": "", // 备注
+        "post": {
+          "id": 30506, // 文章id
+          "baId": 41,  // 分区id
+          "senderId": "文章作者id",
+          "senderNicknameId": 128769, // 发送者名字id
+          "senderAvatarId": 84, // 发送者头像id
+          "groupId": "", // 文章关联群组id
+          "title": "QQ云湖消息互通机器人", // 文章标题
+          "contentType": 1, // 文章类型（1-Markdown，0-普通文章）
+          "delTime": 0, // 删除时间戳
+          "createTime": 1751721707, // 创建时间时间戳
+          "updateTime": 0, // 更新时间时间戳
+          "lastActive": 1753194392, // 上次活跃时间戳
+          "likeNum": 4, // 文章点赞数量
+          "commentNum": 2, // 评论数量
+          "collectNum": 6, // 收藏数量
+          "amountNum": 0.01, // 文章投币数量
+          "senderNickname": "那狗吧", // 文章作者昵称
+          "senderAvatar": "https://chat-img.jwznb.com/defalut-avatars/Nellie%20Bly.png", // 文章作者头像url
+          "createTimeText": "2025-07-05 21:21:47", // 创建文章时间
+          "auditStatus": 0
+        },
+        "sender": {
+          "id": 106634, // 打赏id
+          "user_id": "打赏者id",
+          "nickname": "", // 打赏者昵称
+          "avatar_url": "https://chat-img.jwznb.com/1523c36f6d5b0a73dfb0fe4d3494c1f2.jpg" // 打赏者头像url
+        },
+        "comment": {
+          "id": 0, 
+          "postId": 0,
+          "parentId": 0,
+          "senderId": "",
+          "sender_nicknameId": 0,
+          "sender_avatarUd": 0,
+          "content": "",
+          "delTime": 0,
+          "createTime": 0,
+          "likeNum": 0,
+          "repliesNum": 0,
+          "amountNum": 0,
+          "senderNickname": "",
+          "senderAvatar": "",
+          "createTimeText": "",
+          "isLiked": "",
+          "isReward": 0
+        }
+      }
+    // ...
+    ]
+    "total": 1 // 总共的记录
+  },
+  "msg": "success" // 返回消息
+}
