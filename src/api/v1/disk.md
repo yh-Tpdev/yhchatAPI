@@ -61,7 +61,7 @@ POST /v1/disk/file-list
     "list": [
       {
         "id": 1818, // 文件id
-        "name": "114514", 文件名称
+        "name": "114514", // 文件名称
         "fileSize": 0, // 文件大小
         "objectType": 1, // 对象类型
         "uploadTime": 1754534188, // 更新时间
@@ -76,7 +76,7 @@ POST /v1/disk/file-list
 }
 ```
 
-## 上传文件（需搭配[获取上传文件token](https://github.com/yh-Tpdev/yhchatAPI/blob/main/src/api/v1/misc.md)使用）
+## 上传文件（需搭配[获取上传文件token](https://yh-api.yyyyt.top/api/v1/misc.html#%E8%8E%B7%E5%8F%96%E5%8A%9F%E8%83%BD%E8%B7%AF%E7%94%B1)使用）
 
 POST /v1/disk/upload-file
 
