@@ -477,7 +477,7 @@ POST /v1/community/reward-record
 }
 ```
 
-## 文章评论
+## 评论文章
 
 POST /v1/community/comment/comment
 
