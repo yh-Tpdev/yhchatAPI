@@ -165,7 +165,7 @@ GET /v1/community/posts/post-collect
 }
 ```
 
-## 编辑收藏文章
+## 编辑文章
 
 GET /v1/community/posts/edit
 
