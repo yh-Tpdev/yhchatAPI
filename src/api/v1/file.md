@@ -21,18 +21,25 @@ POST /v1/file/send
 {
   "userId": "123", // 目标用户ID
   "deviceId": "123", // 目标用户指定分享的设备ID，为空则为发送给目标用户的所有设备
-  "fileData": "{}" // 文件分享数据，格式为json转义，以下为fileData转义部分格式
-  // {
-  //   "path": "C:\\Windows\\test.exe", // 文件原始目录
-  //   "size": 5774088, // 文件大小
-  //   "name": "test.exe", // 文件名称
-  //   "isDirectory": 0, // 未知
-  //   "count": 1, // 未知
-  //   "current": 1, // 未知
-  //   "uuid": "123123123123123123" // 文件分享uuid，应该是随机的，可以随便写
-  // }
+  "fileData": "{}" // 文件分享数据，格式为json转义
 }
 ```
+
+::: fileData属性，json数据格式
+
+```JSONC
+{
+  "path": "C:\\Windows\\test.exe", // 文件原始目录
+  "size": 5774088, // 文件大小
+  "name": "test.exe", // 文件名称
+  "isDirectory": 0, // 未知
+  "count": 1, // 未知
+  "current": 1, // 未知
+  "uuid": "123123123123123123" // 文件分享uuid，应该是随机的，可以随便写
+}
+```
+
+:::
 
 响应体:  
 
