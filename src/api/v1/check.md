@@ -8,6 +8,7 @@ title: check
 ## 获取云湖新版本（Android版本）
 
 POST /v1/check/check-version-mobile
+
 POST /v1/check/get-latest-version
 
 请求体:  
@@ -21,6 +22,20 @@ POST /v1/check/get-latest-version
  "userId":"114514" // 用户id （可带可不带）
 }
 ```
+
+::: packageInfo转换后的json结构
+
+```JSONC
+"packageInfo": "{
+ "appName": "云湖" // 软件名称
+ "packageName": "com.yhchat.app", // 软件包名
+ "version": "1.4.83", // 软件版本
+ "buildNumber": "347" // 软件构建号
+}"
+```
+
+:::
+
 
 响应体：
 
