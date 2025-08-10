@@ -624,3 +624,31 @@ message button_report {
 ```
 
 :::
+
+### 文件消息下载记录
+
+POST /v1/msg/file-download-record
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|空|
+
+请求体:  
+
+```JSONC
+{
+  "msgId": "5040d27fc975416680a14e5a1b37ef06", // 文件消息id
+  "downloadPath": "/storage/emulated/0/Download/云湖/恶臭(1).txt" // 下载路径
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
