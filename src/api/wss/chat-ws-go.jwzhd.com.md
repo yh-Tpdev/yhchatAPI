@@ -8,6 +8,7 @@ title: chat-ws-go.jwzhd.com
 ## 登录云湖账号
 
 发送数据:  
+
 ```JSONC
 {
   "seq": "123123123123123123123", // 请求标识码，可以随便写
@@ -24,6 +25,7 @@ title: chat-ws-go.jwzhd.com
 ## 发送心跳包
 
 发送数据:  
+
 ```JSONC
 {
   "seq": "123123123123123123123", // 请求标识码，可以随便写
@@ -33,13 +35,16 @@ title: chat-ws-go.jwzhd.com
 ```
 
 返回数据:  
+
 ```ProtoBuf
 data: {
   seq: "123123123123123123123", // 请求标识码
   cmd: "heartbeat_ack" // 为heartbeat_ack，代表心跳包的返回
 }
 ```
+
 ::: details ProtoBuf数据结构
+
 ```proto
 // 心跳包返回信息
 message heartbeat_ack_info {
@@ -50,11 +55,13 @@ message heartbeat_ack_info {
     }
 }
 ```
+
 :::
 
 ## 发送笔记同步
 
 发送数据:  
+
 ```JSONC
 {
   "seq": "123123123123123123123", // 请求标识码，可以随便写
@@ -70,6 +77,7 @@ message heartbeat_ack_info {
 ## 推送消息  
 
 返回数据:  
+
 ```ProtoBuf
 info {
   seq: "1234567abcd" // 请求表示码
@@ -113,6 +121,7 @@ data {
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 共用区
 // 信息
@@ -195,11 +204,13 @@ message push_message {
     }
 }
 ```
+
 :::
 
-## 推送超级文件分享 
+## 推送超级文件分享
 
 返回数据:  
+
 ```ProtoBuf
 info {
   seq: "1234567abcd" // 请求表示码
@@ -220,6 +231,7 @@ data {
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 信息
 message INFO {
@@ -247,4 +259,5 @@ message file_send_message {
   }
 }
 ```
+
 :::

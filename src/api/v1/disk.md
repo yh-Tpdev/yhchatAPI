@@ -2,7 +2,7 @@
 title: disk
 ---
 
-未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`
 没写请求/响应项目表示不需要相关参数.  
 
 ## 创建群网盘文件夹
@@ -16,6 +16,7 @@ POST /v1/disk/create-folder
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "chatId": "群聊id", // 群聊id
@@ -26,6 +27,7 @@ POST /v1/disk/create-folder
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -44,6 +46,7 @@ POST /v1/disk/file-list
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "chatId": "群聊id",
@@ -54,6 +57,7 @@ POST /v1/disk/file-list
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1,
@@ -87,6 +91,7 @@ POST /v1/disk/upload-file
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "chatId": "群聊id",
@@ -101,6 +106,7 @@ POST /v1/disk/upload-file
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常

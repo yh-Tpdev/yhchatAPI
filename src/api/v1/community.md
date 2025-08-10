@@ -2,7 +2,7 @@
 title: community
 ---
 
-未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`
 没写请求/响应项目表示不需要相关参数.  
 
 ## 发送文章
@@ -16,6 +16,7 @@ GET /v1/community/posts/create
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {  
   "baId": 40, // 文章分区ID
@@ -27,6 +28,7 @@ GET /v1/community/posts/create
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -48,6 +50,7 @@ GET /v1/community/posts/delete
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "postId": 123 // 文章ID
@@ -55,6 +58,7 @@ GET /v1/community/posts/delete
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -73,6 +77,7 @@ GET /v1/community/posts/post-reward
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "postId": 123, // 文章ID
@@ -81,6 +86,7 @@ GET /v1/community/posts/post-reward
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -99,6 +105,7 @@ GET /v1/community/comment/comment-reward
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "postId": 123, // 文章ID
@@ -108,6 +115,7 @@ GET /v1/community/comment/comment-reward
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -126,6 +134,7 @@ GET /v1/community/posts/post-like
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "id": 123, // 文章ID
@@ -133,6 +142,7 @@ GET /v1/community/posts/post-like
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -151,6 +161,7 @@ GET /v1/community/posts/post-collect
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "id": 123, // 文章ID
@@ -158,6 +169,7 @@ GET /v1/community/posts/post-collect
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -176,6 +188,7 @@ GET /v1/community/posts/edit
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "postId": 123, // 文章ID
@@ -186,6 +199,7 @@ GET /v1/community/posts/edit
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -207,6 +221,7 @@ POST /v1/community/posts/post-list
 |token|是|无|
 
 请求体：
+
 ```JSONC
 {
   "typ": 1, // 典型值
@@ -217,6 +232,7 @@ POST /v1/community/posts/post-list
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -289,6 +305,7 @@ POST /v1/community/ba/info
 |token|是|无|
 
 请求体：
+
 ```JSONC
 {
   "id": 41 // 分区id
@@ -296,6 +313,7 @@ POST /v1/community/ba/info
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -329,6 +347,7 @@ POST /v1/community/ba/following-ba-list
 |token|是|无|
 
 请求体：
+
 ```JSONC
 {
   "typ": 2, // 类型
@@ -338,6 +357,7 @@ POST /v1/community/ba/following-ba-list
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -374,6 +394,7 @@ POST /v1/community/reward-record
 |token|是|无|
 
 请求体：
+
 ```JSONC
 {
   "typ": "post", // 类型（post-文章,comment-评论）
@@ -383,6 +404,7 @@ POST /v1/community/reward-record
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常

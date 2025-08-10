@@ -2,10 +2,10 @@
 title: coin
 ---
 
-未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`
 没写请求/响应项目表示不需要相关参数.  
 
-# 商品获取
+## 商品获取
 
 POST /v1/coin/shop/product-recommend
 
@@ -16,6 +16,7 @@ POST /v1/coin/shop/product-recommend
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "size": 100, // 字号
@@ -24,6 +25,7 @@ POST /v1/coin/shop/product-recommend
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -52,9 +54,8 @@ POST /v1/coin/shop/product-recommend
 }
 ```
 
-# 我的金币任务获取
+## 我的金币任务获取
 
-### 获取
 POST /v1/coin/task/my-task-info
 
 请求头:  
@@ -64,6 +65,7 @@ POST /v1/coin/task/my-task-info
 |token|是|无|
 
 响应体:
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -77,9 +79,8 @@ POST /v1/coin/task/my-task-info
 }
 ```
 
-# 商品详情
+## 获取商品详情
 
-### 获取
 POST /v1/coin/shop/product-detail
 
 请求头:  
@@ -89,6 +90,7 @@ POST /v1/coin/shop/product-detail
 |token|是|无|
 
 请求体：
+
 ```JSONC
 {
   "id": 1 // 商品id
@@ -96,6 +98,7 @@ POST /v1/coin/shop/product-detail
 ```
 
 响应体:
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常

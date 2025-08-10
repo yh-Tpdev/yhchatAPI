@@ -2,7 +2,7 @@
 title: bot
 ---
 
-未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`
 没写请求/响应项目表示不需要相关参数.  
 
 ## 机器人商店banner
@@ -16,6 +16,7 @@ POST /v1/bot/banner
 |token|是|无|
 
 响应头：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -53,6 +54,7 @@ POST /v1/bot/new-list
 |token|是|无|
 
 响应头：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -85,6 +87,7 @@ POST /v1/bot/bot-detail
 |token|是|无|
 
 请求体：
+
 ```JSONC
 {
   "id": "30473864" // 机器人id
@@ -92,6 +95,7 @@ POST /v1/bot/bot-detail
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -155,6 +159,7 @@ POST /v1/bot/bot-group-list
 |token|是|无|
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -204,6 +209,7 @@ POST /v1/bot/edit-setting-json
 |token|是|无|
 
 请求体：
+
 ```JSONC
 {
   "id": "123", // 机器人id
@@ -212,6 +218,7 @@ POST /v1/bot/edit-setting-json
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常

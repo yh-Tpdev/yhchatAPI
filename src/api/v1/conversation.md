@@ -2,7 +2,7 @@
 title: conversation
 ---
 
-未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`
 没写请求/响应项目表示不需要相关参数.  
 
 ## 将对话设为已读  
@@ -16,6 +16,7 @@ POST /v1/conversation/dismiss-notification
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
  "chatId": "123" // 用户/机器人/群组ID
@@ -23,6 +24,7 @@ POST /v1/conversation/dismiss-notification
 ```
 
 响应体:  
+
 ```JSONC
 {
  "code": 1, // 返回状态码,1为正常
@@ -35,11 +37,13 @@ POST /v1/conversation/dismiss-notification
 POST /v1/conversation/list  
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
 响应体:  
+
 ```ProtoBuf
 status {
   number: 114514
@@ -74,7 +78,9 @@ total: 8 // 会话数目
 request_id: "abcdef"
 
 ```
+
 ::: details ProtoBuf数据结构
+
 ```proto
 // 列出对话
 message list {
@@ -111,4 +117,5 @@ message list {
     }
 }
 ```
+
 :::
