@@ -2,7 +2,7 @@
 title: msg
 ---
 
-未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`
 没写请求/响应项目表示不需要相关参数.  
 
 ## 发送信息（未完成，请勿参考！）
@@ -17,6 +17,7 @@ POST /v1/msg/send-message
 
 请求体:  
 建议参考proto文件中的内容.  
+
 ```ProtoBuf
 msg_id: "信息ID"
 chat_id: "欲发送到的信息对象"
@@ -37,7 +38,9 @@ temp_code: 0
 quote_msg_id: "引用信息ID"
 temp_text: ""
 ```
+
 ::: details ProtoBuf数据结构
+
 ```proto
 // 发送消息
 message send_message_send {
@@ -84,6 +87,7 @@ message send_message_send {
     }
 }
 ```
+
 :::
 
 ::: warning
@@ -91,6 +95,7 @@ message send_message_send {
 :::
 
 响应体:  
+
 ```ProtoBuf
 status {
   number: 123456
@@ -98,14 +103,16 @@ status {
   msg: "success"
 }
 ```
-::: details ProtoBuf数据结构
-```proto
 
+::: details ProtoBuf数据结构
+
+```proto
 // 信息发送是否成功状态信息
 message send_message {
     Status status = 1; // 状态码
 }
 ```
+
 :::
 
 ## 通过消息序列列出消息
@@ -123,6 +130,7 @@ POST /v1/msg/list-message-by-seq
 |token|是|无|
 
 请求体:  
+
 ```ProtoBuf
 msg_start: 1234 // 开始的消息序列
 chat_type: 2 // 对象类型, 1-用户 2-群聊 3-机器人
@@ -130,6 +138,7 @@ chat_id: "big" // 对象ID
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 通过消息序列列出消息
 message list_message_by_seq_send {
@@ -138,9 +147,11 @@ message list_message_by_seq_send {
     string chat_id = 5; // 对象ID
 }
 ```
+
 :::
 
 响应体:  
+
 ```ProtoBuf
 status {
   number: 114514
@@ -182,7 +193,9 @@ msg {
 // ...
 total: 23 // 获取的消息数量,貌似最大31个
 ```
+
 ::: details ProtoBuf数据结构
+
 ```proto
 message Tag {
     uint64 id = 1; // 标签ID(貌似)
@@ -250,6 +263,7 @@ message list_message_by_seq {
     }
 }
 ```
+
 :::
 
 ## 通过消息ID列出消息
@@ -267,13 +281,16 @@ POST /v1/msg/list-message
 |token|是|无|
 
 请求体:  
+
 ```ProtoBuf
 msg_count: 233 // 获取的消息数
 msg_id: "abcdef" // 从指定消息id开始,可不写
 chat_type: 2 // 对象类型,1-用户 2-群聊 3-机器人
 chat_id: "big" // 对象ID
 ```
+
 ::: details ProtoBuf数据结构
+
 ```proto
 message list_message_send {
     uint64 msg_count = 2; // 获取消息数
@@ -282,10 +299,12 @@ message list_message_send {
     string chat_id = 5; // 对象ID
 }
 ```
+
 :::
 
 响应体:  
 列出的是指定消息ID前的消息.  
+
 ```ProtoBuf
 status {
   number: 114514
@@ -328,6 +347,7 @@ msg {
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 标签
 message Tag {
@@ -397,6 +417,7 @@ message list_message { // 其实可以和 list-message-by-seq共用的。
     repeated Msg msg = 2;
 }
 ```
+
 :::
 
 ### 获取信息历史编辑内容
@@ -404,11 +425,13 @@ message list_message { // 其实可以和 list-message-by-seq共用的。
 POST /v1/msg/list-message-edit-record
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
-|token|是|空
+|token|是|空|
 
 请求体：
+
 ```JSONC
 {
   "msgId": "12312312312312312312312313", // 信息ID
@@ -418,6 +441,7 @@ POST /v1/msg/list-message-edit-record
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -444,11 +468,13 @@ POST /v1/msg/list-message-edit-record
 POST /v1/msg/button-report
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
-|token|是|空
+|token|是|空|
 
 请求体:  
+
 ```ProtoBuf
 msg_id: "123123123123123123" // 信息ID
 chat_type: 2 // 对象类型, 1-用户 2-群聊 3-机器人
@@ -458,6 +484,7 @@ button_text: "测试按钮文本" // 欲点击按钮的文本标题
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 通过消息序列列出消息
 message button_report_send {
@@ -468,10 +495,12 @@ message button_report_send {
     string button_text = 6; // 欲点击按钮的文本标题
 }
 ```
+
 :::
 
 响应体:  
 列出的是指定消息ID前的消息.  
+
 ```ProtoBuf
 status {
   number: 114514
@@ -481,12 +510,14 @@ status {
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 按钮事件点击返回状态信息
 message button_report {
     Status status = 1;
 }
 ```
+
 :::
 
 ### 撤回信息
@@ -494,11 +525,13 @@ message button_report {
 POST /v1/msg/recall-msg
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
-|token|是|空
+|token|是|空|
 
 请求体:  
+
 ```ProtoBuf
 msg_id: "123123123123123123" // 信息ID
 chat_id: "123" // 信息所属对象ID
@@ -506,6 +539,7 @@ chat_type: 2 // 信息所属对象类型, 1-用户 2-群聊 3-机器人
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 通过消息序列列出消息
 message button_report_send {
@@ -514,9 +548,11 @@ message button_report_send {
     uint64 chat_type = 4; // 信息所属对象类型, 1-用户 2-群聊 3-机器人
 }
 ```
+
 :::
 
 响应体:  
+
 ```ProtoBuf
 status {
   number: 114514
@@ -526,12 +562,14 @@ status {
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 按钮事件点击返回状态信息
 message button_report {
     Status status = 1;
 }
 ```
+
 :::
 
 ### 批量信息撤回
@@ -539,11 +577,13 @@ message button_report {
 POST /v1/msg/recall-msg-batch
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
-|token|是|空
+|token|是|空|
 
 请求体:  
+
 ```ProtoBuf
 msg_id: "123123123123123123" // 信息ID
 // ...
@@ -552,6 +592,7 @@ chat_type: 2 // 信息所属对象类型, 1-用户 2-群聊 3-机器人
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 通过消息序列列出消息
 message recall_msg_batch_send {
@@ -560,9 +601,11 @@ message recall_msg_batch_send {
     uint64 chat_type = 4; // 信息所属对象类型, 1-用户 2-群聊 3-机器人
 }
 ```
+
 :::
 
 响应体:  
+
 ```ProtoBuf
 status {
   number: 114514
@@ -572,10 +615,12 @@ status {
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 批量信息撤回返回状态码
 message button_report {
     Status status = 1;
 }
 ```
+
 :::

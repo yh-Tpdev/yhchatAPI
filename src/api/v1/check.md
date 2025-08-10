@@ -2,7 +2,7 @@
 title: check
 ---
 
-未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`
 没写请求/响应项目表示不需要相关参数.  
 
 ## 获取云湖新版本（Android版本）
@@ -11,6 +11,7 @@ POST /v1/check/check-version-mobile
 POST /v1/check/get-latest-version
 
 请求体:  
+
 ```JSONC
 {
  "packageInfo":"{\"appName\":\"云湖\",\"packageName\":\"com.yhchat.app\",\"version\":\"1.4.83\",\"buildNumber\":\"347\"}", // 当前应用信息，为json数组，需转义后才可使用
@@ -22,6 +23,7 @@ POST /v1/check/get-latest-version
 ```
 
 响应体：
+
 ```JSONC
 {
   "ApkMd5": "", // 更新包MD5

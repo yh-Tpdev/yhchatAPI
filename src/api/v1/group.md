@@ -2,23 +2,25 @@
 title: group
 ---
 
-未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
-没写请求/响应项目表示不需要相关参数.  
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`
+没写请求/响应项目表示不需要相关参数.
 
-## 获取群聊信息  
+## 获取群聊信息
 
-POST /v1/group/info  
+POST /v1/group/info
 
-请求头:  
+请求头:
+
 |名称|必须|备注|
-|-----|-----|-----|
+|-----|----|----|
 |token|是|无|
 
 ::: warning
 此处响应数据部分项目需要在打开相应开关后才会出现,例如private必须打开群聊私有才能在响应数据中看到.  
 :::
 
-响应数据:  
+响应数据:
+
 ```ProtoBuf
 status {
   number: 114514
@@ -69,6 +71,7 @@ history_bot {
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 群聊信息
 message info_send {
@@ -113,7 +116,7 @@ message info {
             string color = 4;
         }
     }
-    
+
     // 群聊中使用过的机器人数据
     message Bot_data {
         string id = 1;
@@ -129,6 +132,7 @@ message info {
     }
 }
 ```
+
 :::
 
 ## 获取群聊语音房间
@@ -136,18 +140,21 @@ message info {
 POST /v1/group/live-room
 
 请求头:  
+
 |名称|必须|备注|
 |---|---|---|
 |token|是|无|
 
-请求体:  
+请求体:
+
 ```JSONC
 {
   "group_id": "123" // 群聊id
 }
 ```
 
-响应数据:  
+响应数据:
+
 ```JSONC
 {
   "code": 1,  // 请求状态码，1为正常
@@ -177,18 +184,21 @@ POST /v1/group/live-room
 POST /v1/group/instruction-list
 
 请求头:  
+
 |名称|必须|备注|
 |---|---|---|
 |token|是|无|
 
-请求体:  
+请求体:
+
 ```JSONC
 {
   "groupId": "big" // 目标群聊
 }
 ```
 
-响应数据:  
+响应数据:
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -215,11 +225,13 @@ POST /v1/group/instruction-list
 POST /v1/group/invite
 
 请求头:  
+
 |名称|必须|备注|
 |---|---|---|
 |token|是|无|
 
-请求体:  
+请求体:
+
 ```JSONC
 {
   "chatId": "123", // 邀请成员ID
@@ -228,7 +240,8 @@ POST /v1/group/invite
 }
 ```
 
-响应数据:  
+响应数据:
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -241,11 +254,13 @@ POST /v1/group/invite
 POST /v1/group-tag/list
 
 请求头:  
+
 |名称|必须|备注|
 |---|---|---|
 |token|是|无|
 
-请求体:  
+请求体:
+
 ```JSONC
 {
     "groupId": "123456789", //要获取的群聊ID
@@ -255,7 +270,8 @@ POST /v1/group-tag/list
 }
 ```
 
-响应体:  
+响应体:
+
 ```JSONC
 {
     "code": 1,
@@ -268,7 +284,7 @@ POST /v1/group-tag/list
                 "color": "#E91E63", // 标签颜色
                 "desc": "", // 描述
                 "sort": 0, // 排序
-                "delFlag": 0, 
+                "delFlag": 0,
                 "createTime": 1753719847 // 创建时间
             }
         ]
@@ -282,11 +298,13 @@ POST /v1/group-tag/list
 POST /v1/group-tag/relate
 
 请求头:  
+
 |名称|必须|备注|
 |---|---|---|
 |token|是|必须为群聊管理员token|
 
-请求体:  
+请求体:
+
 ```JSONC
 {
     "userId": "1234567", // 要关联的用户ID
@@ -294,7 +312,8 @@ POST /v1/group-tag/relate
 }
 ```
 
-响应体:  
+响应体:
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -307,11 +326,13 @@ POST /v1/group-tag/relate
 POST /v1/group-tag/relate-cancel
 
 请求头:  
+
 |名称|必须|备注|
 |---|---|---|
 |token|是|必须为群聊管理员token|
 
-请求体:  
+请求体:
+
 ```JSONC
 {
     "userId": "1234567", // 要关联的用户ID
@@ -319,7 +340,8 @@ POST /v1/group-tag/relate-cancel
 }
 ```
 
-响应体:  
+响应体:
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -332,11 +354,13 @@ POST /v1/group-tag/relate-cancel
 POST /v1/group-tag/edit
 
 请求头:  
+
 |名称|必须|备注|
 |---|---|---|
 |token|是|必须为群聊管理员token|
 
-请求体:  
+请求体:
+
 ```JSONC
 {
     "id": 1234, // 要更改的标签ID
@@ -348,7 +372,8 @@ POST /v1/group-tag/edit
 }
 ```
 
-响应体:  
+响应体:
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -361,11 +386,13 @@ POST /v1/group-tag/edit
 POST /v1/group-tag/create
 
 请求头:  
+
 |名称|必须|备注|
 |---|---|---|
 |token|是|必须为群聊管理员token|
 
 请求体：
+
 ```JSONC
 {
     "groupId": "123456789", // 要创建标签的群聊ID
@@ -378,6 +405,7 @@ POST /v1/group-tag/create
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -390,18 +418,21 @@ POST /v1/group-tag/create
 POST /v1/group-tag/delete
 
 请求头:  
+
 |名称|必须|备注|
 |---|---|---|
 |token|是|必须为群聊管理员token|
 
-请求体:  
+请求体:
+
 ```JSONC
 {
     "id": 1234 // 要删除的标签ID
 }
 ```
 
-响应体:  
+响应体:
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -414,11 +445,13 @@ POST /v1/group-tag/delete
 POST /v1/group/remove-member
 
 请求头:  
+
 |名称|必须|备注|
 |---|---|---|
 |token|是|必须为群聊管理员token|
 
-请求体:  
+请求体:
+
 ```JSONC
 {
   "groupId": "123", // 目标群聊ID
@@ -426,7 +459,8 @@ POST /v1/group/remove-member
 }
 ```
 
-响应体:  
+响应体:
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -439,11 +473,13 @@ POST /v1/group/remove-member
 POST /v1/group/gag-member
 
 请求头:  
+
 |名称|必须|备注|
 |---|---|---|
 |token|是|必须为群聊管理员token|
 
-请求体:  
+请求体:
+
 ```JSONC
 {
   "groupId": "123", // 目标群聊ID
@@ -452,7 +488,8 @@ POST /v1/group/gag-member
 }
 ```
 
-响应体:  
+响应体:
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -465,11 +502,13 @@ POST /v1/group/gag-member
 POST /v1/group/recommend/list
 
 请求头:  
+
 |名称|必须|备注|
 |---|---|---|
 |token|是|无|
 
-请求体:  
+请求体:
+
 ```JSONC
 {
   "categoryId": 22, // 群聊分类id
@@ -478,6 +517,7 @@ POST /v1/group/recommend/list
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -485,7 +525,7 @@ POST /v1/group/recommend/list
     "groups": [
       {
         "id": 9910,
-        "groupId": "114514", 
+        "groupId": "114514",
         "name": "这是群聊名字",
         "introduction": "这是个群聊介绍",
         "createBy": "114514", // 创建者id
@@ -499,7 +539,7 @@ POST /v1/group/recommend/list
         "categoryId": 22, // 群聊分类id
         "category": "技术-IT/互联网", // 群聊分类名称
         "private": 0, // 群聊是否私有（1为开启，0为关闭）
-        "banId": 0, // 
+        "banId": 0, //
         "gag": 0,  // 是否禁言（1为开启，0为关闭）
         "gagBy": "", // 被禁言的id
         "msgTypeLimit": "" // 消息类型限制
@@ -516,20 +556,25 @@ POST /v1/group/recommend/list
 POST /v1/group/msg-type-limit
 
 请求头:  
+
 |名称|必须|备注|
 |---|---|---|
 |token|是|必须是群主/管理员token|
 
-请求体:  
+请求体:
+
 ```JSONC
 {
   "groupId": "群聊id",
   "type": "消息类型" // 1-文本消息，2-图片消息，3-Markdown消息，4-文件消息，6-帖子消息，7-表情消息，8-HTML消息，10-视频消息，11-语音消息，13-语音通话（限制多个消息类型一般是 1,2,3,4··· 之类）
 }
 ```
+
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
   "msg": "success" // 返回状态消息
 }
+```

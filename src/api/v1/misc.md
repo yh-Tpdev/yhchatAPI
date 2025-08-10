@@ -2,7 +2,7 @@
 title: misc
 ---
 
-未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`
 没写请求/响应项目表示不需要相关参数.  
 
 ## 获取功能路由
@@ -16,6 +16,7 @@ GET /v1/misc/configure-distribution
 |token|是|无|
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -43,6 +44,7 @@ GET /v1/misc/qiniu-token
 |token|是|无|
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -64,6 +66,7 @@ GET /v1/misc/qiniu-token-audio
 |token|否|无|
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -85,6 +88,7 @@ GET /v1/misc/qiniu-token2
 |token|是|无|
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -106,6 +110,7 @@ GET /v1/misc/qiniu-token-video
 |token|是|无|
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -127,6 +132,7 @@ GET /v1/misc/qiniu-token-group-disk
 |token|是|无|
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -148,6 +154,7 @@ GET /v1/misc/setting
 |token|否|无|
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -168,6 +175,7 @@ GET /v1/misc/setting
 GET /v1/misc/gray-status
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -182,13 +190,15 @@ GET /v1/misc/gray-status
 
 GET /v1/misc/auto-update
 
-参数:  
-```
+URL 参数:  
+
+```TEXT
 platform=windows // 目标平台标识符，windows，android，macos，ios
 userId=123 // 获取更新的用户ID
 ```
 
 响应体:  
+
 ```XML
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
   <channel>
