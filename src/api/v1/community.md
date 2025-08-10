@@ -2,7 +2,7 @@
 title: community
 ---
 
-未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
 没写请求/响应项目表示不需要相关参数.  
 
 ## 发送文章
@@ -488,6 +488,7 @@ POST /v1/community/comment/comment
 |token|是|无|
 
 请求体：
+
 ```JSONC
 {
   "postId": 31108, // 文章id
@@ -497,6 +498,7 @@ POST /v1/community/comment/comment
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -515,6 +517,7 @@ POST /v1/community/comment/comment-list
 |token|是|无|
 
 请求体：
+
 ```JSONC
 {
   "postId": 31153, // 文章id
@@ -524,6 +527,7 @@ POST /v1/community/comment/comment-list
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
