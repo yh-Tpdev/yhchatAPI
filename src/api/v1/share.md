@@ -2,7 +2,7 @@
 title: share
 ---
 
-未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
 没写请求/响应项目表示不需要相关参数.  
 
 ## 分享链接获取群聊信息
@@ -16,6 +16,7 @@ POST /v1/share/info
 |token|是|无|
 
 请求体：
+
 ```JSONC
 {
   "key": "9o5UKnYgLk6z", // 分享链接key（来自 https://yhfx.jwznb.com/share?key=9o5UKnYgLk6z&ts=1754730310 内key的值 ）
@@ -24,6 +25,7 @@ POST /v1/share/info
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -40,6 +42,41 @@ POST /v1/share/info
       "imageUrl": "share/f1881e952b5040a846a8bb1437a8c48f", // 分享链接会话头像url
       "imageName": "resources/share_bg/bg1.jpg" // 图片名称
     }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 创建分享链接
+
+POST /v1/share/create
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "chatId": "会话id",
+  "chatType": 2, // 会话类型，1-用户，2-群聊，3-机器人
+  "chatName": "会话名称"
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "imageKey": "share/897c53c47d767bcde2e0c65367b59871", // 图片key
+    "key": "AzN8zhJXPzyd", // 分享链接的key
+    "shareUrl": "https://yhfx.jwznb.com/", // 分享开头的url
+    "ts": 1754882929 // 分享链接创建时间戳
   },
   "msg": "success" // 返回消息
 }

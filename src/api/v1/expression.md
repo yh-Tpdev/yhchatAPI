@@ -2,7 +2,7 @@
 title: expression
 ---
 
-未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
 没写请求/响应项目表示不需要相关参数.  
 
 ## 获取个人表情收藏
@@ -16,6 +16,7 @@ POST /v1/expression/list
 |token|是|无|
 
 响应体:  
+
 ```JSONC
 {
   "code": 1,
@@ -40,11 +41,13 @@ POST /v1/expression/list
 POST /v1/expression/create  
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "url": "https://chat-img.jwznb.com/......" // 图片URL
@@ -52,6 +55,7 @@ POST /v1/expression/create
 ```
 
 响应体:  
+
 ```JSONC
 {
     "code": 1, // 状态码，正常为1
@@ -70,6 +74,7 @@ POST /v1/expression/delete
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "id": 114514 // // 要删除的表情ID
@@ -77,6 +82,7 @@ POST /v1/expression/delete
 ```
 
 响应体:  
+
 ```JSONC
 {
     "code": 1, // 状态码，正常为1
@@ -95,6 +101,7 @@ POST /v1/expression/topping
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "id": 114514 // 要置顶的表情ID
@@ -102,6 +109,7 @@ POST /v1/expression/topping
 ```
 
 响应体:  
+
 ```JSONC
 {
     "code": 1, // 状态码，正常为1

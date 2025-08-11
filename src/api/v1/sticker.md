@@ -2,7 +2,7 @@
 title: sticker
 ---
 
-未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
 没写请求/响应项目表示不需要相关参数.  
 
 ## 获取收藏表情包
@@ -10,11 +10,13 @@ title: sticker
 POST /v1/sticker/list
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
 响应体:  
+
 ```JSONC
 {
  "code": 1,
@@ -54,11 +56,13 @@ POST /v1/sticker/list
 POST /v1/sticker/detail
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "id": 123 // 表情包ID
@@ -66,6 +70,7 @@ POST /v1/sticker/detail
 ```
 
 响应体:  
+
 ```JSONC
 {
     "code": 1,
@@ -110,11 +115,13 @@ POST /v1/sticker/detail
 POST /v1/sticker/add
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "id": 894 // 表情包ID
@@ -122,6 +129,7 @@ POST /v1/sticker/add
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -134,11 +142,13 @@ POST /v1/sticker/add
 POST /v1/sticker/remove-sticker-pack  
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "id": 123 // 要移除的表情包的ID
@@ -146,6 +156,7 @@ POST /v1/sticker/remove-sticker-pack
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -158,11 +169,13 @@ POST /v1/sticker/remove-sticker-pack
 POST /v1/sticker/sort  
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "sort": "[
@@ -180,6 +193,7 @@ POST /v1/sticker/sort
 ```
 
 ::: details 备注: 使用Python请求代码
+
 ```Python
 headers = {"token": token}
 sticker = [ 
@@ -194,9 +208,11 @@ payload = {"sort": str(sticker)}
 response = httpx.post("https://chat-go.jwzhd.com/v1/sticker/sort", headers = headers, json = payload) 
 print(response.text)
 ```
+
 :::
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常

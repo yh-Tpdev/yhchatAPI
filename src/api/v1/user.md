@@ -2,7 +2,7 @@
 title: user
 ---
 
-未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
 没写请求/响应项目表示不需要相关参数.  
 
 ## 获取人机验证图片
@@ -10,6 +10,7 @@ title: user
 POST /v1/user/captcha  
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -26,6 +27,7 @@ POST /v1/user/captcha
 POST /v1/user/verification-login
 
 请求体:  
+
 ```JSONC
 {  
   "mobile": "12312312300", // 登录手机号
@@ -36,6 +38,7 @@ POST /v1/user/verification-login
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -51,11 +54,13 @@ POST /v1/user/verification-login
 GET /v1/user/info  
 
 请求头:  
+
 |名称|必须|备注|
 |-----|------|-----|
 |token|是|无|
 
 响应体:  
+
 ```ProtoBuf
 status {
   number: 114514
@@ -76,6 +81,7 @@ data {
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 用户自身信息
 message info {
@@ -96,6 +102,7 @@ message info {
     Data data = 2;
 }
 ```
+
 :::
 
 ## 获取用户信息
@@ -109,18 +116,23 @@ POST /v1/user/get-user
 |token|是|可以瞎写一个|
 
 请求体:  
+
 ```ProtoBuf
 id: "用户id"
 ```
+
 ::: details ProtoBuf数据结构
+
 ```proto
 message get_user_send {
     string id = 2;
 }
 ```
+
 :::
 
 响应体:  
+
 ```ProtoBuf
 status {
   number: 123456
@@ -145,7 +157,9 @@ data {
   vip_expired_time: 123 // vip的unix时间戳
 }
 ```
+
 ::: details ProtoBuf数据结构
+
 ```proto
 // 勋章信息
 message Medal_info {
@@ -172,6 +186,7 @@ message get_user {
     }
 }
 ```
+
 :::
 
 ## 用户勋章
@@ -185,6 +200,7 @@ POST /v1/user/medal
 |token|是|空|
 
 响应体:  
+
 ```ProtoBuf
 status {
   number: 114514
@@ -199,6 +215,7 @@ medal {
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 勋章
 message medal {
@@ -213,6 +230,7 @@ message Medal_info {
     uint64 sort = 5;  // 勋章顺序
 }
 ```
+
 :::
 
 ## 更改用户名称
@@ -226,18 +244,23 @@ POST /v1/user/edit-nickname
 |token|是|空|
 
 请求体:  
+
 ```ProtoBuf
 name: "123" // 用户名称
 ```
+
 ::: details ProtoBuf数据结构
+
 ```proto
 message edit_nickname_send {
     string name = 3;
 }
 ```
+
 :::
 
 响应体:  
+
 ```ProtoBuf
 status {
   number: 114514
@@ -247,12 +270,14 @@ status {
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 更改名称状态信息
 message edit_nickname {
     Status status = 1; // 状态信息
 }
 ```
+
 :::
 
 ## 更改用户头像
@@ -266,18 +291,23 @@ POST /v1/user/edit-avatar
 |token|是|空|
 
 请求体:  
+
 ```ProtoBuf
 url: "https://..." // 用户头像url
 ```
+
 ::: details ProtoBuf数据结构
+
 ```proto
 message edit_avatar_send {
     string url = 2;
 }
 ```
+
 :::
 
 响应体:  
+
 ```ProtoBuf
 status {
   number: 114514
@@ -287,20 +317,22 @@ status {
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 更改名称状态信息
 message edit_avatar {
     Status status = 1; // 状态信息
 }
 ```
+
 :::
 
-
-### 用户邮箱密码登录
+## 用户邮箱密码登录
 
 POST /v1/user/email-login
 
 请求体：
+
 ```JSONC
 {
     "email": "123456@example.com", // 登录邮箱
@@ -311,6 +343,7 @@ POST /v1/user/email-login
 ```
 
 响应体:  
+
 ```JSONC
 {
     "code": 1, // 请求状态码，1为正常
@@ -321,16 +354,18 @@ POST /v1/user/email-login
 }
 ```
 
-### 退出登录
+## 退出登录
 
 POST /v1/user/logout
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|空|
 
 响应体：
+
 ```JSONC
 {
     "code": 1, // 请求状态码，1为正常
@@ -338,16 +373,18 @@ POST /v1/user/logout
 }
 ```
 
-### 获取发现群聊分区
+## 获取发现群聊分区
 
 POST /v1/user/recommend-category-list
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|空|
 
 请求体：
+
 ```JSONC
 {
  "appChannel": "default"
@@ -355,6 +392,7 @@ POST /v1/user/recommend-category-list
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 状态码，正常为1
@@ -373,16 +411,18 @@ POST /v1/user/recommend-category-list
 }
 ```
 
-### 获取发现群聊列表
+## 获取发现群聊列表
 
 POST /v1/user/recommend-list
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|空|
 
 请求体：
+
 ```JSONC
 {
   "category": "精选", // 群聊类别
@@ -393,6 +433,7 @@ POST /v1/user/recommend-list
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 状态码，正常为1
@@ -413,16 +454,19 @@ POST /v1/user/recommend-list
   "msg": "success" // 状态信息
 }
 ```
-### 获取机器人推荐列表
+
+## 获取机器人推荐列表
 
 POST /v1/user/recommend
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
-|token|是|空
+|token|是|空|
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -452,11 +496,13 @@ POST /v1/user/recommend
 POST /v1/user/module-ignore-info
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
-|token|是|空
+|token|是|空|
 
 响应体：
+
 ```JSONC
 {
  "deviceId": "设备id"
@@ -465,6 +511,7 @@ POST /v1/user/module-ignore-info
 
 (因为没有vip，这里为示例，请实际情况为准)
 响应体：
+
 ```JSONC
 {
   "code": -1, // 请求状态码，1为正常
@@ -477,11 +524,13 @@ POST /v1/user/module-ignore-info
 POST /v1/user/notification-status
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
-|token|是|空
+|token|是|空|
 
 请求体：
+
 ```JSONC
 {
   "deviceId": "1114514", // 设备id
@@ -490,6 +539,7 @@ POST /v1/user/notification-status
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -515,11 +565,13 @@ POST /v1/user/notification-status
 POST /v1/user/notification-info
 
 请求头:  
+
 |名称|必须|备注|
 |-----|-----|-----|
-|token|是|空
+|token|是|空|
 
 请求体：
+
 ```JSONC
 {
   "deviceId": "114514", // 设备id
@@ -530,6 +582,7 @@ POST /v1/user/notification-info
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -548,6 +601,7 @@ POST /v1/user/gold-coin-increase-decrease-record
 |token|是|无|
 
 响应体：
+
 ```JSONC
 {
   "size": 20, // 尺寸
@@ -556,6 +610,7 @@ POST /v1/user/gold-coin-increase-decrease-record
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -576,6 +631,141 @@ POST /v1/user/gold-coin-increase-decrease-record
     ],
     "total": 243 // 总共的金币记录
   },
+  "msg": "success" // 返回消息
+}
+```
+
+## 绑定手机号
+
+POST /v1/user/bing-phone
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+响应体：
+
+```JSONC
+{
+  "phone": "12312311230", // 欲绑定手机号
+  "captcha": "123123" // 短信验证码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 绑定邮箱
+
+POST /v1/user/bing-email
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+响应体：
+
+```JSONC
+{
+  "email": "123@123.com", // 欲绑定邮箱
+  "captcha": "123123" // 邮件验证码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 更改绑定手机号
+
+POST /v1/user/change-phone-check
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+响应体：
+
+```JSONC
+{
+  "phone": "12312341230", // 欲绑定手机号
+  "captcha": "123123" // 短信验证码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 更改绑定邮箱
+
+POST /v1/user/change-email-check
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+响应体：
+
+```JSONC
+{
+  "email": "123@123.com", // 欲绑定邮箱
+  "captcha": "123123" // 邮件验证码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 更改登陆密码
+
+POST /v1/user/forget-password
+
+响应体：
+
+```JSONC
+{
+  "email": "123@123.com", // 欲绑定邮箱
+  "captcha": "123123", // 邮件验证码
+  "password": "测试登录密码" // 登录密码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
   "msg": "success" // 返回消息
 }
 ```

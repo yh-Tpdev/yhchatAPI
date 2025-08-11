@@ -2,7 +2,7 @@
 title: friend
 ---
 
-未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
 没写请求/响应项目表示不需要相关参数.  
 
 ## 添加用户/群聊/机器人
@@ -16,6 +16,7 @@ POST /v1/friend/apply
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "chatId": "123", // 目标对象ID
@@ -25,6 +26,7 @@ POST /v1/friend/apply
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -43,6 +45,7 @@ POST /v1/friend/delete-friend
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "chatId": "123", // 目标对象ID
@@ -51,6 +54,7 @@ POST /v1/friend/delete-friend
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -69,6 +73,7 @@ POST /v1/friend/agree-apply
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "id": 123, // 申请ID
@@ -77,6 +82,7 @@ POST /v1/friend/agree-apply
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -95,20 +101,24 @@ POST /v1/friend/address-book-list
 |token|是|无|
 
 请求体:  
+
 ```ProtoBuf
 number: "123123" // 请求标识ID，可以随便写
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 请求标识符
 message address_book_list_send {
     string number = 2;
 }
 ```
+
 :::
 
 响应体:  
+
 ```ProtoBuf
 status {
   number: 114514
@@ -130,6 +140,7 @@ data {
 ```
 
 ::: details ProtoBuf数据结构
+
 ```proto
 // 聊天对话列表
 message address_book_list {
@@ -153,4 +164,5 @@ message address_book_list {
   }
 }
 ```
+
 :::

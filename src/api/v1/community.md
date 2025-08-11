@@ -2,7 +2,7 @@
 title: community
 ---
 
-未特别说明情况下请求域名均为 https://chat-go.jwzhd.com
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
 没写请求/响应项目表示不需要相关参数.  
 
 ## 发送文章
@@ -16,6 +16,7 @@ GET /v1/community/posts/create
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {  
   "baId": 40, // 文章分区ID
@@ -27,6 +28,7 @@ GET /v1/community/posts/create
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -48,6 +50,7 @@ GET /v1/community/posts/delete
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "postId": 123 // 文章ID
@@ -55,6 +58,7 @@ GET /v1/community/posts/delete
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -73,6 +77,7 @@ GET /v1/community/posts/post-reward
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "postId": 123, // 文章ID
@@ -81,6 +86,7 @@ GET /v1/community/posts/post-reward
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -99,6 +105,7 @@ GET /v1/community/comment/comment-reward
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "postId": 123, // 文章ID
@@ -108,6 +115,7 @@ GET /v1/community/comment/comment-reward
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -126,6 +134,7 @@ GET /v1/community/posts/post-like
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "id": 123, // 文章ID
@@ -133,6 +142,7 @@ GET /v1/community/posts/post-like
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -151,6 +161,7 @@ GET /v1/community/posts/post-collect
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "id": 123, // 文章ID
@@ -158,6 +169,7 @@ GET /v1/community/posts/post-collect
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -165,7 +177,7 @@ GET /v1/community/posts/post-collect
 }
 ```
 
-## 编辑收藏文章
+## 编辑文章
 
 GET /v1/community/posts/edit
 
@@ -176,6 +188,7 @@ GET /v1/community/posts/edit
 |token|是|无|
 
 请求体:  
+
 ```JSONC
 {
   "postId": 123, // 文章ID
@@ -186,6 +199,7 @@ GET /v1/community/posts/edit
 ```
 
 响应体:  
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -207,6 +221,7 @@ POST /v1/community/posts/post-list
 |token|是|无|
 
 请求体：
+
 ```JSONC
 {
   "typ": 1, // 典型值
@@ -217,6 +232,7 @@ POST /v1/community/posts/post-list
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -289,6 +305,7 @@ POST /v1/community/ba/info
 |token|是|无|
 
 请求体：
+
 ```JSONC
 {
   "id": 41 // 分区id
@@ -296,6 +313,7 @@ POST /v1/community/ba/info
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -329,6 +347,7 @@ POST /v1/community/ba/following-ba-list
 |token|是|无|
 
 请求体：
+
 ```JSONC
 {
   "typ": 2, // 类型
@@ -338,6 +357,7 @@ POST /v1/community/ba/following-ba-list
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -374,6 +394,7 @@ POST /v1/community/reward-record
 |token|是|无|
 
 请求体：
+
 ```JSONC
 {
   "typ": "post", // 类型（post-文章,comment-评论）
@@ -383,6 +404,7 @@ POST /v1/community/reward-record
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -450,6 +472,93 @@ POST /v1/community/reward-record
     // ...
     ]
     "total": 1 // 总共的记录
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 评论文章
+
+POST /v1/community/comment/comment
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "postId": 31108, // 文章id
+  "commentId": 6051, // 评论id（若直接评论文章那id=0）
+  "content": "🤣" // 评论内容
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取文章评论列表
+
+POST /v1/community/comment/comment-list
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "postId": 31153, // 文章id
+  "size": 10, // 尺寸
+  "page": 1 // 页数
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "comments": [
+      {
+        "id": 6173, // 评论id
+        "postId": 31153, // 文章id
+        "parentId": 0, // 父id
+        "senderId": "114514", //发送者id
+        "sender_nicknameId": 178312, // 发送者名称id
+        "sender_avatarUd": 87, // 发送者头像id
+        "content": "？", // 评论内容
+        "delTime": 0, // 删除时间戳
+        "createTime": 1754746982, // 发送时间戳
+        "likeNum": 0, // 该评论的赞数
+        "repliesNum": 0, // 该评论下的回复
+        "amountNum": 0, // 该评论的投币数
+        "auditStatus": 0, // 审核状态
+        "replies": [], // 评论内容
+        "senderNickname": "22928kkkk", // 发送者昵称
+        "senderAvatar": "https://chat-img.jwznb.com/defalut-avatars/Pearl%20Kendrick.png", // 发送者头像url
+        "createTimeText": "2025-08-09 21:43:02", // 评论时间
+        "isLiked": "0", // 是否点赞(1-是，0-否)
+        "isReward": 0, // 是否投币(1-是，0-否)
+        "isVip": 0 // 判断是否为vip(1-是，0-否)
+      },
+    // ...
+    ],
+    "isAdmin": 0, // 判断你是否为管理员(1/是，2-否)
+    "total": 3 // 总共评论数量(3个)
   },
   "msg": "success" // 返回消息
 }
