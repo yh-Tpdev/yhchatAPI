@@ -5,9 +5,9 @@ title: community
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
 没写请求/响应项目表示不需要相关参数.  
 
-## 发送文章
+## 创建文章
 
-GET /v1/community/posts/create
+POST /v1/community/posts/create
 
 请求头:  
 
@@ -41,7 +41,7 @@ GET /v1/community/posts/create
 
 ## 删除文章
 
-GET /v1/community/posts/delete
+POST /v1/community/posts/delete
 
 请求头:  
 
@@ -68,7 +68,7 @@ GET /v1/community/posts/delete
 
 ## 打赏文章
 
-GET /v1/community/posts/post-reward
+POST /v1/community/posts/post-reward
 
 请求头:  
 
@@ -96,7 +96,7 @@ GET /v1/community/posts/post-reward
 
 ## 打赏文章评论
 
-GET /v1/community/comment/comment-reward
+POST /v1/community/comment/comment-reward
 
 请求头:  
 
@@ -125,7 +125,7 @@ GET /v1/community/comment/comment-reward
 
 ## 点赞/取消点赞文章
 
-GET /v1/community/posts/post-like
+POST /v1/community/posts/post-like
 
 请求头:  
 
@@ -152,7 +152,7 @@ GET /v1/community/posts/post-like
 
 ## 收藏/取消收藏文章
 
-GET /v1/community/posts/post-collect
+POST /v1/community/posts/post-collect
 
 请求头:  
 
@@ -179,7 +179,7 @@ GET /v1/community/posts/post-collect
 
 ## 编辑文章
 
-GET /v1/community/posts/edit
+POST /v1/community/posts/edit
 
 请求头:  
 
