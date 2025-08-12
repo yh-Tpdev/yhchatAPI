@@ -109,7 +109,7 @@ data {
       text: "Feng的大手发力了" // 消息文字
       // 剩下的建议参考proto,太多不写了
     }
-    msg_type: 1 // 消息类型
+    content_type: 1 // 消息类型
     timestamp: 123456789 // 时间戳(毫秒)
     cmd {
       id; 999 // 指令ID
@@ -154,7 +154,7 @@ message push_message {
             string chat_id = 4; // 会话的ID
             uint64 chat_type = 5; // 会话类型
             Content content = 6; // 消息内容
-            uint64 msg_type = 7;
+            uint64 content_type = 7;
             uint64 timestamp = 8; // 时间戳(毫秒)
             Cmd cmd = 9; // 指令
             uint64 delete_timestamp = 10; // 撤回消息时间,和8差别不大
