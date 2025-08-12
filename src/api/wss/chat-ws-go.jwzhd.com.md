@@ -261,3 +261,54 @@ message file_send_message {
 ```
 
 :::
+
+## 编辑信息推送
+
+返回数据:  
+
+```ProtoBuf
+info {
+  seq: "123123123123123123123" // 请求表示码
+  cmd: "edit_message" // 推送超级文件分享
+}
+
+data {
+  "msg_id": "123123123123" // 信息ID
+  "chat_id": "123" // 信息对象ID
+  "chat_type": 1 // 信息对象类别，1-用户，2-群聊，3-机器人
+  "content": {
+    “text": "测试信息文本" // 信息文本
+    "buttons": "测试信息文本" // 按钮信息文本数据
+    "quote_msg_text": "测试引用信息文本" // 引用信息文本
+  }
+  "content_type": 1 // 信息类别，1-文本，3-markdown，8-html
+  "quote_msg_id": "123123123123" // 引用信息ID
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 信息
+message INFO {
+    string seq = 1; // 请求标识码
+    string cmd = 2; // 操作类型
+}
+
+// 编辑消息
+message edit_message_send {
+    string msg_id = 2;
+    string chat_id = 3;
+    int32 chat_type = 4;
+    Content content = 5;
+    message Content {
+        string text = 1;
+        string buttons = 2;
+        string quote_msg_text = 8;
+    }
+    uint64 content_type = 6; // 信息类别，1-文本，3-markdown，8-html
+    string quote_msg_id = 8; // 引用信息ID
+}
+```
+
+:::
