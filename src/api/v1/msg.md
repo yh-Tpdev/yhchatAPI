@@ -176,7 +176,7 @@ msg {
   }
   direction: "left" // 在聊天中的位置(左边/右边)
   msg_type: 1 // 消息类型
-  msg_content {
+  content {
     text: "ok" // 消息内容
     // 剩下的建议看ProtoBuf序列文件,太多不写了
   }
@@ -213,7 +213,7 @@ message list_message_by_seq {
         Sender sender = 2;
         string direction = 3; // 消息位置,左边/右边
         uint64 msg_type = 4;
-        Msg_content msg_content = 5;
+        Content content = 5;
         uint64 send_time = 6; // 时间戳(毫秒)
         Cmd cmd = 7; // 指令
         uint64 msg_delete_time = 8; // 消息撤回时间
@@ -226,7 +226,7 @@ message list_message_by_seq {
             uint64 type = 4; // 指令类型
         }
         // 消息
-        message Msg_content {
+        message Content {
             string text = 1; // 消息内容
             string buttons = 2; // 按钮
             string image_url = 3; // 图像URL
@@ -329,7 +329,7 @@ msg {
   }
   direction: "left" // 在聊天中的位置(左边/右边)
   msg_type: 1 // 消息类型
-  msg_content {
+  content {
     text: "ok" // 消息内容
     // 剩下的建议看ProtoBuf序列文件,太多不写了
   }
@@ -361,7 +361,7 @@ message Msg {
     Sender sender = 2;
     string direction = 3; // 消息位置,左边/右边
     uint64 msg_type = 4;
-    Msg_content msg_content = 5;
+    Content content = 5;
     uint64 send_time = 6; // 时间戳(毫秒)
     Cmd cmd = 7; // 指令
     uint64 msg_delete_time = 8; // 消息撤回时间
@@ -374,7 +374,7 @@ message Msg {
         uint64 type = 4; // 指令类型
     }
     // 消息
-    message Msg_content {
+    message Content {
         string text = 1; // 消息内容
         string buttons = 2; // 按钮
         string image_url = 3;
@@ -491,7 +491,7 @@ msg {
   }
   direction: "left" // 在聊天中的位置(左边/右边)
   msg_type: 1 // 消息类型
-  msg_content {
+  content {
     text: "ok" // 消息内容
     // 剩下的建议看ProtoBuf序列文件,太多不写了
   }
@@ -524,7 +524,7 @@ message Msg {
     Sender sender = 2;
     string direction = 3; // 消息位置,左边/右边
     uint64 msg_type = 4;
-    Msg_content msg_content = 5;
+    Content content = 5;
     uint64 send_time = 6; // 时间戳(毫秒)
     Cmd cmd = 7; // 指令
     uint64 msg_delete_time = 8; // 消息撤回时间
@@ -537,7 +537,7 @@ message Msg {
         uint64 type = 4; // 指令类型
     }
     // 消息
-    message Msg_content {
+    message Content {
         string text = 1; // 消息内容
         string buttons = 2; // 按钮
         string image_url = 3;
