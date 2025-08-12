@@ -651,7 +651,7 @@ button_text: "测试按钮文本" // 欲点击按钮的文本标题
 ::: details ProtoBuf数据结构
 
 ```proto
-// 通过消息序列列出消息
+// 通过按钮事件点击消息
 message button_report_send {
     string msg_id = 2; // 信息ID
     uint64 chat_type = 3; // 对象类型, 1-用户 2-群聊 3-机器人
@@ -706,7 +706,7 @@ chat_type: 2 // 信息所属对象类型, 1-用户 2-群聊 3-机器人
 ::: details ProtoBuf数据结构
 
 ```proto
-// 通过消息序列列出消息
+// 通过msgId撤回消息
 message recall_msg_send {
     string msg_id = 2; // 信息ID
     string chat_id = 3; // 信息所属对象ID
@@ -729,7 +729,7 @@ status {
 ::: details ProtoBuf数据结构
 
 ```proto
-// 按钮事件点击返回状态信息
+// 撤回消息返回数据
 message recall_msg {
     Status status = 1;
 }
@@ -759,7 +759,7 @@ chat_type: 2 // 信息所属对象类型, 1-用户 2-群聊 3-机器人
 ::: details ProtoBuf数据结构
 
 ```proto
-// 通过消息序列列出消息
+// 通过msgId撤回消息
 message recall_msg_batch_send {
     repeated string msg_id = 2; // 信息ID
     string chat_id = 3; // 信息所属对象ID
@@ -782,7 +782,7 @@ status {
 ::: details ProtoBuf数据结构
 
 ```proto
-// 批量信息撤回返回状态码
+// 批量信息撤回返回状态
 message recall_msg_batch {
     Status status = 1;
 }
