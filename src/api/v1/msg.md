@@ -33,7 +33,7 @@ data {
   temp_text3: ""
   temp_code1: 0
 }
-msg_type: 1
+content_type: 1
 temp_code: 0
 quote_msg_id: "引用信息ID"
 temp_text: ""
@@ -71,7 +71,7 @@ message send_message_send {
         uint64 sticker_pack_id = 26; // 表情包ID
         string room_name = 29; // 语音房间发送显示信息的文本
     }
-    uint64 msg_type = 6; // 信息类别，1-文本，2-图片，3-markdown，4-文件，5-表单，6-文章，7-表情，8-html，11-语音，13-语音通话
+    uint64 content_type = 6; // 信息类别，1-文本，2-图片，3-markdown，4-文件，5-表单，6-文章，7-表情，8-html，11-语音，13-语音通话
     uint64 command_id = 7; // 所使用命令ID
     string quote_msg_id = 8; // 引用信息ID
     Media media = 9;
@@ -175,7 +175,7 @@ msg {
     // ...
   }
   direction: "left" // 在聊天中的位置(左边/右边)
-  msg_type: 1 // 消息类型
+  content_type: 1 // 消息类型
   content {
     text: "ok" // 消息内容
     // 剩下的建议看ProtoBuf序列文件,太多不写了
@@ -212,7 +212,7 @@ message list_message_by_seq {
         string msg_id = 1; // 消息ID
         Sender sender = 2;
         string direction = 3; // 消息位置,左边/右边
-        uint64 msg_type = 4;
+        uint64 content_type = 4;
         Content content = 5;
         uint64 send_time = 6; // 时间戳(毫秒)
         Cmd cmd = 7; // 指令
@@ -328,7 +328,7 @@ msg {
     // ...
   }
   direction: "left" // 在聊天中的位置(左边/右边)
-  msg_type: 1 // 消息类型
+  content_type: 1 // 消息类型
   content {
     text: "ok" // 消息内容
     // 剩下的建议看ProtoBuf序列文件,太多不写了
@@ -360,7 +360,7 @@ message Msg {
     string msg_id = 1; // 消息ID
     Sender sender = 2;
     string direction = 3; // 消息位置,左边/右边
-    uint64 msg_type = 4;
+    uint64 content_type = 4;
     Content content = 5;
     uint64 send_time = 6; // 时间戳(毫秒)
     Cmd cmd = 7; // 指令
@@ -490,7 +490,7 @@ msg {
     // ...
   }
   direction: "left" // 在聊天中的位置(左边/右边)
-  msg_type: 1 // 消息类型
+  content_type: 1 // 消息类型
   content {
     text: "ok" // 消息内容
     // 剩下的建议看ProtoBuf序列文件,太多不写了
@@ -523,7 +523,7 @@ message Msg {
     string msg_id = 1; // 消息ID
     Sender sender = 2;
     string direction = 3; // 消息位置,左边/右边
-    uint64 msg_type = 4;
+    uint64 content_type = 4;
     Content content = 5;
     uint64 send_time = 6; // 时间戳(毫秒)
     Cmd cmd = 7; // 指令
