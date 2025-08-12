@@ -154,12 +154,12 @@ message address_book_list {
 
     // 聊天对象数据
     message Data_list {
-      chat_id = 1; // 聊天对象ID
-      name = 2; // 聊天对象名称
-      avatar_url = 3; // 聊天对象头像url
-      permisson_level = 4; // 群权限等级(普通用户无此项(数值为0或无此项),群主100,管理员2),只有群列表才有此项
-      temp_text1 = 5; // 未知
-      // name_up = 6; // 聊天对象名称,和2重了
+      string chat_id = 1; // 聊天对象ID
+      string name = 2; // 聊天对象名称
+      string avatar_url = 3; // 聊天对象头像url
+      int32 permisson_level = 4; // 群权限等级(普通用户无此项(数值为0或无此项),群主100,管理员2),只有群列表才有此项
+      bool noDisturb = 5; // 免打扰
+      //int32 field6 = 6; // 未知
     }
   }
 }
