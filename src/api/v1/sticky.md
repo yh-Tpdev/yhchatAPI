@@ -15,7 +15,7 @@ POST /v1/sticky/list
 |-----|-----|-----|
 |token|是|无|
 
-响应头：
+响应体：
 
 ```JSONC
 {
