@@ -57,8 +57,10 @@ message send_message_send {
         string form = 7; // 表单消息
         string quote_msg_text = 8; // 引用信息文本
         string image = 9; // 欲发送图片key/url(expression/abcdef.jpg)
-        string msg_text1 = 11; // 信息文本
-        string msg_text2 = 12; // 信息文本
+        string post_id = 10;
+        string post_title = 11; // 文章标题
+        string post_content = 12; // 文章内容
+        string post_type = 13; // 文章类型:1-文本,2-Markdown
         string temp_text2 = 16; // 未知
         string temp_text3 = 17; // 未知
         uint64 file_size = 18; // 欲发送文件大小
@@ -705,7 +707,7 @@ chat_type: 2 // 信息所属对象类型, 1-用户 2-群聊 3-机器人
 
 ```proto
 // 通过消息序列列出消息
-message button_report_send {
+message recall_msg_send {
     string msg_id = 2; // 信息ID
     string chat_id = 3; // 信息所属对象ID
     uint64 chat_type = 4; // 信息所属对象类型, 1-用户 2-群聊 3-机器人
@@ -728,7 +730,7 @@ status {
 
 ```proto
 // 按钮事件点击返回状态信息
-message button_report {
+message recall_msg {
     Status status = 1;
 }
 ```
@@ -781,7 +783,7 @@ status {
 
 ```proto
 // 批量信息撤回返回状态码
-message button_report {
+message recall_msg_batch {
     Status status = 1;
 }
 ```
