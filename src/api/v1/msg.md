@@ -117,6 +117,75 @@ message send_message {
 
 :::
 
+## 编辑消息
+
+POST /v1/msg/edit-message
+
+::: warning
+云湖会限制一些编辑,例如说你不能把文本消息编辑为语音消息等.  
+:::
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|消息发送者的Token|
+
+请求体:  
+
+```ProtoBuf
+msg_id: "123456" // 要编辑的消息ID
+chat_id: "big" // 消息所属聊天对象的ID
+chat_type: 2 // 消息所属聊天对象的类型,1-用户 2-群组 3-机器人
+content {
+  text: "123" // 文本
+  // 剩下的建议看proto文件
+}
+content_type: 1 // 要编辑为的消息类型,1-文本 3-markdown 8-html
+quote_msg_id: "11451419180" // 引用的消息ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 编辑消息
+message edit_message_send {
+    string msg_id = 2;
+    string chat_id = 3;
+    int32 chat_type = 4;
+    Content content = 5;
+    message Content {
+        string text = 1; // 文本
+        string buttons = 2; // 按钮
+        string quote_msg_text = 8; // 引用消息文字
+    }
+    uint64 content_type = 6; // 信息类别，1-文本，3-markdown，8-html
+    string quote_msg_id = 8; // 引用信息ID
+}
+```
+
+:::
+
+响应体:  
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message edit_message {
+    Status status = 1;
+}
+```
+
+:::
+
 ## 通过消息序列列出消息
 
 POST /v1/msg/list-message-by-seq  
