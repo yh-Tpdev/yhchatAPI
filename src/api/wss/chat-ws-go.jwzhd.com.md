@@ -264,6 +264,8 @@ message file_send_message {
 
 ## 编辑消息接收
 
+!!其实可以和接收消息推送的 proto 基本共用,只是编辑消息额外多了个14 edit_time.!!  
+
 返回数据:  
 
 ```ProtoBuf

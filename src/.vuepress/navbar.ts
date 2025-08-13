@@ -8,13 +8,17 @@ export default navbar([
       prefix: "/api/",
       children: [
         {
-        text: "v1",
-        link: "v1/"
+          text: "v1",
+          link: "v1/"
         },
         {
-        text: "wss",
-        link: "wss/"
-        }
+          text: "wss",
+          link: "wss/"
+        },
       ]
-  }
+  },
+  {
+      text: "API吐槽",
+      link: "/云湖API吐槽/",
+  },
 ])

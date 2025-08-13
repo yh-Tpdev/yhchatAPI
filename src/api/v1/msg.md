@@ -5,7 +5,7 @@ title: msg
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
 没写请求/响应项目表示不需要相关参数.  
 
-## 发送信息（未完成，请勿参考！）
+## 发送信息
 
 POST /v1/msg/send-message
 
@@ -124,6 +124,8 @@ POST /v1/msg/edit-message
 ::: warning
 云湖会限制一些编辑,例如说你不能把文本消息编辑为语音消息等.  
 :::
+
+!!其实云湖的编辑消息和发送消息的 proto 可以共用,只需要 msg_id 改成要编辑的消息即可.!!
 
 请求头:  
 
