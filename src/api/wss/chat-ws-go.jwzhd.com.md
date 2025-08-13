@@ -80,7 +80,7 @@ message heartbeat_ack_info {
 
 ```ProtoBuf
 info {
-  seq: "1234567abcd" // 请求表示码
+  seq: "1234567abcd" // 请求标识码
   cmd: "push_message" // 推送消息
 }
 
@@ -213,7 +213,7 @@ message push_message {
 
 ```ProtoBuf
 info {
-  seq: "1234567abcd" // 请求表示码
+  seq: "1234567abcd" // 请求标识码
   cmd: "file_send_message" // 推送超级文件分享
 }
 
@@ -224,7 +224,7 @@ data {
       user_id: "123" // 接收者用户ID
       temp_code: 1 // 未知
       send_type: "candidate" // 分享类别区分文本
-      data: "{}" // 经过转意后的json格式发送数据
+      data: "{}" // 经过转意义的json格式发送数据
       send_deviceId: "123123123123" // 发送者设备唯一标识符
     }
 }
@@ -253,7 +253,7 @@ message file_send_message {
       string user_id = 2; // 接收者用户ID
       uint64 temp_code = 3; // 未知
       string send_type = 4; // 分享类别区分文本
-      string data = 5; // 经过转意后的json格式发送数据
+      string data = 5; // 经过转义后的json格式发送数据
       string send_deviceId = 6; // 发送者设备唯一标识符
     }
   }
@@ -262,52 +262,65 @@ message file_send_message {
 
 :::
 
-## 编辑信息推送
+## 编辑消息接收
 
 返回数据:  
 
 ```ProtoBuf
 info {
-  seq: "123123123123123123123" // 请求表示码
-  cmd: "edit_message" // 推送超级文件分享
+  seq: "123123123123123123123" // 请求标识码
+  cmd: "edit_message" // 消息编辑推送
 }
 
 data {
-  "msg_id": "123123123123" // 信息ID
-  "chat_id": "123" // 信息对象ID
-  "chat_type": 1 // 信息对象类别，1-用户，2-群聊，3-机器人
-  "content": {
-    “text": "测试信息文本" // 信息文本
-    "buttons": "测试信息文本" // 按钮信息文本数据
-    "quote_msg_text": "测试引用信息文本" // 引用信息文本
+  cmd: "type.googleapis.com/proto.PushMessage" // 操作类型?
+  msg {
+    "msg_id": "123123123123" // 信息ID
+    "chat_id": "123" // 信息对象ID
+    "content": {
+      “text": "测试信息文本" // 信息文本
+      "buttons": "测试信息文本" // 按钮信息文本数据
+      "quote_msg_text": "测试引用信息文本" // 引用信息文本
+    }
+    "content_type": 1 // 信息类别，1-文本，3-markdown，8-html
+    "quote_msg_id": "123123123123" // 引用信息ID
   }
-  "content_type": 1 // 信息类别，1-文本，3-markdown，8-html
-  "quote_msg_id": "123123123123" // 引用信息ID
 }
 ```
 
 ::: details ProtoBuf数据结构
 
 ```proto
-// 信息
 message INFO {
     string seq = 1; // 请求标识码
     string cmd = 2; // 操作类型
 }
 
-// 编辑消息
-message edit_message_send {
-    string msg_id = 2;
-    string chat_id = 3;
-    int32 chat_type = 4;
-    Content content = 5;
+message Msg {
+    string msg_id = 1;
+    string recv_id = 3; // 接收者ID,但是不知道为啥到编辑这里就和4一样了
+    string chat_id = 4; // 会话的ID
+    Content content = 6; // 消息内容
+    uint64 content_type = 7;
+    string quote_msg_id = 11; // 引用消息ID
+    uint64 edit_time = 14; // 编辑时间
+            
     message Content {
-        string text = 1;
-        string buttons = 2;
-        string quote_msg_text = 8;
+        string text = 1; // 消息内容
+        string buttons = 2; // 按钮
+        string quote_msg_text = 8; // 引用消息文字
     }
-    uint64 content_type = 6; // 信息类别，1-文本，3-markdown，8-html
-    string quote_msg_id = 8; // 引用信息ID
+}
+
+// ws接收编辑消息
+message edit_message {
+    INFO info = 1;
+    Data data = 2;
+    
+    message Data {
+        string cmd = 1;
+        Msg msg = 2;
+    }
 }
 ```
 
