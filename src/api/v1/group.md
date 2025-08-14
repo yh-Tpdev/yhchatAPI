@@ -320,7 +320,7 @@ POST /v1/group/invite
 
 ```JSONC
 {
-  "chatId": "123", // 邀请成员ID
+  "chatId": "123", // 邀请成员ID，必须为目标用户token已添加的token
   "chatType": 1, // 邀请成员类别，1-用户，3-机器人
   "groupId": "123" // 目标群聊
 }
