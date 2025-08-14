@@ -75,7 +75,7 @@ history_bot {
 ```proto
 // 群聊信息
 message info_send {
-    string id = 2;
+    string group_id = 2;
 }
 
 message info {
@@ -85,7 +85,7 @@ message info {
 
     // 群聊数据
     message Group_data {
-        string id = 1;
+        string group_id = 1;
         string name = 2;
         string avatar_url = 3;
         uint64 avatar_id = 4; // 头像ID
@@ -129,6 +129,92 @@ message info {
         uint64 create_time = 8;
         uint64 user_number = 9; // 使用人数
         uint64 private = 10; // 是否为私有机器人
+    }
+}
+```
+
+:::
+
+## 获取群成员列表
+
+POST /v1/group/list-member
+
+请求头:  
+
+|名称|必须|备注|
+|-----|----|----|
+|token|是|无|
+
+请求体:  
+
+```ProtoBuf
+data {
+  size: 50 // 分页大小
+  page: 1 // 页数
+}
+group_id: "big" // 群聊ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message list_member_send {
+    Data data = 2;
+    
+    message Data {
+        int32 size = 1; // 分页大小
+        int32 page = 2; // 页数
+    }
+    
+    string group_id = 3;
+}
+```
+
+:::
+
+响应体:  
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+user {
+  group_id: "big" // 所属群聊ID
+  user_info {
+    user_id: "7356666" // 用户ID
+    name: "Feng" // 用户名
+    avatar_url: "https://..." // 头像URL
+  }
+  permission_level: 100 // 权限等级, 群主100 管理员2 普通用户无/0
+  gag_time: 123456 // 禁言时间戳
+  is_gag: 0 // 是否处于禁言状态
+}
+// 可以有多个
+// ...
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message list_member {
+    Status status = 1;
+    repeated User user = 2;
+    
+    message User {
+        string group_id = 1;
+        User_info user_info = 2;
+        
+        message User_info {
+            string user_id = 1;
+            string name = 2;
+            string avatar_url = 4;
+        }
+        
+        int32 permission_level = 3;
+        uint64 gag_time = 4; // 禁言时间
+        int32 is_gag = 5; // 是否被禁言
     }
 }
 ```
