@@ -665,7 +665,7 @@ POST /v1/group/msg-type-limit
 }
 ```
 
-## 获取群成员列表
+## 编辑群聊信息
 
 POST /v1/group/edit-group
 
@@ -696,7 +696,7 @@ message edit_group_send {
   string group_id = 2; // 目标群聊ID
   string name = 3; // 群聊名称
   string introduction = 4; // 群聊简介
-  string avatarUrl = "5; // 群聊头像url
+  string avatarUrl = 5; // 群聊头像url
   uint64 direct_join = 6; // 进群免审核,1为开启
   uint64 history_msg = 7; // 历史消息,1为开启
   string category_name = 8; // 分类名
@@ -720,9 +720,8 @@ status {
 ::: details ProtoBuf数据结构
 
 ```proto
-message list_member {
+message edit_group {
     Status status = 1;
-    repeated User user = 2;
 }
 ```
 
