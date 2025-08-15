@@ -235,7 +235,7 @@ POST /v1/group/live-room
 
 ```JSONC
 {
-  "group_id": "123" // 群聊id
+  "groupId": "123" // 群聊id
 }
 ```
 
