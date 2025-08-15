@@ -658,3 +658,71 @@ POST /v1/community/search
   "msg": "success" // 返回消息
 }
 ```
+
+## 屏蔽指定用户文章
+
+POST /v1/community/set-black-list
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "isAdd": 0, // 0-取消屏蔽，1-屏蔽
+  "authorId": "123"
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取屏蔽指定用户文章列表
+
+POST /v1/community/black-list
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "size": 20, // 返回文章数量
+  "page": 1 // 页数
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "id": 0, // 屏蔽ID
+        "user_id": "123", // 屏蔽用户ID
+        "nickname": "测试屏蔽用户", // 屏蔽用户名称
+        "avatar_url": "https://..." // 屏蔽用户头像
+      }
+      // ...
+    ],
+    "total": 1 // 屏蔽用户数
+  },
+  "msg": "success" // 返回消息
+}
+```
