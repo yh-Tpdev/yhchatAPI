@@ -74,6 +74,55 @@ message heartbeat_ack_info {
 }
 ```
 
+## 接收笔记同步
+
+返回数据:  
+
+```ProtoBuf
+info {
+  seq: "abcdef" // 请求标识符
+  cmd: "draft_input" // 操作类型
+}
+
+data {
+  cmd: "type.googleapis.com/proto.MsgInput" // 操作类型(?)
+  draft {
+    chat_id: "8826687" // 聊天对象ID
+    input: "测试草稿同步" // 草稿内容
+  }
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 共用区
+// 信息
+message INFO {
+    string seq = 1; // 请求标识码
+    string cmd = 2; // 操作类型
+}
+// 共用区结束
+
+// 草稿同步
+message draft_input {
+    INFO info = 1;
+    Data data = 2;
+    
+    message Data {
+        string cmd = 1;
+        Draft draft = 2;
+        
+        message Draft {
+            string chat_id = 1; // 对象ID
+            string input = 2; // 草稿内容
+        }
+    }
+}
+```
+
+:::
+
 ## 推送消息  
 
 返回数据:  
@@ -239,16 +288,16 @@ message INFO {
     string cmd = 2; // 操作类型
 }
 
-// ws推送消息
+// 超级文件分享
 message file_send_message {
   INFO info = 1;
   Data data = 2;
 
   message Data {
     string cmd = 1;
-    Msg msg = 2;
+    Sender sender = 2;
         
-    message file_send_message {
+    message Sender {
       string send_user_id = 1; // 分享者用户ID
       string user_id = 2; // 接收者用户ID
       uint64 temp_code = 3; // 未知
