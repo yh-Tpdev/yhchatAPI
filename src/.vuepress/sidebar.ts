@@ -5,5 +5,6 @@ export default sidebar(
     "/api/v1/": "structure",
     "/api/wss/": "structure",
     "/云湖API吐槽/": "structure",
+    "/api/web/v1/": "structure",
     }
 );

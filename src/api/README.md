@@ -12,3 +12,8 @@ title: API
 
 > **[wss](./wss/)**  
 > -云湖wss连接已记录的所有连接文档
+
+* 3
+
+> **[web](./web)**
+> -云湖 chat-web-go API文档

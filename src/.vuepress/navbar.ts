@@ -15,6 +15,10 @@ export default navbar([
           text: "wss",
           link: "wss/"
         },
+        {
+          text: "web",
+          link: "web/"
+        },
       ]
   },
   {
