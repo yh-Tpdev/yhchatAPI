@@ -13,11 +13,11 @@ POST /v1/report/create
 
 ```JSONC
 {
-  "chatId": "会话id",
-  "chatType": 2, // 会话类型，1-用户，2-群聊，3-机器人
-  "chatName": "会话名称",
-  "content": "举报内容",
-  "url": "https://chat-img.jwznb.com/ImageMd5.jpg" // 举报提交的图片
+  "chatId": "123", // 对象id
+  "chatType": 2, // 对象类型，1-用户，2-群聊，3-机器人
+  "chatName": "测试会话名称", // 对象名称
+  "content": "测试举报内容", // 举报内容
+  "url": "https://..." // 举报提交的图片
 }
 ```
 
