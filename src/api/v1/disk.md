@@ -26,7 +26,7 @@ POST /v1/disk/create-folder
 }
 ```
 
-响应体：
+响应体:  
 
 ```JSONC
 {
@@ -56,7 +56,7 @@ POST /v1/disk/file-list
 }
 ```
 
-响应体：
+响应体:  
 
 ```JSONC
 {
@@ -105,7 +105,64 @@ POST /v1/disk/upload-file
 }
 ```
 
-响应体：
+响应体:  
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 更改文件名
+
+POST /v1/disk/rename
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体:  
+
+```JSONC
+{
+  "id": 123, // 文件ID
+  "objectType": 2, // 会话类型
+  "name": "测试文件名称" // 文件名称
+}
+```
+
+响应体:  
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 删除文件
+
+POST /v1/disk/remove
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体:  
+
+```JSONC
+{
+  "id": 123, // 文件ID
+  "objectType": 2, // 会话类型
+}
+```
+
+响应体:  
 
 ```JSONC
 {
