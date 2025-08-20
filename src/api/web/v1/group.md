@@ -8,13 +8,15 @@ POST /v1/group/group-info
 
 请求体:  
 
-```JSON
-{"groupId": "big" // 你要查询群组的ID }
+```JSONC
+{
+  "groupId": "big" // 你要查询群组的ID
+}
 ```
 
 响应体:  
 
-```JSON
+```JSONC
 {
   "code": 1,
   "data": {
