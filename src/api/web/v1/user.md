@@ -14,7 +14,7 @@ GET /v1/user/info
 
 响应体:  
 
-```JSON
+```JSONC
 {
   "code": 1, // 响应码,1表示正常
   "data": {
@@ -41,7 +41,7 @@ GET /v1/user/homepage?userId=你要查询的用户ID(例如7058262)
 
 响应体:  
 
-```JSON
+```JSONC
 {
   "code": 1,
   "data": {
