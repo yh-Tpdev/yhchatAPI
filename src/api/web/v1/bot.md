@@ -2,19 +2,24 @@
 title: bot
 ---
 
+未特别说明情况下请求域名均为 `chat-web-go.jwzhd.com`  
+没写请求/响应项目表示不需要相关参数.  
+
 ## 获取机器人信息
 
 POST /v1/bot/bot-info
 
 请求体:  
 
-```JSON
-{"botId": "13972254" // 你要查询bot的ID }
+```JSONC
+{
+  "botId": "13972254" // 你要查询bot的ID
+}
 ```
 
 响应体:  
 
-```JSON
+```JSONC
 {
   "code": 1,
   "data": {
