@@ -225,3 +225,34 @@ POST /v1/bot/edit-setting-json
   "msg": "success" // 返回消息
 }
 ```
+
+## 更改机器人信息
+
+POST /v1/bot/web-edit-bot
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "nickname":"测试机器人名称", // 机器人名称
+  "introduction":"测试机器人简介", // 机器人简介
+  "avatarUrl":"https://...", //机器人头像
+  "botId":"123", // 机器人ID
+  "private":0 // 0-公开，1-私有
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
