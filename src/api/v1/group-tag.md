@@ -195,3 +195,86 @@ POST /v1/group-tag/delete
   "msg": "success" // 返回状态消息
 }
 ```
+
+## 获取标签绑定的用户列表
+
+POST /v1/group-tag/members
+
+请求头:  
+
+|名称|必须|备注|
+|---|---|---|
+|token|是|无|
+
+请求体:  
+
+```ProtoBuf
+data {
+  size: 50 // 分页大小
+  page: 1 // 页数
+}
+group_id: "123" // 群聊ID
+tag_id: 123 // 标签ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message tag_member_send {
+    Data data = 2;
+    message Data {
+        int32 size = 1; // 分页大小
+        int32 page = 2; // 页数
+    }
+    string group_id = 3; // 标签所处群聊ID
+    int64 tag_id = 4; // 标签ID
+}
+```
+
+:::
+
+响应体:  
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+user {
+  group_id: "big" // 所属群聊ID
+  user_info {
+    user_id: "7356666" // 用户ID
+    name: "Feng" // 用户名
+    avatar_url: "https://..." // 头像URL
+  }
+total: 1 // 总数
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 标签绑定的用户列表
+message tag_member {
+    Status status = 1;
+    repeated User user = 2;
+    message User {
+        string group_id = 1;
+        User_info user_info = 2;
+
+        message User_info {
+            string user_id = 1;
+            string name = 2;
+            string avatar_url = 4;
+            int32 is_vip = 6;
+        }
+        
+        int32 permission_level = 3;
+        int64 gag_time = 4; // 禁言时间
+        int32 is_gag = 5; // 是否被禁言
+    }
+    int64 total = 3; // 总数
+}
+```
+
+:::
