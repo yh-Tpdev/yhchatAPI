@@ -716,7 +716,7 @@ msg_id: "123123123123123123" // 信息ID
 chat_type: 2 // 对象类型, 1-用户 2-群聊 3-机器人
 chat_id: "123" // 对象ID
 user_id: "123" // 按钮事件发送者ID
-button_text: "测试按钮文本" // 欲点击按钮的文本标题
+button_value: "测试按钮文本" // 欲点击按钮的值
 ```
 
 ::: details ProtoBuf数据结构
@@ -728,7 +728,7 @@ message button_report_send {
     uint64 chat_type = 3; // 对象类型, 1-用户 2-群聊 3-机器人
     string chat_id = 4; // 对象ID
     string user_id = 5; // 按钮事件发送者ID
-    string button_text = 6; // 欲点击按钮的文本标题
+    string button_value = 6; // 欲点击按钮的值
 }
 ```
 
