@@ -256,3 +256,86 @@ POST /v1/bot/web-edit-bot
   "msg": "success" // 返回消息
 }
 ```
+
+## 获取机器人信息
+
+POST /v1/bot/bot-info
+
+请求头:  
+
+|名称|必须|备注|
+|-----|----|----|
+|token|是|无|
+
+请求体:  
+
+```ProtoBuf
+i: 123 // 机器人ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message bot_info_send {
+    string id = 2; // 机器人ID
+}
+```
+
+:::
+
+响应体:  
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+Bot_data {
+  bot_id: "123" // 机器人ID
+  name: "测试机器人名称" // 机器人名称
+  name_id: 123 // 机器人名称ID
+  avatar_url: "https://..." // 机器人头像url
+  avatar_id: 123 // 机器人头像ID
+  introduction: "测试机器人介绍" // 机器人介绍
+  create_by: "123" // 机器人创建者ID
+  create_time: 123123123 // 机器人创建时间戳
+  headcount: 123 // 使用人数
+  private: 0 // 是否为私有，0-公开，1-私有
+  is_stop: 0 // 是否停用，0-启用，1-停用
+  always_agree: 0 // 自动进群，0-不自动进群，1-自动进群
+  do_not_disturb: 0 // 免打扰，0-不免打扰，1-免打扰
+  top: 0 // 置顶，0-未置顶，1-已置顶
+  group_limit: 0 // 限制进群，0-允许进群，1-限制进群
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 获取机器人信息返回信息
+message bot_info {
+    Status status = 1;
+    Bot_data data = 2;
+    message Bot_data {
+        string bot_id = 1; // 机器人ID
+        string name = 2; // 机器人名称
+        int64 name_id = 3; // 机器人名称ID
+        string avatar_url = 4; // 机器人头像url
+        string avatar_id = 5; // 机器人头像ID
+        string introduction = 6; // 机器人介绍
+        string create_by = 7; // 机器人创建者ID
+        int64 create_time = 8; // 机器人创建时间戳
+        int64 headcount = 9; // 使用人数
+        int32 private = 10; // 是否为私有，0-公开，1-私有
+        int32 is_stop = 11; // 是否停用，0-启用，1-停用
+        int32 always_agree = 13; // 自动进群，0-不自动进群，1-自动进群
+        int32 do_not_disturb = 15; // 免打扰，0-不免打扰，1-免打扰
+        int32 top = 18; // 置顶，0-未置顶，1-已置顶
+        int32 group_limit = 20; // 限制进群，0-允许进群，1-限制进群
+    }
+}
+
+```
+
+:::
