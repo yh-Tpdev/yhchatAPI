@@ -270,7 +270,7 @@ POST /v1/bot/bot-info
 请求体:  
 
 ```ProtoBuf
-i: 123 // 机器人ID
+id: 123 // 机器人ID
 ```
 
 ::: details ProtoBuf数据结构
@@ -336,6 +336,75 @@ message bot_info {
     }
 }
 
+```
+
+:::
+
+## 获取机器人群聊看板
+
+POST /v1/bot/board
+
+请求头:  
+
+|名称|必须|备注|
+|-----|----|----|
+|token|是|无|
+
+请求体:  
+
+```ProtoBuf
+id: 123 // 群聊ID
+chat_type: 2 // 对象类型 1-用户 2-群聊 3-机器人
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 看板
+message board_send {
+    string id = 3; // 群聊/用户/机器人ID
+    int64 chat_type = 4; // 对象类型 1-用户 2-群聊 3-机器人
+}
+```
+
+:::
+
+响应体:  
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+Board_data {
+  bot_id: "123" // 机器人ID
+  chat_id: "123" // 对象ID
+  chat_type: 2 // 对象类别，2-群聊，3-机器人
+  content: "测试看板内容" // 看板内容
+  content_type = 5; // 看板内容类别，1-文本，2-markdown，3-html
+  last_update_time: 123123123 // 最后更新时间戳
+  bot_name: "测试机器人名称" // 设置看板机器人名称
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 获取看板返回
+message board {
+    Status status = 1;
+    Board_data data = 2;
+    message Board_data {
+        string bot_id = 1; // 机器人ID
+        string chat_id = 2; // 对象ID
+        int32 chat_type = 3; // 对象类别，2-群聊，3-机器人
+        string content = 4; // 看板内容
+        int32 content_type = 5; // 看板内容类别，1-文本，2-markdown，3-html
+        int64 last_update_time = 6; // 最后更新时间戳
+        string bot_name = 7; // 设置看板机器人名称
+    }
+}
 ```
 
 :::
