@@ -244,10 +244,15 @@ status {
 user {
   group_id: "big" // 所属群聊ID
   user_info {
-    user_id: "7356666" // 用户ID
-    name: "Feng" // 用户名
+    user_id: "123" // 用户ID
+    name: "测试用户名" // 用户名
     avatar_url: "https://..." // 头像URL
+    int32 is_vip: 0 // 是否为vip，0-非vip用户，1-vip用户
   }
+    permission_level: 0 // 权限等级, 群主100 管理员2 普通用户无/0
+    gag_time: 123 // 禁言时间戳
+    is_gag: 0; // 是否被禁言，0-未被禁言，1-已被禁言
+}
 total: 1 // 总数
 ```
 
@@ -268,9 +273,8 @@ message tag_member {
             string avatar_url = 4;
             int32 is_vip = 6;
         }
-        
-        int32 permission_level = 3;
-        int64 gag_time = 4; // 禁言时间
+        int32 permission_level = 3; // 权限等级, 群主100 管理员2 普通用户无/0
+        int64 gag_time = 4; // 禁言时间戳
         int32 is_gag = 5; // 是否被禁言
     }
     int64 total = 3; // 总数
