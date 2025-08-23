@@ -116,3 +116,30 @@ POST /v1/expression/topping
     "msg": "success" // 状态信息
 }
 ```
+
+## 添加已有表情包
+
+POST /v1/expression/add
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体:  
+
+```JSONC
+{
+  "id": 123 // 表情ID
+}
+```
+
+响应体:  
+
+```JSONC
+{
+    "code": 1, // 状态码，正常为1
+    "msg": "success" // 状态信息
+}
+```
