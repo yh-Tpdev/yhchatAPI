@@ -23,13 +23,13 @@ POST /v1/sticky/list
   "data": {
     "sticky": [
       {
-        "id": 8977, // 
-        "chatType": 2, //识别对象类别，1-用户，2-群聊，3-机器人
-        "chatId": "114514", //群聊id
-        "chatName": "example", // 群聊名字
+        "id": 8977, // 置顶ID
+        "chatType": 2, // 会话对象类别，1-用户，2-群聊，3-机器人
+        "chatId": "114514", // 会话对象id
+        "chatName": "example", // 会话对象名字
         "sort": 1751616217, // 不知道，跟群聊创建时间戳一样（?
         "avatarUrl": "https://chat-img.jwznb.com/xxxxxxxxxxxxxxx.jpg", // 群聊头像地址
-        "createTime": 1751616217, // 群聊创建时间戳
+        "createTime": 1751616217, // 会话对象创建时间戳
         "delFlag": 0,
         "userId": "1234567", // 用户id
         "certificationLevel": 0 // 识别是否为官方出品，1为官方出品，0则不是
@@ -111,7 +111,7 @@ POST /v1/sticky/topping
 
 ```JSONC
 {
-  "id": "5753" // 会话创建id（第5753个会话）
+  "id": 5753 // 置顶id
 }
 ```
 
