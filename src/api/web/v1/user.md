@@ -27,13 +27,13 @@ GET /v1/user/info
       "goldCoinAmount": 114.51 // 金币数
     }
   },
-  "msg": "success"
+  "msg": "success" // 返回消息
 }
 ```
 
 ## 获取用户主页信息
 
-GET /v1/user/homepage?userId=你要查询的用户ID(例如7058262)
+GET /v1/user/homepage?userId={你要查询的用户ID(例如1231230)}
 
 ::: tip
 如果用户不存在/已注销仍然会返回数据,特点就是无头像,名称,注册时间戳为0等.  
@@ -66,6 +66,22 @@ GET /v1/user/homepage?userId=你要查询的用户ID(例如7058262)
       "isVip": 1 // 是否为 VIP, 1为是VIP
     }
   },
-  "msg": "success"
+  "msg": "success" // 返回消息
+}
+```
+
+## 复制用户token
+
+GET /v1/user/get-token?token={需要复制的用户token}
+
+响应体:  
+
+```JSONC
+{
+  "code": 1, // 响应码,1表示正常
+  "data": {
+    "token": "19d7k3js-****-****-****-************"
+  },
+  "msg": "success" // 返回消息
 }
 ```
