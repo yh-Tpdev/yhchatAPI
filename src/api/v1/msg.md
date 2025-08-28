@@ -188,7 +188,7 @@ message edit_message {
 
 :::
 
-## 通过消息序列列出消息
+## 按消息序列列出消息（不包含指定消息）
 
 POST /v1/msg/list-message-by-seq  
 
@@ -339,7 +339,7 @@ message list_message_by_seq {
 
 :::
 
-## 通过消息ID列出消息
+## 列出消息
 
 POST /v1/msg/list-message  
 
@@ -493,7 +493,7 @@ message list_message { // 其实可以和 list-message-by-seq共用的。
 
 :::
 
-## 通过消息ID列出消息
+## 按消息ID列出消息（包含消息id指定的消息）
 
 POST /v1/msg/list-message-by-mid-seq  
 
