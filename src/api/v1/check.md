@@ -36,7 +36,6 @@ POST /v1/check/get-latest-version
 
 :::
 
-
 响应体：
 
 ```JSONC

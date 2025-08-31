@@ -75,6 +75,7 @@ data {
   phone: "12312312300" // 手机号
   email: "123@123.com" // 邮箱
   coin: 123 // 金币数
+  is_vip: 0 // 是否为VIP
   vip_expired_time: 1231231230 // VIP过期时间
   invitation_code: "123" // 邀请码
 }
@@ -96,6 +97,7 @@ message info {
         string phone = 6; // 手机号
         string email = 7; // 邮箱
         double coin = 8; // 金币数
+        int32 is_vip = 9; // 是否为VIP
         uint64 vip_expired_time = 10; // VIP过期时间
         string invitation_code = 12; // 邀请码
     }
@@ -152,9 +154,11 @@ data {
   }
   // ...
   register_time: "1234-12-12 12:12:12" // 注册时间(YYYY-MM-DD hh:mm:ss)
+  ban_time: 123123123 // 封禁结束时间
   online_day: 123 // 在线时长
   continuous_online_day: 123 // 连续在线时长
-  vip_expired_time: 123 // vip的unix时间戳
+  is_vip: 1 // 是否为VIP
+  vip_expired_time: 123123123 // vip的unix时间戳
 }
 ```
 
@@ -180,8 +184,10 @@ message get_user {
         uint64 avatar_id = 5; // 头像ID
         repeated Medal_info medal = 6; // 勋章信息
         string register_time = 7; // 注册时间,格式: YYYY-MM-DD hh:mm:ss
+        uint64 ban_time = 10; // 封禁结束事件(时间戳)
         uint64 online_day = 11; // 在线天数
         uint64 continuous_online_day = 12; // 连续在线天数
+        int32 is_vip = 13; // 是否为vip
         uint64 vip_expired_time = 14; // VIP过期时间(时间戳)
     }
 }
@@ -364,7 +370,15 @@ POST /v1/user/logout
 |-----|-----|-----|
 |token|是|空|
 
-响应体：
+请求体:  
+
+```JSONC
+{
+  "device-id": "123123123" // 设备ID
+}
+```
+
+响应体:  
 
 ```JSONC
 {

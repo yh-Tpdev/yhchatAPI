@@ -225,3 +225,242 @@ POST /v1/bot/edit-setting-json
   "msg": "success" // 返回消息
 }
 ```
+
+## 更改机器人信息
+
+POST /v1/bot/web-edit-bot
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "nickname":"测试机器人名称", // 机器人名称
+  "introduction":"测试机器人简介", // 机器人简介
+  "avatarUrl":"https://...", //机器人头像
+  "botId":"123", // 机器人ID
+  "private":0 // 0-公开，1-私有
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取机器人信息
+
+POST /v1/bot/bot-info
+
+请求头:  
+
+|名称|必须|备注|
+|-----|----|----|
+|token|是|无|
+
+请求体:  
+
+```ProtoBuf
+id: 123 // 机器人ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message bot_info_send {
+    string id = 2; // 机器人ID
+}
+```
+
+:::
+
+响应体:  
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+Bot_data {
+  bot_id: "123" // 机器人ID
+  name: "测试机器人名称" // 机器人名称
+  name_id: 123 // 机器人名称ID
+  avatar_url: "https://..." // 机器人头像url
+  avatar_id: 123 // 机器人头像ID
+  introduction: "测试机器人介绍" // 机器人介绍
+  create_by: "123" // 机器人创建者ID
+  create_time: 123123123 // 机器人创建时间戳
+  headcount: 123 // 使用人数
+  private: 0 // 是否为私有，0-公开，1-私有
+  is_stop: 0 // 是否停用，0-启用，1-停用
+  always_agree: 0 // 自动进群，0-不自动进群，1-自动进群
+  do_not_disturb: 0 // 免打扰，0-不免打扰，1-免打扰
+  top: 0 // 置顶，0-未置顶，1-已置顶
+  group_limit: 0 // 限制进群，0-允许进群，1-限制进群
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 获取机器人信息返回信息
+message bot_info {
+    Status status = 1;
+    Bot_data data = 2;
+    message Bot_data {
+        string bot_id = 1; // 机器人ID
+        string name = 2; // 机器人名称
+        int64 name_id = 3; // 机器人名称ID
+        string avatar_url = 4; // 机器人头像url
+        string avatar_id = 5; // 机器人头像ID
+        string introduction = 6; // 机器人介绍
+        string create_by = 7; // 机器人创建者ID
+        int64 create_time = 8; // 机器人创建时间戳
+        int64 headcount = 9; // 使用人数
+        int32 private = 10; // 是否为私有，0-公开，1-私有
+        int32 is_stop = 11; // 是否停用，0-启用，1-停用
+        int32 always_agree = 13; // 自动进群，0-不自动进群，1-自动进群
+        int32 do_not_disturb = 15; // 免打扰，0-不免打扰，1-免打扰
+        int32 top = 18; // 置顶，0-未置顶，1-已置顶
+        int32 group_limit = 20; // 限制进群，0-允许进群，1-限制进群
+    }
+}
+
+```
+
+:::
+
+## 获取机器人群聊看板
+
+POST /v1/bot/board
+
+请求头:  
+
+|名称|必须|备注|
+|-----|----|----|
+|token|是|无|
+
+请求体:  
+
+```ProtoBuf
+id: 123 // 群聊ID
+chat_type: 2 // 对象类型 1-用户 2-群聊 3-机器人
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 看板
+message board_send {
+    string id = 3; // 群聊/用户/机器人ID
+    int64 chat_type = 4; // 对象类型 1-用户 2-群聊 3-机器人
+}
+```
+
+:::
+
+响应体:  
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+Board_data {
+  bot_id: "123" // 机器人ID
+  chat_id: "123" // 对象ID
+  chat_type: 2 // 对象类别，2-群聊，3-机器人
+  content: "测试看板内容" // 看板内容
+  content_type = 5; // 看板内容类别，1-文本，2-markdown，3-html
+  last_update_time: 123123123 // 最后更新时间戳
+  bot_name: "测试机器人名称" // 设置看板机器人名称
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 获取看板返回
+message board {
+    Status status = 1;
+    Board_data data = 2;
+    message Board_data {
+        string bot_id = 1; // 机器人ID
+        string chat_id = 2; // 对象ID
+        int32 chat_type = 3; // 对象类别，2-群聊，3-机器人
+        string content = 4; // 看板内容
+        int32 content_type = 5; // 看板内容类别，1-文本，2-markdown，3-html
+        int64 last_update_time = 6; // 最后更新时间戳
+        string bot_name = 7; // 设置看板机器人名称
+    }
+}
+```
+
+:::
+
+## 删除用户对机器人的添加
+
+POST /v1/bot/remove-follower
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|机器人管理员token|
+
+请求体：
+
+```JSONC
+{
+  "botId": "123", // 机器人ID
+  "userId": "123" // 用户ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 删除群聊对机器人的添加
+
+POST /v1/bot/remove-group
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|机器人管理员token|
+
+请求体：
+
+```JSONC
+{
+  "botId": "123", // 机器人ID
+  "groupId": "123" // 群聊ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```

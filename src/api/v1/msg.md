@@ -5,7 +5,7 @@ title: msg
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
 没写请求/响应项目表示不需要相关参数.  
 
-## 发送信息（未完成，请勿参考！）
+## 发送信息
 
 POST /v1/msg/send-message
 
@@ -33,7 +33,7 @@ data {
   temp_text3: ""
   temp_code1: 0
 }
-msg_type: 1
+content_type: 1
 temp_code: 0
 quote_msg_id: "引用信息ID"
 temp_text: ""
@@ -57,8 +57,10 @@ message send_message_send {
         string form = 7; // 表单消息
         string quote_msg_text = 8; // 引用信息文本
         string image = 9; // 欲发送图片key/url(expression/abcdef.jpg)
-        string msg_text1 = 11; // 信息文本
-        string msg_text2 = 12; // 信息文本
+        string post_id = 10;
+        string post_title = 11; // 文章标题
+        string post_content = 12; // 文章内容
+        string post_type = 13; // 文章类型:1-文本,2-Markdown
         string temp_text2 = 16; // 未知
         string temp_text3 = 17; // 未知
         uint64 file_size = 18; // 欲发送文件大小
@@ -71,7 +73,7 @@ message send_message_send {
         uint64 sticker_pack_id = 26; // 表情包ID
         string room_name = 29; // 语音房间发送显示信息的文本
     }
-    uint64 msg_type = 6; // 信息类别，1-文本，2-图片，3-markdown，4-文件，5-表单，6-文章，7-表情，8-html，11-语音，13-语音通话
+    uint64 content_type = 6; // 信息类别，1-文本，2-图片，3-markdown，4-文件，5-表单，6-文章，7-表情，8-html，11-语音，13-语音通话
     uint64 command_id = 7; // 所使用命令ID
     string quote_msg_id = 8; // 引用信息ID
     Media media = 9;
@@ -115,7 +117,78 @@ message send_message {
 
 :::
 
-## 通过消息序列列出消息
+## 编辑消息
+
+POST /v1/msg/edit-message
+
+::: warning
+云湖会限制一些编辑,例如说你不能把文本消息编辑为语音消息等.  
+:::
+
+!!其实云湖的编辑消息和发送消息的 proto 可以共用,只需要 msg_id 改成要编辑的消息即可.!!
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|消息发送者的Token|
+
+请求体:  
+
+```ProtoBuf
+msg_id: "123456" // 要编辑的消息ID
+chat_id: "big" // 消息所属聊天对象的ID
+chat_type: 2 // 消息所属聊天对象的类型,1-用户 2-群组 3-机器人
+content {
+  text: "123" // 文本
+  // 剩下的建议看proto文件
+}
+content_type: 1 // 要编辑为的消息类型,1-文本 3-markdown 8-html
+quote_msg_id: "11451419180" // 引用的消息ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 编辑消息
+message edit_message_send {
+    string msg_id = 2;
+    string chat_id = 3;
+    int32 chat_type = 4;
+    Content content = 5;
+    message Content {
+        string text = 1; // 文本
+        string buttons = 2; // 按钮
+        string quote_msg_text = 8; // 引用消息文字
+    }
+    uint64 content_type = 6; // 信息类别，1-文本，3-markdown，8-html
+    string quote_msg_id = 8; // 引用信息ID
+}
+```
+
+:::
+
+响应体:  
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message edit_message {
+    Status status = 1;
+}
+```
+
+:::
+
+## 按消息序列列出消息（不包含指定消息）
 
 POST /v1/msg/list-message-by-seq  
 
@@ -175,8 +248,8 @@ msg {
     // ...
   }
   direction: "left" // 在聊天中的位置(左边/右边)
-  msg_type: 1 // 消息类型
-  msg_content {
+  content_type: 1 // 消息类型
+  content {
     text: "ok" // 消息内容
     // 剩下的建议看ProtoBuf序列文件,太多不写了
   }
@@ -212,8 +285,8 @@ message list_message_by_seq {
         string msg_id = 1; // 消息ID
         Sender sender = 2;
         string direction = 3; // 消息位置,左边/右边
-        uint64 msg_type = 4;
-        Msg_content msg_content = 5;
+        uint64 content_type = 4;
+        Content content = 5;
         uint64 send_time = 6; // 时间戳(毫秒)
         Cmd cmd = 7; // 指令
         uint64 msg_delete_time = 8; // 消息撤回时间
@@ -226,7 +299,7 @@ message list_message_by_seq {
             uint64 type = 4; // 指令类型
         }
         // 消息
-        message Msg_content {
+        message Content {
             string text = 1; // 消息内容
             string buttons = 2; // 按钮
             string image_url = 3; // 图像URL
@@ -266,7 +339,7 @@ message list_message_by_seq {
 
 :::
 
-## 通过消息ID列出消息
+## 列出消息
 
 POST /v1/msg/list-message  
 
@@ -328,8 +401,8 @@ msg {
     // ...
   }
   direction: "left" // 在聊天中的位置(左边/右边)
-  msg_type: 1 // 消息类型
-  msg_content {
+  content_type: 1 // 消息类型
+  content {
     text: "ok" // 消息内容
     // 剩下的建议看ProtoBuf序列文件,太多不写了
   }
@@ -360,8 +433,8 @@ message Msg {
     string msg_id = 1; // 消息ID
     Sender sender = 2;
     string direction = 3; // 消息位置,左边/右边
-    uint64 msg_type = 4;
-    Msg_content msg_content = 5;
+    uint64 content_type = 4;
+    Content content = 5;
     uint64 send_time = 6; // 时间戳(毫秒)
     Cmd cmd = 7; // 指令
     uint64 msg_delete_time = 8; // 消息撤回时间
@@ -374,7 +447,7 @@ message Msg {
         uint64 type = 4; // 指令类型
     }
     // 消息
-    message Msg_content {
+    message Content {
         string text = 1; // 消息内容
         string buttons = 2; // 按钮
         string image_url = 3;
@@ -420,7 +493,7 @@ message list_message { // 其实可以和 list-message-by-seq共用的。
 
 :::
 
-## 通过消息ID列出消息
+## 按消息ID列出消息（包含消息id指定的消息）
 
 POST /v1/msg/list-message-by-mid-seq  
 
@@ -490,8 +563,8 @@ msg {
     // ...
   }
   direction: "left" // 在聊天中的位置(左边/右边)
-  msg_type: 1 // 消息类型
-  msg_content {
+  content_type: 1 // 消息类型
+  content {
     text: "ok" // 消息内容
     // 剩下的建议看ProtoBuf序列文件,太多不写了
   }
@@ -523,8 +596,8 @@ message Msg {
     string msg_id = 1; // 消息ID
     Sender sender = 2;
     string direction = 3; // 消息位置,左边/右边
-    uint64 msg_type = 4;
-    Msg_content msg_content = 5;
+    uint64 content_type = 4;
+    Content content = 5;
     uint64 send_time = 6; // 时间戳(毫秒)
     Cmd cmd = 7; // 指令
     uint64 msg_delete_time = 8; // 消息撤回时间
@@ -537,7 +610,7 @@ message Msg {
         uint64 type = 4; // 指令类型
     }
     // 消息
-    message Msg_content {
+    message Content {
         string text = 1; // 消息内容
         string buttons = 2; // 按钮
         string image_url = 3;
@@ -643,19 +716,19 @@ msg_id: "123123123123123123" // 信息ID
 chat_type: 2 // 对象类型, 1-用户 2-群聊 3-机器人
 chat_id: "123" // 对象ID
 user_id: "123" // 按钮事件发送者ID
-button_text: "测试按钮文本" // 欲点击按钮的文本标题
+button_value: "测试按钮文本" // 欲点击按钮的值
 ```
 
 ::: details ProtoBuf数据结构
 
 ```proto
-// 通过消息序列列出消息
+// 通过按钮事件点击消息
 message button_report_send {
     string msg_id = 2; // 信息ID
     uint64 chat_type = 3; // 对象类型, 1-用户 2-群聊 3-机器人
     string chat_id = 4; // 对象ID
     string user_id = 5; // 按钮事件发送者ID
-    string button_text = 6; // 欲点击按钮的文本标题
+    string button_value = 6; // 欲点击按钮的值
 }
 ```
 
@@ -704,8 +777,8 @@ chat_type: 2 // 信息所属对象类型, 1-用户 2-群聊 3-机器人
 ::: details ProtoBuf数据结构
 
 ```proto
-// 通过消息序列列出消息
-message button_report_send {
+// 通过msgId撤回消息
+message recall_msg_send {
     string msg_id = 2; // 信息ID
     string chat_id = 3; // 信息所属对象ID
     uint64 chat_type = 4; // 信息所属对象类型, 1-用户 2-群聊 3-机器人
@@ -727,8 +800,8 @@ status {
 ::: details ProtoBuf数据结构
 
 ```proto
-// 按钮事件点击返回状态信息
-message button_report {
+// 撤回消息返回数据
+message recall_msg {
     Status status = 1;
 }
 ```
@@ -757,7 +830,7 @@ chat_type: 2 // 信息所属对象类型, 1-用户 2-群聊 3-机器人
 ::: details ProtoBuf数据结构
 
 ```proto
-// 通过消息序列列出消息
+// 通过msgId撤回消息
 message recall_msg_batch_send {
     repeated string msg_id = 2; // 信息ID
     string chat_id = 3; // 信息所属对象ID
@@ -780,8 +853,8 @@ status {
 ::: details ProtoBuf数据结构
 
 ```proto
-// 批量信息撤回返回状态码
-message button_report {
+// 批量信息撤回返回状态
+message recall_msg_batch {
     Status status = 1;
 }
 ```

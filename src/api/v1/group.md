@@ -75,7 +75,7 @@ history_bot {
 ```proto
 // 群聊信息
 message info_send {
-    string id = 2;
+    string group_id = 2;
 }
 
 message info {
@@ -85,7 +85,7 @@ message info {
 
     // 群聊数据
     message Group_data {
-        string id = 1;
+        string group_id = 1;
         string name = 2;
         string avatar_url = 3;
         uint64 avatar_id = 4; // 头像ID
@@ -135,6 +135,95 @@ message info {
 
 :::
 
+## 获取群成员列表
+
+POST /v1/group/list-member
+
+请求头:  
+
+|名称|必须|备注|
+|-----|----|----|
+|token|是|无|
+
+请求体:  
+
+```ProtoBuf
+data {
+  size: 50 // 分页大小
+  page: 1 // 页数
+}
+group_id: "big" // 群聊ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message list_member_send {
+    Data data = 2;
+    
+    message Data {
+        int32 size = 1; // 分页大小
+        int32 page = 2; // 页数
+    }
+    
+    string group_id = 3;
+}
+```
+
+:::
+
+响应体:  
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+user {
+  group_id: "big" // 所属群聊ID
+  user_info {
+    user_id: "7356666" // 用户ID
+    name: "Feng" // 用户名
+    avatar_url: "https://..." // 头像URL
+    is_vip: 0 // 是否为vip用户, 0-不为vip用户, 1-vip用户
+    
+  }
+  permission_level: 100 // 权限等级, 群主100 管理员2 普通用户无/0
+  gag_time: 123456 // 禁言时间戳
+  is_gag: 0 // 是否处于禁言状态
+}
+// 可以有多个
+// ...
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message list_member {
+    Status status = 1;
+    repeated User user = 2;
+    
+    message User {
+      string group_id = 1;
+      User_info user_info = 2;
+
+      message User_info {
+          string user_id = 1;
+          string name = 2;
+          string avatar_url = 4;
+          int32 is_vip = 6;
+      }
+        
+      int32 permission_level = 3;
+      int64 gag_time = 4; // 禁言时间
+      int32 is_gag = 5; c
+  }
+}
+```
+
+:::
+
 ## 获取群聊语音房间
 
 POST /v1/group/live-room
@@ -149,7 +238,7 @@ POST /v1/group/live-room
 
 ```JSONC
 {
-  "group_id": "123" // 群聊id
+  "groupId": "123" // 群聊id
 }
 ```
 
@@ -234,204 +323,13 @@ POST /v1/group/invite
 
 ```JSONC
 {
-  "chatId": "123", // 邀请成员ID
+  "chatId": "123", // 邀请成员ID，必须为目标用户token已添加的token
   "chatType": 1, // 邀请成员类别，1-用户，3-机器人
   "groupId": "123" // 目标群聊
 }
 ```
 
 响应数据:
-
-```JSONC
-{
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
-}
-```
-
-## 获取群组标签列表
-
-POST /v1/group-tag/list
-
-请求头:  
-
-|名称|必须|备注|
-|---|---|---|
-|token|是|无|
-
-请求体:
-
-```JSONC
-{
-    "groupId": "123456789", //要获取的群聊ID
-    "size": 20,// 页面总数
-    "page": 1,//页码
-    "tag": ""// 搜索词语
-}
-```
-
-响应体:
-
-```JSONC
-{
-    "code": 1,
-    "data": {
-        "list": [
-            {
-                "id": 1234, // 标签ID
-                "groupId": "123456789", // 群聊ID
-                "tag": "一个标签", // 标签名称
-                "color": "#E91E63", // 标签颜色
-                "desc": "", // 描述
-                "sort": 0, // 排序
-                "delFlag": 0,
-                "createTime": 1753719847 // 创建时间
-            }
-        ]
-    },
-    "msg": "success"
-}
-```
-
-## 关联用户标签
-
-POST /v1/group-tag/relate
-
-请求头:  
-
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须为群聊管理员token|
-
-请求体:
-
-```JSONC
-{
-    "userId": "1234567", // 要关联的用户ID
-    "tagGroupId": 1145 // 要关联的标签ID
-}
-```
-
-响应体:
-
-```JSONC
-{
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
-}
-```
-
-## 取消关联用户标签
-
-POST /v1/group-tag/relate-cancel
-
-请求头:  
-
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须为群聊管理员token|
-
-请求体:
-
-```JSONC
-{
-    "userId": "1234567", // 要关联的用户ID
-    "tagGroupId": 1145 // 要关联的标签ID
-}
-```
-
-响应体:
-
-```JSONC
-{
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
-}
-```
-
-## 编辑群组标签
-
-POST /v1/group-tag/edit
-
-请求头:  
-
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须为群聊管理员token|
-
-请求体:
-
-```JSONC
-{
-    "id": 1234, // 要更改的标签ID
-    "groupId": "123456789", // 要更改的标签所在的群聊ID
-    "tag": "一个标签", // 标签名称
-    "color": "#E91E63", // 标签颜色
-    "desc": "", //，标签描述
-    "sort": 0 // 标签排序
-}
-```
-
-响应体:
-
-```JSONC
-{
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
-}
-```
-
-## 新增群组标签
-
-POST /v1/group-tag/create
-
-请求头:  
-
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须为群聊管理员token|
-
-请求体：
-
-```JSONC
-{
-    "groupId": "123456789", // 要创建标签的群聊ID
-    "tag": "标签名称", // 标签名称
-    "color": "#2196F3", // 标签颜色
-    "desc": "", // 标签描述
-    "sort": 0 // 标签排序
-}
-
-```
-
-响应体：
-
-```JSONC
-{
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
-}
-```
-
-## 删除群组标签
-
-POST /v1/group-tag/delete
-
-请求头:  
-
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须为群聊管理员token|
-
-请求体:
-
-```JSONC
-{
-    "id": 1234 // 要删除的标签ID
-}
-```
-
-响应体:
 
 ```JSONC
 {
@@ -484,7 +382,7 @@ POST /v1/group/gag-member
 {
   "groupId": "123", // 目标群聊ID
   "userId": "123", // 禁言用户ID
-  "gag": 0 // 禁言时间，0-取消禁言
+  "gag": 0 // 禁言时间，只能为这些时间，0-取消禁言，600-10分钟，3600-1小时，21600-6小时，43200-12小时，1-永久禁言
 }
 ```
 
@@ -578,3 +476,65 @@ POST /v1/group/msg-type-limit
   "msg": "success" // 返回状态消息
 }
 ```
+
+## 编辑群聊信息
+
+POST /v1/group/edit-group
+
+请求头:  
+
+|名称|必须|备注|
+|-----|----|----|
+|token|是|群聊管理员token|
+
+请求体:  
+
+```ProtoBuf
+group_id: "123" // 目标群聊ID
+name: "测试群聊名称" // 群聊名称
+introduction: "测试群聊简介" // 群聊简介
+avatarUrl: "https://..." // 群聊头像url
+direct_join: 0 // 进群免审核,1为开启
+history_msg: 1 // 历史消息,1为开启
+category_name: "无" // 分类名
+category_id: 40 // 分类ID
+private: 0 // 是否私有,1为私有
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message edit_group_send {
+  string group_id = 2; // 目标群聊ID
+  string name = 3; // 群聊名称
+  string introduction = 4; // 群聊简介
+  string avatarUrl = 5; // 群聊头像url
+  uint64 direct_join = 6; // 进群免审核,1为开启
+  uint64 history_msg = 7; // 历史消息,1为开启
+  string category_name = 8; // 分类名
+  uint64 category_id = 9; // 分类ID
+  uint64 private = 10; // 是否私有,1为私有
+}
+```
+
+:::
+
+响应体:  
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message edit_group {
+    Status status = 1;
+}
+```
+
+:::

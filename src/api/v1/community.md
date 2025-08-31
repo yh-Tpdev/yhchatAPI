@@ -411,11 +411,11 @@ POST /v1/community/reward-record
   "data": {
     "rewards": [
       {
-        "id": 1474, // 打赏id
-        "senderId": "打赏者id",
-        "recvId": "文章作者id",
-        "postId": 文章id,
-        "commentId": 评论id,
+        "id": 123, // 打赏id
+        "senderId": "123", // 打赏者id
+        "recvId": "123", // 文章作者id
+        "postId": 123, // 文章id
+        "commentId": 123, // 评论id
         "amount": 0.01, // 打赏者减少金币的数量
         "recvAmount": 0.01, // 收到的金币数量
         "createTime": 1753427517,
@@ -424,7 +424,7 @@ POST /v1/community/reward-record
         "post": {
           "id": 30506, // 文章id
           "baId": 41,  // 分区id
-          "senderId": "文章作者id",
+          "senderId": "123", // 文章作者id
           "senderNicknameId": 128769, // 发送者名字id
           "senderAvatarId": 84, // 发送者头像id
           "groupId": "", // 文章关联群组id
@@ -445,8 +445,8 @@ POST /v1/community/reward-record
         },
         "sender": {
           "id": 106634, // 打赏id
-          "user_id": "打赏者id",
-          "nickname": "", // 打赏者昵称
+          "user_id": "123", // 打赏者id
+          "nickname": "测试打赏者昵称", // 打赏者昵称
           "avatar_url": "https://chat-img.jwznb.com/1523c36f6d5b0a73dfb0fe4d3494c1f2.jpg" // 打赏者头像url
         },
         "comment": {
@@ -470,7 +470,7 @@ POST /v1/community/reward-record
         }
       }
     // ...
-    ]
+    ],
     "total": 1 // 总共的记录
   },
   "msg": "success" // 返回消息
@@ -562,3 +562,167 @@ POST /v1/community/comment/comment-list
   },
   "msg": "success" // 返回消息
 }
+```
+
+## 查找文章
+
+POST /v1/community/search
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "typ": 3, // 未知
+  "keyword": "123", // 关键词文本 
+  "size": 10, // 返回文章数量
+  "page": 1 // 页数
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "ba": [],
+      "posts": [
+        {
+          "id": 30315, // 文章ID
+          "baId": 43, // 文章所属分区ID
+          "senderId": "123", // 文章发送者ID
+          "senderNicknameId": 123, // 文章发送者名称ID
+          "senderAvatarId": 123, // 文章发送者头像ID
+          "groupId": "", // 文章引用群聊ID
+          "title": "测试文章标题", // 文章标题
+          "contentType": 2, // 文章内容类别，1-文本，2-Markdown
+          "content": "测试文章内容", // 文章内容
+          "delTime": 0, // 未知
+          "createTime": 1749736140, // 文章创建时间戳
+          "updateTime": 0, // 未知
+          "editTime": 0, // 未知
+          "lastActive": 1749736140, // 文章上次活跃时间戳
+          "likeNum": 0, // 文章点赞人数
+          "commentNum": 0, // 文章评论人数
+          "collectNum": 0, // 文章收藏人数
+          "amountNum": 0, // 文章打赏金币数量
+          "senderNickname": "测试文章发送者名称", // 文章发送者名称
+          "senderAvatar": "https://...",
+          "createTimeText": "2025-06-12 21:49:00", // 文章发送时间
+          "group": {
+            "id": 0, // 未知
+            "groupId": "", // 未知
+            "name": "", // 未知
+            "introduction": "", // 未知
+            "createBy": "", // 未知
+            "createTime": 0, // 未知
+            "avatarId": 0, // 未知
+            "del_flag": 0, // 未知
+            "avatarUrl": "", // 未知
+            "headcount": 0, // 未知
+            "readHistory": 0, // 未知
+            "alwaysAgree": 0, // 未知
+            "categoryId": 0, // 未知
+            "category": "", // 未知
+            "private": 0, // 未知
+            "banId": 0, // 未知
+            "gag": 0, // 未知
+            "gagBy": "", // 未知
+            "msgTypeLimit": "" // 未知
+          },
+        "ba": {
+          "id": 123, // 文章所处分区ID
+          "name": "测试文章所处分区名称", // 文章所处分区名称
+          "avatar": "https://...", // 文章所处分区头像
+          "delTime": 0, // 未知
+          "createTime": 1675671165, // 文章所处分区创建时间戳
+          "lastActive": 1755075037, // 文章所处分区最近活跃时间戳
+          "memberNum": 123, // 文章所处分区关注数
+          "postNum": 123, // 文章所处分区贴子数
+          "groupNum": 123 // 文章所处分区引用群聊数
+          },
+        "isLiked": 0, // 未知
+        "isCollected": 0, // 未知
+        "isReward": 0, // 未知
+        "isVip": 0 // 未知
+        }
+      // ...
+      ]
+    },
+  "msg": "success" // 返回消息
+}
+```
+
+## 屏蔽指定用户文章
+
+POST /v1/community/set-black-list
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "isAdd": 0, // 0-取消屏蔽，1-屏蔽
+  "authorId": "123"
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取屏蔽指定用户文章列表
+
+POST /v1/community/black-list
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "size": 20, // 返回文章数量
+  "page": 1 // 页数
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "id": 0, // 屏蔽ID
+        "user_id": "123", // 屏蔽用户ID
+        "nickname": "测试屏蔽用户", // 屏蔽用户名称
+        "avatar_url": "https://..." // 屏蔽用户头像
+      }
+      // ...
+    ],
+    "total": 1 // 屏蔽用户数
+  },
+  "msg": "success" // 返回消息
+}
+```
