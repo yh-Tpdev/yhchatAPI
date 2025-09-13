@@ -383,7 +383,7 @@ message edit_message {
 ```ProtoBuf
 info {
   seq: "123123123123123123123" // 请求标识码
-  cmd: "edit_message" // 消息编辑推送
+  cmd: "invite_apply" // 邀请信息推送
 }
 ```
 ::: details ProtoBuf数据结构
