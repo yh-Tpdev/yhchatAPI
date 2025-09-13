@@ -374,5 +374,23 @@ message edit_message {
     }
 }
 ```
+:::
 
+## 接受邀请消息
+::: tip 提示
+本项只提供了“有人邀请我”的这种状态，并没有提供相关信息，如邀请人、群聊ID等，建议配合邀请列表进行使用。
+:::
+```ProtoBuf
+info {
+  seq: "123123123123123123123" // 请求标识码
+  cmd: "invite_apply" // 邀请信息推送
+}
+```
+::: details ProtoBuf数据结构
+```proto
+message INFO {
+    string seq = 1; // 请求标识码
+    string cmd = 2; // 操作类型
+}
+```
 :::
