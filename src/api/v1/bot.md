@@ -464,3 +464,87 @@ POST /v1/bot/remove-group
   "msg": "success" // 返回消息
 }
 ```
+
+## 获取可用AI模型列表
+
+POST /v1/bot/llm/llm-setting-list
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "icon": "https://...", // 模型组图标
+        "id": 1, // 模型组ID
+        "name": "测试AI大模型", // 模型组名称
+        "params": "[{\"name\": \"API Key\", \"type\": \"input\"}]", // 参数模板
+        "parent_id": 0, // 参数ID
+        "subItems": [
+          {
+            "icon": null, // 模型图标
+            "id": 161,// 模型ID
+            "name": "测试AI大模型-chat",
+            "params": "[{\"name\": \"API Key\", \"type\": \"input\"}]", // 参数模板
+            "parent_id": 1, // 参数模板ID
+            "subItems": null,
+            "tag": "测试模型数据" // tag数据，若无则为null
+          }
+          // ...
+        ]
+        "tag": "测试模型数据" // tag数据，若无则为null
+      }
+      // ...
+    ]
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取机器人大模型设置
+
+POST /v1/bot/llm/llm-setting-ref-info
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|机器人管理员token|
+
+请求体：
+
+```JSONC
+{
+  "botId": "123", // 机器人ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "historyCount": 0,
+    "id": 0,
+    "isBigModel": 0, // 是否开启大模型，0-关闭，1-开启
+    "isNeedReply": 0,
+    "key": "", // 大模型APIkey
+    "llmBaseUrl": "",
+    "llmId": 0, // 大模型组ID
+    "llmModelName": "测试大模型-chat", // 大模型名称
+    "llmName": "测试大模型", // 大模型组名称
+    "mcpJson": "", // mcpJSON数据，json转义
+    "paramJson": "", // paramJSON数据，json转义
+    "prompt": "" // AI提示词
+  },
+  "msg": "success" // 返回消息
+}
+```
