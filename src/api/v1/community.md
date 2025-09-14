@@ -726,3 +726,183 @@ POST /v1/community/black-list
   "msg": "success" // 返回消息
 }
 ```
+
+## 查看文章详情
+
+POST /v1/community/posts/post-detail
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+```JSONC
+{
+  "id": 31622 //文章id
+}
+```
+
+响应体：
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "ba": {
+      "id": 41, // 文章分区id
+      "name": "云湖", // 分区名称
+      "avatar": "https://chat-img2.jwznb.com/FoHHKnX-QNuD33-NnGWlq74xkgpg.webp", // 作者头像url
+      "delTime":url // 删除时间(戳)
+      "createTime": 1665233353, // 文章创建时间戳
+      "lastActive": 1757794419, // 上次活跃时间戳
+      "memberNum": 1118, // 该分区订阅的人数
+      "postNum": 9752, // 该分区的文章数量
+      "groupNum": 64, // 该分区绑定的群聊数量
+      "createTimeText": "2022-10-08 20:49:13", // 分区创建时间
+      "isFollowed": "0" 
+    },
+    "isAdmin": 0, // 文章作者是否为管理员
+    "post": {
+      "id": 31622, // 文章id
+      "baId": 41, // 该文章所处的分区id
+      "senderId": "7384288", // 文章作者id
+      "senderNicknameId": 185792, // 文章作者名称id
+      "senderAvatarId": 46626, // 文章作者头像id
+      "groupId": "", // 该文章所处的群聊id
+      "title": "文章标题", // 文章标题
+      "contentType": 2, // 文章类型，1-普通文字，2-Markdown
+      "content": "文章内容", // 文章内容
+      "delTime": 0, // 删除时间(戳)
+      "createTime": 1757755754, // 文章发送时间戳
+      "updateTime": 0, // 文章更新时间戳
+      "editTime": 1757755828, // 文章上次编辑时间戳
+      "lastActive": 1757755828, // 文章上次活跃(编辑)时间戳
+      "likeNum": 0, // 文章点赞数量
+      "commentNum": 0, // 文章评论数量
+      "collectNum": 0, // 文章收藏数量
+      "amountNum": 0, // 文章投币数量
+      "senderNickname": "作者名称", // 文章作者名称
+      "senderAvatar": "https://chat-img.jwznb.com/14ee9ecc8856e34e9f3fdd115e5139b6.jpg", // 文章作者头像url
+      "createTimeText": "2025-09-13 17:29:14", // 文章发送时间
+      "group": { // 该文章下绑定的群聊信息
+        "id": 0, // 会话类型id
+        "groupId": "", // 群聊id
+        "name": "", // 群聊名称
+        "introduction": "", // 群聊简介
+        "createBy": "", // 该群群主id
+        "createTime": 0, // 群聊创建时间戳
+        "avatarId": 0, // 群头像id
+        "del_flag": 0,
+        "avatarUrl": "", // 群头像url
+        "headcount": 0, // 群聊人数
+        "readHistory": 0, // 是否开启群聊历史消息选项，0-关，1-开
+        "alwaysAgree": 0, // 是否总是默认新成员进群选项，0-关，1-开
+        "categoryId": 0, // 群聊类型id
+        "category": "", // 群聊类型
+        "private": 0, // 是否私有选项，0-关，1-开
+        "banId": 0, // 被ban的id
+        "gag": 0, // 被禁言群成员id
+        "gagBy": "", // 谁禁言的成员id
+        "msgTypeLimit": "" // 群聊消息类型限制
+      },
+      "ba": { // 分区相关信息
+        "id": 41, // 该文章所属分区id
+        "name": "云湖", // 分区名称
+        "avatar": "https://chat-img.jwznb.com/1665235278282.2976yunhu192.png", // 分区头像url
+        "delTime": 0, // 分区删除时间戳
+        "createTime": 1665233353, // 分区创建时间戳
+        "lastActive": 1757794419, // 分区上次活跃时间戳
+        "memberNum": 1118, // 分区成员数量
+        "postNum": 9752, // 分区文章数量
+        "groupNum": 64 // 该分区下绑定的群聊数量
+      },
+      "isLiked": 0, // (你)是否给文章点赞，0-没有，1-点了
+      "isCollected": 0, // (你)是否收藏该文章，0-没有，1-收了
+      "isReward": 0, // (你)是否给文章投币，0-没有，1-投了
+      "isVip": 0 // 文章作者是否为vip，0-没有，1-有
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 查看自己发布的文章
+
+POST /v1/community/posts/my-post-list
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "size": 20, // 显示文章数量
+  "page": 1 // 页数
+}
+```
+
+响应体：
+```JSONC
+{
+  "code": 1,  // 请求状态码，1为正常
+  "data": {
+    "posts": [ // 帖子相关
+      {
+        "id": 31635, // 文章id
+        "baId": 49, // 文章所属分区id
+        "senderId": "1659829", // 文章作者
+        "senderNicknameId": 177154, // 作者名称id
+        "senderAvatarId": 46580, // 作者头像id
+        "groupId": "", // 文章所属群聊id
+        "title": "test", // 文章标题
+        "contentType": 1, // 文章类型，1-普通文字，2-Markdown
+        "content": "内容", // 文章内容
+        "delTime": 0, // 删除时间
+        "createTime": 1757818078, // 文章发布时间戳
+        "updateTime": 0, // 文章更新时间戳
+        "editTime": 0, // 文章编辑时间戳
+        "lastActive": 1757818078, // 文章上次活跃时间
+        "likeNum": 0, // 文章赞数
+        "commentNum": 0, // 文章评论数量
+        "collectNum": 0, // 文章收藏数量
+        "amountNum": 0, // 文章投币数量
+        "senderNickname": "作者", // 文章作者名称
+        "senderAvatar": "https://chat-img.jwznb.com/aa117e6f7a237926ea75426fd707f915.jpg", // 文章作者头像url
+        "createTimeText": "2025-09-14 10:47:58", // 文章发布时间
+        "group": { // 文章绑定群聊相关
+          "id": 0, // 文章所属群聊的类型id
+          "groupId": "", // 文章所属群聊id
+          "name": "", // 群聊名称
+          "introduction": "", // 群聊简介
+          "createBy": "", // 群聊群主id
+          "createTime": 0, // 群聊创建时间戳
+          "avatarId": 0, // 群聊头像id
+          "del_flag": 0,
+          "avatarUrl": "", // 群聊头像url
+          "headcount": 0, // 群聊人数
+          "readHistory": 0, // 是否开启聊天历史记录，0-没有，1-开了
+          "alwaysAgree": 0, // 新成员是否直接进入群聊，0-没有，1-开了
+          "categoryId": 0, // 群聊类型id
+          "category": "", // 群聊类型
+          "private": 0, // 群聊是否私有，0-没有，1-开了
+          "banId": 0, // 被banid
+          "gag": 0, // 被禁言者id
+          "gagBy": "", // 禁言者id
+          "msgTypeLimit": "" // 消息类型限制
+        },
+        "isLiked": "0",  // (你)是否点赞该文章，0-没有，1-点了
+        "isCollected": 0, // (你)是否收藏该文章，0-没有，1-点了
+        "isReward": 0, // (你)是否投币该文章，0-没有，1-点了
+        "isVip": 0 // 暂时不清楚
+      }
+    ],
+    "total": 1 // 文章数量
+  },
+  "msg": "success" // 返回成功消息
+}
+```
