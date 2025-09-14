@@ -826,3 +826,83 @@ POST /v1/community/posts/post-detail
   "msg": "success" // 返回消息
 }
 ```
+
+## 查看自己发布的文章
+
+POST /v1/community/posts/my-post-list
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "size": 20, // 显示文章数量
+  "page": 1 // 页数
+}
+```
+
+响应体：
+```JSONC
+{
+  "code": 1,  // 请求状态码，1为正常
+  "data": {
+    "posts": [ // 帖子相关
+      {
+        "id": 31635, // 文章id
+        "baId": 49, // 文章所属分区id
+        "senderId": "1659829", // 文章作者
+        "senderNicknameId": 177154, // 作者名称id
+        "senderAvatarId": 46580, // 作者头像id
+        "groupId": "", // 文章所属群聊id
+        "title": "test", // 文章标题
+        "contentType": 1, // 文章类型，1-普通文字，2-Markdown
+        "content": "内容", // 文章内容
+        "delTime": 0, // 删除时间
+        "createTime": 1757818078, // 文章发布时间戳
+        "updateTime": 0, // 文章更新时间戳
+        "editTime": 0, // 文章编辑时间戳
+        "lastActive": 1757818078, // 文章上次活跃时间
+        "likeNum": 0, // 文章赞数
+        "commentNum": 0, // 文章评论数量
+        "collectNum": 0, // 文章收藏数量
+        "amountNum": 0, // 文章投币数量
+        "senderNickname": "作者", // 文章作者名称
+        "senderAvatar": "https://chat-img.jwznb.com/aa117e6f7a237926ea75426fd707f915.jpg", // 文章作者头像url
+        "createTimeText": "2025-09-14 10:47:58", // 文章发布时间
+        "group": { // 文章绑定群聊相关
+          "id": 0, // 文章所属群聊的类型id
+          "groupId": "", // 文章所属群聊id
+          "name": "", // 群聊名称
+          "introduction": "", // 群聊简介
+          "createBy": "", // 群聊群主id
+          "createTime": 0, // 群聊创建时间戳
+          "avatarId": 0, // 群聊头像id
+          "del_flag": 0,
+          "avatarUrl": "", // 群聊头像url
+          "headcount": 0, // 群聊人数
+          "readHistory": 0, // 是否开启聊天历史记录，0-没有，1-开了
+          "alwaysAgree": 0, // 新成员是否直接进入群聊，0-没有，1-开了
+          "categoryId": 0, // 群聊类型id
+          "category": "", // 群聊类型
+          "private": 0, // 群聊是否私有，0-没有，1-开了
+          "banId": 0, // 被banid
+          "gag": 0, // 被禁言者id
+          "gagBy": "", // 禁言者id
+          "msgTypeLimit": "" // 消息类型限制
+        },
+        "isLiked": "0",  // (你)是否点赞该文章，0-没有，1-点了
+        "isCollected": 0, // (你)是否收藏该文章，0-没有，1-点了
+        "isReward": 0, // (你)是否投币该文章，0-没有，1-点了
+        "isVip": 0 // 暂时不清楚
+      }
+    ],
+    "total": 1 // 文章数量
+  },
+  "msg": "success" // 返回成功消息
+}
+```
