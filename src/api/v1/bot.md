@@ -548,3 +548,30 @@ POST /v1/bot/llm/llm-setting-ref-info
   "msg": "success" // 返回消息
 }
 ```
+
+## 重置机器人token
+
+POST /v1/bot/reset-bot-token
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|机器人管理员token|
+
+请求体：
+
+```JSONC
+{
+  "botId": "123", // 机器人ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
