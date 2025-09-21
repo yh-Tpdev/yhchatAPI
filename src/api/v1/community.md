@@ -906,3 +906,84 @@ POST /v1/community/posts/my-post-list
   "msg": "success" // 返回成功消息
 }
 ```
+
+## 查看分区下绑定的群聊列表
+
+POST /v1/community/ba/group-list
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "baId": 41, //分区id
+  "size": 10, // 分页大小
+  "page": 1 // 页数
+}
+```
+
+响应体:
+```JSONC
+{
+  "code": 1,  // 请求状态码，1为正常
+  "data": {
+    "groups": [
+      {
+        "id": 10497, // 群聊创建id
+        "groupId": "554470989", // 群聊id
+        "name": "这个是群聊", // 群聊名称
+        "introduction": "这个是介绍", // 群聊简介
+        "createBy": "6016104", // 群聊创建者id(群主id)
+        "createTime": 1757207765, // 群聊创建时间戳
+        "avatarId": 47524, // 头像id
+        "del_flag": 0, 
+        "avatarUrl": "https://chat-img.jwznb.com/922717b67b6c61b79155fdb11bc1f796.jpg", // 群头像url
+        "headcount": 35, // 群聊人数
+        "readHistory": 1, // 是否开启新成员查看消息历史记录（1为开启，0为关闭）
+        "alwaysAgree": 1, // 是否直接进群（1为开启，0为关闭）
+        "categoryId": 21, // 绑定分区的id
+        "category": "兴趣爱好-其他", // 群聊分类名称
+        "private": 0, // 群聊是否私有（1为开启，0为关闭）
+        "banId": 0, // 被ban者id
+        "gag": 0,  // 是否禁言（1为开启，0为关闭）
+        "gagBy": "",  // 禁言者id
+        "msgTypeLimit": "", // 被限制的消息类型,如1,2,3,使用","分格。1-文本消息，2-图片消息，3-Markdown消息，4-文件消息，6-帖子消息，7-表情消息，8-HTML消息，10-视频消息，11-语音消息，13-语音通话（限制多个消息类型一般是 1,2,3,4··· 之类）
+}
+        "uri": "https://chat-go.jwzhd.com/open-apis/v1/bot/send?token\u003d", // 机器人消息发送接口
+        "groupBotRel": null
+      },
+      {
+        "id": 10494,
+        "groupId": "960023663",
+        "name": "测试群",
+        "introduction": "114514",
+        "createBy": "6016104",
+        "createTime": 1757170885,
+        "avatarId": 47509,
+        "del_flag": 0,
+        "avatarUrl": "https://chat-img.jwznb.com/b63c826d9a1906f8811b2c6df8aa8adf.jpg",
+        "headcount": 20,
+        "readHistory": 1,
+        "alwaysAgree": 1,
+        "categoryId": 0,
+        "category": "",
+        "private": 0,
+        "banId": 0,
+        "gag": 0,
+        "gagBy": "",
+        "msgTypeLimit": "",
+        "uri": "https://chat-go.jwzhd.com/open-apis/v1/bot/send?token\u003d",
+        "groupBotRel": null
+      }
+    // ...
+    ],
+    "total": 72 // 群聊总数
+  },
+  "msg": "success" // 返回状态消息
+}
+```
