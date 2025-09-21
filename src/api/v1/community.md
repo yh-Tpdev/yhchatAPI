@@ -753,7 +753,7 @@ POST /v1/community/posts/post-detail
       "id": 41, // 文章分区id
       "name": "云湖", // 分区名称
       "avatar": "https://chat-img2.jwznb.com/FoHHKnX-QNuD33-NnGWlq74xkgpg.webp", // 作者头像url
-      "delTime":url // 删除时间(戳)
+      "delTime": 0, // 删除时间(戳)
       "createTime": 1665233353, // 文章创建时间戳
       "lastActive": 1757794419, // 上次活跃时间戳
       "memberNum": 1118, // 该分区订阅的人数
