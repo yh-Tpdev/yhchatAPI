@@ -4,6 +4,13 @@ title: chat-ws-go.jwzhd.com
 
 本文章下所有wss请求地址均为 wss://chat-ws-go.jwzhd.com/ws
 没写请求/响应项目表示不需要相关参数,使用以下功能前必须先链接wss并 **登录云湖账号**.  
+本教程中未特别说明情况下proto的INFO均为以下部分:  
+```proto
+message INFO {
+    string seq = 1; // 请求标识码
+    string cmd = 2; // 操作类型
+}
+```
 
 ## 登录云湖账号
 
@@ -85,7 +92,7 @@ info {
 }
 
 data {
-  cmd: "type.googleapis.com/proto.MsgInput" // 操作类型(?)
+  any: "type.googleapis.com/proto.MsgInput" // 操作类型(?)
   draft {
     chat_id: "8826687" // 聊天对象ID
     input: "测试草稿同步" // 草稿内容
@@ -96,21 +103,13 @@ data {
 ::: details ProtoBuf数据结构
 
 ```proto
-// 共用区
-// 信息
-message INFO {
-    string seq = 1; // 请求标识码
-    string cmd = 2; // 操作类型
-}
-// 共用区结束
-
 // 草稿同步
 message draft_input {
     INFO info = 1;
     Data data = 2;
     
     message Data {
-        string cmd = 1;
+        string any = 1;
         Draft draft = 2;
         
         message Draft {
@@ -134,7 +133,7 @@ info {
 }
 
 data {
-  cmd: "type.googleapis.com/proto.PushMessage" // 操作类型?
+  any: "type.googleapis.com/proto.PushMessage" // 操作类型?
   msg {
     msg_id: "abcdef" // 消息ID
     sender {
@@ -173,11 +172,6 @@ data {
 
 ```proto
 // 共用区
-// 信息
-message INFO {
-    string seq = 1; // 请求标识码
-    string cmd = 2; // 操作类型
-}
 
 // 标签
 message Tag {
@@ -193,7 +187,7 @@ message push_message {
     Data data = 2;
 
     message Data {
-        string cmd = 1;
+        string any = 1;
         Msg msg = 2;
         
         message Msg {
@@ -238,16 +232,21 @@ message push_message {
                 string post_content = 12; // 文章内容
                 string post_content_type = 13; // 文章类型
                 string expression_id = 15; // 个人表情ID(不知道为啥为STR)
+                string quote_image_url = 16; // 引用图片直链,https://...
+                string quote_image_name = 17; // 引用图片文件名称
                 uint64 file_size = 18; // 文件/图片大小(字节)
                 string video_url = 19; // 视频URL
                 string audio_url = 21; // 语音URL
                 uint64 audio_time = 22; // 语音时长
+                string quote_video_url = 23; // 引用视频直链,https://...
+                uint64 quote_video_time = 24; // 引用视频时长
                 uint64 sticker_item_id = 25; // 表情ID
                 uint64 sticker_pack_id = 26; // 表情包ID
                 string call_text = 29; // 语音通话文字
                 string call_status_text = 32; // 语音通话状态文字
                 uint64 width = 33; // 图片的宽度
                 uint64 height = 34; // 图片的高度
+                string tip = 37; // 提示信息
             }
         }
     }
@@ -267,7 +266,7 @@ info {
 }
 
 data {
-  cmd: "type.googleapis.com/proto.PushMessage" // 操作类型?
+  any: "type.googleapis.com/proto.PushMessage" // 操作类型?
   file_send: {
       send_user_id: "123" // 分享者用户ID
       user_id: "123" // 接收者用户ID
@@ -282,19 +281,13 @@ data {
 ::: details ProtoBuf数据结构
 
 ```proto
-// 信息
-message INFO {
-    string seq = 1; // 请求标识码
-    string cmd = 2; // 操作类型
-}
-
 // 超级文件分享
 message file_send_message {
   INFO info = 1;
   Data data = 2;
 
   message Data {
-    string cmd = 1;
+    string any = 1;
     Sender sender = 2;
         
     message Sender {
@@ -324,7 +317,7 @@ info {
 }
 
 data {
-  cmd: "type.googleapis.com/proto.PushMessage" // 操作类型?
+  any: "type.googleapis.com/proto.PushMessage" // 操作类型?
   msg {
     "msg_id": "123123123123" // 信息ID
     "chat_id": "123" // 信息对象ID
@@ -342,11 +335,6 @@ data {
 ::: details ProtoBuf数据结构
 
 ```proto
-message INFO {
-    string seq = 1; // 请求标识码
-    string cmd = 2; // 操作类型
-}
-
 message Msg {
     string msg_id = 1;
     string recv_id = 3; // 接收者ID,但是不知道为啥到编辑这里就和4一样了
@@ -369,7 +357,7 @@ message edit_message {
     Data data = 2;
     
     message Data {
-        string cmd = 1;
+        string any = 1;
         Msg msg = 2;
     }
 }
@@ -377,20 +365,75 @@ message edit_message {
 :::
 
 ## 接受邀请消息
+
 ::: tip 提示
 本项只提供了“有人邀请我”的这种状态，并没有提供相关信息，如邀请人、群聊ID等，建议配合邀请列表进行使用。
 :::
+
+返回数据:  
+
 ```ProtoBuf
 info {
   seq: "123123123123123123123" // 请求标识码
   cmd: "invite_apply" // 邀请信息推送
 }
 ```
+
 ::: details ProtoBuf数据结构
+
 ```proto
 message INFO {
     string seq = 1; // 请求标识码
     string cmd = 2; // 操作类型
 }
 ```
+
+:::
+
+## 流式消息
+
+::: tip
+流式消息第一个推送是 push_message,后续才是 stream_message,需要将 content 里面的内容追加到消息内容后面.
+:::
+
+返回数据:  
+
+```ProtoBuf
+info {
+    seq: "114aaaa" // 请求ID
+    cmd: "stream_message"
+}
+data {
+  any: "type.googleapis.com/proto.StreamMessage" // ProtoBuf的any字段
+  msg {
+    msgId: "11451419180" // 消息ID
+    recvId: "6666666" // 接受者ID
+    chatId: "26146395" // 发送者ID
+    content: "我是追加内容" // 要追加的内容
+  }
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 流式消息
+message stream_message {
+    INFO info = 1;
+    Data data = 2;
+    
+    message Data {
+        string any = 1;
+        StreamMsg msg = 2;
+        
+        message StreamMsg {
+            string msg_id = 1;
+            string recv_id = 2;
+            string chat_id = 3; // 似乎是会话ID
+            string content = 4; // 消息内容
+        }
+    }
+}
+```
+
 :::
