@@ -53,3 +53,30 @@ POST /v1/bot/bot-info
   "msg": "success"
 }
 ```
+
+## 恢复机器人订阅
+
+POST /v1/bot/bot-link-reset
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|机器人管理员token|
+
+请求体：
+
+```JSONC
+{
+  "botId": "123", // 机器人ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
