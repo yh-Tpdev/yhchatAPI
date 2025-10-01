@@ -53,3 +53,24 @@ POST /v1/bot/bot-info
   "msg": "success"
 }
 ```
+
+## 重置机器人订阅地址接收
+
+POST /v1/bot/bot-lik-reset
+
+请求体:  
+
+```JSONC
+{
+  "botId": "13972254" // 你创建的bot的ID
+}
+```
+
+响应体:  
+
+```JSONC
+{
+  "code": 1, // 响应码，1为正常
+  "msg": "success" // 返回消息
+}
+```
