@@ -61,13 +61,13 @@ message send_message_send {
         string post_title = 11; // 文章标题
         string post_content = 12; // 文章内容
         string post_type = 13; // 文章类型:1-文本,2-Markdown
-        string quote_image = 16; // 引用图片直链,https://...
-        string quote_image_name = 17; // 引用图片名称
+        string quote_image_url = 16; // 引用图片直链,https://...
+        string quote_image_name = 17; // 引用图片文件名称
         uint64 file_size = 18; // 欲发送文件大小
         string video = 19; // 欲发送视频key/url(123.mp4)
         string audio = 21; // 语音key/url(123.m4a)
         uint64 audio_time = 22; // 语音秒数
-        string quote_video = 23; // 引用视频直链,https://...
+        string quote_video_url = 23; // 引用视频直链,https://...
         uint64 quote_video_time = 24; // 引用视频时长
         uint64 sticker_item_id = 25; // 表情ID
         uint64 sticker_pack_id = 26; // 表情包ID
@@ -313,16 +313,21 @@ message list_message_by_seq {
             string post_content = 12; // 文章内容
             string post_content_type = 13; // 文章类型
             string expression_id = 15; // 个人表情ID(不知道为啥为STR)
+            string quote_image_url = 16; // 引用图片直链,https://...
+            string quote_image_name = 17; // 引用图片文件名称
             uint64 file_size = 18; // 文件/图片大小(字节)
             string video_url = 19; // 视频URL
             string audio_url = 21; // 语音URL
             uint64 audio_time = 22; // 语音时长
+            string quote_video_url = 23; // 引用视频直链,https://...
+            uint64 quote_video_time = 24; // 引用视频时长
             uint64 sticker_item_id = 25; // 表情ID
             uint64 sticker_pack_id = 26; // 表情包ID
             string call_text = 29; // 语音通话文字
             string call_status_text = 32; // 语音通话状态文字
             uint64 width = 33; // 图片的宽度
             uint64 height = 34; // 图片的高度
+            string tip = 37; // 提示信息
         }
         // 发送者信息
         message Sender {
@@ -461,17 +466,21 @@ message Msg {
         string post_content = 12; // 文章内容
         string post_content_type = 13; // 文章类型
         string expression_id = 15; // 个人表情ID(不知道为啥为STR)
+        string quote_image_url = 16; // 引用图片直链,https://...
+        string quote_image_name = 17; // 引用图片文件名称
         uint64 file_size = 18; // 文件/图片大小(字节)
         string video_url = 19; // 视频URL
         string audio_url = 21; // 语音URL
         uint64 audio_time = 22; // 语音时长
+        string quote_video_url = 23; // 引用视频直链,https://...
+        uint64 quote_video_time = 24; // 引用视频时长
         uint64 sticker_item_id = 25; // 表情ID
         uint64 sticker_pack_id = 26; // 表情包ID
         string call_text = 29; // 语音通话文字
         string call_status_text = 32; // 语音通话状态文字
         uint64 width = 33; // 图片的宽度
         uint64 height = 34; // 图片的高度
-            
+        string tip = 37; // 提示信息
     }
     // 发送者信息
     message Sender {
@@ -514,7 +523,7 @@ POST /v1/msg/list-message-by-mid-seq
 请求体:  
 
 ```ProtoBuf
-request_id: 123456 // 请求ID,方便debug用的,可不写
+msg_seq: 123456 // 开始消息的seq,不写默认0
 chat_type: 2 // 对象类型,1-用户 2-群聊 3-机器人
 chat_id: "big" // 对象ID
 unknown: 0 // 不知道干啥的
@@ -527,7 +536,7 @@ msg_id: abcdef // 消息ID
 ```proto
 // 列出包含请求 msg_id 消息
 message list_message_by_mid_seq_send {
-    uint64 request_id = 3; // 请求id
+    uint64 msg_seq = 3; // 开始消息的seq
     uint64 chat_type = 4;
     string chat_id = 5;
     uint64 unknown = 6; // 不知道干啥的
@@ -624,16 +633,21 @@ message Msg {
         string post_content = 12; // 文章内容
         string post_content_type = 13; // 文章类型
         string expression_id = 15; // 个人表情ID(不知道为啥为STR)
+        string quote_image_url = 16; // 引用图片直链,https://...
+        string quote_image_name = 17; // 引用图片文件名称
         uint64 file_size = 18; // 文件/图片大小(字节)
         string video_url = 19; // 视频URL
         string audio_url = 21; // 语音URL
         uint64 audio_time = 22; // 语音时长
+        string quote_video_url = 23; // 引用视频直链,https://...
+        uint64 quote_video_time = 24; // 引用视频时长
         uint64 sticker_item_id = 25; // 表情ID
         uint64 sticker_pack_id = 26; // 表情包ID
         string call_text = 29; // 语音通话文字
         string call_status_text = 32; // 语音通话状态文字
         uint64 width = 33; // 图片的宽度
         uint64 height = 34; // 图片的高度
+        string tip = 37; // 提示信息
     }
     // 发送者信息
     message Sender {
