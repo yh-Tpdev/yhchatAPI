@@ -175,19 +175,19 @@ POST /v1/bot/bot-group-list
           "avatarId": 0, // 机器人头像ID
           "avatarUrl": "https://...", // 机器人头像ID
           "token": "123123123123123123123", // 机器人token
-          "link": "", // 未知
+          "link": "", // 机器人分享链接？
           "type": 0, // 未知
           "introduction": "测试机器人简介", // 机器人简介
-          "createBy": "", // 未知
-          "createTime": 0, // 未知
+          "createBy": "", // 创建者id
+          "createTime": 0, // 机器人创建时间
           "headcount": 0, // 未知
-          "private": 0, // 未知
-          "isStop": 0, // 未知
+          "private": 0, // 是否私有
+          "isStop": 0, // 是否停用
           "settingJson": "", // 机器人设置json，需转义
-          "del_flag": 0, // 未知
-          "alwaysAgree": 0, // 未知
-          "groupLimit": 0, // 未知
-          "banId": 0, // 未知
+          "del_flag": 0, // 删除标签
+          "alwaysAgree": 0, // 拉机器人时机器人是否直接进群
+          "groupLimit": 0, // 机器人进群限制
+          "banId": 0, // 被封禁的id
           "linkStop": 0, // 未知
           "uri": "https://chat-go.jwzhd.com/open-apis/v1/bot/send?token=" // 机器人示例API接口
         },
