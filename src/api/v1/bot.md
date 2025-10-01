@@ -491,19 +491,19 @@ POST /v1/bot/llm/llm-setting-list
         "subItems": [
           {
             "icon": null, // 模型图标
-            "id": 161,// 模型ID
-            "name": "测试AI大模型-chat",
+            "id": 161, // 模型ID
+            "name": "测试AI大模型-chat", // 模型名称
             "params": "[{\"name\": \"API Key\", \"type\": \"input\"}]", // 参数模板
             "parent_id": 1, // 参数模板ID
             "subItems": null,
             "tag": "测试模型数据" // tag数据，若无则为null
           }
           // ...
-        ]
+        ],
         "tag": "测试模型数据" // tag数据，若无则为null
       }
       // ...
-    ]
+    ],
   "msg": "success" // 返回消息
 }
 ```
