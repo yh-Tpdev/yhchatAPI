@@ -5,6 +5,7 @@ title: chat-ws-go.jwzhd.com
 本文章下所有wss请求地址均为 wss://chat-ws-go.jwzhd.com/ws
 没写请求/响应项目表示不需要相关参数,使用以下功能前必须先链接wss并 **登录云湖账号**.  
 本教程中未特别说明情况下proto的INFO均为以下部分:  
+
 ```proto
 message INFO {
     string seq = 1; // 请求标识码
@@ -362,6 +363,7 @@ message edit_message {
     }
 }
 ```
+
 :::
 
 ## 接受邀请消息
