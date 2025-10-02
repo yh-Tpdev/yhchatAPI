@@ -738,6 +738,7 @@ POST /v1/community/posts/post-detail
 |token|是|无|
 
 请求体：
+
 ```JSONC
 {
   "id": 31622 //文章id
@@ -745,6 +746,7 @@ POST /v1/community/posts/post-detail
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
@@ -847,6 +849,7 @@ POST /v1/community/posts/my-post-list
 ```
 
 响应体：
+
 ```JSONC
 {
   "code": 1,  // 请求状态码，1为正常
@@ -928,6 +931,7 @@ POST /v1/community/ba/group-list
 ```
 
 响应体:
+
 ```JSONC
 {
   "code": 1,  // 请求状态码，1为正常
