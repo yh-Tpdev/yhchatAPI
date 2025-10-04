@@ -153,6 +153,7 @@ data {
   page: 1 // 页数
 }
 group_id: "big" // 群聊ID
+keywords: "测试群成员" // 搜索关键词
 ```
 
 ::: details ProtoBuf数据结构
@@ -166,7 +167,8 @@ message list_member_send {
         int32 page = 2; // 页数
     }
     
-    string group_id = 3;
+    string group_id = 3; // 群聊ID
+    string keywords = 4; // 搜索关键词
 }
 ```
 
