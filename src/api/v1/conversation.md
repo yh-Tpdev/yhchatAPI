@@ -119,3 +119,29 @@ message list {
 ```
 
 :::
+
+## 更改对话排序
+
+POST /v1/conversation/sort-change
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体:  
+
+```JSONC
+{
+  "userId": "123" // 对象ID
+}
+```
+
+响应体:  
+
+```JSONC
+{
+ "code": 1, // 返回状态码,1为正常
+ "msg": "success" // 返回信息
+}
