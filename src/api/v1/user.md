@@ -154,11 +154,11 @@ data {
   }
   // ...
   register_time: "1234-12-12 12:12:12" // 注册时间(YYYY-MM-DD hh:mm:ss)
-  ban_time: 123123123 // 封禁结束时间
+  ban_time: 123123123 // 封禁结束时间(时间戳)
   online_day: 123 // 在线时长
   continuous_online_day: 123 // 连续在线时长
   is_vip: 1 // 是否为VIP
-  vip_expired_time: 123123123 // vip的unix时间戳
+  vip_expired_time: 123123123 // VIP过期时间(时间戳)
 }
 ```
 
@@ -184,7 +184,7 @@ message get_user {
         uint64 avatar_id = 5; // 头像ID
         repeated Medal_info medal = 6; // 勋章信息
         string register_time = 7; // 注册时间,格式: YYYY-MM-DD hh:mm:ss
-        uint64 ban_time = 10; // 封禁结束事件(时间戳)
+        uint64 ban_time = 10; // 封禁结束时间(时间戳)
         uint64 online_day = 11; // 在线天数
         uint64 continuous_online_day = 12; // 连续在线天数
         int32 is_vip = 13; // 是否为vip
