@@ -572,6 +572,9 @@ POST /v1/bot/reset-bot-token
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
+  "data": {
+    "token": "123" // 重置后的机器人token
+  }
   "msg": "success" // 返回消息
 }
 ```
