@@ -540,3 +540,86 @@ message edit_group {
 ```
 
 :::
+
+## 获取群机器人列表
+
+POST /v1/group/bot-list
+
+请求头:  
+
+|名称|必须|备注|
+|-----|----|----|
+|token|是|群内成员|
+
+请求体:  
+
+```ProtoBuf
+group_id: "123" // 目标群聊ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message edit_group_send {
+  string group_id = 2; // 目标群聊ID
+}
+```
+
+:::
+
+响应体:  
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+// ...
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 获取群机器人列表
+message bot_list_send {
+    string group_id = 2;
+}
+
+message bot_list {
+    Status status = 1;
+    repeated Bot_data bot = 2;
+
+    repeated Instruction_data instruction = 3;
+    
+    message Instruction_data {
+        int64 id = 1;
+        string bot_id = 2;
+        string name = 3; // 指令名
+        string desc = 4; // 指令描述
+        int32 type = 5; // 指令类型
+        string hint_text = 6; // 输入框提示文字
+        string default_text = 7; // 输入框默认文字
+        // int32 hidden/del_flag = 8; // 是否隐藏/删除,猜的,有误欢迎指正
+        int64 sort = 9; // 和排序相关 不确定
+        string form = 10; // 表单
+        string bot_name = 11;
+    }
+    repeated Menu_data menu = 4; // 快捷菜单相关
+
+    message Menu_data {
+        int64 id = 1;
+        string bot_id = 2;
+        // int32 hidden/del_flag = 3; // 是否隐藏/删除,猜的
+        string name = 4;
+        string content = 5; // 内容
+        int32 menu_type = 6; // 按钮类型,1-普通按钮 2-选中按钮 3-下拉选择
+        int64 create_time = 7;
+        // 8,9没找到
+        int32 menu_action = 10; // 操作类型
+        string select = 99; // 选择的选项,在选择按钮的时候也作为状态,选中为1,未选中为0
+    }
+}
+```
+
+:::
