@@ -609,3 +609,22 @@ message CreateBotRequest {
 ```
 
 :::
+
+响应体：
+
+```proto
+message CreateBotResponse {
+    Status status = 1;
+    BotData data = 2;               
+    
+    message Status {
+        int64 number = 1;           // 可能是请求ID
+        int32 code = 2;             // 1表示成功
+        string msg = 3;             // success
+    }
+    
+    message BotData {
+        string bot_id = 1;          // 创建的机器人ID
+    }
+}
+```
