@@ -578,3 +578,34 @@ POST /v1/bot/reset-bot-token
   "msg": "success" // 返回消息
 }
 ```
+
+## 创建机器人
+
+POST /v1/bot/create-bot
+
+请求头:  
+
+|名称|必须|备注|
+|---|---|---|
+|token|是|无|
+
+请求体：
+```ProtoBuf
+name: 2 //机器人名称
+introduction: 3 //机器人简介
+avatar_url：4 // 机器人头像Url
+private:5 // 是否私有(0-公开，1-私有)
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message CreateBotRequest {
+    string name = 2;                // 机器人名称
+    string introduction = 3;        // 机器人简介
+    string avatar_url = 4;          // 头像URL
+    int32 private = 5;              // 是否私有(0-公开，1-私有)
+}
+```
+
+:::
