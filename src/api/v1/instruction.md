@@ -1,3 +1,10 @@
+---
+title: instruction
+---
+
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
+没写请求/响应项项目表示不需要相关参数.
+
 ## 获取机器人指令列表（网页控制台）
 
 POST /v1/instruction/web-list
@@ -65,7 +72,7 @@ POST /v1/instruction/web-list
   },
   "msg": "success" // 返回消息
 }
-
+```
 ::: details 自定义输入指令部分解释
 
 ```jsonc
