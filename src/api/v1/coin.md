@@ -123,3 +123,22 @@ POST /v1/coin/shop/product-detail
   "msg": "success" // 返回消息
 }
 ```
+
+## 让金币机器人给你发领金币信息
+
+POST /v1/coin/task/raffle
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回成功信息
+}
+```

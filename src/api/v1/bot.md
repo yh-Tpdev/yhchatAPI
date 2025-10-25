@@ -603,5 +603,53 @@ POST /v1/bot/edit-subscribed-link
 {
   "code": 1, // 请求状态码，1为正常
   "msg": "success" // 返回消息
+=======
+## 创建机器人
+
+POST /v1/bot/create-bot
+
+请求头:  
+
+|名称|必须|备注|
+|---|---|---|
+|token|是|无|
+
+请求体：
+```ProtoBuf
+name: 2 //机器人名称
+introduction: 3 //机器人简介
+avatar_url：4 // 机器人头像Url
+private:5 // 是否私有(0-公开，1-私有)
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message CreateBotRequest {
+    string name = 2;                // 机器人名称
+    string introduction = 3;        // 机器人简介
+    string avatar_url = 4;          // 头像URL
+    int32 private = 5;              // 是否私有(0-公开，1-私有)
+}
+```
+
+:::
+
+响应体：
+
+```proto
+message CreateBotResponse {
+    Status status = 1;
+    BotData data = 2;               
+    
+    message Status {
+        int64 number = 1;           // 可能是请求ID
+        int32 code = 2;             // 1表示成功
+        string msg = 3;             // success
+    }
+    
+    message BotData {
+        string bot_id = 1;          // 创建的机器人ID
+    }
 }
 ```
