@@ -628,3 +628,31 @@ message CreateBotResponse {
     }
 }
 ```
+
+## 设置机器人消息订阅接口
+
+POST /v1/bot/edit-subscribed-link
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|机器人管理员token|
+
+请求体：
+
+```JSONC
+{
+  "botId": "75282754", // 机器人id
+  "link": "http(s)://xxxxxx" // 设置消息订阅接口（地址）
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
