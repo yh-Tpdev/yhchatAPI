@@ -45,3 +45,38 @@ POST /v1/event/list
     "msg": "success" // 返回消息
 }
 ```
+
+## 机器人消息订阅设置
+
+POST /v1/event/edit
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|机器人管理员token|
+
+请求体：
+
+```JSONC
+{
+  "botId": "75282754", // 机器人id
+  "messageReceiveNormal": 1, // 普通消息事件，1开启，0-关闭
+  "messageReceiveInstruction": 0, // 指令消息事件，1开启，0-关闭
+  "botFollowed": 1, // 关注机器人事件，1开启，0-关闭
+  "botUnfollowed": 1, // 取关机器人事件，1开启，0-关闭
+  "groupJoin": 1, // 加入群事件，1开启，0-关闭
+  "groupLeave": 1, // 退出群事件，1开启，0-关闭
+  "botSetting": 1, // 机器人设置消息事件，1开启，0-关闭
+  "typ": "messageReceiveInstruction" // 每次机器人设置的key值，为该请求2-8的key值中的一个
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
