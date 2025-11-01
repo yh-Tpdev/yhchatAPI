@@ -957,7 +957,6 @@ POST /v1/community/ba/group-list
         "gag": 0,  // 是否禁言（1为开启，0为关闭）
         "gagBy": "",  // 禁言者id
         "msgTypeLimit": "", // 被限制的消息类型,如1,2,3,使用","分格。1-文本消息，2-图片消息，3-Markdown消息，4-文件消息，6-帖子消息，7-表情消息，8-HTML消息，10-视频消息，11-语音消息，13-语音通话（限制多个消息类型一般是 1,2,3,4··· 之类）
-}
         "uri": "https://chat-go.jwzhd.com/open-apis/v1/bot/send?token\u003d", // 机器人消息发送接口
         "groupBotRel": null
       },
