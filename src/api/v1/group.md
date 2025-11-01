@@ -603,7 +603,7 @@ message bot_list {
         // int32 hidden/del_flag = 8; // 是否隐藏/删除,猜的,有误欢迎指正
         int64 sort = 9; // 和排序相关 不确定
         string form = 10; // 表单
-        string bot_name = 11;
+        string bot_name = 11; // 机器人名称
     }
     repeated Menu_data menu = 4; // 快捷菜单相关
 
@@ -638,8 +638,8 @@ POST /v1/group/remove-bot
 
 ```jsonc
 {
-  "groupId": "979377289", // 群聊id
-  "botId": "24120702" // 机器人id
+  "groupId": "123", // 群聊id
+  "botId": "123" // 机器人id
 }
 ```
 
@@ -651,3 +651,138 @@ POST /v1/group/remove-bot
   "msg": "success" // 返回状态消息
 }
 ```
+
+## 设置我的群昵称
+
+POST /v1/group/edit-my-group-nickname
+
+请求头:  
+
+|名称|必须|备注|
+
+|-----|----|----|
+|token|是|群内成员|
+
+
+
+```jsonc
+{
+  "groupId": "123", // 目标群聊ID
+  "botId": "测试群昵称" // 欲设置的群昵称
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 设置群口令
+
+POST /v1/group/edit-group-keyword
+
+::: details 功能简介
+在 /v1/group/info-add-friend 中
+搜索群口令就会显示群口令绑定的相应群聊
+也就是在聊天主页列表最顶上的搜索栏搜索指定群口令时会显示设置为该群口令的群聊
+:::
+
+请求头:  
+
+|名称|必须|备注|
+|---|---|---|
+|token|是|必须为vip用户且是目标群群主|
+
+请求体:
+
+```JSONC
+{
+  "groupId": "123", // 目前群聊ID
+  "keyword": "测试群口令" // 欲设置的群口令
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 获取指定群口令关联群聊
+
+POST /v1/group/info-add-friend
+
+请求头:  
+
+|名称|必须|备注|
+|---|---|---|
+|token|是|无|
+
+请求体:  
+
+```ProtoBuf
+keyword: "测试群口令" // 欲要搜索的群口令
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message info_add_friend_send {
+  string keyword = 2; // 欲要搜索的群口令
+}
+```
+
+:::
+
+响应体：
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+
+Data {
+  id: "123" // 群聊ID
+  name: "测试群名称" // 群聊名称
+  avatar_url: "https://..." // 群聊头像url
+  avatar_id: 123; // 群聊头像ID
+  introduction: "测试群聊简介" // 群聊简介
+  headcount: 123 // 群人数
+  createBy: "123" // 群聊创建者ID
+  readHistory: 1 // 是否允许阅读历史信息，0-不允许，1-允许
+  limited_msg_type: "1" // 被限制的消息类型,如1,2,3,使用","分格
+  keyword: "测试群口令" // 群聊设置的口令
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message info_add_friend {
+    Status status = 1;
+    Data data = 1;
+
+    message Data {
+      string id = 1; // 群聊ID
+      string name = 2; // 群聊名称
+      string avatar_url = 3; // 群聊头像url
+      uint64 avatar_id = 4; // 群聊头像ID
+      string introduction = 5; // 群聊简介
+      uint64 headcount = 6; // 群人数
+      string createBy = 7; // 群聊创建者ID
+      uint64 readHistory = 10; // 是否允许阅读历史信息，0-不允许，1-允许
+      string limited_msg_type = 22; // 被限制的消息类型,如1,2,3,使用","分格
+      string keyword = 29; // 群聊设置的口令
+  }
+}
+```
+
+:::
