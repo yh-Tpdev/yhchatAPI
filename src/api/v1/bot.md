@@ -143,8 +143,9 @@ POST /v1/bot/bot-detail
         "msgTypeLimit": ""
       },
     // ...
-  ],
+    ],
   "msg": "success" // 返回消息
+  },
 }
 ```
 
@@ -505,6 +506,7 @@ POST /v1/bot/llm/llm-setting-list
       // ...
     ],
   "msg": "success" // 返回消息
+  },
 }
 ```
 
@@ -590,6 +592,7 @@ POST /v1/bot/create-bot
 |token|是|无|
 
 请求体：
+
 ```ProtoBuf
 name: 2 //机器人名称
 introduction: 3 //机器人简介

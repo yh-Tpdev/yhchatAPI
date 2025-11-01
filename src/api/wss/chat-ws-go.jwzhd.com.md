@@ -273,7 +273,7 @@ data {
       user_id: "123" // 接收者用户ID
       temp_code: 1 // 未知
       send_type: "candidate" // 分享类别区分文本
-      data: "{}" // 经过转意义的json格式发送数据
+      data: "{}" // 经过转义义的json格式发送数据
       send_deviceId: "123123123123" // 发送者设备唯一标识符
     }
 }
