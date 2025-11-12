@@ -50,7 +50,7 @@ POST /v1/bot/bot-info
       }
     }
   },
-  "msg": "success"
+  "msg": "success" // 返回消息
 }
 ```
 
