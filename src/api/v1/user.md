@@ -783,3 +783,36 @@ POST /v1/user/forget-password
   "msg": "success" // 返回消息
 }
 ```
+
+## 修改个人资料
+
+POST /v1/user/save-user-data
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|空|
+
+请求体：
+
+```JSONC
+{
+  "introduction": "111", // 个人简介
+  "gender": 3, // 性别，1-男，2-女，3-其他
+  "birthday": 1762876800, // 生日时间戳
+  "province": "北京市", // 所在地省份
+  "city": "北京城区", // 所在地城市
+  "district": "东城区", // 所在地城区
+  "locationCode": "110101" // 所在地邮政编码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
