@@ -663,8 +663,6 @@ POST /v1/group/edit-my-group-nickname
 |-----|----|----|
 |token|是|群内成员|
 
-
-
 ```jsonc
 {
   "groupId": "123", // 目标群聊ID
