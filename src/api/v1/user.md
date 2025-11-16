@@ -784,7 +784,7 @@ POST /v1/user/forget-password
 }
 ```
 
-## 修改个人资料
+## 修改自身个人资料
 
 POST /v1/user/save-user-data
 
@@ -800,7 +800,7 @@ POST /v1/user/save-user-data
 {
   "introduction": "111", // 个人简介
   "gender": 3, // 性别，1-男，2-女，3-其他
-  "birthday": 1762876800, // 生日时间戳
+  "birthday": 1231231230, // 生日时间戳
   "province": "北京市", // 所在地省份
   "city": "北京城区", // 所在地城市
   "district": "东城区", // 所在地城区
@@ -813,6 +813,40 @@ POST /v1/user/save-user-data
 ```JSONC
 {
   "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取自身个人资料
+
+POST /v1/user/get-user-data
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|空|
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "data": {
+      "id": 123, // 个人简介ID
+      "userId": "123", // 用户ID
+      "lastLoginTime": 1231231230, // 最后登录时间戳
+      "update_time": 1231231230, // 个人简介最后更新时间戳
+      "introduction": "测试个人简介", // 个人简介
+      "gender": 3, // 性别，1-男，2-女，3-其他
+      "birthday": 1231231230, // 生日时间戳
+      "province": "北京市", // 所在地省份
+     "city": "北京城区", // 所在地城市
+      "district": "东城区", // 所在地城区
+     "locationCode": "110101" // 所在地邮政编码
+    }
+  },
   "msg": "success" // 返回消息
 }
 ```
