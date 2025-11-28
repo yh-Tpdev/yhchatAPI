@@ -659,14 +659,13 @@ POST /v1/group/edit-my-group-nickname
 请求头:  
 
 |名称|必须|备注|
-
 |-----|----|----|
 |token|是|群内成员|
 
 ```jsonc
 {
   "groupId": "123", // 目标群聊ID
-  "botId": "测试群昵称" // 欲设置的群昵称
+  "nickname": "测试群昵称" // 欲设置的群昵称
 }
 ```
 
