@@ -55,6 +55,8 @@ data {
     text: "" // 标签文字
     color: "#FFFFFFFF" // 标签颜色
   }
+  my_group_nickname: "12345" // 我的群昵称
+  group_code: "test1234" // 群口令
 }
 history_bot {
   id: "123" // 机器人ID
@@ -108,6 +110,8 @@ message info {
         uint64 recommandation = 24; // 是否加入群推荐
         repeated string tag_old = 26; // 标签(旧版)
         repeated Tag tag = 27;
+        string my_group_nickname = 28; // 我的群昵称
+        string group_code = 29; // 群口令
 
         // 已使用标签信息,2没啥用不解析了
         message Tag {
