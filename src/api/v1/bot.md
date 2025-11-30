@@ -23,13 +23,13 @@ POST /v1/bot/banner
   "data": {
     "banners": [
       {
-        "id": 6, // banner的id
-        "title": "机器人开发指南", // 标题
-        "introduction": "依托开放的服务接口，用户可以打造属于自己的机器人，提升工作生活效率", // 介绍
+        "id": 123, // banner的id
+        "title": "测试标题", // 标题
+        "introduction": "测试介绍", // 介绍
         "targetId": "", // "查看详情"点击后的id
-        "targetUrl": "https://www.yhchat.com/document/1-3", // "查看详情"跳转的链接
-        "imageUrl": "https://chat-img.jwznb.com/ca2b3753a9e7dbb94881b5f9364f7ffc.tmp", // banner背景图
-        "sort": 40, // 排列顺序
+        "targetUrl": "https://...", // "查看详情"跳转的链接
+        "imageUrl": "https://...", // banner背景图
+        "sort": 123, // 排列顺序
         "delFlag": 0,
         "createTime": 0, // 创建时间
         "remark": "", // 备注
@@ -61,13 +61,13 @@ POST /v1/bot/new-list
   "data": {
     "bots": [
       {
-        "chatId": "35393533", // 机器人id
+        "chatId": "123", // 机器人id
         "chatType": "3", // 识别对象类别，1-用户，2-群聊，3-机器人
         "headcount": "25", // 机器人使用人数
-        "nickname": "红红火火恍恍惚惚", // 机器人名字
-        "introduction": "介绍介绍介绍介绍介绍介绍介绍", // 机器人介绍
+        "nickname": "测试机器人名称", // 机器人名字
+        "introduction": "测试机器人介绍", // 机器人介绍
         "instructions": "",
-        "avatarUrl": "https://chat-img.jwznb.com/1753199311790.647github-mark.png" // 机器人头像url
+        "avatarUrl": "https://..." // 机器人头像url
       }
      // ...
     ]
@@ -90,7 +90,7 @@ POST /v1/bot/bot-detail
 
 ```JSONC
 {
-  "id": "30473864" // 机器人id
+  "id": "123" // 机器人id
 }
 ```
 
@@ -102,16 +102,16 @@ POST /v1/bot/bot-detail
   "data": {
     "bot": {
       "id": 1, // 排序id（？
-      "botId": "30473864", // 机器人id
-      "nickname": "云湖AI助手",  //机器人名字
-      "nicknameId": 151394, // 名称id
-      "avatarId": 29016, // 头像id
-      "avatarUrl": "https://chat-img.jwznb.com/cb1a825a1f7e4c5f782dc79200961907.png", // 头像url
+      "botId": "123", // 机器人id
+      "nickname": "测试机器人每次",  //机器人名字
+      "nicknameId": 123, // 名称id
+      "avatarId": 123, // 头像id
+      "avatarUrl": "https://.。。", // 头像url
       "type": 0,  // 类型
-      "introduction": "官方的机器人，AI机器人。本机器人所有输出内容均由AI生成。", // 机器人介绍
-      "createBy": "7058262", // 机器人创建者id
-      "createTime": 1639670120, // 机器人创建时间戳
-      "headcount": 115177, // 机器人使用人数
+      "introduction": "测试机器人介绍", // 机器人介绍
+      "createBy": "123", // 机器人创建者id
+      "createTime": 1231231230, // 机器人创建时间戳
+      "headcount": 123, // 机器人使用人数
       "private": 0, // 是否私有（0为否，1为私人）
       "isStop": 0, // 是否停用（0为启用，1为停用）
       "settingJson": "",  // 设置json
@@ -123,14 +123,14 @@ POST /v1/bot/bot-detail
     "groups": [ 
       {
         "id": 0, // 排序 （不知道为什么很多字段没有值，而客户端加入这个群显示群聊信息正常）
-        "groupId": "161466900", // 群组id
-        "name": "每日科技", // 群聊名字
-        "introduction": "每天分享互联网科技信息", // 群聊介绍
+        "groupId": "123", // 群组id
+        "name": "测试群聊名称", // 群聊名字
+        "introduction": "测试群聊简介", // 群聊介绍
         "createBy": "", // 群聊创建者id
         "createTime": 0, // 群聊创建时间
         "avatarId": 0, // 群聊头像id
         "del_flag": 0,
-        "avatarUrl": "https://chat-img.jwznb.com/6eedb15cae0e7ddc59e8ae19a234c33c.png", // 群聊头像url
+        "avatarUrl": "https://...", // 群聊头像url
         "headcount": 0, // 群聊人数
         "readHistory": 0, // 是否启用新成员查看历史记录
         "alwaysAgree": 0, // 是否总是直接加入群聊
@@ -576,7 +576,7 @@ POST /v1/bot/reset-bot-token
   "code": 1, // 请求状态码，1为正常
   "data": {
     "token": "123" // 重置后的机器人token
-  }
+  },
   "msg": "success" // 返回消息
 }
 ```
