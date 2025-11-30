@@ -454,13 +454,13 @@ POST /v1/user/recommend-list
   "data": {
     "groupList": [
       {
-        "chatId": "787149149", // 群聊id
+        "chatId": "123", // 群聊id
         "banId": 0, // 顾名思义
-        "nickname": "小说交流群", // 群聊名字
-        "introduction": "小说交流群", // 群聊介绍
-        "avatarUrl": "https://chat-img.jwznb.com/e96780b45546654e0774d48727432b05.jpeg", // 群聊头像
-        "headcount": 71, // 群聊内人数
-        "createTime": 1751264890 // 创建时间戳
+        "nickname": "测试群聊名称", // 群聊名字
+        "introduction": "测试群聊简介", // 群聊介绍
+        "avatarUrl": "https://...", // 群聊头像
+        "headcount": 123, // 群聊内人数
+        "createTime": 1231231230 // 创建时间戳
       }
      // ...
     ]
@@ -487,13 +487,13 @@ POST /v1/user/recommend
   "data": {
     "botList": [
       {
-        "chatId": "30473864", // 机器人id
+        "chatId": "123", // 机器人id
         "chatType": "3", // 识别对象类别，1-用户，2-群聊，3-机器人
-        "headcount": "115190", // 使用人数
-        "nickname": "云湖AI助手", // 机器人名称
-        "introduction": "官方的机器人，AI机器人。本机器人所有输出内容均由AI生成。", // 机器人简介
+        "headcount": "123", // 使用人数
+        "nickname": "测试机器人名称", // 机器人名称
+        "introduction": "测试机器人简介", // 机器人简介
         "introductions": "",
-        "avatarUrl": "https://chat-img.jwznb.com/cb1a825a1f7e4c5f782dc79200961907.png", // 机器人头像url
+        "avatarUrl": "https://...", // 机器人头像url
         "isAdd": 1, // 是否添加（1为可添加，0为不可添加）
         "isApply": 0, // 是否应用
         "alwaysAgree": 0 // 是否总是同意
@@ -566,8 +566,8 @@ POST /v1/user/notification-status
       "isOpen": 1, // 是否打开系统消息通知（设置”系统消息通知“选项可控制这个数值，1-打开，0-关闭）
       "type": 2, // 类型
       "delFlag": 0, 
-      "createTime": 1743426921, // 创建时间戳
-      "updateTime": 1754705620 // 更新时间戳
+      "createTime": 1231231230, // 创建时间戳
+      "updateTime": 1231231230 // 更新时间戳
     }
   },
   "msg": "success" // 返回消息
@@ -842,10 +842,35 @@ POST /v1/user/get-user-data
       "gender": 3, // 性别，1-男，2-女，3-其他
       "birthday": 1231231230, // 生日时间戳
       "province": "北京市", // 所在地省份
-     "city": "北京城区", // 所在地城市
+      "city": "北京城区", // 所在地城市
       "district": "东城区", // 所在地城区
      "locationCode": "110101" // 所在地邮政编码
     }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取用户显示广告
+
+POST /v1/user/get-user-show-adv
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|空|
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "androidCodeId": "123", // Android代码ID
+    "bottomHeight": 123, // 底部高度
+    "iosCodeId": "123", // IOS代码ID
+    "isShow": 0 // 是否显示，0-不显示，1-显示
   },
   "msg": "success" // 返回消息
 }
