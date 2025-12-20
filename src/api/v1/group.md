@@ -55,6 +55,8 @@ data {
     text: "" // 标签文字
     color: "#FFFFFFFF" // 标签颜色
   }
+  my_group_nickname: "12345" // 我的群昵称
+  group_code: "test1234" // 群口令
 }
 history_bot {
   id: "123" // 机器人ID
@@ -108,6 +110,8 @@ message info {
         uint64 recommandation = 24; // 是否加入群推荐
         repeated string tag_old = 26; // 标签(旧版)
         repeated Tag tag = 27;
+        string my_group_nickname = 28; // 我的群昵称
+        string group_code = 29; // 群口令
 
         // 已使用标签信息,2没啥用不解析了
         message Tag {
@@ -659,14 +663,13 @@ POST /v1/group/edit-my-group-nickname
 请求头:  
 
 |名称|必须|备注|
-
 |-----|----|----|
 |token|是|群内成员|
 
 ```jsonc
 {
   "groupId": "123", // 目标群聊ID
-  "botId": "测试群昵称" // 欲设置的群昵称
+  "nickname": "测试群昵称" // 欲设置的群昵称
 }
 ```
 
