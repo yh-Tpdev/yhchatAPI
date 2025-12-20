@@ -172,6 +172,22 @@ message Medal_info {
     uint64 sort = 5;  // 勋章顺序
 }
 
+message Remark_info {
+    string remark_name = 1; // 备注名
+    string phone_number = 2; // 手机号
+    string extra_remark = 3; // 其他备注（格式为JSON，示例：'[{"key":"他是","value":"我的朋友"},{"key":"职业","value":"打工人"}]'
+}
+
+message Profile_info {
+    string last_active_time = 1; // 该用户上次活跃时间
+    string introduction = 2; // 简介
+    int32 gender = 3; // 性别（1-男，2-女，3-其他）
+    uint64 birthday_timestamp = 4; // 生日时间戳
+    string city = 5; // 城市
+    string district = 6; // 地区
+    string address = 7; // 详细地址
+}
+
 // 获取用户信息
 message get_user {
     Status status = 1; // 状态码
@@ -189,6 +205,8 @@ message get_user {
         uint64 continuous_online_day = 12; // 连续在线天数
         int32 is_vip = 13; // 是否为vip
         uint64 vip_expired_time = 14; // VIP过期时间(时间戳)
+        Remark_info remark_info = 18; // 备注信息
+        Profile_info profile_info = 19; // 用户资料信息
     }
 }
 ```
