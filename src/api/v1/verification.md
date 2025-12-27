@@ -40,7 +40,7 @@ POST /v1/verification/get-email-verification-code
   "email": "123@123.123", // 邮箱
   "typ": "forget_password", // 验证类别，forget_password-更改密码验证，其他所有验证都为空
   "code": "123123", // 人机验证校验码
-  "id": "123", // 人机验证ID
+  "id": "123" // 人机验证ID
 }
 ```
 
