@@ -23,7 +23,8 @@ POST /v1/community/posts/create
   "groupId": "123", // 文本引用群聊ID
   "title": "测试文章标题", // 文章标题
   "content": "测试文章内容", // 文章内容
-  "contentType": 1 // 文章内容类别，1-文本，2-markdown
+  "contentType": 1, // 文章内容类别，1-文本，2-markdown
+  "draftId": 123 // 草稿ID，若此值不为0则云湖会删除这里设定的草稿ID所对应的草稿
 }
 ```
 
@@ -239,11 +240,11 @@ POST /v1/community/posts/post-list
   "data": {
     "posts": [
       {
-        "id": 11451, // 文章id
+        "id": 123, // 文章id
         "baId": 41, // 分区id
         "senderId": "114514", // 文章作者id
-        "senderNicknameId": 171342, // 发送者昵称 Id
-        "senderAvatarId": 42481, // 发送者头像 Id
+        "senderNicknameId": 123, // 发送者昵称 Id
+        "senderAvatarId": 123, // 发送者头像 Id
         "groupId": "", // 绑定该分区且从这个群聊发送文章的群聊id
         "title": "我是标题", // 标题
         "contentType": 2, // 文章类型(2是Markdown，1是普通文本)
@@ -258,7 +259,7 @@ POST /v1/community/posts/post-list
         "collectNum": 0, // 收藏数量
         "amountNum": 0, // 投币数量
         "senderNickname": "文章作者id",
-        "senderAvatar": "https://chat-img.jwznb.com/225f9d692979928a7734d9b8cc0a4d74.gif", // 作者头像url
+        "senderAvatar": "https://.。。", // 作者头像url
         "createTimeText": "2025-08-05 16:30:13", // 创建文章时间
         "group": { // 以下是绑定该分区且从这个群聊发送文章的群聊id
           "id": 0, // 
@@ -422,13 +423,13 @@ POST /v1/community/reward-record
         "reason": "打赏文章扣金币", // 扣大赏者金币原因
         "remark": "", // 备注
         "post": {
-          "id": 30506, // 文章id
+          "id": 123, // 文章id
           "baId": 41,  // 分区id
           "senderId": "123", // 文章作者id
-          "senderNicknameId": 128769, // 发送者名字id
+          "senderNicknameId": 123, // 发送者名字id
           "senderAvatarId": 84, // 发送者头像id
           "groupId": "", // 文章关联群组id
-          "title": "QQ云湖消息互通机器人", // 文章标题
+          "title": "测试文章标题", // 文章标题
           "contentType": 1, // 文章类型（1-Markdown，0-普通文章）
           "delTime": 0, // 删除时间戳
           "createTime": 1751721707, // 创建时间时间戳
@@ -438,8 +439,8 @@ POST /v1/community/reward-record
           "commentNum": 2, // 评论数量
           "collectNum": 6, // 收藏数量
           "amountNum": 0.01, // 文章投币数量
-          "senderNickname": "那狗吧", // 文章作者昵称
-          "senderAvatar": "https://chat-img.jwznb.com/defalut-avatars/Nellie%20Bly.png", // 文章作者头像url
+          "senderNickname": "测试打赏者名称", // 文章作者昵称
+          "senderAvatar": "https://...", // 文章作者头像url
           "createTimeText": "2025-07-05 21:21:47", // 创建文章时间
           "auditStatus": 0
         },
@@ -447,7 +448,7 @@ POST /v1/community/reward-record
           "id": 106634, // 打赏id
           "user_id": "123", // 打赏者id
           "nickname": "测试打赏者昵称", // 打赏者昵称
-          "avatar_url": "https://chat-img.jwznb.com/1523c36f6d5b0a73dfb0fe4d3494c1f2.jpg" // 打赏者头像url
+          "avatar_url": "https://..." // 打赏者头像url
         },
         "comment": {
           "id": 0, 
@@ -491,8 +492,8 @@ POST /v1/community/comment/comment
 
 ```JSONC
 {
-  "postId": 31108, // 文章id
-  "commentId": 6051, // 评论id（若直接评论文章那id=0）
+  "postId": 123, // 文章id
+  "commentId": 123, // 评论id（若直接评论文章那id=0）
   "content": "🤣" // 评论内容
 }
 ```
@@ -534,12 +535,12 @@ POST /v1/community/comment/comment-list
   "data": {
     "comments": [
       {
-        "id": 6173, // 评论id
-        "postId": 31153, // 文章id
+        "id": 123, // 评论id
+        "postId": 123, // 文章id
         "parentId": 0, // 父id
         "senderId": "114514", //发送者id
-        "sender_nicknameId": 178312, // 发送者名称id
-        "sender_avatarUd": 87, // 发送者头像id
+        "sender_nicknameId": 123, // 发送者名称id
+        "sender_avatarUd": 123, // 发送者头像id
         "content": "？", // 评论内容
         "delTime": 0, // 删除时间戳
         "createTime": 1754746982, // 发送时间戳
@@ -548,8 +549,8 @@ POST /v1/community/comment/comment-list
         "amountNum": 0, // 该评论的投币数
         "auditStatus": 0, // 审核状态
         "replies": [], // 评论内容
-        "senderNickname": "22928kkkk", // 发送者昵称
-        "senderAvatar": "https://chat-img.jwznb.com/defalut-avatars/Pearl%20Kendrick.png", // 发送者头像url
+        "senderNickname": "测试评论发送者名称", // 发送者昵称
+        "senderAvatar": "https://...", // 发送者头像url
         "createTimeText": "2025-08-09 21:43:02", // 评论时间
         "isLiked": "0", // 是否点赞(1-是，0-否)
         "isReward": 0, // 是否投币(1-是，0-否)
@@ -766,11 +767,11 @@ POST /v1/community/posts/post-detail
     },
     "isAdmin": 0, // 文章作者是否为管理员
     "post": {
-      "id": 31622, // 文章id
+      "id": 123, // 文章id
       "baId": 41, // 该文章所处的分区id
       "senderId": "7384288", // 文章作者id
-      "senderNicknameId": 185792, // 文章作者名称id
-      "senderAvatarId": 46626, // 文章作者头像id
+      "senderNicknameId": 123, // 文章作者名称id
+      "senderAvatarId": 123, // 文章作者头像id
       "groupId": "", // 该文章所处的群聊id
       "title": "文章标题", // 文章标题
       "contentType": 2, // 文章类型，1-普通文字，2-Markdown
@@ -783,9 +784,11 @@ POST /v1/community/posts/post-detail
       "likeNum": 0, // 文章点赞数量
       "commentNum": 0, // 文章评论数量
       "collectNum": 0, // 文章收藏数量
+      "isDraft": 0, // 是否为草稿，0-不是，1-是
+      "isSticky": 0, // 置顶时间戳，若不是置顶则为0
       "amountNum": 0, // 文章投币数量
       "senderNickname": "作者名称", // 文章作者名称
-      "senderAvatar": "https://chat-img.jwznb.com/14ee9ecc8856e34e9f3fdd115e5139b6.jpg", // 文章作者头像url
+      "senderAvatar": "https://c...", // 文章作者头像url
       "createTimeText": "2025-09-13 17:29:14", // 文章发送时间
       "group": { // 该文章下绑定的群聊信息
         "id": 0, // 会话类型id
@@ -856,11 +859,11 @@ POST /v1/community/posts/my-post-list
   "data": {
     "posts": [ // 帖子相关
       {
-        "id": 31635, // 文章id
+        "id": 123, // 文章id
         "baId": 49, // 文章所属分区id
         "senderId": "1659829", // 文章作者
-        "senderNicknameId": 177154, // 作者名称id
-        "senderAvatarId": 46580, // 作者头像id
+        "senderNicknameId": 123, // 作者名称id
+        "senderAvatarId": 123, // 作者头像id
         "groupId": "", // 文章所属群聊id
         "title": "test", // 文章标题
         "contentType": 1, // 文章类型，1-普通文字，2-Markdown
@@ -873,9 +876,11 @@ POST /v1/community/posts/my-post-list
         "likeNum": 0, // 文章赞数
         "commentNum": 0, // 文章评论数量
         "collectNum": 0, // 文章收藏数量
+        "isDraft": 0, // 是否为草稿，0-不是，1-是
+        "isSticky": 0, // 置顶时间戳，若不是置顶则为0
         "amountNum": 0, // 文章投币数量
         "senderNickname": "作者", // 文章作者名称
-        "senderAvatar": "https://chat-img.jwznb.com/aa117e6f7a237926ea75426fd707f915.jpg", // 文章作者头像url
+        "senderAvatar": "https://...", // 文章作者头像url
         "createTimeText": "2025-09-14 10:47:58", // 文章发布时间
         "group": { // 文章绑定群聊相关
           "id": 0, // 文章所属群聊的类型id
@@ -1129,6 +1134,147 @@ POST /v1/community/ba/delete
 ```JSONC
 {
   "baId": 0 // 分区ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 创建文章草稿
+
+POST /v1/community/posts/create-draft
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "baId": 0, // 草稿所在分区ID
+  "title": "测试完整草稿标题", // 草稿标题
+  "content": "测试文章草稿内容", // 草稿内容
+  "contentType": 1, // 草稿类别，1-文本，2-Markdown
+  "draftId": 0 // 草稿ID，若此值不为0云湖将会删除这里设定的草稿ID所对应的草稿，以此实现草稿编辑
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "id": 123 // 草稿ID
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取文章草稿信息
+
+POST /v1/community/posts/get-draft
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "baId": 0, // 草稿所处文章分区ID，一般为0
+  "draftId": 123 // 草稿ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "posts": { // 帖子相关
+      "id": 123, // 文章id
+      "baId": 41, // 文章所属分区id
+      "senderId": "123", // 文章作者
+      "senderNicknameId": 123, // 作者名称id
+      "senderAvatarId": 123, // 作者头像id
+      "groupId": "", // 文章所属群聊id
+      "title": "test", // 文章标题
+      "contentType": 1, // 文章类型，1-普通文字，2-Markdown
+      "content": "内容", // 文章内容
+      "delTime": 0, // 删除时间
+      "createTime": 1757818078, // 文章发布时间戳
+      "updateTime": 0, // 文章更新时间戳
+      "editTime": 0, // 文章编辑时间戳
+      "lastActive": 1757818078, // 文章上次活跃时间
+      "likeNum": 0, // 文章赞数
+      "commentNum": 0, // 文章评论数量
+      "collectNum": 0, // 文章收藏数量
+      "isDraft": 0, // 是否为草稿，0-不是，1-是
+      "isSticky": 0, // 置顶时间戳，若不是置顶则为0
+      "amountNum": 0, // 文章投币数量
+      "senderNickname": "作者", // 文章作者名称
+      "senderAvatar": "https://...", // 文章作者头像url
+      "createTimeText": "2025-09-14 10:47:58", // 文章发布时间
+      "group": { // 文章绑定群聊相关
+      "id": 0, // 文章所属群聊的类型id
+      "groupId": "", // 文章所属群聊id
+      "name": "", // 群聊名称
+      "introduction": "", // 群聊简介
+      "createBy": "", // 群聊群主id
+      "createTime": 0, // 群聊创建时间戳
+      "avatarId": 0, // 群聊头像id
+      "del_flag": 0,
+      "avatarUrl": "", // 群聊头像url
+      "headcount": 0, // 群聊人数
+      "readHistory": 0, // 是否开启聊天历史记录，0-没有，1-开了
+      "alwaysAgree": 0, // 新成员是否直接进入群聊，0-没有，1-开了
+      "categoryId": 0, // 群聊类型id
+      "category": "", // 群聊类型
+      "private": 0, // 群聊是否私有，0-没有，1-开了
+      "banId": 0, // 被banid
+      "gag": 0, // 被禁言者id
+      "gagBy": "", // 禁言者id
+      "msgTypeLimit": "" // 消息类型限制
+      },
+    "isLiked": "0",  // (你)是否点赞该文章，0-没有，1-点了
+    "isCollected": 0, // (你)是否收藏该文章，0-没有，1-点了
+    "isReward": 0, // (你)是否投币该文章，0-没有，1-点了
+    "isVip": 0 // 暂时不清楚
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 删除文章草稿
+
+POST /v1/community/posts/cancel-draft
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|必须为草稿创建者|
+
+请求体：
+
+```JSONC
+{
+  "draftId": 123 // 草稿ID
 }
 ```
 
