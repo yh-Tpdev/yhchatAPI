@@ -76,7 +76,7 @@ POST /v1/bot/new-list
 }
 ```
 
-## 使用该机器人的群组(该注释含有较多不知道的字段，请谨慎使用)
+## 使用该机器人的群组
 
 POST /v1/bot/bot-detail
 
@@ -114,7 +114,7 @@ POST /v1/bot/bot-detail
       "headcount": 123, // 机器人使用人数
       "private": 0, // 是否私有（0为否，1为私人）
       "isStop": 0, // 是否停用（0为启用，1为停用）
-      "settingJson": "",  // 设置json
+      "settingJson": "",  // 机器人设置json（需转义）
       "del_flag": 0, 
       "alwaysAgree": 1, // 是否总是同意添加群聊
       "banId": 0, // 顾名思义
@@ -657,5 +657,199 @@ POST /v1/bot/edit-subscribed-link
 {
   "code": 1, // 请求状态码，1为正常
   "msg": "success" // 返回消息
+}
+```
+
+## 获取群聊内机器人设置
+
+POST /v1/bot/get-user-settings-json 
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|群聊管理员token|
+
+请求体：
+
+```JSONC
+{
+  "botId": "2468910", // 机器人id
+  "chatId": "1234567" // 会话id(一般是群聊)
+}
+```
+
+响应体： （具体settingsJson更多解释请看[这里](https://yh-api.yyyyt.top/api/v1/instruction.html#%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8C%87%E4%BB%A4)）
+
+```JSONC
+{
+  "code": 1,
+  "data": {
+    "settingsJson": [
+      {
+        "id": "pqkyru", // 该项的id（表单id）
+        "key": 0, // 第几个项，这里是第一个
+        "props": [
+          {
+            "name": "标签", // 该项名称
+            "type": "label", // 类型，一个用于设置“标签”的配置项，有radio-单选框，input-输入框，switch-开关，chexkbox-多选框，textarea-多行输入框，select-选择器
+            "value": "" // 这个类型预定的值，默认空
+          },
+          {
+            "name": "选项",
+            "placeholder": "用#分割，如：北京#上海#天津", // 带有输入框的项/类型，会有选项，然后里面有占位符，这个就是占位符文本，其实这个叫选项
+            "type": "options", // 带placeholder的类型有，Radio 单选框，Checkbox 多选框，Select 选择器
+            "value": ""
+          }
+        ],
+        "propsValue": {
+          "label": "标签",
+          "options": "用#分割，如：北京#上海#天津"
+        },
+        "title": "Radio 单选框", // 该项标题
+        "type": "radio"
+      },
+      {
+        "id": "xmmtbi",
+        "key": 1,
+        "props": [
+          {
+            "name": "标签",
+            "type": "label",
+            "value": ""
+          },
+          {
+            "name": "默认内容",
+            "type": "defaultValue",
+            "value": ""
+          },
+          {
+            "name": "占位文本",
+            "type": "placeholder",
+            "value": ""
+          }
+        ],
+        "propsValue": {
+          "defaultValue": "默认内容",
+          "label": "标签",
+          "placeholder": "占位文本"
+        },
+        "title": "Input 输入框",
+        "type": "input"
+      },
+      {
+        "id": "vnafdx",
+        "key": 2,
+        "props": [
+          {
+            "name": "标签",
+            "type": "label",
+            "value": ""
+          },
+          {
+            "name": "默认状态",
+            "placeholder": "1：默认打开，0：默认关闭",
+            "type": "defaultValue",
+            "value": ""
+          }
+        ],
+        "propsValue": {
+          "defaultValue": "1：默认打开，0：默认关闭",
+          "label": "标签"
+        },
+        "title": "Switch 开关",
+        "type": "switch"
+      },
+      {
+        "id": "sdudlm",
+        "key": 3,
+        "props": [
+          {
+            "name": "标签",
+            "type": "label",
+            "value": ""
+          },
+          {
+            "name": "选项",
+            "placeholder": "用#分割，如：北京#上海#天津",
+            "type": "options",
+            "value": ""
+          }
+        ],
+        "propsValue": {
+          "label": "标签",
+          "options": "用#分割，如：北京#上海#天津"
+        },
+        "title": "Checkbox 多选框",
+        "type": "checkbox"
+      },
+      {
+        "id": "qievxs",
+        "key": 4,
+        "props": [
+          {
+            "name": "标签",
+            "type": "label",
+            "value": ""
+          },
+          {
+            "name": "占位文本",
+            "type": "placeholder",
+            "value": ""
+          }
+        ],
+        "propsValue": {
+          "label": "标签",
+          "placeholder": "占位文本"
+        },
+        "title": "textarea 多行输入框",
+        "type": "textarea"
+      },
+      {
+        "id": "pzdslt",
+        "key": 5,
+        "props": [
+          {
+            "name": "标签",
+            "type": "label",
+            "value": ""
+          },
+          {
+            "name": "选项",
+            "placeholder": "用#分割，如：北京#上海#天津",
+            "type": "options",
+            "value": ""
+          }
+        ],
+        "propsValue": {
+          "label": "标签",
+          "options": "用#分割，如：北京#上海#天津"
+        },
+        "title": "Select 选择器",
+        "type": "select"
+      }
+    ]
+  },
+  "msg": "success"
+}
+```
+
+## 群聊内机器人设置保存
+
+POST /v1/bot/send-setting-json
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|群聊管理员token|
+
+请求体：  （具体settingJson更多解释请看[这里](https://yh-api.yyyyt.top/api/v1/instruction.html#%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8C%87%E4%BB%A4)）
+
+```JSONC
+{
+  "id": "12345", // 机器人id
+  "groupId": "678910", // 群聊id
+  "settingJson": "" // 机器人设置json数组（需转义）
 }
 ```
