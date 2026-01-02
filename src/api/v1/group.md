@@ -640,7 +640,7 @@ POST /v1/group/remove-bot
 
 请求体:  
 
-```jsonc
+```JSONC
 {
   "groupId": "123", // 群聊id
   "botId": "123" // 机器人id
@@ -666,7 +666,7 @@ POST /v1/group/edit-my-group-nickname
 |-----|----|----|
 |token|是|群内成员|
 
-```jsonc
+```JSONC
 {
   "groupId": "123", // 目标群聊ID
   "nickname": "测试群昵称" // 欲设置的群昵称

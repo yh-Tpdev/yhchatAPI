@@ -77,7 +77,7 @@ POST /v1/instruction/web-list
 
 ::: details 自定义输入指令部分解释
 
-```jsonc
+```JSONC
 [{
   "key": 0,
   "type": "radio",
