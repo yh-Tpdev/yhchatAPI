@@ -16,7 +16,7 @@ POST /v1/verification/get-verification-code
   "mobile": "12312312300", // 手机号
   "code": "123123", // 人机验证校验码
   "id": "123", // 人机验证ID
-  "platform": "windows" // 登陆平台名称,一般为windows,web等可自定义
+  "platform": "windows" // 登录平台名称,一般为windows,web等可自定义
 }
 ```
 
