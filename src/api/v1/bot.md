@@ -662,7 +662,7 @@ POST /v1/bot/edit-subscribed-link
 
 ## 获取群聊内机器人设置
 
-POST /v1/bot/get-user-settings-json 
+POST /v1/bot/get-user-settings-json
 
 请求头:  
 
