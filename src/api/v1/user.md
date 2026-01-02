@@ -32,8 +32,8 @@ POST /v1/user/verification-login
 {  
   "mobile": "12312312300", // 登录手机号
   "captcha": "123123", // 手机验证码
-  "deviceId": "awa", // 登陆设备唯一标识符，可自定义
-  "platform": "windows" // 登陆平台名称,一般为windows,web等可自定义
+  "deviceId": "awa", // 登录设备唯一标识符，可自定义
+  "platform": "windows" // 登录平台名称,一般为windows,web等可自定义
 }
 ```
 
@@ -779,7 +779,7 @@ POST /v1/user/change-email-check
 }
 ```
 
-## 更改登陆密码
+## 更改登录密码
 
 POST /v1/user/forget-password
 
