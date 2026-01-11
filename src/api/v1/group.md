@@ -787,3 +787,31 @@ message info_add_friend {
 ```
 
 :::
+
+## 设置群聊消息自动销毁时间
+
+POST /v1/group/edit-auto-delete-message
+
+请求头:  
+
+|名称|必须|备注|
+|---|---|---|
+|token|是|必须是群主token|
+
+请求体：
+
+```JSONC
+{
+  "groupId": "123", // 群聊id
+  "autoDeleteMessage": 0 // 消息自动销毁时间（0-永久不删，90-2个月后删除，365-1年后删除，730-2年后删除）
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
