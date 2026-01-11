@@ -57,6 +57,7 @@ data {
   }
   my_group_nickname: "12345" // 我的群昵称
   group_code: "test1234" // 群口令
+  auto_delete_message: 730 // 消息自动销毁时间（0-永久不删，90-2个月后删除，365-1年后删除，730-2年后删除）
 }
 history_bot {
   id: "123" // 机器人ID
@@ -112,6 +113,7 @@ message info {
         repeated Tag tag = 27;
         string my_group_nickname = 28; // 我的群昵称
         string group_code = 29; // 群口令
+        uint64 auto_delete_message = 32; // 消息自动销毁时间
 
         // 已使用标签信息,2没啥用不解析了
         message Tag {
