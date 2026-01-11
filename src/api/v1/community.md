@@ -1286,3 +1286,162 @@ POST /v1/community/posts/cancel-draft
   "msg": "success" // 返回消息
 }
 ```
+
+## 关注分区
+
+POST /v1/community/ba/user-follow-ba
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "baId": 45, // 分区id
+  "followSource": 2
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 取关分区
+
+POST /v1/community/ba/user-unfollow-ba
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "baId": 45, // 分区id
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 置顶/取消置顶文章
+
+POST /v1/community/posts/edit-sticky
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|必须是分区管理者|
+
+请求体：
+
+```JSONC
+{
+  "postId": 45008 // 文章id（如果已经置顶了，则会取消置顶）
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取分区关注者列表
+
+POST /v1/community/ba/follower-list
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|必须是分区管理者|
+
+请求体：
+
+```JSONC
+{
+  "id": 115, // 分区id
+  "size": 20, // 每页显示的数量
+  "page": 1, // 第1页
+  "memberName": "" // 搜索关注者的关键词
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "followers": [
+      {
+        "id": 11930, //关注id（应该是）
+        "baId": 115, // 分区id
+        "userId": "1234567", // 关注者用户id
+        "delTime": 0,
+        "followSource": 2,
+        "createTime": 1763132265, // 关注时间戳
+        "userLevel": 0, // 关注者等级（0-普通，2-分区管理员）
+        "nickname": "是个人", // 关注者名称
+        "avatarUrl": "https://chat-img.jwznb.com/6900488d625d48ac45ba34eff5b1246c.jpg", // 关注者头像url
+        "vipUserid": "1234567", // 关注者vip用户id
+        "vipEndTime": 1765728069 // vip结束时间戳
+      }
+    ],
+    "total": 1 // 总关注者数量
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 设置分区管理员
+
+POST /v1/community/ba/manage-setting
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|必须是分区创建者|
+
+请求体：
+
+```JSONC
+{
+  "baId": 115, // 分区id
+  "userId": "1234567", // 用户id
+  "userLevel": 2 // 关注者(用户)等级（0-普通，2-分区管理员）
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
