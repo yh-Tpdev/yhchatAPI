@@ -7,7 +7,7 @@ title: user
 
 ## 获取人机验证图片
 
-POST /v1/user/captcha  
+POST /v1/user/captcha
 
 响应体:  
 
@@ -531,23 +531,59 @@ POST /v1/user/module-ignore-info
 
 |名称|必须|备注|
 |-----|-----|-----|
-|token|是|空|
+|token|是|需要vip|
 
-响应体：
+请求体：
 
 ```JSONC
 {
- "deviceId": "设备id"
+ "deviceId": "1234"
 }
 ```
 
-(因为没有vip，这里为示例，请实际情况为准)
 响应体：
 
 ```JSONC
 {
-  "code": -1, // 请求状态码，1为正常
-  "msg": "此功能仅限VIP用户使用"
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "ignore": {
+      "id": 0, // 可能是模块设置id
+      "userId": "1234567", // 用户id
+      "updateTime": 123455660, // 更新时间戳
+      "deviceId": "1234", // 设备id
+      "ignore": ",30,20,10" // 模块id，10-隐藏社区页面，20-隐藏发现页面，30-精简我的界面
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 设置自定义模块
+
+POST /v1/user/module-ignore
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|需要vip|
+
+请求体：
+
+```JSONC
+{
+ "deviceId": "1234"
+ "ignore": ",30,20,10" // 模块id，10-隐藏社区页面，20-隐藏发现页面，30-精简我的界面
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
 }
 ```
 
@@ -632,7 +668,7 @@ POST /v1/user/gold-coin-increase-decrease-record
 |-----|-----|-----|
 |token|是|无|
 
-响应体：
+请求体：
 
 ```JSONC
 {
@@ -677,7 +713,7 @@ POST /v1/user/bing-phone
 |-----|-----|-----|
 |token|是|无|
 
-响应体：
+请求体：
 
 ```JSONC
 {
@@ -705,7 +741,7 @@ POST /v1/user/bing-email
 |-----|-----|-----|
 |token|是|无|
 
-响应体：
+请求体：
 
 ```JSONC
 {
@@ -733,7 +769,7 @@ POST /v1/user/change-phone-check
 |-----|-----|-----|
 |token|是|无|
 
-响应体：
+请求体：
 
 ```JSONC
 {
@@ -761,7 +797,7 @@ POST /v1/user/change-email-check
 |-----|-----|-----|
 |token|是|无|
 
-响应体：
+请求体：
 
 ```JSONC
 {
@@ -783,7 +819,7 @@ POST /v1/user/change-email-check
 
 POST /v1/user/forget-password
 
-响应体：
+请求体：
 
 ```JSONC
 {
