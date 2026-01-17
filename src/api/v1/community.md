@@ -1445,3 +1445,39 @@ POST /v1/community/ba/manage-setting
   "msg": "success" // 返回消息
 }
 ```
+
+## 获取用户创建的分区
+
+POST /v1/community/ba/list-by-create
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "userId": "1234567" // 用户id
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "ba": [
+      {
+        "id": 50, // 分区id
+        "name": "123", // 分区名称
+        "avatar": "https://..." // 分区头像url
+      }
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
