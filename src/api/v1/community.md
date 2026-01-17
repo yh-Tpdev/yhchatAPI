@@ -880,6 +880,7 @@ POST /v1/community/posts/my-post-list
         "isSticky": 0, // 置顶时间戳，若不是置顶则为0
         "amountNum": 0, // 文章投币数量
         "senderNickname": "作者", // 文章作者名称
+        "auditStatus": 0, // 审核状态，0-通过，1-不通过
         "senderAvatar": "https://...", // 文章作者头像url
         "createTimeText": "2025-09-14 10:47:58", // 文章发布时间
         "group": { // 文章绑定群聊相关
