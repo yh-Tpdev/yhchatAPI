@@ -994,3 +994,31 @@ POST /v1/group/edit-auto-delete-message
   "msg": "success" // 返回状态消息
 }
 ```
+
+## 设置禁止群成员上传到群云盘
+
+POST /v1/group/edit-stop-member-upload-group-file
+
+请求头:  
+
+|名称|必须|备注|
+|---|---|---|
+|token|是|必须是群主token|
+
+请求体：
+
+```JSONC
+{
+ "groupId": "123456789", // 群聊id
+ "stopMemberUploadGroupFile":1 // 是否开启（0-关闭，1-开启）
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
