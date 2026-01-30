@@ -1482,3 +1482,94 @@ POST /v1/community/ba/list-by-create
   "msg": "success" // 返回消息
 }
 ```
+
+## 获取推荐文章
+
+POST /v1/community/posts/post-list-recommend
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+ "size":1, // 每页的文章数量
+ "page":2 // 页数
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "posts": [
+      {
+        "id": 29950, // 文章id
+        "baId": 41, // 文章所属分区id
+        "senderId": "1234567", // 文章作者id
+        "senderNicknameId": 127504, // 作者昵称id
+        "senderAvatarId": 32537, // 作者头像id
+        "groupId": "", // 文章所属群聊id
+        "title": "测试", // 文章标题
+        "contentType": 2, // 文章类型，1-普通文字，2-Markdown
+        "content": "如果缺少您所在的城市，欢迎反馈添加。", // 文章部分内容
+        "delTime": 0, // 删除时间戳
+        "createTime": 1748067660, // 创建时间戳
+        "updateTime": 0, // 更新时间戳
+        "editTime": 1767086078, // 编辑时间戳
+        "lastActive": 1767086078, // 上次活跃时间戳
+        "likeNum": 14, // 文章点赞数量
+        "commentNum": 522, // 文章评论数量
+        "collectNum": 1, // 文章收藏数量
+        "isDraft": 0, // 是否为草稿，0-不是，1-是
+        "isSticky": 0, // 置顶时间戳，0-不是，1-是
+        "amountNum": 0, // 文章投币数量
+        "auditStatus": 0, // 审核状态
+        "delBy": "", 
+        "senderNickname": "昵称", // 作者昵称
+        "senderAvatar": "https://chat-img.jwznb.com/xxx.jpg", // 作者头像url
+        "createTimeText": "",
+        "group": {
+          "id": 0,
+          "groupId": "",
+          "name": "",
+          "introduction": "",
+          "createBy": "",
+          "createTime": 0,
+          "avatarId": 0,
+          "del_flag": 0,
+          "avatarUrl": "",
+          "headcount": 0,
+          "readHistory": 0,
+          "alwaysAgree": 0,
+          "categoryId": 0,
+          "category": "",
+          "private": 0,
+          "banId": 0,
+          "gag": 0,
+          "gagBy": "",
+          "msgTypeLimit": "",
+          "keyword": "",
+          "hideMember": 0,
+          "allowRecommend": 0,
+          "blockFriends": 0,
+          "autoDeleteMessage": 0
+        },
+        "isLiked": "1", // 是否点赞，0-不是，1-是
+        "isCollected": 0, // 是否收藏，0-不是，1-是
+        "isReward": 0, // 是否投币，0-不是，1-是
+        "isVip": 1, // 作者是否为vip
+        "score": 877.005014928 // 文章分数（猜测）
+      }
+    ],
+    "total": 3933 // 总文章数量
+  },
+  "msg": "success" // 返回消息
+}
+```
