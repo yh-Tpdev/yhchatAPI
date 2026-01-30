@@ -57,6 +57,7 @@ data {
   }
   my_group_nickname: "12345" // 我的群昵称
   group_code: "test1234" // 群口令
+  stop_member_upload_group_file: 0 // 是否停止群成员上传文件到群云盘，0-不禁止，1-禁止
 }
 history_bot {
   id: "123" // 机器人ID
@@ -68,7 +69,7 @@ history_bot {
   create_by: "123" // 创建者ID
   create_time: 1231231230 // 创建时间戳
   user_number: 123 // 使用人数
-  private: 1 // 1表示私有机器人.
+  private: 1 // 1表示私有机器人
 }
 ```
 
@@ -112,7 +113,7 @@ message info {
         repeated Tag tag = 27;
         string my_group_nickname = 28; // 我的群昵称
         string group_code = 29; // 群口令
-
+        uint64 stop_member_upload_group_file = 33; // 是否停止群成员上传文件到群云盘，0-不禁止，1-禁止
         // 已使用标签信息,2没啥用不解析了
         message Tag {
             uint64 id = 1; // 标签ID(貌似)
@@ -787,3 +788,59 @@ message info_add_friend {
 ```
 
 :::
+
+## 设置是否允许群成员上传群云盘
+
+POST /v1/group/edit-stop-member-upload-group-file
+
+请求头:  
+
+|名称|必须|备注|
+|---|---|---|
+|token|是|必须为目标群群主|
+
+请求体:
+
+```JSONC
+{
+  "groupId":"123", // 目标群ID
+  "stopMemberUploadGroupFile":0 // 是否禁止群成员上传群云盘，0-不禁止，1-禁止
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 设置信息自动删除时间
+
+POST /v1/group/edit-auto-delete-message
+
+请求头:  
+
+|名称|必须|备注|
+|---|---|---|
+|token|是|必须为目标群群主|
+
+请求体:
+
+```JSONC
+{
+  "groupId": "123", // 目标群ID
+  "autoDeleteMessage": // 信息自动删除天数，90-六个月，365-一年，730-两年，0-永久不删除
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
