@@ -57,6 +57,7 @@ data {
   }
   my_group_nickname: "12345" // 我的群昵称
   group_code: "test1234" // 群口令
+  auto_delete_message: 730 // 消息自动销毁时间（0-永久不删，90-2个月后删除，365-1年后删除，730-2年后删除）
   stop_member_upload_group_file: 0 // 是否停止群成员上传文件到群云盘，0-不禁止，1-禁止
 }
 history_bot {
@@ -113,7 +114,9 @@ message info {
         repeated Tag tag = 27;
         string my_group_nickname = 28; // 我的群昵称
         string group_code = 29; // 群口令
+        uint64 auto_delete_message = 32; // 消息自动销毁时间
         uint64 stop_member_upload_group_file = 33; // 是否停止群成员上传文件到群云盘，0-不禁止，1-禁止
+        
         // 已使用标签信息,2没啥用不解析了
         message Tag {
             uint64 id = 1; // 标签ID(貌似)
@@ -825,14 +828,14 @@ POST /v1/group/edit-auto-delete-message
 
 |名称|必须|备注|
 |---|---|---|
-|token|是|必须为目标群群主|
+|token|是|必须是群主token|
 
-请求体:
+请求体：
 
 ```JSONC
 {
-  "groupId": "123", // 目标群ID
-  "autoDeleteMessage": // 信息自动删除天数，90-六个月，365-一年，730-两年，0-永久不删除
+  "groupId": "123", // 群聊id
+  "autoDeleteMessage": 0 // 消息自动销毁时间（0-永久不删，90-2个月后删除，365-1年后删除，730-2年后删除）
 }
 ```
 

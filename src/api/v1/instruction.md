@@ -166,3 +166,65 @@ POST v1/instruction/edit
   "msg": "success" // 返回消息
 }
 ```
+
+
+# 获取机器人私聊指令
+
+POST /v1/instruction/list
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```protobuf
+id: "123123123"
+```
+
+```proto
+message get_bot_instruction {
+    string id = 3;
+}
+```
+
+响应体：
+
+```protobuf
+status {
+  number: 123456
+  code: 1 // 请求状态码，1为正常
+  msg: "success" // 返回消息
+}
+data {
+  command_id: 123 // 指令id
+  bot_id： 123123123 // 机器人id
+  command_name: "测试指令名称" // 指令名称
+  instruction_type: 5 // 指令类型，1-普通指令，2-直发指令，5-自定义输入指令
+  command_defaultText: "测试默认输入文本" // 指令输入框默认文本
+  command_settingsJso: "{}" // 指令设置JSON（表单指令，自定义输入指令）
+}
+```
+
+```proto
+message Status {
+    uint64 number = 1; // 不知道干啥的,可能是请求ID
+    uint64 code = 2; // 状态码,1为正常
+    string msg = 3; // 返回消息
+}
+
+message instruction_list {
+   Status status = 1;
+   Data data = 2;
+   message Data {
+    uint64 command_id = 1; // 指令id
+    string bot_id = 2; // 机器人id
+    string command_name = 3; // 指令名称
+    uint64 instruction_type = 5; // 指令类型，1-普通指令，2-直发指令，5-自定义输入指令
+    string command_defaultText = 7; // 指令输入框默认文本
+    string command_settingsJson = 10; // 指令设置JSON（表单指令，自定义输入指令）
+   }
+}
+```
