@@ -408,22 +408,194 @@ POST /v1/group/gag-member
 }
 ```
 
+## 获取群聊推荐分类
+
+GET /v1/group/category
+
+响应体：
+```JSONC
+{
+  "code": 1,
+  "data": {
+    "category": [
+      {
+        "id": 27,
+        "name": "云湖",
+        "parent_id": 0,
+        "subItems": [
+          {
+            "id": 26,
+            "name": "云湖反馈",
+            "parent_id": 27,
+            "subItems": null
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "技术",
+        "parent_id": 0,
+        "subItems": [
+          {
+            "id": 22,
+            "name": "IT/互联网",
+            "parent_id": 6,
+            "subItems": null
+          },
+          {
+            "id": 23,
+            "name": "玩机",
+            "parent_id": 6,
+            "subItems": null
+          },
+          {
+            "id": 24,
+            "name": "其他技术",
+            "parent_id": 6,
+            "subItems": null
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "游戏",
+        "parent_id": 0,
+        "subItems": [
+          {
+            "id": 11,
+            "name": "手游",
+            "parent_id": 3,
+            "subItems": null
+          },
+          {
+            "id": 12,
+            "name": "单机游戏",
+            "parent_id": 3,
+            "subItems": null
+          },
+          {
+            "id": 13,
+            "name": "主机游戏",
+            "parent_id": 3,
+            "subItems": null
+          },
+          {
+            "id": 14,
+            "name": "网络游戏",
+            "parent_id": 3,
+            "subItems": null
+          },
+          {
+            "id": 15,
+            "name": "其他游戏",
+            "parent_id": 3,
+            "subItems": null
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "兴趣爱好",
+        "parent_id": 0,
+        "subItems": [
+          {
+            "id": 16,
+            "name": "影视",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 17,
+            "name": "摄影",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 18,
+            "name": "音乐",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 19,
+            "name": "动漫",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 20,
+            "name": "运动",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 21,
+            "name": "其他",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 25,
+            "name": "资讯订阅",
+            "parent_id": 5,
+            "subItems": null
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "其他",
+        "parent_id": 0,
+        "subItems": [
+          {
+            "id": 29,
+            "name": "粉丝群",
+            "parent_id": 2,
+            "subItems": null
+          },
+          {
+            "id": 28,
+            "name": "地区",
+            "parent_id": 2,
+            "subItems": null
+          },
+          {
+            "id": 8,
+            "name": "同事",
+            "parent_id": 2,
+            "subItems": null
+          },
+          {
+            "id": 9,
+            "name": "朋友",
+            "parent_id": 2,
+            "subItems": null
+          },
+          {
+            "id": 10,
+            "name": "家人",
+            "parent_id": 2,
+            "subItems": null
+          }
+        ]
+      }
+    ]
+  },
+  "msg": "success"
+}
+```
+
 ## 搜索推荐群聊
 
 POST /v1/group/recommend/list
 
-请求头:  
-
-|名称|必须|备注|
-|---|---|---|
-|token|是|无|
 
 请求体:
 
 ```JSONC
 {
-  "categoryId": 22, // 群聊分类id
-  "keyword": "114514" // 搜索关键词
+  "categoryId": 22, // 群聊分类id， 0 代表全部
+  "keyword": "114514" // 搜索关键词，留空获取全部群聊
 }
 ```
 
