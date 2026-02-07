@@ -266,7 +266,6 @@ POST /v1/friend/no-notify
 }
 ```
 
-
 响应体：
 
 ```JSONC

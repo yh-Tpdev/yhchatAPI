@@ -3,19 +3,19 @@ title: conversation
 ---
 
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
-没写请求/响应项目表示不需要相关参数.  
+没写请求/响应项目表示不需要相关参数.
 
-## 将对话设为已读  
+## 将对话设为已读
 
 POST /v1/conversation/dismiss-notification
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -23,7 +23,7 @@ POST /v1/conversation/dismiss-notification
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -34,15 +34,15 @@ POST /v1/conversation/dismiss-notification
 
 ## 获取对话列表
 
-POST /v1/conversation/list  
+POST /v1/conversation/list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -88,7 +88,7 @@ message list {
     repeated Data data = 2;
     uint64 total = 3; // 列表中对话的数量
     string request_id = 4; // 似乎是请求ID
-    
+
     message Data {
         string chat_id = 1; // 对象ID
         uint64 chat_type = 2; // 对象类型
@@ -124,13 +124,13 @@ message list {
 
 POST /v1/conversation/sort-change
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -138,10 +138,11 @@ POST /v1/conversation/sort-change
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
  "code": 1, // 返回状态码,1为正常
  "msg": "success" // 返回信息
 }
+```

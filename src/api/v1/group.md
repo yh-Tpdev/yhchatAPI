@@ -11,9 +11,9 @@ POST /v1/group/info
 
 请求头:
 
-|名称|必须|备注|
-|-----|----|----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 ::: warning
 此处响应数据部分项目需要在打开相应开关后才会出现,例如private必须打开群聊私有才能在响应数据中看到.  
@@ -60,7 +60,7 @@ data {
   hide_group_members: 1 // 隐藏群成员（开启时为1）
   auto_delete_message: 730 // 消息自动销毁时间（0-永久不删，90-2个月后删除，365-1年后删除，730-2年后删除）
   deny_members_upload_to_group_disk: 1 // 禁止群成员上传文件到群云盘（开启时为1）
-  
+
 }
 history_bot {
   id: "123" // 机器人ID
@@ -150,13 +150,13 @@ message info {
 
 POST /v1/group/list-member
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|----|----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 data {
@@ -172,12 +172,12 @@ keywords: "测试群成员" // 搜索关键词
 ```proto
 message list_member_send {
     Data data = 2;
-    
+
     message Data {
         int32 size = 1; // 分页大小
         int32 page = 2; // 页数
     }
-    
+
     string group_id = 3; // 群聊ID
     string keywords = 4; // 搜索关键词
 }
@@ -185,7 +185,7 @@ message list_member_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -200,7 +200,7 @@ user {
     name: "Feng" // 用户名
     avatar_url: "https://..." // 头像URL
     is_vip: 0 // 是否为vip用户, 0-不为vip用户, 1-vip用户
-    
+
   }
   permission_level: 100 // 权限等级, 群主100 管理员2 普通用户无/0
   gag_time: 123456 // 禁言时间戳
@@ -216,7 +216,7 @@ user {
 message list_member {
     Status status = 1;
     repeated User user = 2;
-    
+
     message User {
       string group_id = 1;
       User_info user_info = 2;
@@ -227,7 +227,7 @@ message list_member {
           string avatar_url = 4;
           int32 is_vip = 6;
       }
-        
+
       int32 permission_level = 3;
       int64 gag_time = 4; // 禁言时间
       int32 is_gag = 5; c
@@ -241,11 +241,11 @@ message list_member {
 
 POST /v1/group/live-room
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体:
 
@@ -285,11 +285,11 @@ POST /v1/group/live-room
 
 POST /v1/group/instruction-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体:
 
@@ -326,11 +326,11 @@ POST /v1/group/instruction-list
 
 POST /v1/group/invite
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体:
 
@@ -355,11 +355,11 @@ POST /v1/group/invite
 
 POST /v1/group/remove-member
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须为群聊管理员token|
+| 名称  | 必须 | 备注                  |
+| ----- | ---- | --------------------- |
+| token | 是   | 必须为群聊管理员token |
 
 请求体:
 
@@ -383,11 +383,11 @@ POST /v1/group/remove-member
 
 POST /v1/group/gag-member
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须为群聊管理员token|
+| 名称  | 必须 | 备注                  |
+| ----- | ---- | --------------------- |
+| token | 是   | 必须为群聊管理员token |
 
 请求体:
 
@@ -413,6 +413,7 @@ POST /v1/group/gag-member
 GET /v1/group/category
 
 响应体：
+
 ```JSONC
 {
   "code": 1,
@@ -589,7 +590,6 @@ GET /v1/group/category
 
 POST /v1/group/recommend/list
 
-
 请求体:
 
 ```JSONC
@@ -638,11 +638,11 @@ POST /v1/group/recommend/list
 
 POST /v1/group/msg-type-limit
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须是群主/管理员token|
+| 名称  | 必须 | 备注                   |
+| ----- | ---- | ---------------------- |
+| token | 是   | 必须是群主/管理员token |
 
 请求体:
 
@@ -666,13 +666,13 @@ POST /v1/group/msg-type-limit
 
 POST /v1/group/edit-group
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|----|----|
-|token|是|群聊管理员token|
+| 名称  | 必须 | 备注            |
+| ----- | ---- | --------------- |
+| token | 是   | 群聊管理员token |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 group_id: "123" // 目标群聊ID
@@ -704,7 +704,7 @@ message edit_group_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -728,13 +728,13 @@ message edit_group {
 
 POST /v1/group/bot-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|----|----|
-|token|是|群内成员|
+| 名称  | 必须 | 备注     |
+| ----- | ---- | -------- |
+| token | 是   | 群内成员 |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 group_id: "123" // 目标群聊ID
@@ -750,7 +750,7 @@ message edit_group_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -774,7 +774,7 @@ message bot_list {
     repeated Bot_data bot = 2;
 
     repeated Instruction_data instruction = 3;
-    
+
     message Instruction_data {
         int64 id = 1;
         string bot_id = 2;
@@ -811,13 +811,13 @@ message bot_list {
 
 POST /v1/group/remove-bot
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|----|----|
-|token|是|群内成员|
+| 名称  | 必须 | 备注     |
+| ----- | ---- | -------- |
+| token | 是   | 群内成员 |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -839,11 +839,11 @@ POST /v1/group/remove-bot
 
 POST /v1/group/edit-my-group-nickname
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|----|----|
-|token|是|群内成员|
+| 名称  | 必须 | 备注     |
+| ----- | ---- | -------- |
+| token | 是   | 群内成员 |
 
 ```JSONC
 {
@@ -870,11 +870,11 @@ POST /v1/group/edit-group-keyword
 也就是在聊天主页列表最顶上的搜索栏搜索指定群口令时会显示设置为该群口令的群聊
 :::
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须为vip用户且是目标群群主|
+| 名称  | 必须 | 备注                        |
+| ----- | ---- | --------------------------- |
+| token | 是   | 必须为vip用户且是目标群群主 |
 
 请求体:
 
@@ -898,13 +898,13 @@ POST /v1/group/edit-group-keyword
 
 POST /v1/group/info-add-friend
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 keyword: "测试群口令" // 欲要搜索的群口令
@@ -971,11 +971,11 @@ message info_add_friend {
 
 POST /v1/group/edit-auto-delete-message
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须是群主token|
+| 名称  | 必须 | 备注            |
+| ----- | ---- | --------------- |
+| token | 是   | 必须是群主token |
 
 请求体：
 
@@ -999,11 +999,11 @@ POST /v1/group/edit-auto-delete-message
 
 POST /v1/group/edit-stop-member-upload-group-file
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须是群主token|
+| 名称  | 必须 | 备注            |
+| ----- | ---- | --------------- |
+| token | 是   | 必须是群主token |
 
 请求体：
 

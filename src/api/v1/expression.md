@@ -3,19 +3,19 @@ title: expression
 ---
 
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
-没写请求/响应项目表示不需要相关参数.  
+没写请求/响应项目表示不需要相关参数.
 
 ## 获取个人表情收藏
 
 POST /v1/expression/list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -38,15 +38,15 @@ POST /v1/expression/list
 
 ## 添加图片到个人表情收藏
 
-POST /v1/expression/create  
+POST /v1/expression/create
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -54,7 +54,7 @@ POST /v1/expression/create
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -67,13 +67,13 @@ POST /v1/expression/create
 
 POST /v1/expression/delete
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -81,7 +81,7 @@ POST /v1/expression/delete
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -92,15 +92,15 @@ POST /v1/expression/delete
 
 ## 置顶个人表情收藏中的表情
 
-POST /v1/expression/topping  
+POST /v1/expression/topping
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -108,7 +108,7 @@ POST /v1/expression/topping
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -121,13 +121,13 @@ POST /v1/expression/topping
 
 POST /v1/expression/add
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -135,7 +135,7 @@ POST /v1/expression/add
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {

@@ -3,19 +3,19 @@ title: mount-setting
 ---
 
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
-没写请求/响应项目表示不需要相关参数.  
+没写请求/响应项目表示不需要相关参数.
 
 ## 添加群WebDAV挂载
 
 POST /v1/mount-setting/create
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|目标群管理员token|
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 目标群管理员token |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -28,7 +28,7 @@ POST /v1/mount-setting/create
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -41,13 +41,13 @@ POST /v1/mount-setting/create
 
 POST /v1/mount-setting/delete
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|目标群管理员token|
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 目标群管理员token |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -55,7 +55,7 @@ POST /v1/mount-setting/delete
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {

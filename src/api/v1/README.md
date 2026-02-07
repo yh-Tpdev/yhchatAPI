@@ -9,7 +9,7 @@ article: false
 这里存放的是 `v1` API 的文档.  
 无特别说明,请求域名均为 `https://chat-go.jwzhd.com/`  
 一般为 JSON 或者是 ProtoBuf 格式.  
-Proto 文件中的 Status 未特别备注均为下面内容:  
+Proto 文件中的 Status 未特别备注均为下面内容:
 
 ```proto
 message Status {
@@ -19,7 +19,7 @@ message Status {
 }
 ```
 
-无特别说明,请求成功返回状态信息中 code 为状态码,msg 为状态信息.一般情况下响应成功的状态信息为以下格式  
+无特别说明,请求成功返回状态信息中 code 为状态码,msg 为状态信息.一般情况下响应成功的状态信息为以下格式
 
 ```JSONC
 {
