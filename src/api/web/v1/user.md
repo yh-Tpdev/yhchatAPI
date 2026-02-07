@@ -4,15 +4,15 @@ title: user
 
 ## 获取用户自身信息
 
-GET /v1/user/info  
+GET /v1/user/info
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -39,7 +39,7 @@ GET /v1/user/homepage?userId={你要查询的用户ID(例如1231230)}
 如果用户不存在/已注销仍然会返回数据,特点就是无头像,名称,注册时间戳为0等.  
 :::
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -74,7 +74,7 @@ GET /v1/user/homepage?userId={你要查询的用户ID(例如1231230)}
 
 GET /v1/user/get-token?token={需要复制的用户token}
 
-响应体:  
+响应体:
 
 ```JSONC
 {

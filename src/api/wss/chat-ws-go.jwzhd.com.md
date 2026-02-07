@@ -4,7 +4,7 @@ title: chat-ws-go.jwzhd.com
 
 本文章下所有wss请求地址均为 wss://chat-ws-go.jwzhd.com/ws
 没写请求/响应项目表示不需要相关参数,使用以下功能前必须先链接wss并 **登录云湖账号**.  
-本教程中未特别说明情况下proto的INFO均为以下部分:  
+本教程中未特别说明情况下proto的INFO均为以下部分:
 
 ```proto
 message INFO {
@@ -15,7 +15,7 @@ message INFO {
 
 ## 登录云湖账号
 
-发送数据:  
+发送数据:
 
 ```JSONC
 {
@@ -32,7 +32,7 @@ message INFO {
 
 ## 发送心跳包
 
-发送数据:  
+发送数据:
 
 ```JSONC
 {
@@ -42,7 +42,7 @@ message INFO {
 }
 ```
 
-返回数据:  
+返回数据:
 
 ```ProtoBuf
 data: {
@@ -68,7 +68,7 @@ message heartbeat_ack_info {
 
 ## 发送笔记同步
 
-发送数据:  
+发送数据:
 
 ```JSONC
 {
@@ -84,7 +84,7 @@ message heartbeat_ack_info {
 
 ## 接收笔记同步
 
-返回数据:  
+返回数据:
 
 ```ProtoBuf
 info {
@@ -108,11 +108,11 @@ data {
 message draft_input {
     INFO info = 1;
     Data data = 2;
-    
+
     message Data {
         string any = 1;
         Draft draft = 2;
-        
+
         message Draft {
             string chat_id = 1; // 对象ID
             string input = 2; // 草稿内容
@@ -123,9 +123,9 @@ message draft_input {
 
 :::
 
-## 推送消息  
+## 推送消息
 
-返回数据:  
+返回数据:
 
 ```ProtoBuf
 info {
@@ -190,7 +190,7 @@ message push_message {
     message Data {
         string any = 1;
         Msg msg = 2;
-        
+
         message Msg {
             string msg_id = 1;
             Sender sender = 2;
@@ -204,12 +204,12 @@ message push_message {
             uint64 delete_timestamp = 10; // 撤回消息时间,和8差别不大
             string quote_msg_id = 11; // 引用消息ID
             uint64 msg_seq = 12; // 消息序列,在撤回时也是被撤回消息的序列
-            
+
             message Cmd {
                 uint64 id = 1; // 命令ID
                 string name = 2; // 命令名称
             }
-            
+
             message Sender {
                 string chat_id = 1;
                 uint64 chat_type = 2;
@@ -218,7 +218,7 @@ message push_message {
                 repeated string tag_old = 6;
                 repeated Tag tag = 7;
             }
-            
+
             message Content {
                 string text = 1; // 消息内容
                 string buttons = 2; // 按钮
@@ -258,7 +258,7 @@ message push_message {
 
 ## 推送超级文件分享
 
-返回数据:  
+返回数据:
 
 ```ProtoBuf
 info {
@@ -290,7 +290,7 @@ message file_send_message {
   message Data {
     string any = 1;
     Sender sender = 2;
-        
+
     message Sender {
       string send_user_id = 1; // 分享者用户ID
       string user_id = 2; // 接收者用户ID
@@ -307,9 +307,9 @@ message file_send_message {
 
 ## 编辑消息接收
 
-!!其实可以和接收消息推送的 proto 基本共用,只是编辑消息额外多了个14 edit_time.!!  
+!!其实可以和接收消息推送的 proto 基本共用,只是编辑消息额外多了个14 edit_time.!!
 
-返回数据:  
+返回数据:
 
 ```ProtoBuf
 info {
@@ -344,7 +344,7 @@ message Msg {
     uint64 content_type = 7;
     string quote_msg_id = 11; // 引用消息ID
     uint64 edit_time = 14; // 编辑时间
-            
+
     message Content {
         string text = 1; // 消息内容
         string buttons = 2; // 按钮
@@ -356,7 +356,7 @@ message Msg {
 message edit_message {
     INFO info = 1;
     Data data = 2;
-    
+
     message Data {
         string any = 1;
         Msg msg = 2;
@@ -372,7 +372,7 @@ message edit_message {
 本项只提供了“有人邀请我”的这种状态，并没有提供相关信息，如邀请人、群聊ID等，建议配合邀请列表进行使用。
 :::
 
-返回数据:  
+返回数据:
 
 ```ProtoBuf
 info {
@@ -398,7 +398,7 @@ message INFO {
 流式消息第一个推送是 push_message,后续才是 stream_message,需要将 content 里面的内容追加到消息内容后面.
 :::
 
-返回数据:  
+返回数据:
 
 ```ProtoBuf
 info {
@@ -423,11 +423,11 @@ data {
 message stream_message {
     INFO info = 1;
     Data data = 2;
-    
+
     message Data {
         string any = 1;
         StreamMsg msg = 2;
-        
+
         message StreamMsg {
             string msg_id = 1;
             string recv_id = 2;

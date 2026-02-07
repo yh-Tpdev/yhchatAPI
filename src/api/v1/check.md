@@ -3,7 +3,7 @@ title: check
 ---
 
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
-没写请求/响应项目表示不需要相关参数.  
+没写请求/响应项目表示不需要相关参数.
 
 ## 获取云湖新版本（Android版本）
 
@@ -11,7 +11,7 @@ POST /v1/check/check-version-mobile
 
 POST /v1/check/get-latest-version
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -42,7 +42,7 @@ POST /v1/check/get-latest-version
 {
   "ApkMd5": "", // 更新包MD5
   "ApkSize": 74491, // 包体大小
-  "Code": 0, 
+  "Code": 0,
   "DownloadUrl": "https://app-cdn1.jwznb.com/android/yunhu-1.4.84.apk", // 下载地址
   "Level": 0,
   "Message": "success", // 返回消息
