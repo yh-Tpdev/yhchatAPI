@@ -207,6 +207,7 @@ message get_user {
         uint64 vip_expired_time = 14; // VIP过期时间(时间戳)
         Remark_info remark_info = 18; // 备注信息
         Profile_info profile_info = 19; // 用户资料信息
+        string ip = 20 // IP归属地（国家）
     }
 }
 ```
