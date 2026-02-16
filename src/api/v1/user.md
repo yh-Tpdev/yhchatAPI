@@ -147,18 +147,42 @@ data {
   name_id: 123 // 名称ID
   avatar_url: "https://..." // 头像URL
   avatar_id: 123 // 头像ID
-  medal {
-    id: 1 // 勋章ID
-    name: "测试勋章" // 勋章名称
-    sort: 100 // 勋章顺序
-  }
-  // ...
   register_time: "1234-12-12 12:12:12" // 注册时间(YYYY-MM-DD hh:mm:ss)
-  ban_time: 123123123 // 封禁结束时间(时间戳)
   online_day: 123 // 在线时长
   continuous_online_day: 123 // 连续在线时长
   is_vip: 1 // 是否为VIP
   vip_expired_time: 123123123 // VIP过期时间(时间戳)
+  ban_time: 123123123 // 封禁结束时间(时间戳)
+  medal [
+    {
+      "name": "徽章1", // 徽章名称
+      "icon": "徽章1", // ?徽章图标?
+      "sort": 1, // 徽章顺序（在服务端）
+      "_id": "id", // ?徽章介绍?
+      "level": 100, // 等级
+      "_level": "level" // ?等级介绍?
+     },
+     {
+      "name": "徽章2", // 徽章名称
+      "icon": "徽章2", // ?徽章图标?
+      "sort": 3, // 徽章顺序（在服务端）
+      "_id": "id", // ?徽章介绍?
+      "level": 500, // 等级
+      "_level": "level" // ?等级介绍?
+    }
+  ],
+  "remark_info": {
+    "date": "", // 备注时间
+    "remarks": "" // 备注内容
+  },
+  "profile_info": {
+    "flag": 1, // ？
+    "scoreOrId": 1295971200,
+    "province": "省（自治区）", // IP归属地
+    "city": "市（乡）", // IP归属地
+    "district": "区（县）", // IP归属地
+  },
+  "country": "国家或地区" // IP归属地
 }
 ```
 
