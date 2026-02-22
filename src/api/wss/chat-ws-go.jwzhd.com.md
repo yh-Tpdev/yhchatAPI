@@ -384,9 +384,8 @@ info {
 ::: details ProtoBuf数据结构
 
 ```proto
-message INFO {
-    string seq = 1; // 请求标识码
-    string cmd = 2; // 操作类型
+message InviteApply {
+    INFO info = 1;
 }
 ```
 
