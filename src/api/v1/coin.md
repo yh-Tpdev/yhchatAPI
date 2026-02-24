@@ -3,19 +3,19 @@ title: coin
 ---
 
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
-没写请求/响应项目表示不需要相关参数.  
+没写请求/响应项目表示不需要相关参数.
 
 ## 商品获取
 
 POST /v1/coin/shop/product-recommend
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -24,7 +24,7 @@ POST /v1/coin/shop/product-recommend
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -33,9 +33,9 @@ POST /v1/coin/shop/product-recommend
     "list": [
       {
         "id": 1, // 商品id
-        "type": 1, // 
+        "type": 1, //
         "cycle": 7, //会员持续时间（持续7天
-        "info": "7", 
+        "info": "7",
         "name": "【云湖】会员7天", // 商品名
         "imageUrls": "[\"https://chat-img.jwznb.com/999955a351c67b761ed078dc40d28ede.png\"]", // 商品图片url，为json数组，需转义后才可使用
         "price": 100, // 价格（单位为金币）
@@ -58,11 +58,11 @@ POST /v1/coin/shop/product-recommend
 
 POST /v1/coin/task/my-task-info
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 响应体:
 
@@ -83,11 +83,11 @@ POST /v1/coin/task/my-task-info
 
 POST /v1/coin/shop/product-detail
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -128,11 +128,11 @@ POST /v1/coin/shop/product-detail
 
 POST /v1/coin/task/raffle
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 响应体：
 
