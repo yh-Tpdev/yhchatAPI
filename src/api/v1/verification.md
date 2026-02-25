@@ -3,16 +3,16 @@ title: verification
 ---
 
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
-没写请求/响应项目表示不需要相关参数.  
+没写请求/响应项目表示不需要相关参数.
 
 ## 获取短信验证码
 
 POST /v1/verification/get-verification-code
 
-请求体:  
+请求体:
 
 ```JSONC
-{  
+{
   "mobile": "12312312300", // 手机号
   "code": "123123", // 人机验证校验码
   "id": "123", // 人机验证ID
@@ -20,7 +20,7 @@ POST /v1/verification/get-verification-code
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -33,10 +33,10 @@ POST /v1/verification/get-verification-code
 
 POST /v1/verification/get-email-verification-code
 
-请求体:  
+请求体:
 
 ```JSONC
-{  
+{
   "email": "123@123.123", // 邮箱
   "typ": "forget_password", // 验证类别，forget_password-更改密码验证，其他所有验证都为空
   "code": "123123", // 人机验证校验码
@@ -44,7 +44,7 @@ POST /v1/verification/get-email-verification-code
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {

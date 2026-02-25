@@ -11,9 +11,9 @@ POST /v1/group/info
 
 请求头:
 
-|名称|必须|备注|
-|-----|----|----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 ::: warning
 此处响应数据部分项目需要在打开相应开关后才会出现,例如private必须打开群聊私有才能在响应数据中看到.  
@@ -57,6 +57,7 @@ data {
   }
   my_group_nickname: "12345" // 我的群昵称
   group_code: "test1234" // 群口令
+  hide_group_members: 1 // 隐藏群成员（开启时为1）
   auto_delete_message: 730 // 消息自动销毁时间（0-永久不删，90-2个月后删除，365-1年后删除，730-2年后删除）
   stop_member_upload_group_file: 0 // 是否停止群成员上传文件到群云盘，0-不禁止，1-禁止
 }
@@ -114,6 +115,7 @@ message info {
         repeated Tag tag = 27;
         string my_group_nickname = 28; // 我的群昵称
         string group_code = 29; // 群口令
+        uint64 hide_group_members = 30; // 隐藏群成员（开启时为1）
         uint64 auto_delete_message = 32; // 消息自动销毁时间
         uint64 stop_member_upload_group_file = 33; // 是否停止群成员上传文件到群云盘，0-不禁止，1-禁止
         
@@ -147,13 +149,13 @@ message info {
 
 POST /v1/group/list-member
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|----|----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 data {
@@ -169,12 +171,12 @@ keywords: "测试群成员" // 搜索关键词
 ```proto
 message list_member_send {
     Data data = 2;
-    
+
     message Data {
         int32 size = 1; // 分页大小
         int32 page = 2; // 页数
     }
-    
+
     string group_id = 3; // 群聊ID
     string keywords = 4; // 搜索关键词
 }
@@ -182,7 +184,7 @@ message list_member_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -197,7 +199,7 @@ user {
     name: "Feng" // 用户名
     avatar_url: "https://..." // 头像URL
     is_vip: 0 // 是否为vip用户, 0-不为vip用户, 1-vip用户
-    
+
   }
   permission_level: 100 // 权限等级, 群主100 管理员2 普通用户无/0
   gag_time: 123456 // 禁言时间戳
@@ -213,7 +215,7 @@ user {
 message list_member {
     Status status = 1;
     repeated User user = 2;
-    
+
     message User {
       string group_id = 1;
       User_info user_info = 2;
@@ -224,7 +226,7 @@ message list_member {
           string avatar_url = 4;
           int32 is_vip = 6;
       }
-        
+
       int32 permission_level = 3;
       int64 gag_time = 4; // 禁言时间
       int32 is_gag = 5; c
@@ -238,11 +240,11 @@ message list_member {
 
 POST /v1/group/live-room
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体:
 
@@ -282,11 +284,11 @@ POST /v1/group/live-room
 
 POST /v1/group/instruction-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体:
 
@@ -323,11 +325,11 @@ POST /v1/group/instruction-list
 
 POST /v1/group/invite
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体:
 
@@ -352,11 +354,11 @@ POST /v1/group/invite
 
 POST /v1/group/remove-member
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须为群聊管理员token|
+| 名称  | 必须 | 备注                  |
+| ----- | ---- | --------------------- |
+| token | 是   | 必须为群聊管理员token |
 
 请求体:
 
@@ -380,11 +382,11 @@ POST /v1/group/remove-member
 
 POST /v1/group/gag-member
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须为群聊管理员token|
+| 名称  | 必须 | 备注                  |
+| ----- | ---- | --------------------- |
+| token | 是   | 必须为群聊管理员token |
 
 请求体:
 
@@ -405,22 +407,194 @@ POST /v1/group/gag-member
 }
 ```
 
+## 获取群聊推荐分类
+
+GET /v1/group/category
+
+响应体：
+
+```JSONC
+{
+  "code": 1,
+  "data": {
+    "category": [
+      {
+        "id": 27,
+        "name": "云湖",
+        "parent_id": 0,
+        "subItems": [
+          {
+            "id": 26,
+            "name": "云湖反馈",
+            "parent_id": 27,
+            "subItems": null
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "技术",
+        "parent_id": 0,
+        "subItems": [
+          {
+            "id": 22,
+            "name": "IT/互联网",
+            "parent_id": 6,
+            "subItems": null
+          },
+          {
+            "id": 23,
+            "name": "玩机",
+            "parent_id": 6,
+            "subItems": null
+          },
+          {
+            "id": 24,
+            "name": "其他技术",
+            "parent_id": 6,
+            "subItems": null
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "游戏",
+        "parent_id": 0,
+        "subItems": [
+          {
+            "id": 11,
+            "name": "手游",
+            "parent_id": 3,
+            "subItems": null
+          },
+          {
+            "id": 12,
+            "name": "单机游戏",
+            "parent_id": 3,
+            "subItems": null
+          },
+          {
+            "id": 13,
+            "name": "主机游戏",
+            "parent_id": 3,
+            "subItems": null
+          },
+          {
+            "id": 14,
+            "name": "网络游戏",
+            "parent_id": 3,
+            "subItems": null
+          },
+          {
+            "id": 15,
+            "name": "其他游戏",
+            "parent_id": 3,
+            "subItems": null
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "兴趣爱好",
+        "parent_id": 0,
+        "subItems": [
+          {
+            "id": 16,
+            "name": "影视",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 17,
+            "name": "摄影",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 18,
+            "name": "音乐",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 19,
+            "name": "动漫",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 20,
+            "name": "运动",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 21,
+            "name": "其他",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 25,
+            "name": "资讯订阅",
+            "parent_id": 5,
+            "subItems": null
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "其他",
+        "parent_id": 0,
+        "subItems": [
+          {
+            "id": 29,
+            "name": "粉丝群",
+            "parent_id": 2,
+            "subItems": null
+          },
+          {
+            "id": 28,
+            "name": "地区",
+            "parent_id": 2,
+            "subItems": null
+          },
+          {
+            "id": 8,
+            "name": "同事",
+            "parent_id": 2,
+            "subItems": null
+          },
+          {
+            "id": 9,
+            "name": "朋友",
+            "parent_id": 2,
+            "subItems": null
+          },
+          {
+            "id": 10,
+            "name": "家人",
+            "parent_id": 2,
+            "subItems": null
+          }
+        ]
+      }
+    ]
+  },
+  "msg": "success"
+}
+```
+
 ## 搜索推荐群聊
 
 POST /v1/group/recommend/list
-
-请求头:  
-
-|名称|必须|备注|
-|---|---|---|
-|token|是|无|
 
 请求体:
 
 ```JSONC
 {
-  "categoryId": 22, // 群聊分类id
-  "keyword": "114514" // 搜索关键词
+  "categoryId": 22, // 群聊分类id， 0 代表全部
+  "keyword": "114514" // 搜索关键词，留空获取全部群聊
 }
 ```
 
@@ -463,11 +637,11 @@ POST /v1/group/recommend/list
 
 POST /v1/group/msg-type-limit
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须是群主/管理员token|
+| 名称  | 必须 | 备注                   |
+| ----- | ---- | ---------------------- |
+| token | 是   | 必须是群主/管理员token |
 
 请求体:
 
@@ -491,13 +665,13 @@ POST /v1/group/msg-type-limit
 
 POST /v1/group/edit-group
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|----|----|
-|token|是|群聊管理员token|
+| 名称  | 必须 | 备注            |
+| ----- | ---- | --------------- |
+| token | 是   | 群聊管理员token |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 group_id: "123" // 目标群聊ID
@@ -529,7 +703,7 @@ message edit_group_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -553,13 +727,13 @@ message edit_group {
 
 POST /v1/group/bot-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|----|----|
-|token|是|群内成员|
+| 名称  | 必须 | 备注     |
+| ----- | ---- | -------- |
+| token | 是   | 群内成员 |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 group_id: "123" // 目标群聊ID
@@ -575,7 +749,7 @@ message edit_group_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -599,7 +773,7 @@ message bot_list {
     repeated Bot_data bot = 2;
 
     repeated Instruction_data instruction = 3;
-    
+
     message Instruction_data {
         int64 id = 1;
         string bot_id = 2;
@@ -636,13 +810,13 @@ message bot_list {
 
 POST /v1/group/remove-bot
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|----|----|
-|token|是|群内成员|
+| 名称  | 必须 | 备注     |
+| ----- | ---- | -------- |
+| token | 是   | 群内成员 |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -664,11 +838,11 @@ POST /v1/group/remove-bot
 
 POST /v1/group/edit-my-group-nickname
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|----|----|
-|token|是|群内成员|
+| 名称  | 必须 | 备注     |
+| ----- | ---- | -------- |
+| token | 是   | 群内成员 |
 
 ```JSONC
 {
@@ -695,11 +869,11 @@ POST /v1/group/edit-group-keyword
 也就是在聊天主页列表最顶上的搜索栏搜索指定群口令时会显示设置为该群口令的群聊
 :::
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须为vip用户且是目标群群主|
+| 名称  | 必须 | 备注                        |
+| ----- | ---- | --------------------------- |
+| token | 是   | 必须为vip用户且是目标群群主 |
 
 请求体:
 
@@ -723,13 +897,13 @@ POST /v1/group/edit-group-keyword
 
 POST /v1/group/info-add-friend
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 keyword: "测试群口令" // 欲要搜索的群口令
@@ -822,7 +996,7 @@ POST /v1/group/edit-stop-member-upload-group-file
 
 ## 设置信息自动删除时间
 
-POST /v1/group/edit-auto-delete-message
+POST /v1/group/edit-stop-member-upload-group-file
 
 请求头:  
 
@@ -836,6 +1010,34 @@ POST /v1/group/edit-auto-delete-message
 {
   "groupId": "123", // 群聊id
   "autoDeleteMessage": 0 // 消息自动销毁时间（0-永久不删，90-2个月后删除，365-1年后删除，730-2年后删除）
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 设置禁止群成员上传到群云盘
+
+POST /v1/group/edit-stop-member-upload-group-file
+
+请求头:
+
+| 名称  | 必须 | 备注            |
+| ----- | ---- | --------------- |
+| token | 是   | 必须是群主token |
+
+请求体：
+
+```JSONC
+{
+ "groupId": "123456789", // 群聊id
+ "stopMemberUploadGroupFile":1 // 是否开启（0-关闭，1-开启）
 }
 ```
 

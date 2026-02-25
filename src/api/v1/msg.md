@@ -3,20 +3,20 @@ title: msg
 ---
 
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
-没写请求/响应项目表示不需要相关参数.  
+没写请求/响应项目表示不需要相关参数.
 
 ## 发送信息
 
 POST /v1/msg/send-message
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体:  
-建议参考proto文件中的内容.  
+建议参考proto文件中的内容.
 
 ```ProtoBuf
 msg_id: "信息ID"
@@ -96,7 +96,7 @@ message send_message_send {
 在发送单种类别的信息时，其余类别的信息属性不存在，例如语音信息不存在引用信息.
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -127,13 +127,13 @@ POST /v1/msg/edit-message
 
 !!其实云湖的编辑消息和发送消息的 proto 可以共用,只需要 msg_id 改成要编辑的消息即可.!!
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|消息发送者的Token|
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 消息发送者的Token |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 msg_id: "123456" // 要编辑的消息ID
@@ -168,7 +168,7 @@ message edit_message_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -190,19 +190,19 @@ message edit_message {
 
 ## 按消息序列列出消息（不包含指定消息）
 
-POST /v1/msg/list-message-by-seq  
+POST /v1/msg/list-message-by-seq
 
 ::: warning
 由于没有所有消息情况,因此此处响应相关内容(尤其是指令等测试群不常见部分)可能会有缺失/错误,见谅.同时建议参照proto文件理解相关内容.也欢迎来PR补充.  
 :::
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 msg_start: 1234 // 开始的消息序列
@@ -223,7 +223,7 @@ message list_message_by_seq_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -280,7 +280,7 @@ message list_message_by_seq {
     Status status = 1;
     repeated Msg msg = 2;
     uint64 msg_count = 3; // 消息数
-    
+
     message Msg {
         string msg_id = 1; // 消息ID
         Sender sender = 2;
@@ -293,7 +293,7 @@ message list_message_by_seq {
         string quote_msg_id = 9; // 引用消息ID
         uint64 msg_seq = 10;
         uint64 edit_time = 12; // 最后编辑时间
-        
+
         message Cmd {
             string name = 2; // 指令名
             uint64 type = 4; // 指令类型
@@ -346,19 +346,19 @@ message list_message_by_seq {
 
 ## 列出消息
 
-POST /v1/msg/list-message  
+POST /v1/msg/list-message
 
 ::: warning
 由于没有所有消息情况,因此此处响应相关内容(尤其是指令等测试群不常见部分)可能会有缺失/错误,见谅.同时建议参照proto文件理解相关内容.也欢迎来PR补充.  
 :::
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 msg_count: 233 // 获取的消息数
@@ -381,7 +381,7 @@ message list_message_send {
 :::
 
 响应体:  
-列出的是指定消息ID前的消息.  
+列出的是指定消息ID前的消息.
 
 ```ProtoBuf
 status {
@@ -446,7 +446,7 @@ message Msg {
     string quote_msg_id = 9; // 引用消息ID
     uint64 msg_seq = 10;
     uint64 edit_time = 12; // 最后编辑时间
-        
+
     message Cmd {
         string name = 2; // 指令名
         uint64 type = 4; // 指令类型
@@ -504,7 +504,7 @@ message list_message { // 其实可以和 list-message-by-seq共用的。
 
 ## 按消息ID列出消息（包含消息id指定的消息）
 
-POST /v1/msg/list-message-by-mid-seq  
+POST /v1/msg/list-message-by-mid-seq
 
 ::: warning
 由于没有所有消息情况,因此此处响应相关内容(尤其是指令等测试群不常见部分)可能会有缺失/错误,见谅.同时建议参照proto文件理解相关内容.也欢迎来PR补充.  
@@ -514,13 +514,13 @@ POST /v1/msg/list-message-by-mid-seq
 此接口和 list-message 的区别在于此接口获取到的消息包含请求的消息ID的消息内容. 实际获取到的消息数量是请求消息数量+1
 :::
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 msg_seq: 123456 // 开始消息的seq,不写默认0
@@ -547,7 +547,7 @@ message list_message_by_mid_seq_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -613,7 +613,7 @@ message Msg {
     string quote_msg_id = 9; // 引用消息ID
     uint64 msg_seq = 10;
     uint64 edit_time = 12; // 最后编辑时间
-        
+
     message Cmd {
         string name = 2; // 指令名
         uint64 type = 4; // 指令类型
@@ -674,11 +674,11 @@ message list_message_by_mid_seq {
 
 POST /v1/msg/list-message-edit-record
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
 请求体：
 
@@ -717,13 +717,13 @@ POST /v1/msg/list-message-edit-record
 
 POST /v1/msg/button-report
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 msg_id: "123123123123123123" // 信息ID
@@ -749,7 +749,7 @@ message button_report_send {
 :::
 
 响应体:  
-列出的是指定消息ID前的消息.  
+列出的是指定消息ID前的消息.
 
 ```ProtoBuf
 status {
@@ -774,13 +774,13 @@ message button_report {
 
 POST /v1/msg/recall-msg
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 msg_id: "123123123123123123" // 信息ID
@@ -801,7 +801,7 @@ message recall_msg_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -826,13 +826,13 @@ message recall_msg {
 
 POST /v1/msg/recall-msg-batch
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 msg_id: "123123123123123123" // 信息ID
@@ -854,7 +854,7 @@ message recall_msg_batch_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -879,13 +879,13 @@ message recall_msg_batch {
 
 POST /v1/msg/file-download-record
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {

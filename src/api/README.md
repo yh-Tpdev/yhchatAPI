@@ -6,7 +6,7 @@ title: API
 * 1
 
 > **[v1](./v1/)**  
-> -云湖v1目录下已记录的所有API文档
+> -云湖v1版本API已记录的所有API文档
 
 * 2
 
@@ -15,5 +15,5 @@ title: API
 
 * 3
 
-> **[web](./web)**
-> -云湖 chat-web-go API文档
+> **[web](./web)**  
+> -云湖网页版API已记录的所有API文档

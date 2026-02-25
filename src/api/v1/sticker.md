@@ -3,19 +3,19 @@ title: sticker
 ---
 
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
-没写请求/响应项目表示不需要相关参数.  
+没写请求/响应项目表示不需要相关参数.
 
 ## 获取收藏表情包
 
 POST /v1/sticker/list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -55,13 +55,13 @@ POST /v1/sticker/list
 
 POST /v1/sticker/detail
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -69,7 +69,7 @@ POST /v1/sticker/detail
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -114,13 +114,13 @@ POST /v1/sticker/detail
 
 POST /v1/sticker/add
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -128,7 +128,7 @@ POST /v1/sticker/add
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -139,15 +139,15 @@ POST /v1/sticker/add
 
 ## 移除收藏表情包
 
-POST /v1/sticker/remove-sticker-pack  
+POST /v1/sticker/remove-sticker-pack
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -155,7 +155,7 @@ POST /v1/sticker/remove-sticker-pack
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -164,17 +164,17 @@ POST /v1/sticker/remove-sticker-pack
 }
 ```
 
-## 更改收藏表情包的排序  
+## 更改收藏表情包的排序
 
-POST /v1/sticker/sort  
+POST /v1/sticker/sort
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -196,7 +196,7 @@ POST /v1/sticker/sort
 
 ```Python
 headers = {"token": token}
-sticker = [ 
+sticker = [
             {
               "id": "1","sort": "1", # 不知道为啥id前面是数值这里为啥变成了字符串,sort越大排序越靠前
             },
@@ -205,13 +205,13 @@ sticker = [
             }
           ]
 payload = {"sort": str(sticker)}
-response = httpx.post("https://chat-go.jwzhd.com/v1/sticker/sort", headers = headers, json = payload) 
+response = httpx.post("https://chat-go.jwzhd.com/v1/sticker/sort", headers = headers, json = payload)
 print(response.text)
 ```
 
 :::
 
-响应体:  
+响应体:
 
 ```JSONC
 {

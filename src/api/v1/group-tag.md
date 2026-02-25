@@ -9,11 +9,11 @@ title: group-tag
 
 POST /v1/group-tag/list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体:
 
@@ -53,11 +53,11 @@ POST /v1/group-tag/list
 
 POST /v1/group-tag/relate
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须为群聊管理员token|
+| 名称  | 必须 | 备注                  |
+| ----- | ---- | --------------------- |
+| token | 是   | 必须为群聊管理员token |
 
 请求体:
 
@@ -81,11 +81,11 @@ POST /v1/group-tag/relate
 
 POST /v1/group-tag/relate-cancel
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须为群聊管理员token|
+| 名称  | 必须 | 备注                  |
+| ----- | ---- | --------------------- |
+| token | 是   | 必须为群聊管理员token |
 
 请求体:
 
@@ -109,11 +109,11 @@ POST /v1/group-tag/relate-cancel
 
 POST /v1/group-tag/edit
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须为群聊管理员token|
+| 名称  | 必须 | 备注                  |
+| ----- | ---- | --------------------- |
+| token | 是   | 必须为群聊管理员token |
 
 请求体:
 
@@ -141,11 +141,11 @@ POST /v1/group-tag/edit
 
 POST /v1/group-tag/create
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须为群聊管理员token|
+| 名称  | 必须 | 备注                  |
+| ----- | ---- | --------------------- |
+| token | 是   | 必须为群聊管理员token |
 
 请求体：
 
@@ -173,11 +173,11 @@ POST /v1/group-tag/create
 
 POST /v1/group-tag/delete
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|必须为群聊管理员token|
+| 名称  | 必须 | 备注                  |
+| ----- | ---- | --------------------- |
+| token | 是   | 必须为群聊管理员token |
 
 请求体:
 
@@ -200,13 +200,13 @@ POST /v1/group-tag/delete
 
 POST /v1/group-tag/members
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 data {
@@ -233,7 +233,7 @@ message tag_member_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {

@@ -3,17 +3,17 @@ title: bot
 ---
 
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
-没写请求/响应项目表示不需要相关参数.  
+没写请求/响应项目表示不需要相关参数.
 
 ## 机器人商店banner
 
 POST /v1/bot/banner
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 响应头：
 
@@ -47,11 +47,11 @@ POST /v1/bot/banner
 
 POST /v1/bot/new-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 响应头：
 
@@ -80,11 +80,11 @@ POST /v1/bot/new-list
 
 POST /v1/bot/bot-detail
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -115,12 +115,12 @@ POST /v1/bot/bot-detail
       "private": 0, // 是否私有（0为否，1为私人）
       "isStop": 0, // 是否停用（0为启用，1为停用）
       "settingJson": "",  // 机器人设置json（需转义）
-      "del_flag": 0, 
+      "del_flag": 0,
       "alwaysAgree": 1, // 是否总是同意添加群聊
       "banId": 0, // 顾名思义
       "uri": "https://chat-go.jwzhd.com/open-apis/v1/bot/send?token=" // 机器人发送消息url（？
     },
-    "groups": [ 
+    "groups": [
       {
         "id": 0, // 排序 （不知道为什么很多字段没有值，而客户端加入这个群显示群聊信息正常）
         "groupId": "123", // 群组id
@@ -153,11 +153,11 @@ POST /v1/bot/bot-detail
 
 POST /v1/bot/bot-group-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 响应体：
 
@@ -203,11 +203,11 @@ POST /v1/bot/bot-group-list
 
 POST /v1/bot/edit-setting-json
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -231,11 +231,11 @@ POST /v1/bot/edit-setting-json
 
 POST /v1/bot/web-edit-bot
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -262,13 +262,13 @@ POST /v1/bot/web-edit-bot
 
 POST /v1/bot/bot-info
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|----|----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 id: 123 // 机器人ID
@@ -284,7 +284,7 @@ message bot_info_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -345,13 +345,13 @@ message bot_info {
 
 POST /v1/bot/board
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|----|----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 id: 123 // 群聊ID
@@ -370,7 +370,7 @@ message board_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -414,11 +414,11 @@ message board {
 
 POST /v1/bot/remove-follower
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|机器人管理员token|
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 机器人管理员token |
 
 请求体：
 
@@ -442,11 +442,11 @@ POST /v1/bot/remove-follower
 
 POST /v1/bot/remove-group
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|机器人管理员token|
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 机器人管理员token |
 
 请求体：
 
@@ -470,11 +470,11 @@ POST /v1/bot/remove-group
 
 POST /v1/bot/llm/llm-setting-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 响应体：
 
@@ -514,11 +514,11 @@ POST /v1/bot/llm/llm-setting-list
 
 POST /v1/bot/llm/llm-setting-ref-info
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|机器人管理员token|
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 机器人管理员token |
 
 请求体：
 
@@ -555,11 +555,11 @@ POST /v1/bot/llm/llm-setting-ref-info
 
 POST /v1/bot/reset-bot-token
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|机器人管理员token|
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 机器人管理员token |
 
 请求体：
 
@@ -585,11 +585,11 @@ POST /v1/bot/reset-bot-token
 
 POST /v1/bot/create-bot
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -618,14 +618,14 @@ message CreateBotRequest {
 ```proto
 message CreateBotResponse {
     Status status = 1;
-    BotData data = 2;               
-    
+    BotData data = 2;
+
     message Status {
         int64 number = 1;           // 可能是请求ID
         int32 code = 2;             // 1表示成功
         string msg = 3;             // success
     }
-    
+
     message BotData {
         string bot_id = 1;          // 创建的机器人ID
     }
@@ -636,11 +636,11 @@ message CreateBotResponse {
 
 POST /v1/bot/edit-subscribed-link
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|机器人管理员token|
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 机器人管理员token |
 
 请求体：
 
@@ -664,11 +664,11 @@ POST /v1/bot/edit-subscribed-link
 
 POST /v1/bot/get-user-settings-json
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|群聊管理员token|
+| 名称  | 必须 | 备注            |
+| ----- | ---- | --------------- |
+| token | 是   | 群聊管理员token |
 
 请求体：
 
@@ -838,13 +838,13 @@ POST /v1/bot/get-user-settings-json
 
 POST /v1/bot/send-setting-json
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|群聊管理员token|
+| 名称  | 必须 | 备注            |
+| ----- | ---- | --------------- |
+| token | 是   | 群聊管理员token |
 
-请求体：  （具体settingJson更多解释请看[这里](https://yh-api.yyyyt.top/api/v1/instruction.html#%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8C%87%E4%BB%A4)）
+请求体： （具体settingJson更多解释请看[这里](https://yh-api.yyyyt.top/api/v1/instruction.html#%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8C%87%E4%BB%A4)）
 
 ```JSONC
 {

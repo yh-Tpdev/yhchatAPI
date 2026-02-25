@@ -3,19 +3,19 @@ title: vip
 ---
 
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
-没写请求/响应项目表示不需要相关参数.  
+没写请求/响应项目表示不需要相关参数.
 
 ## vip价格获取
 
 POST /v1/vip/vip-product-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -23,7 +23,7 @@ POST /v1/vip/vip-product-list
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -51,11 +51,11 @@ POST /v1/vip/vip-product-list
 
 GET /v1/vip/vip-benefits-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 响应体：
 
