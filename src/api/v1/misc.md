@@ -3,19 +3,19 @@ title: misc
 ---
 
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
-没写请求/响应项目表示不需要相关参数.  
+没写请求/响应项目表示不需要相关参数.
 
 ## 获取功能路由
 
 GET /v1/misc/configure-distribution
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -37,13 +37,13 @@ GET /v1/misc/configure-distribution
 
 GET /v1/misc/qiniu-token
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -59,13 +59,13 @@ GET /v1/misc/qiniu-token
 
 GET /v1/misc/qiniu-token-audio
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|否|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 否   | 无   |
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -81,13 +81,13 @@ GET /v1/misc/qiniu-token-audio
 
 GET /v1/misc/qiniu-token2
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -103,13 +103,13 @@ GET /v1/misc/qiniu-token2
 
 GET /v1/misc/qiniu-token-video
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -125,13 +125,13 @@ GET /v1/misc/qiniu-token-video
 
 GET /v1/misc/qiniu-token-group-disk
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -147,13 +147,13 @@ GET /v1/misc/qiniu-token-group-disk
 
 GET /v1/misc/setting
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|否|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 否   | 无   |
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -174,7 +174,7 @@ GET /v1/misc/setting
 
 GET /v1/misc/gray-status
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -190,14 +190,14 @@ GET /v1/misc/gray-status
 
 GET /v1/misc/auto-update
 
-URL 参数:  
+URL 参数:
 
 ```TEXT
 platform=windows // 目标平台标识符，windows，android，macos，ios
 userId=123 // 获取更新的用户ID
 ```
 
-响应体:  
+响应体:
 
 ```XML
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">

@@ -3,22 +3,22 @@ title: community
 ---
 
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
-没写请求/响应项目表示不需要相关参数.  
+没写请求/响应项目表示不需要相关参数.
 
 ## 创建文章
 
 POST /v1/community/posts/create
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
-{  
+{
   "baId": 40, // 文章分区ID
   "groupId": "123", // 文本引用群聊ID
   "title": "测试文章标题", // 文章标题
@@ -28,7 +28,7 @@ POST /v1/community/posts/create
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -44,13 +44,13 @@ POST /v1/community/posts/create
 
 POST /v1/community/posts/delete
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -58,7 +58,7 @@ POST /v1/community/posts/delete
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -71,13 +71,13 @@ POST /v1/community/posts/delete
 
 POST /v1/community/posts/post-reward
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -86,7 +86,7 @@ POST /v1/community/posts/post-reward
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -99,13 +99,13 @@ POST /v1/community/posts/post-reward
 
 POST /v1/community/comment/comment-reward
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -115,7 +115,7 @@ POST /v1/community/comment/comment-reward
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -128,13 +128,13 @@ POST /v1/community/comment/comment-reward
 
 POST /v1/community/posts/post-like
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -142,7 +142,7 @@ POST /v1/community/posts/post-like
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -155,13 +155,13 @@ POST /v1/community/posts/post-like
 
 POST /v1/community/posts/post-collect
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -169,7 +169,7 @@ POST /v1/community/posts/post-collect
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -182,13 +182,13 @@ POST /v1/community/posts/post-collect
 
 POST /v1/community/posts/edit
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -199,7 +199,7 @@ POST /v1/community/posts/edit
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -215,11 +215,11 @@ POST /v1/community/posts/edit
 
 POST /v1/community/posts/post-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -262,7 +262,7 @@ POST /v1/community/posts/post-list
         "senderAvatar": "https://.。。", // 作者头像url
         "createTimeText": "2025-08-05 16:30:13", // 创建文章时间
         "group": { // 以下是绑定该分区且从这个群聊发送文章的群聊id
-          "id": 0, // 
+          "id": 0, //
           "groupId": "", // 群聊id
           "name": "", // 群聊名字
           "introduction": "", // 群聊简介
@@ -299,11 +299,11 @@ POST /v1/community/posts/post-list
 
 POST /v1/community/ba/info
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -341,11 +341,11 @@ POST /v1/community/ba/info
 
 POST /v1/community/ba/following-ba-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -388,11 +388,11 @@ POST /v1/community/ba/following-ba-list
 
 POST /v1/community/reward-record
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -451,7 +451,7 @@ POST /v1/community/reward-record
           "avatar_url": "https://..." // 打赏者头像url
         },
         "comment": {
-          "id": 0, 
+          "id": 0,
           "postId": 0,
           "parentId": 0,
           "senderId": "",
@@ -482,11 +482,11 @@ POST /v1/community/reward-record
 
 POST /v1/community/comment/comment
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -511,11 +511,11 @@ POST /v1/community/comment/comment
 
 POST /v1/community/comment/comment-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -569,18 +569,18 @@ POST /v1/community/comment/comment-list
 
 POST /v1/community/search
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
 ```JSONC
 {
   "typ": 3, // 未知
-  "keyword": "123", // 关键词文本 
+  "keyword": "123", // 关键词文本
   "size": 10, // 返回文章数量
   "page": 1 // 页数
 }
@@ -664,11 +664,11 @@ POST /v1/community/search
 
 POST /v1/community/set-black-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -692,11 +692,11 @@ POST /v1/community/set-black-list
 
 POST /v1/community/black-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -732,11 +732,11 @@ POST /v1/community/black-list
 
 POST /v1/community/posts/post-detail
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -763,7 +763,7 @@ POST /v1/community/posts/post-detail
       "postNum": 9752, // 该分区的文章数量
       "groupNum": 64, // 该分区绑定的群聊数量
       "createTimeText": "2022-10-08 20:49:13", // 分区创建时间
-      "isFollowed": "0" 
+      "isFollowed": "0"
     },
     "isAdmin": 0, // 文章作者是否为管理员
     "post": {
@@ -836,11 +836,11 @@ POST /v1/community/posts/post-detail
 
 POST /v1/community/posts/my-post-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -920,11 +920,11 @@ POST /v1/community/posts/my-post-list
 
 POST /v1/community/ba/group-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -951,7 +951,7 @@ POST /v1/community/ba/group-list
         "createBy": "6016104", // 群聊创建者id(群主id)
         "createTime": 1757207765, // 群聊创建时间戳
         "avatarId": 47524, // 头像id
-        "del_flag": 0, 
+        "del_flag": 0,
         "avatarUrl": "https://chat-img.jwznb.com/922717b67b6c61b79155fdb11bc1f796.jpg", // 群头像url
         "headcount": 35, // 群聊人数
         "readHistory": 1, // 是否开启新成员查看消息历史记录（1为开启，0为关闭）
@@ -1001,11 +1001,11 @@ POST /v1/community/ba/group-list
 
 POST /v1/community/ba/forward
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -1035,11 +1035,11 @@ POST /v1/community/ba/forward
 
 POST /v1/community/ba/manage
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|必须为文章分区所有者|
+| 名称  | 必须 | 备注                 |
+| ----- | ---- | -------------------- |
+| token | 是   | 必须为文章分区所有者 |
 
 请求体：
 
@@ -1064,11 +1064,11 @@ POST /v1/community/ba/manage
 
 POST /v1/community/ba/create
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -1095,11 +1095,11 @@ POST /v1/community/ba/create
 
 POST /v1/community/ba/edit
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|必须为文章分区所有者|
+| 名称  | 必须 | 备注                 |
+| ----- | ---- | -------------------- |
+| token | 是   | 必须为文章分区所有者 |
 
 请求体：
 
@@ -1124,11 +1124,11 @@ POST /v1/community/ba/edit
 
 POST /v1/community/ba/delete
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|必须为文章分区所有者|
+| 名称  | 必须 | 备注                 |
+| ----- | ---- | -------------------- |
+| token | 是   | 必须为文章分区所有者 |
 
 请求体：
 
@@ -1151,11 +1151,11 @@ POST /v1/community/ba/delete
 
 POST /v1/community/posts/create-draft
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -1185,11 +1185,11 @@ POST /v1/community/posts/create-draft
 
 POST /v1/community/posts/get-draft
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -1265,11 +1265,11 @@ POST /v1/community/posts/get-draft
 
 POST /v1/community/posts/cancel-draft
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|必须为草稿创建者|
+| 名称  | 必须 | 备注             |
+| ----- | ---- | ---------------- |
+| token | 是   | 必须为草稿创建者 |
 
 请求体：
 
@@ -1292,11 +1292,11 @@ POST /v1/community/posts/cancel-draft
 
 POST /v1/community/ba/user-follow-ba
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -1320,11 +1320,11 @@ POST /v1/community/ba/user-follow-ba
 
 POST /v1/community/ba/user-unfollow-ba
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -1347,11 +1347,11 @@ POST /v1/community/ba/user-unfollow-ba
 
 POST /v1/community/posts/edit-sticky
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|必须是分区管理者|
+| 名称  | 必须 | 备注             |
+| ----- | ---- | ---------------- |
+| token | 是   | 必须是分区管理者 |
 
 请求体：
 
@@ -1374,11 +1374,11 @@ POST /v1/community/posts/edit-sticky
 
 POST /v1/community/ba/follower-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|必须是分区管理者|
+| 名称  | 必须 | 备注             |
+| ----- | ---- | ---------------- |
+| token | 是   | 必须是分区管理者 |
 
 请求体：
 
@@ -1422,11 +1422,11 @@ POST /v1/community/ba/follower-list
 
 POST /v1/community/ba/manage-setting
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|必须是分区创建者|
+| 名称  | 必须 | 备注             |
+| ----- | ---- | ---------------- |
+| token | 是   | 必须是分区创建者 |
 
 请求体：
 
@@ -1451,11 +1451,11 @@ POST /v1/community/ba/manage-setting
 
 POST /v1/community/ba/list-by-create
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -1478,6 +1478,97 @@ POST /v1/community/ba/list-by-create
         "avatar": "https://..." // 分区头像url
       }
     ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取推荐文章
+
+POST /v1/community/posts/post-list-recommend
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+ "size":1, // 每页的文章数量
+ "page":2 // 页数
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "posts": [
+      {
+        "id": 29950, // 文章id
+        "baId": 41, // 文章所属分区id
+        "senderId": "1234567", // 文章作者id
+        "senderNicknameId": 127504, // 作者昵称id
+        "senderAvatarId": 32537, // 作者头像id
+        "groupId": "", // 文章所属群聊id
+        "title": "测试", // 文章标题
+        "contentType": 2, // 文章类型，1-普通文字，2-Markdown
+        "content": "如果缺少您所在的城市，欢迎反馈添加。", // 文章部分内容
+        "delTime": 0, // 删除时间戳
+        "createTime": 1748067660, // 创建时间戳
+        "updateTime": 0, // 更新时间戳
+        "editTime": 1767086078, // 编辑时间戳
+        "lastActive": 1767086078, // 上次活跃时间戳
+        "likeNum": 14, // 文章点赞数量
+        "commentNum": 522, // 文章评论数量
+        "collectNum": 1, // 文章收藏数量
+        "isDraft": 0, // 是否为草稿，0-不是，1-是
+        "isSticky": 0, // 置顶时间戳，0-不是，1-是
+        "amountNum": 0, // 文章投币数量
+        "auditStatus": 0, // 审核状态
+        "delBy": "",
+        "senderNickname": "昵称", // 作者昵称
+        "senderAvatar": "https://chat-img.jwznb.com/xxx.jpg", // 作者头像url
+        "createTimeText": "",
+        "group": {
+          "id": 0,
+          "groupId": "",
+          "name": "",
+          "introduction": "",
+          "createBy": "",
+          "createTime": 0,
+          "avatarId": 0,
+          "del_flag": 0,
+          "avatarUrl": "",
+          "headcount": 0,
+          "readHistory": 0,
+          "alwaysAgree": 0,
+          "categoryId": 0,
+          "category": "",
+          "private": 0,
+          "banId": 0,
+          "gag": 0,
+          "gagBy": "",
+          "msgTypeLimit": "",
+          "keyword": "",
+          "hideMember": 0,
+          "allowRecommend": 0,
+          "blockFriends": 0,
+          "autoDeleteMessage": 0
+        },
+        "isLiked": "1", // 是否点赞，0-不是，1-是
+        "isCollected": 0, // 是否收藏，0-不是，1-是
+        "isReward": 0, // 是否投币，0-不是，1-是
+        "isVip": 1, // 作者是否为vip
+        "score": 877.005014928 // 文章分数（猜测）
+      }
+    ],
+    "total": 3933 // 总文章数量
   },
   "msg": "success" // 返回消息
 }

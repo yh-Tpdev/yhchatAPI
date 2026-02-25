@@ -3,13 +3,13 @@ title: user
 ---
 
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
-没写请求/响应项目表示不需要相关参数.  
+没写请求/响应项目表示不需要相关参数.
 
 ## 获取人机验证图片
 
 POST /v1/user/captcha
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -18,18 +18,18 @@ POST /v1/user/captcha
     "b64s": "image//png;base64...", // 人机验证图片base64
     "id": "123" // 人机验证ID
   },
-  "msg": "success" // 返回消息 
+  "msg": "success" // 返回消息
 }
 ```
 
-## 短信验证码登录  
+## 短信验证码登录
 
 POST /v1/user/verification-login
 
-请求体:  
+请求体:
 
 ```JSONC
-{  
+{
   "mobile": "12312312300", // 登录手机号
   "captcha": "123123", // 手机验证码
   "deviceId": "awa", // 登录设备唯一标识符，可自定义
@@ -37,7 +37,7 @@ POST /v1/user/verification-login
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -51,15 +51,15 @@ POST /v1/user/verification-login
 
 ## 获取用户自身信息
 
-GET /v1/user/info  
+GET /v1/user/info
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|------|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -71,7 +71,7 @@ data {
   id: "123" // 用户id
   name: "测试用户" // 用户名
   avatar_url: "https://..." // 头像URL
-  avatar_id: 123 //头像ID 
+  avatar_id: 123 //头像ID
   phone: "12312312300" // 手机号
   email: "123@123.com" // 邮箱
   coin: 123 // 金币数
@@ -111,13 +111,13 @@ message info {
 
 POST /v1/user/get-user
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|---|---|---|
-|token|是|可以瞎写一个|
+| 名称  | 必须 | 备注         |
+| ----- | ---- | ------------ |
+| token | 是   | 可以瞎写一个 |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 id: "用户id"
@@ -133,7 +133,7 @@ message get_user_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -147,18 +147,42 @@ data {
   name_id: 123 // 名称ID
   avatar_url: "https://..." // 头像URL
   avatar_id: 123 // 头像ID
-  medal {
-    id: 1 // 勋章ID
-    name: "测试勋章" // 勋章名称
-    sort: 100 // 勋章顺序
-  }
-  // ...
   register_time: "1234-12-12 12:12:12" // 注册时间(YYYY-MM-DD hh:mm:ss)
-  ban_time: 123123123 // 封禁结束时间(时间戳)
   online_day: 123 // 在线时长
   continuous_online_day: 123 // 连续在线时长
   is_vip: 1 // 是否为VIP
   vip_expired_time: 123123123 // VIP过期时间(时间戳)
+  ban_time: 123123123 // 封禁结束时间(时间戳)
+  medal [
+    {
+      "name": "徽章1", // 徽章名称
+      "icon": "徽章1", // ?徽章图标?
+      "sort": 1, // 徽章顺序（在服务端）
+      "_id": "id", // ?徽章介绍?
+      "level": 100, // 等级
+      "_level": "level" // ?等级介绍?
+     },
+     {
+      "name": "徽章2", // 徽章名称
+      "icon": "徽章2", // ?徽章图标?
+      "sort": 3, // 徽章顺序（在服务端）
+      "_id": "id", // ?徽章介绍?
+      "level": 500, // 等级
+      "_level": "level" // ?等级介绍?
+    }
+  ],
+  "remark_info": {
+    "date": "", // 备注时间
+    "remarks": "" // 备注内容
+  },
+  "profile_info": {
+    "flag": 1, // ？
+    "scoreOrId": 1295971200,
+    "province": "省（自治区）", // IP归属地
+    "city": "市（乡）", // IP归属地
+    "district": "区（县）", // IP归属地
+  },
+  "country": "国家或地区" // IP归属地
 }
 ```
 
@@ -207,6 +231,7 @@ message get_user {
         uint64 vip_expired_time = 14; // VIP过期时间(时间戳)
         Remark_info remark_info = 18; // 备注信息
         Profile_info profile_info = 19; // 用户资料信息
+        string ipGeo = 20; // IP归属地（国家）
     }
 }
 ```
@@ -217,13 +242,13 @@ message get_user {
 
 POST /v1/user/medal
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -261,13 +286,13 @@ message Medal_info {
 
 POST /v1/user/edit-nickname
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 name: "123" // 用户名称
@@ -283,7 +308,7 @@ message edit_nickname_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -308,13 +333,13 @@ message edit_nickname {
 
 POST /v1/user/edit-avatar
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
-请求体:  
+请求体:
 
 ```ProtoBuf
 url: "https://..." // 用户头像url
@@ -330,7 +355,7 @@ message edit_avatar_send {
 
 :::
 
-响应体:  
+响应体:
 
 ```ProtoBuf
 status {
@@ -366,7 +391,7 @@ POST /v1/user/email-login
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -382,13 +407,13 @@ POST /v1/user/email-login
 
 POST /v1/user/logout
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
-请求体:  
+请求体:
 
 ```JSONC
 {
@@ -396,7 +421,7 @@ POST /v1/user/logout
 }
 ```
 
-响应体:  
+响应体:
 
 ```JSONC
 {
@@ -409,11 +434,11 @@ POST /v1/user/logout
 
 POST /v1/user/recommend-category-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
 请求体：
 
@@ -447,11 +472,11 @@ POST /v1/user/recommend-category-list
 
 POST /v1/user/recommend-list
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
 请求体：
 
@@ -491,11 +516,11 @@ POST /v1/user/recommend-list
 
 POST /v1/user/recommend
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
 响应体：
 
@@ -527,11 +552,11 @@ POST /v1/user/recommend
 
 POST /v1/user/module-ignore-info
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|需要vip|
+| 名称  | 必须 | 备注    |
+| ----- | ---- | ------- |
+| token | 是   | 需要vip |
 
 请求体：
 
@@ -563,11 +588,11 @@ POST /v1/user/module-ignore-info
 
 POST /v1/user/module-ignore
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|需要vip|
+| 名称  | 必须 | 备注    |
+| ----- | ---- | ------- |
+| token | 是   | 需要vip |
 
 请求体：
 
@@ -591,11 +616,11 @@ POST /v1/user/module-ignore
 
 POST /v1/user/notification-status
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
 请求体：
 
@@ -619,7 +644,7 @@ POST /v1/user/notification-status
       "registrationId": "114514", // 通知注册id
       "isOpen": 1, // 是否打开系统消息通知（设置”系统消息通知“选项可控制这个数值，1-打开，0-关闭）
       "type": 2, // 类型
-      "delFlag": 0, 
+      "delFlag": 0,
       "createTime": 1231231230, // 创建时间戳
       "updateTime": 1231231230 // 更新时间戳
     }
@@ -632,11 +657,11 @@ POST /v1/user/notification-status
 
 POST /v1/user/notification-info
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
 请求体：
 
@@ -662,11 +687,11 @@ POST /v1/user/notification-info
 
 POST /v1/user/gold-coin-increase-decrease-record
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -707,11 +732,11 @@ POST /v1/user/gold-coin-increase-decrease-record
 
 POST /v1/user/bing-phone
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -735,11 +760,11 @@ POST /v1/user/bing-phone
 
 POST /v1/user/bing-email
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -763,11 +788,11 @@ POST /v1/user/bing-email
 
 POST /v1/user/change-phone-check
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -791,11 +816,11 @@ POST /v1/user/change-phone-check
 
 POST /v1/user/change-email-check
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -842,11 +867,11 @@ POST /v1/user/forget-password
 
 POST /v1/user/save-user-data
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
 请求体：
 
@@ -875,11 +900,11 @@ POST /v1/user/save-user-data
 
 POST /v1/user/get-user-data
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
 响应体：
 
@@ -909,11 +934,11 @@ POST /v1/user/get-user-data
 
 POST /v1/user/get-user-show-adv
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|空|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
 
 响应体：
 

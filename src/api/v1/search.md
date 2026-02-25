@@ -9,11 +9,11 @@ title: search
 
 POST /v1/search/home-search
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -43,7 +43,7 @@ POST /v1/search/home-search
             "nickname": "114514", // 群聊名字
             "name": "",
             "avatarUrl": "https://chat-img.jwznb.com/ba7631819aaff2fc5799bbf6f279c606.jpg", // 群聊头像url
-            "hit": 1 
+            "hit": 1
           }
         ]
       },
@@ -61,11 +61,11 @@ POST /v1/search/home-search
 
 POST /v1/search/chat-search
 
-请求头:  
+请求头:
 
-|名称|必须|备注|
-|-----|-----|-----|
-|token|是|无|
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
 
 请求体：
 
@@ -75,7 +75,7 @@ POST /v1/search/chat-search
   "chatId": "test", // 对象ID
   "chatType": 2, // 对象类别
   "type": "all", // 信息类别，1-文本，3-markdown，4-文件，6-文章，7-表情包，8-html
-  "size": 30, // 
+  "size": 30, //
   "time": 9999999999999, // 涵盖信息时间戳，只返回此时间戳内的信息
   "direction":1 // 未知
 }
