@@ -830,7 +830,7 @@ POST /v1/bot/get-user-settings-json
       }
     ]
   },
-  "msg": "success"
+  "msg": "success" // 返回状态消息
 }
 ```
 
@@ -851,5 +851,117 @@ POST /v1/bot/send-setting-json
   "id": "12345", // 机器人id
   "groupId": "678910", // 群聊id
   "settingJson": "" // 机器人设置json数组（需转义）
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 智能体机器人清除上下文
+
+POST /v1/bot/llm/clean-content
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|机器人创建者token|
+
+请求体：
+
+```JSONC
+{
+  "botId": "25637484" // 机器人ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 获取智能体机器人知识库
+
+POST /v1/bot/llm/knowledge/list
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|机器人创建者token|
+
+请求体：
+
+```JSONC
+{
+  "botId": "123123123" // 机器人ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "id": 123, // 知识文件ID
+        "botId": "123123123", // 机器人ID
+        "botLlmId": 123, // Llm智能体机器人ID
+        "name": "轻韵助手-第三方云湖助手：第三方扩展插件编写文档.txt",
+        "url": "https://chat-file.jwznb.com/knowledge/835a1ab0d63ba9921c25d5f4e8c3bfe5.txt",
+        "status": 0, // 知识库文件处理状态，0-处理中，1-处理成功，2-处理失败
+        "isStop": 0, // 是否停用此文件，0-不停用，1-停用
+        "charLength": 0, // 字符长度
+        "paragraphCount": 0, // 分段数
+        "createBy": "123", // 知识库文件创建者ID
+        "createTime": 123123123, // 知识库文件创建时间戳
+        "updateBy": "", // 知识库文件更新用户ID
+        "updateTime": 0, // 知识库文件更新时间戳
+        "delFlag": 0 // 删除标签
+      }
+      // ...
+    ]
+  },
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 智能体机器人上传知识文件
+
+POST /v1/bot/llm/knowledge/create
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|机器人创建者token|
+
+请求体：
+
+```JSONC
+{
+  "botId": "123123123", // 机器人ID
+  "knowledgeId": 123 // 知识文件ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
 }
 ```

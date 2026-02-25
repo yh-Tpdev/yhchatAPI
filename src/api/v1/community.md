@@ -1405,7 +1405,7 @@ POST /v1/community/ba/follower-list
         "delTime": 0,
         "followSource": 2,
         "createTime": 1763132265, // 关注时间戳
-        "userLevel": 0, // 关注者等级（0-普通，2-分区管理员）
+        "userLevel": 0, // 关注者等级（0-普通，2-分区管理员，100-分区创建者）
         "nickname": "是个人", // 关注者名称
         "avatarUrl": "https://chat-img.jwznb.com/6900488d625d48ac45ba34eff5b1246c.jpg", // 关注者头像url
         "vipUserid": "1234567", // 关注者vip用户id
