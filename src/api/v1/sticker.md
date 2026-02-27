@@ -204,7 +204,7 @@ sticker = [
               "id": "2","sort": "2"
             }
           ]
-payload = {"sort": str(sticker)}
+payload = {"sort": json.dumps(sticker)} # 注意是 json.dumps,不是 str
 response = httpx.post("https://chat-go.jwzhd.com/v1/sticker/sort", headers = headers, json = payload)
 print(response.text)
 ```

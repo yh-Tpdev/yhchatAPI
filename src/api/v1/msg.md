@@ -53,7 +53,7 @@ message send_message_send {
         string buttons = 2; // 按钮
         string file_name = 4; // 欲发送文件名称
         string file_key = 5; // 欲发送文件key
-        repeated string mentioned_id = 6; // @用户ID，可重复多个本属性
+        repeated string mentioned_id = 6; // @用户ID,可以填写多个
         string form = 7; // 表单消息
         string quote_msg_text = 8; // 引用信息文本
         string image = 9; // 欲发送图片key/url(expression/abcdef.jpg)
@@ -61,6 +61,7 @@ message send_message_send {
         string post_title = 11; // 文章标题
         string post_content = 12; // 文章内容
         string post_type = 13; // 文章类型:1-文本,2-Markdown
+        string expression_id = 15; // 个人表情ID(不知道为啥为STR)
         string quote_image_url = 16; // 引用图片直链,https://...
         string quote_image_name = 17; // 引用图片文件名称
         uint64 file_size = 18; // 欲发送文件大小
@@ -92,8 +93,67 @@ message send_message_send {
 
 :::
 
-::: warning
-在发送单种类别的信息时，其余类别的信息属性不存在，例如语音信息不存在引用信息.
+::: details 发送消息指引
+
+### 任何消息
+下面说的各种消息是需要额外注意/填写部分,填写内容建议看 proto 的注释.  
+必填: 
+- `msg_id` # 可以使用 `uuid.uuid4.hex()` 生成一个.
+- `chat_id`
+- `chat_type`
+- `content_type` # 按照实际填写
+
+可选:
+- `data.mentioned_id`
+- `data.buttons` # 部分消息填写此项会非常生草
+- `quote_msg_id` # 服务端会自动忽略无效的 `msg_id`,部分消息不支持
+- `data.quote_msg_text` # 可以自定义,服务端不校验,格式: `用户名: 消息内容`
+- `data.quote_image_name` # 填写图片 URL(例如说 test.jpg)
+- `data.quote_video_time` # 填写引用视频 URL,示例同上
+- `command_id`
+
+### 文本类消息
+此处文本类消息指 `普通文本`,`html 消息`,`markdown 消息`.
+必填:
+- `data.text`  
+
+### 图片消息
+必填:
+- `data.image`
+
+### 文件消息
+必填:
+- `data.file_key` # 直接填文件 URL,例如 123.bin
+- `data.file_size` # 文件大小,服务端不校验,建议如实填写
+
+### 视频消息
+必填:
+- `data.video` # 直接填视频 URL,例如 123.mp4
+
+### 语音消息
+必填;
+- `data.audio` # 语音文件 URL(例如说 test.m4a)
+- `data.audio_time` # 语音时长,服务端不校验,建议按照实际填写
+
+注: 服务端会忽略引用消息相关的参数.
+
+### 个人收藏表情
+必填:
+- `data.image`
+- `data.expression_id` # 注意 proto 中此项为 str 类型,服务端不校验,建议如实填写否则会导致无法添加/添加表情和图片不一致等问题
+
+### 表情包表情
+必填:
+- `data.image`
+- `data.sticker_item_id` # 表情 ID,服务端不校验,建议如实填写,否则会出现不一致/无法添加等问题
+- `data.sticker_pack_id` # 表情包 ID,服务端不校验,建议如实填写否则会出现不一致/无法预览等问题
+
+### 文章消息
+建议使用 community 的转发文章 API 而不是手动填写,手动填写容易出问题.
+
+### 表单消息
+必填:
+- `data.form` # 具体内容自己抓包看吧
 :::
 
 响应体:

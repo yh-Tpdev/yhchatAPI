@@ -2,7 +2,7 @@
 title: chat-ws-go.jwzhd.com
 ---
 
-> 本文章下所有 wss 请求地址均为 `wss://chat-ws-go.jwzhd.com/ws` 。
+> 本文章下所有 wss 请求地址均为 `wss://chat-ws-go.jwzhd.com/ws`  
 
 没写 请求/响应项目 表示不需要相关参数，使用以下功能前必须先链接 wss 并 **登录云湖账号** 。
 
@@ -28,7 +28,7 @@ message INFO {
   "data": {
     "userId": "123", // 登录用户ID
     "token": "nj104901-****-****-****-************",
-    "platform": "windows", // 登录平台，只能为 windows，Web 等
+    "platform": "windows", // 登录平台，只能为 windows，Web 等特定值,乱写云湖不认
     "deviceId": "123" //设备识别码，可随便写
   }
 }
@@ -36,7 +36,7 @@ message INFO {
 
 ### 允许的平台
 
-注：**大小写敏感，填写错误会导致登录失败**
+注：**大小写敏感，填写错误会导致登录失败**.
 
 - `windows`
 - `macos`
@@ -109,7 +109,7 @@ info {
 }
 
 data {
-  any: "type.googleapis.com/proto.MsgInput" // 操作类型(?)
+  any: "type.googleapis.com/proto.MsgInput" // ProtoBuf 的 any 字段
   draft {
     chat_id: "8826687" // 聊天对象ID
     input: "测试草稿同步" // 草稿内容
@@ -150,7 +150,7 @@ info {
 }
 
 data {
-  any: "type.googleapis.com/proto.PushMessage" // 操作类型?
+  any: "type.googleapis.com/proto.PushMessage" // ProtoBuf 的 any 字段
   msg {
     msg_id: "abcdef" // 消息ID
     sender {
@@ -283,7 +283,7 @@ info {
 }
 
 data {
-  any: "type.googleapis.com/proto.PushMessage" // 操作类型?
+  any: "type.googleapis.com/proto.PushMessage" // ProtoBuf 的 any 字段
   file_send: {
       send_user_id: "123" // 分享者用户ID
       user_id: "123" // 接收者用户ID
@@ -334,7 +334,7 @@ info {
 }
 
 data {
-  any: "type.googleapis.com/proto.PushMessage" // 操作类型?
+  any: "type.googleapis.com/proto.PushMessage" // ProtoBuf 的 any 字段
   msg {
     "msg_id": "123123123123" // 信息ID
     "chat_id": "123" // 信息对象ID
@@ -421,7 +421,7 @@ info {
     cmd: "stream_message"
 }
 data {
-  any: "type.googleapis.com/proto.StreamMessage" // ProtoBuf的any字段
+  any: "type.googleapis.com/proto.StreamMessage" // ProtoBuf 的 any 字段
   msg {
     msgId: "11451419180" // 消息ID
     recvId: "6666666" // 接受者ID

@@ -80,7 +80,7 @@ POST /v1/disk/file-list
 }
 ```
 
-## 上传文件（需搭配[获取上传文件token](https://yh-api.yyyyt.top/api/v1/misc.html#%E8%8E%B7%E5%8F%96%E5%8A%9F%E8%83%BD%E8%B7%AF%E7%94%B1)使用）
+## 上传文件（需搭配[获取上传文件token](/api/v1/misc.html#%E8%8E%B7%E5%8F%96%E5%8A%9F%E8%83%BD%E8%B7%AF%E7%94%B1)使用）
 
 POST /v1/disk/upload-file
 
