@@ -2,9 +2,9 @@
 title: chat-ws-go.jwzhd.com
 ---
 
-本文章下所有wss请求地址均为 `wss://chat-ws-go.jwzhd.com/ws`  
-没写请求/响应项目表示不需要相关参数,使用以下功能前必须先链接wss并 **登录云湖账号**.  
-如果登录失败或未登录直接发送数据，会返回"数据不合法"或其二进制格式.  
+本文章下所有wss请求地址均为 `wss://chat-ws-go.jwzhd.com/ws` 。
+没写请求/响应项目表示不需要相关参数,使用以下功能前必须先链接wss并 **登录云湖账号** 。
+如果登录失败或未登录直接发送数据，会返回"数据不合法"或其二进制格式或无任何响应。
 本教程中未特别说明情况下proto的INFO均为以下部分:
 
 ```proto
@@ -25,11 +25,23 @@ message INFO {
   "data": {
     "userId": "123", // 登录用户ID
     "token": "nj104901-****-****-****-************",
-    "platform": "windows", // 登录平台，只能为windows，web等
+    "platform": "windows", // 登录平台，只能为 windows，Web 等
     "deviceId": "123" //设备识别码，可随便写
   }
 }
 ```
+
+### 允许的平台
+
+注：**大小写敏感，填写错误会导致登录失败**
+
+- `windows`
+- `macos`
+- `android`
+- `linux`
+- `ios`
+- `fuchsia`
+- `Web`
 
 ## 发送心跳包
 
