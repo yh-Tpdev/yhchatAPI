@@ -2,8 +2,9 @@
 title: chat-ws-go.jwzhd.com
 ---
 
-本文章下所有wss请求地址均为 wss://chat-ws-go.jwzhd.com/ws
+本文章下所有wss请求地址均为 `wss://chat-ws-go.jwzhd.com/ws`  
 没写请求/响应项目表示不需要相关参数,使用以下功能前必须先链接wss并 **登录云湖账号**.  
+如果登录失败或未登录直接发送数据，会返回"数据不合法"或其二进制格式.  
 本教程中未特别说明情况下proto的INFO均为以下部分:
 
 ```proto
@@ -384,9 +385,8 @@ info {
 ::: details ProtoBuf数据结构
 
 ```proto
-message INFO {
-    string seq = 1; // 请求标识码
-    string cmd = 2; // 操作类型
+message InviteApply {
+    INFO info = 1;
 }
 ```
 
