@@ -679,7 +679,7 @@ POST /v1/bot/get-user-settings-json
 }
 ```
 
-响应体： （具体settingsJson更多解释请看[这里](https://yh-api.yyyyt.top/api/v1/instruction.html#%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8C%87%E4%BB%A4)）
+响应体： （具体settingsJson更多解释请看[这里](/api/v1/instruction.html#%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8C%87%E4%BB%A4)）
 
 ```JSONC
 {
@@ -844,7 +844,7 @@ POST /v1/bot/send-setting-json
 | ----- | ---- | --------------- |
 | token | 是   | 群聊管理员token |
 
-请求体： （具体settingJson更多解释请看[这里](https://yh-api.yyyyt.top/api/v1/instruction.html#%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8C%87%E4%BB%A4)）
+请求体： （具体settingJson更多解释请看[这里](/api/v1/instruction.html#%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8C%87%E4%BB%A4)）
 
 ```JSONC
 {
