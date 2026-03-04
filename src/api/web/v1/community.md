@@ -148,4 +148,3 @@ POST /v1/community/c/info
   "msg": "success" // 返回消息
 }
 ```
-
