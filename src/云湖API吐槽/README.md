@@ -2,6 +2,7 @@
 title: 云湖API吐槽
 feed: false
 index: false
+icon: comment
 ---
 ## 云湖API吐槽目录
 
