@@ -15,7 +15,7 @@ title: API
 
 * 3
 
-> **[web](./web)**  
+> **[web](./web/)**  
 > -云湖网页版API已记录的所有API文档
 
 ::: warning 由于云湖域名 `https://*.jwznb.com/` 是防盗链，需要请求头加上 `referer:http://myapp.jwznb.com` 才可正常获取内容，否则会403.
