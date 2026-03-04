@@ -1,5 +1,5 @@
 ---
-title: v1
+title: v1 API
 index: false
 feed: false
 timeline: false
