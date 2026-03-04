@@ -15,5 +15,5 @@ title: API
 
 * 3
 
-> **[web](./web)**  
+> **[web](./web/)**  
 > -云湖网页版API已记录的所有API文档
