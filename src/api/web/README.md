@@ -1,5 +1,5 @@
 ---
-title: chat-web-go
+title: Web API
 index: false
 article: false
 sitemap: false
