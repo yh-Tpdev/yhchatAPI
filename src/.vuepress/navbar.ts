@@ -23,6 +23,7 @@ export default navbar([
   },
   {
       text: "API吐槽",
+      icon: "comment",
       link: "/云湖API吐槽/",
   },
 ])
