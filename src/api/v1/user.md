@@ -179,7 +179,7 @@ data {
     "flag": 1, // ？
     "scoreOrId": 1295971200,
     "province": "省（自治区）", // IP归属地
-    "city": "市（乡）", // IP归属地
+    "city": "市", // IP归属地
     "district": "区（县）", // IP归属地
   },
   "country": "国家或地区" // IP归属地
