@@ -7,7 +7,9 @@ title: bot
 
 ## 机器人发送信息
 
+```http
 POST /open-apis/v1/bot/send?token={机器人token}
+```
 
 请求体：
 
@@ -15,7 +17,7 @@ POST /open-apis/v1/bot/send?token={机器人token}
 {
   "recvId": "123", // 目标对象ID
   "recvType": "user", // 目标对象类别，user-用户，group-群聊
-  "contentType": "text", // 信息类别，text-文本信息，image-图片信息，video-视频信息，file-文件信息，markdown-Markdown信息，html-HTML信息
+  "contentType": "text", // 信息类别，text-文本信息，image-图片信息，video-视频信息，file-文件信息，markdown-Markdown信息，html-HTML信息，post-文章
   "content": {
     "text": "测试消息文本", // 消息文本
     "at":"123,123,123", // @用户ID，使用","符号分割
@@ -41,7 +43,7 @@ POST /open-apis/v1/bot/send?token={机器人token}
 }
 ```
 
-响应头：
+响应体：
 
 ```JSONC
 {
@@ -59,7 +61,9 @@ POST /open-apis/v1/bot/send?token={机器人token}
 
 ## 机器人批量发送信息
 
+```http
 POST /open-apis/v1/bot/batch_send?token={机器人token}
+```
 
 请求体：
 
@@ -93,7 +97,7 @@ POST /open-apis/v1/bot/batch_send?token={机器人token}
 }
 ```
 
-响应头：
+响应体：
 
 ```JSONC
 {
@@ -115,20 +119,23 @@ POST /open-apis/v1/bot/batch_send?token={机器人token}
 
 ## 机器人流式发送信息
 
+```http
 POST /open-apis/v1/bot/send-stream?token={机器人token}&recvId={对象ID}&recvType={目标对象类别，user-用户，group-群聊}&contentType={信息类别，text-文本信息，markdown-Markdown信息}
+```
 
 请求头:
 
-| 名称  | 数值 | 必须 | 备注 |
-| ----- | ---- | ---- |
+| 名称 | 数值 | 必须 | 备注 |
+| ---- | ---- | ---- | ---- |
 | Transfer-Encoding | chunked | 是 | 使用分块传输编码 |
 
 请求体：
 
+```text
 {data-binary/二进制文本数据，此处直接传入文本}
+```
 
-
-响应头：
+响应体：
 
 ```JSONC
 {
@@ -145,7 +152,8 @@ POST /open-apis/v1/bot/send-stream?token={机器人token}&recvId={对象ID}&recv
 ```
 
 代码示例：
-```Golang
+
+```go
     // 创建请求
     req, err := http.NewRequest("POST", "https://chat-go.jwzhd.com/open-apis/v1/bot/send-stream?token=xxxx&recvId=123&recvType=user&contentType=text", nil)
     if err != nil {
@@ -187,7 +195,9 @@ POST /open-apis/v1/bot/send-stream?token={机器人token}&recvId={对象ID}&recv
 
 ## 机器人编辑信息
 
+```http
 POST /open-apis/v1/bot/edit?token={机器人token}
+```
 
 请求体：
 
@@ -203,7 +213,7 @@ POST /open-apis/v1/bot/edit?token={机器人token}
 }
 ```
 
-响应头：
+响应体：
 
 ```JSONC
 {
@@ -217,7 +227,9 @@ POST /open-apis/v1/bot/edit?token={机器人token}
 
 ## 机器人撤回信息
 
+```http
 POST /open-apis/v1/bot/recall?token={机器人token}
+```
 
 请求体：
 
@@ -229,7 +241,7 @@ POST /open-apis/v1/bot/recall?token={机器人token}
 }
 ```
 
-响应头：
+响应体：
 
 ```JSONC
 {
@@ -240,9 +252,11 @@ POST /open-apis/v1/bot/recall?token={机器人token}
 
 ## 机器人获取信息列表
 
+```http
 POST /open-apis/v1/bot/messages?token={机器人token}&chat-id={目标信息ID}&chat-type={目标对象类别，user-用户，group-群聊}&message-id={消息ID，不填时可以配合before参数返回最近的N条消息}&after={指定消息ID后N条，默认0条}&before={指定消息ID前N条，默认0条}
+```
 
-响应头：
+响应体：
 
 ```JSONC
 {
