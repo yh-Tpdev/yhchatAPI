@@ -20,7 +20,7 @@ title: API
 
 * 4
 
-> **[bpt](./bot/)**  
+> **[bot](./bot/)**  
 > -云湖bot/机器人已记录的所有API文档
 
 ::: warning
