@@ -18,6 +18,11 @@ title: API
 > **[web](./web/)**  
 > -云湖网页版API已记录的所有API文档
 
+* 4
+
+> **[bpt](./bot/)**  
+> -云湖bot/机器人已记录的所有API文档
+
 ::: warning
 * `https://chat-audio1.jwznb.com/` 音频路由
 * `https://chat-file.jwznb.com/` 文件路由
