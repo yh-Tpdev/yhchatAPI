@@ -93,7 +93,7 @@ message send_message_send {
 
 :::
 
-::: details 发送消息指引
+:::: details 发送消息指引
 
 ### 任何消息
 
@@ -116,33 +116,34 @@ message send_message_send {
 - `data.quote_video_time` # 填写引用视频 URL,示例同上
 - `command_id`
 
-### 文本类消息
+::: tabs
+@tab:active 文本类消息
 
 此处文本类消息指 `普通文本`,`html 消息`,`markdown 消息`.
 必填:
 
 - `data.text`  
 
-### 图片消息
+@tab 图片消息
 
 必填:
 
 - `data.image`
 
-### 文件消息
+@tab 文件消息
 
 必填:
 
 - `data.file_key` # 直接填文件 URL,例如 123.bin
 - `data.file_size` # 文件大小,服务端不校验,建议如实填写
 
-### 视频消息
+@tab 视频消息
 
 必填:
 
 - `data.video` # 直接填视频 URL,例如 123.mp4
 
-### 语音消息
+@tab 语音消息
 
 必填:
 
@@ -151,14 +152,14 @@ message send_message_send {
 
 注: 服务端会忽略引用消息相关的参数.
 
-### 个人收藏表情
+@tab 个人收藏表情
 
 必填:
 
 - `data.image`
 - `data.expression_id` # 注意 proto 中此项为 str 类型,服务端不校验,建议如实填写否则会导致无法添加/添加表情和图片不一致等问题
 
-### 表情包表情
+@tab 表情包表情
 
 必填:
 
@@ -166,17 +167,18 @@ message send_message_send {
 - `data.sticker_item_id` # 表情 ID,服务端不校验,建议如实填写,否则会出现不一致/无法添加等问题
 - `data.sticker_pack_id` # 表情包 ID,服务端不校验,建议如实填写否则会出现不一致/无法预览等问题
 
-### 文章消息
+@tab 文章消息
 
 建议使用 community 的转发文章 API 而不是手动填写,手动填写容易出问题.
 
-### 表单消息
+@tab 表单消息
 
 必填:
 
 - `data.form` # 具体内容自己抓包看吧
 
 :::
+::::
 
 响应体:
 
