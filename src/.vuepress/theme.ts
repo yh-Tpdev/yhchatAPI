@@ -132,6 +132,10 @@ export default hopeTheme({
       components: ["Badge", "VPCard"],
     },
 
+    copyCode: {
+      showInMobile: true
+    },
+
     icon: {
       prefix: "fa6-solid:",
     },
