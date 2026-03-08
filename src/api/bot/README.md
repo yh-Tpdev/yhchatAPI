@@ -4,11 +4,11 @@ title: Bot API
 
 ## 此目录下为云湖官网bot机器人文档
 
-::: details 失败响应示例
+::: tabs#失败响应示例
 
 这里收集了一些由于API请求格式不规范等导致错误的响应，欢迎补充
 
-### 群聊中未添加机器人
+@tab:active 群聊中未添加机器人 1
 
 ```JSONC
 {
@@ -17,7 +17,7 @@ title: Bot API
 }
 ```
 
-### 群聊不存在/chat-id错误（会话id错误）
+@tab:active 群聊不存在/chat-id错误（会话id错误） 2
 
 ```JSONC
 {
@@ -26,7 +26,7 @@ title: Bot API
 }
 ```
 
-### chat-type错误（会话类型错误）
+@tab:active chat-type错误（会话类型错误） 3
 
 ```JSONC
 {
@@ -35,7 +35,7 @@ title: Bot API
 }
 ```
 
-### token错误
+@tab:active token错误 4
 
 ```JSONC
 {
@@ -44,7 +44,7 @@ title: Bot API
 }
 ```
 
-### 缺少chat-id（缺少会话id）
+@tab:active 缺少chat-id（缺少会话id） 5
 
 ```JSONC
 {
@@ -53,7 +53,7 @@ title: Bot API
 }
 ```
 
-### token不存在
+@tab:active token不存在 6
 
 ```JSONC
 {
