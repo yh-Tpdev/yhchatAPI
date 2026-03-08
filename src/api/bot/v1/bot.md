@@ -267,11 +267,45 @@ POST /open-apis/v1/bot/messages?token={机器人token}&chat-id={目标信息ID}&
         "msgId": "123123123123", // 信息ID
         "parentId": "123123123123", // 引用ID
         "senderId": "123", // 发送对象ID
-        "senderType": "user", // 发送对象类别，user-bot-机器人
+        "senderType": "user", // 发送对象类别，user-用户，bot-机器人
         "senderNickname": "测试发送者名称", // 发送对象名称
         "contentType": "text", // 信息类别，text-文本信息，image-图片信息，video-视频信息，file-文件信息，markdown-Markdown信息，html-HTML信息，expression-表情信息，audio-语音信息
         "content": {
           "text": "测试文本", // 信息文本
+          "formJson": { // 表单消息
+            "bodnzx": {
+              "id": "bodnzx", // 自定义输入项每个项的id，外层键名与内层id字段的值保持一致（键名与id值同步）
+              "label": "Radio 单选框标签", // 表单label
+              "selectIndex": 1, // 如果选中为1，未选中为-1
+              "selectValue": "分割", // 选中时的值
+              "type": "radio" // 表单类型
+            },
+            "kfumpw": {
+              "id": "kfumpw", // 自定义输入项每个项的id
+              "label": "Input 输入框标签", // 表单label
+              "type": "input", // 表单类型
+              "value": "Input 输入框默认内容"
+            },
+            "pqnhhd": {
+              "id": "pqnhhd", // 自定义输入项每个项的id
+              "label": "Select 选择器标签", // 表单label
+              "selectIndex": 0, // 如果选中为1，未选中为-1
+              "selectValue": "Select 选择器选项", // 选中时的值
+              "type": "select" // 表单类型
+            },
+            "rpzjmd": {
+              "id": "rpzjmd", // 自定义输入项每个项的id
+              "label": "Switch 开关标签", // 表单label
+              "type": "switch", // 表单类型
+              "value": false // 选中时的值
+            },
+            "uqojdl": {
+              "id": "uqojdl", // 自定义输入项每个项的id
+              "label": "textarea 多行输入框标签", // 表单label
+              "type": "textarea", // 表单类型
+              "value": "" // 选中时的值
+            }
+          },
           "etag": "123123123123123123123123", // 媒体etag，图片/视频/语音信息都会有此项
           "imageHeight": 123, // 图片高度
           "imageName": "123.jpg", // 图片名称，大部分情况下可以当作图片key使用
@@ -280,6 +314,11 @@ POST /open-apis/v1/bot/messages?token={机器人token}&chat-id={目标信息ID}&
           "videoUrl": "123.mp4", // 图片网址，大部分情况下可以当作视频key使用
           "audioDuration": 123, // 语音时长
           "audioUrl": "123.mps", // 语音网址，大部分情况下可以当作语音key使用
+          "at": [ // at的ID列表，可带多个
+            "1234567",
+            "9876543"
+          ],
+          "parent": "我是1名字 : 12345", // 引用消息内容
           "buttons": [
             [
               {
