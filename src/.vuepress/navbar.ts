@@ -19,6 +19,10 @@ export default navbar([
           text: "web",
           link: "web/"
         },
+        {
+          text: "bot",
+          link: "bot/"
+        },
       ]
   },
   {
