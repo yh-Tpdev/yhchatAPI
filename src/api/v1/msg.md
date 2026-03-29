@@ -986,3 +986,37 @@ POST /v1/msg/file-download-record
   "msg": "success" // 返回消息
 }
 ```
+
+## 转发消息
+
+POST v1/msg/msg-forward
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体:
+
+```JSONC
+{
+  "msgId": "e22342a5a1a54f03bc3xxxxxxxxxxxx", // 被转发的消息msgId
+  "chatType": 2, // 被转发消息的会话类型
+  "receive": [
+    {
+      "chatId": "1234567", // 要转发到的会话id
+      "chatType": 1 // 要转发到的会话类型
+    }
+  ]
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
