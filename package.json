@@ -11,20 +11,17 @@
     "docs:update-package": "pnpm dlx vp-update"
   },
   "devDependencies": {
-    "@vuepress/bundler-vite": "2.0.0-rc.26",
-    "sass-embedded": "^1.97.3",
-    "vue": "^3.5.22",
-    "vuepress": "2.0.0-rc.26",
-    "vuepress-theme-hope": "2.0.0-rc.103",
-    "vite": "npm:rolldown-vite@7.3.1"
+    "@vuepress/bundler-vite": "2.0.0-rc.27",
+    "sass-embedded": "^1.98.0",
+    "vue": "^3.5.31",
+    "vuepress": "2.0.0-rc.27",
+    "vuepress-theme-hope": "2.0.0-rc.104"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
+      "@parcel/watcher",
       "esbuild"
-    ],
-    "overrides": {
-      "vite": "npm:rolldown-vite@7.3.1"
-    }
+    ]
   },
   "packageManager": "pnpm@9.15.5"
 }

@@ -1,8 +1,11 @@
 
-name: 部署文档
+name: 检查 & 部署文档
 
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
 
@@ -10,7 +13,7 @@ permissions:
   contents: write
 
 jobs:
-  deploy-gh-pages:
+  deploy-pages:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -43,6 +46,7 @@ jobs:
           > src/.vuepress/dist/.nojekyll
 
       - name: 部署文档
+        if: github.event_name == 'push' # 仅限合并后才会发布
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           # 部署文档

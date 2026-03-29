@@ -965,3 +965,40 @@ POST /v1/bot/llm/knowledge/create
   "msg": "success" // 返回状态消息
 }
 ```
+
+## 获取我创建的机器人
+
+POST /v1/bot/console/my-bots
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "botsTotal": 1, // 创建的机器人总数
+    "list": {
+      "bots": [
+        {
+          "botId": "123123123", // 机器人ID
+          "nickname": "测试机器人名称", // 机器人名称
+          "avatarUrl": "https://...", // 机器人头像
+          "token": "123123123123123123123", // 机器人token
+          "link": "", // 订阅链接
+          "linkStop": "0", // 订阅链接是否被停用，0-未停用，1-已停用
+          "settingJson": "", // 机器人设置配置json，需将json数据转义后填入
+          "introduction": "测试机器人简介" // 机器人简介
+        }
+        // ...
+      ]
+    }
+  },
+  "msg": "success" // 返回状态消息
+}
+```
