@@ -274,3 +274,30 @@ POST /v1/friend/no-notify
   "msg": "success" // 返回消息
 }
 ```
+
+# 删除好友/邀请请求
+
+POST /v1/friend/delete-request
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "id": 123 // 请求ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```

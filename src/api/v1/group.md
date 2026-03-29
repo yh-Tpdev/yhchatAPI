@@ -1022,3 +1022,61 @@ POST /v1/group/edit-stop-member-upload-group-file
   "msg": "success" // 返回状态消息
 }
 ```
+
+## 目标群主是否为vip
+
+POST /v1/group/edit-stop-member-upload-group-file
+
+请求头:
+
+| 名称  | 必须 | 备注            |
+| ----- | ---- | --------------- |
+| token | 是   | 无 |
+
+请求体：
+
+```JSONC
+{
+  "groupId": "123123123" // 群聊ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "isVip": 0 // 群主是否为vip，0-不是，1-是
+  },
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 转让群主
+
+POST /v1/group/transfer-group
+
+请求头:
+
+| 名称  | 必须 | 备注            |
+| ----- | ---- | --------------- |
+| token | 是   | 必须为群聊群主 |
+
+请求体：
+
+```JSONC
+{
+  "groupId": "123123123", // 群聊ID
+  "groupId": "123123" // 目标新群主用户ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
