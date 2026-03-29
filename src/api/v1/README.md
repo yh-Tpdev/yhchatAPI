@@ -29,5 +29,3 @@ message Status {
 ```
 
 注意！部分标注未完成的文档不具有参考价值！
-
-<Catalog />

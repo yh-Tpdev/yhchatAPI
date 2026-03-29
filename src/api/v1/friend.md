@@ -148,7 +148,7 @@ message address_book_list {
   repeated Data data = 2;
 
   // 列表数据
-  message Data {
+  Data data {
     string list_name = 1; // 聊天对象列表名称，为"用户"，"我加入的群聊"，"机器人"
     repeated Data_list data = 2;
 

@@ -10,5 +10,3 @@ timeline: false
 Web 端 API 文档
 
 > [v1](./v1/)
-
-<Catalog />

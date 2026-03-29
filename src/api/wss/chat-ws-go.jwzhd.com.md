@@ -19,7 +19,7 @@ message INFO {
 
 ## 登录云湖账号
 
-### 发送数据
+发送数据:
 
 ```JSONC
 {
@@ -48,7 +48,7 @@ message INFO {
 
 ## 发送心跳包
 
-### 发送数据
+发送数据:
 
 ```JSONC
 {
@@ -58,7 +58,7 @@ message INFO {
 }
 ```
 
-### 返回数据
+返回数据:
 
 ```ProtoBuf
 data: {
@@ -84,7 +84,7 @@ message heartbeat_ack_info {
 
 ## 发送笔记同步
 
-### 发送数据
+发送数据:
 
 ```JSONC
 {
@@ -100,7 +100,7 @@ message heartbeat_ack_info {
 
 ## 接收笔记同步
 
-### 返回数据
+返回数据:
 
 ```ProtoBuf
 info {
@@ -141,7 +141,7 @@ message draft_input {
 
 ## 推送消息
 
-### 返回数据
+返回数据:
 
 ```ProtoBuf
 info {
@@ -272,23 +272,9 @@ message push_message {
 
 :::
 
-### 消息类型列表
-
-- `1`: 文本消息
-- `2`: 图片消息
-- `3`: Markdown 消息
-- `4`: 文件消息
-- `6`: 帖子消息
-- `7`: 表情消息
-- `8`: HTML 消息
-- `10`: 视频消息
-- `11`: 语音消息
-- `13`: 语音通话
-- `14`: A2UI 消息
-
 ## 推送超级文件分享
 
-### 返回数据
+返回数据:
 
 ```ProtoBuf
 info {
@@ -339,7 +325,7 @@ message file_send_message {
 
 !!其实可以和接收消息推送的 proto 基本共用,只是编辑消息额外多了个14 edit_time.!!
 
-### 返回数据
+返回数据:
 
 ```ProtoBuf
 info {
@@ -353,7 +339,7 @@ data {
     "msg_id": "123123123123" // 信息ID
     "chat_id": "123" // 信息对象ID
     "content": {
-      "text": "测试信息文本" // 信息文本
+      “text": "测试信息文本" // 信息文本
       "buttons": "测试信息文本" // 按钮信息文本数据
       "quote_msg_text": "测试引用信息文本" // 引用信息文本
     }
@@ -402,7 +388,7 @@ message edit_message {
 本项只提供了“有人邀请我”的这种状态，并没有提供相关信息，如邀请人、群聊ID等，建议配合邀请列表进行使用。
 :::
 
-### 返回数据
+返回数据:
 
 ```ProtoBuf
 info {
@@ -427,7 +413,7 @@ message InviteApply {
 流式消息第一个推送是 push_message,后续才是 stream_message,需要将 content 里面的内容追加到消息内容后面.
 :::
 
-### 返回数据
+返回数据:
 
 ```ProtoBuf
 info {
