@@ -148,7 +148,7 @@ message address_book_list {
   repeated Data data = 2;
 
   // 列表数据
-  message Data {
+  Data data {
     string list_name = 1; // 聊天对象列表名称，为"用户"，"我加入的群聊"，"机器人"
     repeated Data_list data = 2;
 
@@ -263,6 +263,33 @@ POST /v1/friend/no-notify
 {
   "chatId": "118738312", // 会话ID
   "noNotify": 0 // 0-取消免打扰，1-设置免打扰
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 删除好友/邀请请求
+
+POST /v1/friend/delete-request
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "id": 123 // 请求ID
 }
 ```
 
