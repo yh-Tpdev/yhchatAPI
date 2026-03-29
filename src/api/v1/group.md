@@ -1025,7 +1025,7 @@ POST /v1/group/edit-stop-member-upload-group-file
 
 ## 目标群主是否为vip
 
-POST /v1/group/edit-stop-member-upload-group-file
+POST /v1/group/check-master-is-vip
 
 请求头:
 
