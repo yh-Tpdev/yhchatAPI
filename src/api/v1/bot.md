@@ -1002,3 +1002,91 @@ POST /v1/bot/console/my-bots
   "msg": "success" // 返回状态消息
 }
 ```
+
+## 获取群机器人权限列表
+
+POST /v1/bot/group-permission-get
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "allowEditGroupInfo": 0, // 允许编辑群消息，0-不允许，1-允许
+    "allowGagMember": 0, // 允许禁言用户，0-不允许，1-允许
+    "allowRemoveMember": 0, // 允许移除用户，0-不允许，1-允许
+    "allowGroupTagManage": 0 // 允许管理群标签，0-不允许，1-允许
+  },
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 获取智能体机器人参数参考
+
+POST /v1/bot/llm/llm-setting-ref-params
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "chatId": "123123123", // 对象ID
+  "chatType": 2 // 对象类别
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [] // 暂无实例数据
+  },
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 更改群机器人权限
+
+POST /v1/bot/group-permission-edit
+
+请求头:  
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|必须为目标群群主或管理员|
+
+请求体：
+
+```JSONC
+{
+  "botId": "123123", // 机器人ID
+  "groupId": "123123123", // 群聊ID
+  "allowEditGroupInfo": 0, // 允许编辑群消息，0-不允许，1-允许
+  "allowGagMember": 0, // 允许禁言用户，0-不允许，1-允许
+  "allowRemoveMember": 0, // 允许移除用户，0-不允许，1-允许
+  "allowGroupTagManage": 0 // 允许管理群标签，0-不允许，1-允许
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
