@@ -1021,7 +1021,7 @@ POST v1/msg/msg-forward
 }
 ```
 
-## 获取消息列表内的图片
+## 获取消息列表内的图片（未完成）
 
 POST v1/msg/pic-list-message-by-mid-seq
 
