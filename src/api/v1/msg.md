@@ -1058,5 +1058,7 @@ meassage pic-list-message-by-mid-seq {
 响应体：
 
 ```proto
-// 和list-message(-mid-by-seq)的proto共用
+// 和list-message的proto共用
 ```
+
+
