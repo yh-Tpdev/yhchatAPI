@@ -1020,3 +1020,45 @@ POST v1/msg/msg-forward
   "msg": "success" // 返回消息
 }
 ```
+
+## 获取消息列表内的图片（未完成）
+
+POST v1/msg/pic-list-message-by-mid-seq
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体：
+
+```ProtoBuf
+image_id: 110617 // 图片id
+chat_type: 2 // 会话类型
+chat_id: "418769995" // 会话id
+unknown: 10 // 未知
+unknown: 0 //未知
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+meassage pic-list-message-by-mid-seq {
+    uint64 image_id = 3; // 图片id
+    uint64 chat_type = 4; // 会话类型
+    string chat_id = 5; // 会话id
+    uint64 unknown = 6; // 未知
+    uint64 unknown = 7; // 未知
+}
+```
+
+:::
+
+响应体：
+
+```proto
+// 和list-message的proto共用
+```
+
+
