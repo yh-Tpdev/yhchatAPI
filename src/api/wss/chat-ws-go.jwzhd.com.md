@@ -434,6 +434,7 @@ info {
     seq: "114aaaa" // 请求ID
     cmd: "stream_message"
 }
+
 data {
   any: "type.googleapis.com/proto.StreamMessage" // ProtoBuf 的 any 字段
   msg {
@@ -468,3 +469,43 @@ message stream_message {
 ```
 
 :::
+
+
+## 用户挂断语音
+
+### 返回数据
+
+```ProtoBuf
+info {
+    seq: "114aaaa" // 请求ID
+    cmd: "live_video_user_hang_up"
+}
+
+data {
+  any: "type.googleapis.com/proto.LiveMessage" // ProtoBuf 的 any 字段
+  msg {
+    msgId: "11451419180" // 语音消息ID
+    cmd: "	live_video_user_hang_up" // 用户挂断语音指令
+  }
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 用户挂起通话消息
+message live_video_user_hang_up {
+    INFO info = 1;
+    Data data = 2;
+
+    message Data {
+        string any = 1;
+        UserHangUpMsg msg = 2;
+
+        message UserHangUpMsMsg {
+            string msg_id = 1; // 语音消息id
+            string cmd = 5; // 指令
+        }
+    }
+}
+```
