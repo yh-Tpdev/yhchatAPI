@@ -198,10 +198,54 @@ POST /v1/live/get-calling
 }
 ```
 
-::: Details content值示例内容（语音通话参数，未经处理）
+::: details content值示例内容（语音通话参数，未经处理）
 
 ```JSON
 {\"formJson\":{\"type\":\"offer\",\"sdp\":\"v=0\\r\\no=- 4594442093964212757 2 IN IP4 127.0.0.1\\r\\ns=-\\r\\nt=0 0\\r\\na=group:BUNDLE 0\\r\\na=extmap-allow-mixed\\r\\na=msid-semantic: WMS c86e64f8-1cfd-49f9-ba89-c64c1edf02fc\\r\\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 0 8 13 110 126\\r\\nc=IN IP4 0.0.0.0\\r\\na=rtcp:9 IN IP4 0.0.0.0\\r\\na=ice-ufrag:2ubM\\r\\na=ice-pwd:TZ8aa+rVZqfUlbQMj5hPRtaS\\r\\na=ice-options:trickle renomination\\r\\na=fingerprint:sha-256 E8:A6:6A:DE:D1:51:EE:30:CB:C6:A9:4F:D1:C7:54:10:3A:2A:80:D9:0A:9D:F0:27:A7:BA:E2:D8:FC:DF:57:7F\\r\\na=setup:actpass\\r\\na=mid:0\\r\\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\\r\\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\\r\\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\\r\\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\\r\\na=sendrecv\\r\\na=msid:c86e64f8-1cfd-49f9-ba89-c64c1edf02fc 5f7cf8af-4691-4645-9a92-5449530064c2\\r\\na=rtcp-mux\\r\\na=rtcp-rsize\\r\\na=rtpmap:111 opus/48000/2\\r\\na=rtcp-fb:111 transport-cc\\r\\na=fmtp:111 minptime=10;useinbandfec=1\\r\\na=rtpmap:63 red/48000/2\\r\\na=fmtp:63 111/111\\r\\na=rtpmap:9 G722/8000\\r\\na=rtpmap:0 PCMU/8000\\r\\na=rtpmap:8 PCMA/8000\\r\\na=rtpmap:13 CN/8000\\r\\na=rtpmap:110 telephone-event/48000\\r\\na=rtpmap:126 telephone-event/8000\\r\\na=ssrc:1148727064 cname:SVr9elEOhHAAZrJH\\r\\na=ssrc:1148727064 msid:c86e64f8-1cfd-49f9-ba89-c64c1edf02fc 5f7cf8af-4691-4645-9a92-5449530064c2\\r\\n\"},\"liveInviteUserIds\":[\"8516939\"],\"liveType\":\"语音通话\",\"liveStatusText\":\"等待接通\"}
 ```
 
 :::
+
+## 获取语音房间列表
+
+POST /v1/group/live-room
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "groupId": "big" // 群聊id
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "rooms": [
+      {
+        "userId": "1234567", // 用户id
+        "roomId": "c7552ca7c79546dd93baca4e4adxxxxx", // 房间id
+        "chatId": "123456789", // 房间所发起的会话id
+        "title": "", // 房间标题
+        "chatType": 2, // 房间所发起的会话类型
+        "status": 0, // 房间状态
+        "createBy": "1234567", // 发起房间的用户id
+        "createTime": 1775881889, // 房间创建时间戳
+        "nickname": "111", // 房间创建者名称
+        "count": 1, // 房间人数
+        "avatarUrl": "https://chat-img.jwznb.com/defalut-avatars/Nellie%20Bly.png" // 房间创建者头像Url
+      }
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
