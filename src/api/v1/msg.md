@@ -1020,3 +1020,17 @@ POST v1/msg/msg-forward
   "msg": "success" // 返回消息
 }
 ```
+
+## 获取消息列表内的图片
+
+POST v1/msg/pic-list-message-by-mid-seq
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体：
+
+```ProtoBuf
