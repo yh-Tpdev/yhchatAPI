@@ -1060,5 +1060,3 @@ meassage pic-list-message-by-mid-seq {
 ```proto
 // 和list-message的proto共用
 ```
-
-
