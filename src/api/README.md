@@ -24,6 +24,7 @@ title: API
 > -云湖bot/机器人已记录的所有API文档
 
 ::: warning
+
 * `https://chat-audio1.jwznb.com/` 音频路由
 * `https://chat-file.jwznb.com/` 文件路由
 * `https://chat-img.jwznb.com/` 图片路由

@@ -12,7 +12,6 @@ title: Bot API
 
 ::: tabs#BotApiErrpr
 
-
 @tab:active 群聊中未添加机器人
 
 ```JSONC
@@ -77,6 +76,7 @@ title: Bot API
   "msg": "token不存在"
 }
 ```
+
 @tab:active 请求json错误
 
 第一种：

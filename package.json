@@ -11,11 +11,11 @@
     "docs:update-package": "pnpm dlx vp-update"
   },
   "devDependencies": {
-    "@vuepress/bundler-vite": "2.0.0-rc.27",
-    "sass-embedded": "^1.98.0",
-    "vue": "^3.5.31",
-    "vuepress": "2.0.0-rc.27",
-    "vuepress-theme-hope": "2.0.0-rc.104"
+    "@vuepress/bundler-vite": "2.0.0-rc.28",
+    "sass-embedded": "^1.99.0",
+    "vue": "^3.5.32",
+    "vuepress": "2.0.0-rc.28",
+    "vuepress-theme-hope": "2.0.0-rc.106"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
