@@ -7,15 +7,17 @@ title: friend
 
 ## 添加用户/群聊/机器人
 
+```http request
 POST /v1/friend/apply
+```
 
-请求头:  
+### 请求头  
 
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
-请求体:  
+### 请求体
 
 ```JSONC
 {
@@ -25,7 +27,7 @@ POST /v1/friend/apply
 }
 ```
 
-响应体:  
+### 响应体
 
 ```JSONC
 {
@@ -34,17 +36,32 @@ POST /v1/friend/apply
 }
 ```
 
+::: warning
+
+群主无法退群，会响应:
+
+```JSONC
+{
+  "code": -1,
+  "msg": "群主不可退群，请先转移群聊"
+}
+```
+
+:::
+
 ## 删除用户/群聊/机器人
 
+```http request
 POST /v1/friend/delete-friend
+```
 
-请求头:  
+### 请求头
 
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
-请求体:  
+### 请求体
 
 ```JSONC
 {
@@ -53,7 +70,7 @@ POST /v1/friend/delete-friend
 }
 ```
 
-响应体:  
+### 响应体
 
 ```JSONC
 {
@@ -64,15 +81,17 @@ POST /v1/friend/delete-friend
 
 ## 处理用户/群聊/机器人添加申请
 
+```http request
 POST /v1/friend/agree-apply
+```
 
-请求头:  
+### 请求头
 
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
-请求体:  
+### 请求体
 
 ```JSONC
 {
@@ -81,7 +100,7 @@ POST /v1/friend/agree-apply
 }
 ```
 
-响应体:  
+### 响应体
 
 ```JSONC
 {
@@ -92,15 +111,17 @@ POST /v1/friend/agree-apply
 
 ## 获取所有聊天对象
 
+```http request
 POST /v1/friend/address-book-list
+```
 
-请求头:  
+### 请求头
 
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
-请求体:  
+### 请求体
 
 ```ProtoBuf
 number: "123123" // 请求标识ID，可以随便写
@@ -117,7 +138,7 @@ message address_book_list_send {
 
 :::
 
-响应体:  
+### 响应体
 
 ```ProtoBuf
 status {
@@ -169,15 +190,17 @@ message address_book_list {
 
 ## 获取对象请求列表
 
+```http request
 POST /v1/friend/request-list
+```
 
-请求头:  
+### 请求头
 
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
-响应体:  
+### 响应体
 
 ```ProtoBuf
 status {
@@ -202,9 +225,9 @@ requests {
   inviteAt: 1231231230 // 邀请时间戳
   inviteAtStr: "1231-23-12 31:23:00" // 邀请时间字符串
   requestI: 123; // 请求ID
-  botName: 测试机器人名称" // 机器人名称
+  botName: "测试机器人名称" // 机器人名称
   botAvatar: "https://..." // 机器人头像
-  processorName: "测试处理者名称" 处理者名称
+  processorName: "测试处理者名称" // 处理者名称
   note: "测试对象请求" // 备注信息
 }
 total: 1 // 总请求数
@@ -249,15 +272,17 @@ message Response {
 
 ## 设置会话免打扰
 
+```http request
 POST /v1/friend/no-notify
+```
 
-请求头:  
+### 请求头
 
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
-请求体：
+### 请求体
 
 ```JSONC
 {
@@ -266,7 +291,7 @@ POST /v1/friend/no-notify
 }
 ```
 
-响应体：
+### 响应体
 
 ```JSONC
 {
@@ -277,15 +302,17 @@ POST /v1/friend/no-notify
 
 ## 删除好友/邀请请求
 
+```http request
 POST /v1/friend/delete-request
+```
 
-请求头:  
+### 请求头
 
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
-请求体：
+### 请求体
 
 ```JSONC
 {
@@ -293,7 +320,7 @@ POST /v1/friend/delete-request
 }
 ```
 
-响应体：
+### 响应体
 
 ```JSONC
 {
