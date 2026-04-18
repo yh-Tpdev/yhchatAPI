@@ -141,4 +141,3 @@ POST https://chat-go.jwzhd.com/v1/check/check-version
   "msg": "success" // 返回消息
 }
 ```
-
