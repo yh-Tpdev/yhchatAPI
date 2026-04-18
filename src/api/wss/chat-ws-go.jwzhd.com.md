@@ -470,7 +470,6 @@ message stream_message {
 
 :::
 
-
 ## 用户挂断语音
 
 ### 返回数据
@@ -485,7 +484,7 @@ data {
   any: "type.googleapis.com/proto.LiveMessage" // ProtoBuf 的 any 字段
   msg {
     msgId: "11451419180" // 语音消息ID
-    cmd: "	live_video_user_hang_up" // 用户挂断语音指令
+    cmd: "live_video_user_hang_up" // 用户挂断语音指令
   }
 }
 ```
