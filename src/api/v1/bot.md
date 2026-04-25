@@ -647,7 +647,8 @@ POST /v1/bot/edit-subscribed-link
 ```JSONC
 {
   "botId": "75282754", // 机器人id
-  "link": "http(s)://xxxxxx" // 设置消息订阅接口（地址）
+  "link": "http(s)://xxxxxx", // 设置消息订阅接口（地址）
+  "subscribeType": 0 // 订阅类别，0-url订阅，1-wss订阅
 }
 ```
 
@@ -992,6 +993,7 @@ POST /v1/bot/console/my-bots
           "token": "123123123123123123123", // 机器人token
           "link": "", // 订阅链接
           "linkStop": "0", // 订阅链接是否被停用，0-未停用，1-已停用
+          "subscribeType": "0", // 订阅类别，0-url订阅，1-wss订阅
           "settingJson": "", // 机器人设置配置json，需将json数据转义后填入
           "introduction": "测试机器人简介" // 机器人简介
         }
