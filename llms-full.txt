@@ -1,0 +1,11033 @@
+---
+url: /index.md
+---
+# 主页
+云湖已发现API及调用的非官方参考文档.目的是方便开发者进行二次开发使用.\
+**本文档默认你拥有相关编程基础,不解决过于小白的问题.**\
+**所有API信息只做为公开参考**\
+**所有API调用请遵循相关法律法规以及云湖的用户协议,本项目仅用于学习研究用途.**\
+**由于文档的特殊性,可能会因为某些原因随时停止服务.**
+
+---
+
+---
+url: /云湖API吐槽/index.md
+---
+# 云湖API吐槽
+## 云湖API吐槽目录
+
+各位在攥写API文档时是不是经常看到云湖让人眼前一黑的设计？\
+没错！这多亏了云湖优秀的后端+前端逻辑（\
+有苦没处说？欢迎在此目录下留下你的吐槽
+
+使用自己的用户名称为文件名+.md创建新文件并pr！用户名称大小写也需要认真区分哦~
+
+### 温馨提醒: 不要恶意骂人哦~
+
+---
+
+---
+url: /云湖API吐槽/1ctrl-cv.md
+---
+# B84F2246
+第二\
+我待会再来写这个
+
+---
+
+---
+url: /云湖API吐槽/ccd2s.md
+---
+# ccD2s
+云湖后端还是太神秘了，请听我给你慢慢分解：
+
+* protobuf 折磨自己。
+* 带 token 时返回 proto ，token 为空时返回 json ，我们至今不知道这是什么逻辑。（
+
+暂时先写这点。
+
+---
+
+---
+url: /云湖API吐槽/QianLin-Jiaxi.md
+---
+# QianLin-Jiaxi
+md，云湖后端简直逆天
+这么说可能不怎么好理解，我举个实例:
+
+1.莫名奇妙多出的相同属性数值，明明在前面已经有了相应的数值却还要重复一遍，增加包大小（\
+2.一堆json转义，数组不嫌多的往请求里塞，愣是不好好写json（\
+3.人无法理解的proto，设计自带防破解，根本看不懂（\
+4.一堆永远是空的数值，后端还™的必须检验是否存在，不然就报错（
+
+前端也差不多，在我测试时也发现了各种稀奇的问题：
+
+1.有较大部分逻辑没有做数值校验，一旦数值错误直接渲染报错，组件原地灰屏（\
+2.一堆地方文件大小校验没做，流量炸弹直接boom！
+
+总结，离神不知道近不近，但离人肯定很远了，散会！\
+PS：怨气很重 + MAX^MAX (╬▔皿▔)凸
+愿天堂没有proto！
+
+#### （宇宙安全声明：本文只为吐槽云湖特性，无实际侮辱含义，请勿恶意曲解文章意义！）
+
+---
+
+---
+url: /api/index.md
+---
+# API
+## 目录
+
+* 1
+
+> **[v1](./v1/)**\
+> -云湖v1版本API已记录的所有API文档
+
+* 2
+
+> **[wss](./wss/)**\
+> -云湖wss连接已记录的所有连接文档
+
+* 3
+
+> **[web](./web/)**\
+> -云湖网页版API已记录的所有API文档
+
+* 4
+
+> **[bot](./bot/)**\
+> -云湖bot/机器人已记录的所有API文档
+
+::: warning
+
+* `https://chat-audio1.jwznb.com/` 音频路由
+* `https://chat-file.jwznb.com/` 文件路由
+* `https://chat-img.jwznb.com/` 图片路由
+* `https://chat-video1.jwznb.com/` 视频路由
+
+云湖数据床地址需要请求头加上 `referer: http://myapp.jwznb.com` 才可正常获取内容，否则会403.
+
+当发送的文件体积过大时， `chat-file.jwznb.com` 文件路由请求下载时会重定向到 `chat-file-oss.jwznb.com` 这个路由不需要referer.
+:::
+
+---
+
+---
+url: /api/bot/index.md
+---
+# Bot API
+## 此目录下为云湖官网bot机器人文档
+
+::: tip
+
+这里收集了一些由于API请求格式不规范等导致错误的响应，欢迎补充
+（请求头：服务器会区分大小写）
+:::
+
+::: tabs#BotApiErrpr
+
+@tab:active 群聊中未添加机器人
+
+```JSONC
+{
+  "code": -1,
+  "msg": "群(ID:xxx)中未添加当前机器人(ID: xxxxxxxx)。"
+}
+```
+
+@tab:active 不存在/chat-id错误
+
+```JSONC
+{
+  "code": -1,
+  "msg": "群(ID:xxx)不存在。"
+}
+```
+
+@tab:active chat-type错误
+
+群聊：
+
+```JSONC
+{
+  "code": 1002,
+  "msg": "chat-type取值错误，取值仅支持group、user"
+}
+```
+
+用户：
+
+```JSONC
+{
+  "code": 1002,
+  "msg": "recvType取值错误，取值仅支持group、user"
+}
+```
+
+@tab:active token错误
+
+```JSONC
+{
+  "code": 1003,
+  "msg": "非法token"
+}
+```
+
+@tab:active 缺少chat-id
+
+```JSONC
+{
+  "code": 1002,
+  "msg": "chat-id值错误，值不能为空"
+}
+```
+
+@tab:active token不存在
+
+```JSONC
+{
+  "code": 1002,
+  "msg": "token不存在"
+}
+```
+
+@tab:active 请求json错误
+
+第一种：
+
+```JSONC
+{
+  "code": 1002,
+  "msg": "请求参数应为json格式，Body内容为: {}" // {}是请求json内容
+}
+```
+
+第二种：
+
+```JSONC
+{
+  "code": 1002,
+  "msg": "请求参数应为json格式"
+}
+```
+
+@tab:active 用户未添加机器人
+
+```JSONC
+{
+  "code": 1003,
+  "msg": "recvId值错误，该用户不是机器人好友"
+}
+```
+
+@tab:active contentType错误
+
+```JSONC
+{
+  "code": 1002,
+  "msg": "contentType取值错误，请翻看文档"
+}
+```
+
+@tab:active 消息为空
+
+```JSONC
+{
+  "code": 1002,
+  "msg": "消息内容不能为空"
+}
+```
+
+@tab:active msgId错误/无权修改
+
+```JSONC
+{
+  "code": -1,
+  "msg": "消息不存在或无权限修改"
+}
+```
+
+@tab:active 媒体上传失败
+
+图片：
+
+```JSONC
+{
+  "code": -1,
+  "msg": "图片获取失败"
+}
+```
+
+视频：
+
+```JSONC
+{
+  "code": -1,
+  "msg": "视频获取失败"
+}
+```
+
+文件：
+
+```JSONC
+{
+  "code": -1,
+  "msg": "文件获取失败"
+}
+```
+
+@tab:active 看板content内容为空
+
+```JSONC
+{
+  "code": 1002,
+  "msg": "看板内容不能为空"
+}
+```
+
+:::
+
+---
+
+---
+url: /api/bot/v1/bot.md
+---
+# bot
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 机器人发送信息
+
+```http
+POST /open-apis/v1/bot/send?token={机器人token}
+```
+
+请求体：
+
+```JSONC
+{
+  "recvId": "123", // 目标对象ID
+  "recvType": "user", // 目标对象类别，user-用户，group-群聊
+  "contentType": "text", // 信息类别，text-文本信息，image-图片信息，video-视频信息，file-文件信息，markdown-Markdown信息，html-HTML信息，post-文章
+  "content": {
+    "text": "测试消息文本", // 消息文本
+    "at":"123,123,123", // @用户ID，使用","符号分割
+    "imageKey": "123123123.jpg", // 图片Key
+    "fileKey": "123123123.txt", // 文件key
+    "videoKey": "123123123.mp4", // 视频key
+    "buttons": [
+      [
+        {
+          "text": "测试跳转网站",
+          "actionType": 1, // 按钮类别，1-复制按钮，2-跳转按钮
+          "url": "https://www.yhchat.com/"
+        },
+        {
+          "text": "测试复制文本",
+          "actionType": 2, // 按钮类别，1-复制按钮，2-跳转按钮
+          "value": "测试被复制文本" // 被复制的文本
+        }
+      ]
+    ]
+  },
+  "parentId":"123123123123123123123", // 引用信息ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "messageInfo": {
+      "msgId": "123123123123123123123", // 信息ID
+      "recvId": "123", // 目标对象ID
+      "recvType": "user" // 目标对象类别，user-用户，group-群聊
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 机器人批量发送信息
+
+```http
+POST /open-apis/v1/bot/batch_send?token={机器人token}
+```
+
+请求体：
+
+```JSONC
+{
+  "recvIds": ["123","123"], // 目标对象ID数组，支持多个对象，相同对象ID只发送一次
+  "recvType": "user", // 目标对象类别，user-用户，group-群聊
+  "contentType": "text", // 信息类别，text-文本信息，image-图片信息，video-视频信息，file-文件信息，markdown-Markdown信息，html-HTML信息
+  "content": {
+    "text": "测试消息文本", // 消息文本
+    "at":"123,123,123", // @用户ID，使用","符号分割
+    "imageKey": "123123123.jpg", // 图片Key
+    "fileKey": "123123123.txt", // 文件key
+    "videoKey": "123123123.mp4", // 视频key
+    "buttons": [
+      [
+        {
+          "text": "测试跳转网站",
+          "actionType": 1, // 按钮类别，1-复制按钮，2-跳转按钮
+          "url": "https://www.yhchat.com/"
+        },
+        {
+          "text": "测试复制文本",
+          "actionType": 2, // 按钮类别，1-复制按钮，2-跳转按钮
+          "value": "测试被复制文本" // 被复制的文本
+        }
+      ]
+    ]
+  },
+  "parentId":"123123123123123123123", // 引用信息ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "successCount": 1, // 成功发送数量
+    "successList": [
+      {
+        "msgId": "123123123123123123123", // 信息ID
+        "recvId": "123", // 目标对象ID
+        "recvType": "user" // 目标对象类别，user-用户，group-群聊
+      }
+      // ...
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 机器人流式发送信息
+
+```http
+POST /open-apis/v1/bot/send-stream?token={机器人token}&recvId={对象ID}&recvType={目标对象类别，user-用户，group-群聊}&contentType={信息类别，text-文本信息，markdown-Markdown信息}
+```
+
+请求头:
+
+| 名称 | 数值 | 必须 | 备注 |
+| ---- | ---- | ---- | ---- |
+| Transfer-Encoding | chunked | 是 | 使用分块传输编码 |
+
+请求体：
+
+```text
+{data-binary/二进制文本数据，此处直接传入文本}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "messageInfo": {
+    "msgId": "123123123123123123123", // 信息ID
+    "recvId": "123", // 目标对象
+    "recvType": "user" // 目标对象类别，user-用户，group-群聊
+   }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+代码示例：
+
+```go
+    // 创建请求
+    req, err := http.NewRequest("POST", "https://chat-go.jwzhd.com/open-apis/v1/bot/send-stream?token=xxxx&recvId=123&recvType=user&contentType=text", nil)
+    if err != nil {
+        fmt.Println("Error creating request:", err)
+        return
+    }
+
+    // 创建一个管道，用于流式传输数据
+    pr, pw := io.Pipe()
+
+    // 启动一个 goroutine 来写入数据
+    go func() {
+        defer pw.Close()
+        for i := 0; i < 15; i++ {
+            data := fmt.Sprintf("Message %d", i)
+            pw.Write([]byte(data))
+            time.Sleep(1 * time.Second) // 模拟延迟
+        }
+    }()
+
+    // 将管道的读取器作为请求的主体
+    req.Body = pr
+
+    // 发送请求
+    resp, err := client.Do(req)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    // 读取响应
+    responseBody, err := io.ReadAll(resp.Body)
+    if err != nil {
+        fmt.Println("Error reading response:", err)
+        return
+    }
+    fmt.Println("Response:", string(responseBody))
+```
+
+## 机器人编辑信息
+
+```http
+POST /open-apis/v1/bot/edit?token={机器人token}
+```
+
+请求体：
+
+```JSONC
+{
+  "msgId": "123123123123123", // 目标信息ID
+  "recvId": "123", // 目标对象ID
+  "recvType": "user", // 目标对象类别，user-用户，group-群聊
+  "contentType": "text", // 信息类别，text-文本信息，image-图片信息，video-视频信息，file-文件信息，markdown-Markdown信息，html-HTML信息
+  "content": {
+    "text": "测试消息文本" // 消息文本
+  }
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "successCount": 1 // 成功编辑数量
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 机器人撤回信息
+
+```http
+POST /open-apis/v1/bot/recall?token={机器人token}
+```
+
+请求体：
+
+```JSONC
+{
+  "msgId": "123123123123123", // 目标信息ID
+  "chatId": "123", // 目标对象ID
+  "chatType": "user" // 目标对象类别，user-用户，group-群聊
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 机器人获取信息列表
+
+```http
+POST /open-apis/v1/bot/messages?token={机器人token}&chat-id={目标信息ID}&chat-type={目标对象类别，user-用户，group-群聊}&message-id={消息ID，不填时可以配合before参数返回最近的N条消息}&after={指定消息ID后N条，默认0条}&before={指定消息ID前N条，默认0条}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "msgId": "123123123123", // 信息ID
+        "parentId": "123123123123", // 引用ID
+        "senderId": "123", // 发送对象ID
+        "senderType": "user", // 发送对象类别，user-用户，bot-机器人
+        "senderNickname": "测试发送者名称", // 发送对象名称
+        "contentType": "text", // 信息类别，text-文本信息，image-图片信息，video-视频信息，file-文件信息，markdown-Markdown信息，html-HTML信息，expression-表情信息，audio-语音信息
+        "content": {
+          "text": "测试文本", // 信息文本
+          "formJson": { // 表单消息
+            "bodnzx": {
+              "id": "bodnzx", // 自定义输入项每个项的id，外层键名与内层id字段的值保持一致（键名与id值同步）
+              "label": "Radio 单选框标签", // 表单label
+              "selectIndex": 1, // 如果选中为1，未选中为-1
+              "selectValue": "分割", // 选中时的值
+              "type": "radio" // 表单类型
+            },
+            "kfumpw": {
+              "id": "kfumpw", // 自定义输入项每个项的id
+              "label": "Input 输入框标签", // 表单label
+              "type": "input", // 表单类型
+              "value": "Input 输入框默认内容"
+            },
+            "pqnhhd": {
+              "id": "pqnhhd", // 自定义输入项每个项的id
+              "label": "Select 选择器标签", // 表单label
+              "selectIndex": 0, // 如果选中为1，未选中为-1
+              "selectValue": "Select 选择器选项", // 选中时的值
+              "type": "select" // 表单类型
+            },
+            "rpzjmd": {
+              "id": "rpzjmd", // 自定义输入项每个项的id
+              "label": "Switch 开关标签", // 表单label
+              "type": "switch", // 表单类型
+              "value": false // 选中时的值
+            },
+            "uqojdl": {
+              "id": "uqojdl", // 自定义输入项每个项的id
+              "label": "textarea 多行输入框标签", // 表单label
+              "type": "textarea", // 表单类型
+              "value": "" // 选中时的值
+            }
+          },
+          "etag": "123123123123123123123123", // 媒体etag，图片/视频/语音信息都会有此项
+          "imageHeight": 123, // 图片高度
+          "imageName": "123.jpg", // 图片名称，大部分情况下可以当作图片key使用
+          "imageWidth": 123, // 图片宽度
+          "videoDuration": 123, // 视频时长
+          "videoUrl": "123.mp4", // 图片网址，大部分情况下可以当作视频key使用
+          "audioDuration": 123, // 语音时长
+          "audioUrl": "123.mps", // 语音网址，大部分情况下可以当作语音key使用
+          "at": [ // at的ID列表，可带多个
+            "1234567",
+            "9876543"
+          ],
+          "parent": "我是1名字 : 12345", // 引用消息内容
+          "buttons": [
+            [
+              {
+                "text": "测试跳转网站",
+                "actionType": 1, // 按钮类别，1-复制按钮，2-跳转按钮
+                "url": "https://www.yhchat.com/"
+              },
+              {
+                "text": "测试复制文本",
+                "actionType": 2, // 按钮类别，1-复制按钮，2-跳转按钮
+                "value": "测试被复制文本" // 被复制的文本
+              }
+            ]
+          ]
+        },
+        "sendTime": 123123123123, // 信息发送时间戳
+        "commandName": "", // 信息使用的指令名称
+        "commandId": 0 // 信息使用的指令ID
+      }
+      // ...
+    ],
+    "total": 1 // 返回信息数量
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/v1/index.md
+---
+# v1 API
+这里存放的是 `v1` API 的文档.\
+无特别说明,请求域名均为 `https://chat-go.jwzhd.com/`\
+一般为 JSON 或者是 ProtoBuf 格式.\
+Proto 文件中的 Status 未特别备注均为下面内容:
+
+```proto
+message Status {
+    uint64 number = 1; // 不知道干啥的,可能是请求ID
+    uint64 code = 2; // 状态码,1为正常
+    string msg = 3; // 返回消息
+}
+```
+
+无特别说明,请求成功返回状态信息中 code 为状态码,msg 为状态信息.一般情况下响应成功的状态信息为以下格式
+
+```JSONC
+{
+    "code":1, // 返回状态码
+    "msg":"success" //返回状态信息
+}
+```
+
+注意！部分标注未完成的文档不具有参考价值！
+
+---
+
+---
+url: /api/v1/beta.md
+---
+# beta
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取内测状态
+
+```http request
+POST /v1/beta/info
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1 为正常
+  "data": {
+    "beta": "allow", // 是否为内测用户，allow - 是，noapply - 否
+    "info": "\n即将内测的功能：\n1、更加完整的内测功能\n2、邀请码自定义功能\n3、地区排名活动\n4、网页版云湖\n"
+  }, // 内测信息
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/v1/bot.md
+---
+# bot
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 机器人商店banner
+
+POST /v1/bot/banner
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应头：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "banners": [
+      {
+        "id": 123, // banner的id
+        "title": "测试标题", // 标题
+        "introduction": "测试介绍", // 介绍
+        "targetId": "", // "查看详情"点击后的id
+        "targetUrl": "https://...", // "查看详情"跳转的链接
+        "imageUrl": "https://...", // banner背景图
+        "sort": 123, // 排列顺序
+        "delFlag": 0,
+        "createTime": 0, // 创建时间
+        "remark": "", // 备注
+        "createBy": 0, // banner创建者
+        "typ": 2 // 类型
+      }
+      // ...
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 机器人商店列表
+
+POST /v1/bot/new-list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应头：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "bots": [
+      {
+        "chatId": "123", // 机器人id
+        "chatType": "3", // 识别对象类别，1-用户，2-群聊，3-机器人
+        "headcount": "25", // 机器人使用人数
+        "nickname": "测试机器人名称", // 机器人名字
+        "introduction": "测试机器人介绍", // 机器人介绍
+        "instructions": "",
+        "avatarUrl": "https://..." // 机器人头像url
+      }
+     // ...
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 使用该机器人的群组
+
+POST /v1/bot/bot-detail
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "id": "123" // 机器人id
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "bot": {
+      "id": 1, // 排序id（？
+      "botId": "123", // 机器人id
+      "nickname": "测试机器人每次",  //机器人名字
+      "nicknameId": 123, // 名称id
+      "avatarId": 123, // 头像id
+      "avatarUrl": "https://.。。", // 头像url
+      "type": 0,  // 类型
+      "introduction": "测试机器人介绍", // 机器人介绍
+      "createBy": "123", // 机器人创建者id
+      "createTime": 1231231230, // 机器人创建时间戳
+      "headcount": 123, // 机器人使用人数
+      "private": 0, // 是否私有（0为否，1为私人）
+      "isStop": 0, // 是否停用（0为启用，1为停用）
+      "settingJson": "",  // 机器人设置json（需转义）
+      "del_flag": 0,
+      "alwaysAgree": 1, // 是否总是同意添加群聊
+      "banId": 0, // 顾名思义
+      "uri": "https://chat-go.jwzhd.com/open-apis/v1/bot/send?token=" // 机器人发送消息url（？
+    },
+    "groups": [
+      {
+        "id": 0, // 排序 （不知道为什么很多字段没有值，而客户端加入这个群显示群聊信息正常）
+        "groupId": "123", // 群组id
+        "name": "测试群聊名称", // 群聊名字
+        "introduction": "测试群聊简介", // 群聊介绍
+        "createBy": "", // 群聊创建者id
+        "createTime": 0, // 群聊创建时间
+        "avatarId": 0, // 群聊头像id
+        "del_flag": 0,
+        "avatarUrl": "https://...", // 群聊头像url
+        "headcount": 0, // 群聊人数
+        "readHistory": 0, // 是否启用新成员查看历史记录
+        "alwaysAgree": 0, // 是否总是直接加入群聊
+        "categoryId": 0, // 类别id
+        "category": "", // 类别
+        "private": 0, // 群聊是否私有
+        "banId": 0, // ban人的id
+        "gag": 0,
+        "gagBy": "",
+        "msgTypeLimit": ""
+      },
+    // ...
+    ],
+  "msg": "success" // 返回消息
+  },
+}
+```
+
+## 获取创建的所有机器人信息
+
+POST /v1/bot/bot-group-list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "botsTotal": 1, // 机器人数量
+    "list": {
+      "bots": [
+        {
+          "id": 0, // 机器人排列位置ID
+          "botId": "123", // 机器人ID
+          "nickname": "测试机器人名称", // 机器人名称
+          "nicknameId": 0, // 机器人名称ID
+          "avatarId": 0, // 机器人头像ID
+          "avatarUrl": "https://...", // 机器人头像ID
+          "token": "123123123123123123123", // 机器人token
+          "link": "", // 机器人分享链接？
+          "type": 0, // 未知
+          "introduction": "测试机器人简介", // 机器人简介
+          "createBy": "", // 创建者id
+          "createTime": 0, // 机器人创建时间
+          "headcount": 0, // 未知
+          "private": 0, // 是否私有
+          "isStop": 0, // 是否停用
+          "settingJson": "", // 机器人设置json，需转义
+          "del_flag": 0, // 删除标签
+          "alwaysAgree": 0, // 拉机器人时机器人是否直接进群
+          "groupLimit": 0, // 机器人进群限制
+          "banId": 0, // 被封禁的id
+          "linkStop": 0, // 未知
+          "uri": "https://chat-go.jwzhd.com/open-apis/v1/bot/send?token=" // 机器人示例API接口
+        },
+      ]
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 更改机器人设置
+
+POST /v1/bot/edit-setting-json
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "id": "123", // 机器人id
+  "settingJson": "[]" // 机器人设置json，需转义
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 更改机器人信息
+
+POST /v1/bot/web-edit-bot
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "nickname":"测试机器人名称", // 机器人名称
+  "introduction":"测试机器人简介", // 机器人简介
+  "avatarUrl":"https://...", //机器人头像
+  "botId":"123", // 机器人ID
+  "private":0 // 0-公开，1-私有
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取机器人信息
+
+POST /v1/bot/bot-info
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```ProtoBuf
+id: 123 // 机器人ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message bot_info_send {
+    string id = 2; // 机器人ID
+}
+```
+
+:::
+
+响应体:
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+Bot_data {
+  bot_id: "123" // 机器人ID
+  name: "测试机器人名称" // 机器人名称
+  name_id: 123 // 机器人名称ID
+  avatar_url: "https://..." // 机器人头像url
+  avatar_id: 123 // 机器人头像ID
+  introduction: "测试机器人介绍" // 机器人介绍
+  create_by: "123" // 机器人创建者ID
+  create_time: 123123123 // 机器人创建时间戳
+  headcount: 123 // 使用人数
+  private: 0 // 是否为私有，0-公开，1-私有
+  is_stop: 0 // 是否停用，0-启用，1-停用
+  always_agree: 0 // 自动进群，0-不自动进群，1-自动进群
+  do_not_disturb: 0 // 免打扰，0-不免打扰，1-免打扰
+  top: 0 // 置顶，0-未置顶，1-已置顶
+  group_limit: 0 // 限制进群，0-允许进群，1-限制进群
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 获取机器人信息返回信息
+message bot_info {
+    Status status = 1;
+    Bot_data data = 2;
+    message Bot_data {
+        string bot_id = 1; // 机器人ID
+        string name = 2; // 机器人名称
+        int64 name_id = 3; // 机器人名称ID
+        string avatar_url = 4; // 机器人头像url
+        string avatar_id = 5; // 机器人头像ID
+        string introduction = 6; // 机器人介绍
+        string create_by = 7; // 机器人创建者ID
+        int64 create_time = 8; // 机器人创建时间戳
+        int64 headcount = 9; // 使用人数
+        int32 private = 10; // 是否为私有，0-公开，1-私有
+        int32 is_stop = 11; // 是否停用，0-启用，1-停用
+        int32 always_agree = 13; // 自动进群，0-不自动进群，1-自动进群
+        int32 do_not_disturb = 15; // 免打扰，0-不免打扰，1-免打扰
+        int32 top = 18; // 置顶，0-未置顶，1-已置顶
+        int32 group_limit = 20; // 限制进群，0-允许进群，1-限制进群
+    }
+}
+
+```
+
+:::
+
+## 获取机器人群聊看板
+
+POST /v1/bot/board
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```ProtoBuf
+id: 123 // 群聊ID
+chat_type: 2 // 对象类型 1-用户 2-群聊 3-机器人
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 看板
+message board_send {
+    string id = 3; // 群聊/用户/机器人ID
+    int64 chat_type = 4; // 对象类型 1-用户 2-群聊 3-机器人
+}
+```
+
+:::
+
+响应体:
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+Board_data {
+  bot_id: "123" // 机器人ID
+  chat_id: "123" // 对象ID
+  chat_type: 2 // 对象类别，2-群聊，3-机器人
+  content: "测试看板内容" // 看板内容
+  content_type = 5; // 看板内容类别，1-文本，2-markdown，3-html
+  last_update_time: 123123123 // 最后更新时间戳
+  bot_name: "测试机器人名称" // 设置看板机器人名称
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 获取看板返回
+message board {
+    Status status = 1;
+    Board_data data = 2;
+    message Board_data {
+        string bot_id = 1; // 机器人ID
+        string chat_id = 2; // 对象ID
+        int32 chat_type = 3; // 对象类别，2-群聊，3-机器人
+        string content = 4; // 看板内容
+        int32 content_type = 5; // 看板内容类别，1-文本，2-markdown，3-html
+        int64 last_update_time = 6; // 最后更新时间戳
+        string bot_name = 7; // 设置看板机器人名称
+    }
+}
+```
+
+:::
+
+## 删除用户对机器人的添加
+
+POST /v1/bot/remove-follower
+
+请求头:
+
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 机器人管理员token |
+
+请求体：
+
+```JSONC
+{
+  "botId": "123", // 机器人ID
+  "userId": "123" // 用户ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 删除群聊对机器人的添加
+
+POST /v1/bot/remove-group
+
+请求头:
+
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 机器人管理员token |
+
+请求体：
+
+```JSONC
+{
+  "botId": "123", // 机器人ID
+  "groupId": "123" // 群聊ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取可用AI模型列表
+
+POST /v1/bot/llm/llm-setting-list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "icon": "https://...", // 模型组图标
+        "id": 1, // 模型组ID
+        "name": "测试AI大模型", // 模型组名称
+        "params": "[{\"name\": \"API Key\", \"type\": \"input\"}]", // 参数模板
+        "parent_id": 0, // 参数ID
+        "subItems": [
+          {
+            "icon": null, // 模型图标
+            "id": 161, // 模型ID
+            "name": "测试AI大模型-chat", // 模型名称
+            "params": "[{\"name\": \"API Key\", \"type\": \"input\"}]", // 参数模板
+            "parent_id": 1, // 参数模板ID
+            "subItems": null,
+            "tag": "测试模型数据" // tag数据，若无则为null
+          }
+          // ...
+        ],
+        "tag": "测试模型数据" // tag数据，若无则为null
+      }
+      // ...
+    ],
+  "msg": "success" // 返回消息
+  },
+}
+```
+
+## 获取机器人大模型设置
+
+POST /v1/bot/llm/llm-setting-ref-info
+
+请求头:
+
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 机器人管理员token |
+
+请求体：
+
+```JSONC
+{
+  "botId": "123", // 机器人ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "historyCount": 0,
+    "id": 0,
+    "isBigModel": 0, // 是否开启大模型，0-关闭，1-开启
+    "isNeedReply": 0,
+    "key": "", // 大模型APIkey
+    "llmBaseUrl": "",
+    "llmId": 0, // 大模型组ID
+    "llmModelName": "测试大模型-chat", // 大模型名称
+    "llmName": "测试大模型", // 大模型组名称
+    "mcpJson": "", // mcpJSON数据，json转义
+    "paramJson": "", // paramJSON数据，json转义
+    "prompt": "" // AI提示词
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 重置机器人token
+
+POST /v1/bot/reset-bot-token
+
+请求头:
+
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 机器人管理员token |
+
+请求体：
+
+```JSONC
+{
+  "botId": "123", // 机器人ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "token": "123" // 重置后的机器人token
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 创建机器人
+
+POST /v1/bot/create-bot
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```ProtoBuf
+name: 2 //机器人名称
+introduction: 3 //机器人简介
+avatar_url：4 // 机器人头像Url
+private:5 // 是否私有(0-公开，1-私有)
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message CreateBotRequest {
+    string name = 2;                // 机器人名称
+    string introduction = 3;        // 机器人简介
+    string avatar_url = 4;          // 头像URL
+    int32 private = 5;              // 是否私有(0-公开，1-私有)
+}
+```
+
+:::
+
+响应体：
+
+```proto
+message CreateBotResponse {
+    Status status = 1;
+    BotData data = 2;
+
+    message Status {
+        int64 number = 1;           // 可能是请求ID
+        int32 code = 2;             // 1表示成功
+        string msg = 3;             // success
+    }
+
+    message BotData {
+        string bot_id = 1;          // 创建的机器人ID
+    }
+}
+```
+
+## 设置机器人消息订阅接口
+
+POST /v1/bot/edit-subscribed-link
+
+请求头:
+
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 机器人管理员token |
+
+请求体：
+
+```JSONC
+{
+  "botId": "75282754", // 机器人id
+  "link": "http(s)://xxxxxx", // 设置消息订阅接口（地址）
+  "subscribeType": 0 // 订阅类别，0-url订阅，1-wss订阅
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取群聊内机器人设置
+
+POST /v1/bot/get-user-settings-json
+
+请求头:
+
+| 名称  | 必须 | 备注            |
+| ----- | ---- | --------------- |
+| token | 是   | 群聊管理员token |
+
+请求体：
+
+```JSONC
+{
+  "botId": "2468910", // 机器人id
+  "chatId": "1234567" // 会话id(一般是群聊)
+}
+```
+
+响应体： （具体settingsJson更多解释请看[这里](/api/v1/instruction.html#%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8C%87%E4%BB%A4)）
+
+```JSONC
+{
+  "code": 1,
+  "data": {
+    "settingsJson": [
+      {
+        "id": "pqkyru", // 该项的id（表单id）
+        "key": 0, // 第几个项，这里是第一个
+        "props": [
+          {
+            "name": "标签", // 该项名称
+            "type": "label", // 类型，一个用于设置“标签”的配置项，有radio-单选框，input-输入框，switch-开关，chexkbox-多选框，textarea-多行输入框，select-选择器
+            "value": "" // 这个类型预定的值，默认空
+          },
+          {
+            "name": "选项",
+            "placeholder": "用#分割，如：北京#上海#天津", // 带有输入框的项/类型，会有选项，然后里面有占位符，这个就是占位符文本，其实这个叫选项
+            "type": "options", // 带placeholder的类型有，Radio 单选框，Checkbox 多选框，Select 选择器
+            "value": ""
+          }
+        ],
+        "propsValue": {
+          "label": "标签",
+          "options": "用#分割，如：北京#上海#天津"
+        },
+        "title": "Radio 单选框", // 该项标题
+        "type": "radio"
+      },
+      {
+        "id": "xmmtbi",
+        "key": 1,
+        "props": [
+          {
+            "name": "标签",
+            "type": "label",
+            "value": ""
+          },
+          {
+            "name": "默认内容",
+            "type": "defaultValue",
+            "value": ""
+          },
+          {
+            "name": "占位文本",
+            "type": "placeholder",
+            "value": ""
+          }
+        ],
+        "propsValue": {
+          "defaultValue": "默认内容",
+          "label": "标签",
+          "placeholder": "占位文本"
+        },
+        "title": "Input 输入框",
+        "type": "input"
+      },
+      {
+        "id": "vnafdx",
+        "key": 2,
+        "props": [
+          {
+            "name": "标签",
+            "type": "label",
+            "value": ""
+          },
+          {
+            "name": "默认状态",
+            "placeholder": "1：默认打开，0：默认关闭",
+            "type": "defaultValue",
+            "value": ""
+          }
+        ],
+        "propsValue": {
+          "defaultValue": "1：默认打开，0：默认关闭",
+          "label": "标签"
+        },
+        "title": "Switch 开关",
+        "type": "switch"
+      },
+      {
+        "id": "sdudlm",
+        "key": 3,
+        "props": [
+          {
+            "name": "标签",
+            "type": "label",
+            "value": ""
+          },
+          {
+            "name": "选项",
+            "placeholder": "用#分割，如：北京#上海#天津",
+            "type": "options",
+            "value": ""
+          }
+        ],
+        "propsValue": {
+          "label": "标签",
+          "options": "用#分割，如：北京#上海#天津"
+        },
+        "title": "Checkbox 多选框",
+        "type": "checkbox"
+      },
+      {
+        "id": "qievxs",
+        "key": 4,
+        "props": [
+          {
+            "name": "标签",
+            "type": "label",
+            "value": ""
+          },
+          {
+            "name": "占位文本",
+            "type": "placeholder",
+            "value": ""
+          }
+        ],
+        "propsValue": {
+          "label": "标签",
+          "placeholder": "占位文本"
+        },
+        "title": "textarea 多行输入框",
+        "type": "textarea"
+      },
+      {
+        "id": "pzdslt",
+        "key": 5,
+        "props": [
+          {
+            "name": "标签",
+            "type": "label",
+            "value": ""
+          },
+          {
+            "name": "选项",
+            "placeholder": "用#分割，如：北京#上海#天津",
+            "type": "options",
+            "value": ""
+          }
+        ],
+        "propsValue": {
+          "label": "标签",
+          "options": "用#分割，如：北京#上海#天津"
+        },
+        "title": "Select 选择器",
+        "type": "select"
+      }
+    ]
+  },
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 群聊内机器人设置保存
+
+POST /v1/bot/send-setting-json
+
+请求头:
+
+| 名称  | 必须 | 备注            |
+| ----- | ---- | --------------- |
+| token | 是   | 群聊管理员token |
+
+请求体： （具体settingJson更多解释请看[这里](/api/v1/instruction.html#%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8C%87%E4%BB%A4)）
+
+```JSONC
+{
+  "id": "12345", // 机器人id
+  "groupId": "678910", // 群聊id
+  "settingJson": "" // 机器人设置json数组（需转义）
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 智能体机器人清除上下文
+
+POST /v1/bot/llm/clean-content
+
+请求头:
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|机器人创建者token|
+
+请求体：
+
+```JSONC
+{
+  "botId": "25637484" // 机器人ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 获取智能体机器人知识库
+
+POST /v1/bot/llm/knowledge/list
+
+请求头:
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|机器人创建者token|
+
+请求体：
+
+```JSONC
+{
+  "botId": "123123123" // 机器人ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "id": 123, // 知识文件ID
+        "botId": "123123123", // 机器人ID
+        "botLlmId": 123, // Llm智能体机器人ID
+        "name": "轻韵助手-第三方云湖助手：第三方扩展插件编写文档.txt",
+        "url": "https://chat-file.jwznb.com/knowledge/835a1ab0d63ba9921c25d5f4e8c3bfe5.txt",
+        "status": 0, // 知识库文件处理状态，0-处理中，1-处理成功，2-处理失败
+        "isStop": 0, // 是否停用此文件，0-不停用，1-停用
+        "charLength": 0, // 字符长度
+        "paragraphCount": 0, // 分段数
+        "createBy": "123", // 知识库文件创建者ID
+        "createTime": 123123123, // 知识库文件创建时间戳
+        "updateBy": "", // 知识库文件更新用户ID
+        "updateTime": 0, // 知识库文件更新时间戳
+        "delFlag": 0 // 删除标签
+      }
+      // ...
+    ]
+  },
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 智能体机器人上传知识文件
+
+POST /v1/bot/llm/knowledge/create
+
+请求头:
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|机器人创建者token|
+
+请求体：
+
+```JSONC
+{
+  "botId": "123123123", // 机器人ID
+  "knowledgeId": 123 // 知识文件ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 获取我创建的机器人
+
+POST /v1/bot/console/my-bots
+
+请求头:
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "botsTotal": 1, // 创建的机器人总数
+    "list": {
+      "bots": [
+        {
+          "botId": "123123123", // 机器人ID
+          "nickname": "测试机器人名称", // 机器人名称
+          "avatarUrl": "https://...", // 机器人头像
+          "token": "123123123123123123123", // 机器人token
+          "link": "", // 订阅链接
+          "linkStop": "0", // 订阅链接是否被停用，0-未停用，1-已停用
+          "subscribeType": "0", // 订阅类别，0-url订阅，1-wss订阅
+          "settingJson": "", // 机器人设置配置json，需将json数据转义后填入
+          "introduction": "测试机器人简介" // 机器人简介
+        }
+        // ...
+      ]
+    }
+  },
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 获取群机器人权限列表
+
+POST /v1/bot/group-permission-get
+
+请求头:
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "allowEditGroupInfo": 0, // 允许编辑群消息，0-不允许，1-允许
+    "allowGagMember": 0, // 允许禁言用户，0-不允许，1-允许
+    "allowRemoveMember": 0, // 允许移除用户，0-不允许，1-允许
+    "allowGroupTagManage": 0 // 允许管理群标签，0-不允许，1-允许
+  },
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 获取智能体机器人参数参考
+
+POST /v1/bot/llm/llm-setting-ref-params
+
+请求头:
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+请求体：
+
+```JSONC
+{
+  "chatId": "123123123", // 对象ID
+  "chatType": 2 // 对象类别
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [] // 暂无实例数据
+  },
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 更改群机器人权限
+
+POST /v1/bot/group-permission-edit
+
+请求头:
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|必须为目标群群主|
+
+请求体：
+
+```JSONC
+{
+  "botId": "123123", // 机器人ID
+  "groupId": "123123123", // 群聊ID
+  "allowEditGroupInfo": 0, // 允许编辑群消息，0-不允许，1-允许
+  "allowGagMember": 0, // 允许禁言用户，0-不允许，1-允许
+  "allowRemoveMember": 0, // 允许移除用户，0-不允许，1-允许
+  "allowGroupTagManage": 0 // 允许管理群标签，0-不允许，1-允许
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+---
+
+---
+url: /api/v1/chat-background.md
+---
+# chat-background
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 设置聊天背景
+
+```http request
+POST /v1/chat-background/edit
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+### 请求体
+
+```JSONC
+{
+  "userId": "用户 id",
+  "chatId": "群聊 id", // 如果设置全部背景则填 all
+  "url": "要设置背景的文件名 + 拓展名"
+}
+```
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1 为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取背景设置列表
+
+```http request
+POST /v1/chat-background/list
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1 为正常
+  "data": {
+    "list": [
+      {
+        "id": 514, // 背景设置的 ID
+        "userId": "114514", // 用户 ID
+        "chatId": "all", // 聊天 ID，单个群聊就是正常的，如果是全部的那 ID 就是 all
+        "imgUrl": "https://chat-img.jwznb.com/background9.webp", // 背景图片 URL
+        "createTime": 1754710993, // 创建时间戳
+        "delFlag": 0,
+        "updateTime": 1754713160 // 更新时间戳
+      }
+    // ...
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/v1/check.md
+---
+# check
+> 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com` .
+
+没写请求/响应项目表示不需要相关参数.
+
+由于部分数据较为隐私，已省略.
+
+## 获取云湖新版本（Android 版本）
+
+```http request
+POST /v1/check/check-version-mobile
+###
+POST /v1/check/get-latest-version
+```
+
+### 请求体
+
+```JSONC
+{
+ "packageInfo":"{\"appName\":\"云湖\",\"packageName\":\"com.yhchat.app\",\"version\":\"1.4.83\",\"buildNumber\":\"347\"}", // 当前应用信息，为 JSON 数组，需转义后才可使用
+ "platform":"android", // 设备标识
+ "deviceinfo":"", // 这里填写设备信息
+ "deviceId":"114514", // 设备 ID
+ "userId":"114514" // 用户 ID（可带可不带）
+}
+```
+
+::: info
+
+`packageInfo` 转换后的 JSON 结构
+
+```JSONC
+{
+  "appName": "云湖", // 软件名称
+  "packageName": "com.yhchat.app", // 软件包名
+  "version": "1.4.83", // 软件版本
+  "buildNumber": "347" // 软件构建号
+}
+```
+
+:::
+
+### 响应体
+
+```JSONC
+{
+  "ApkMd5": "", // 更新包 MD5
+  "ApkSize": 74491, // 包体大小
+  "Code": 0,
+  "DownloadUrl": "https://app-cdn1.jwznb.com/android/yunhu-1.4.84.apk", // 下载地址
+  "Level": 0,
+  "Message": "success", // 返回消息
+  "ModifyContent": "1、全新发布云湖APP\n2、修复多个bug", // 更新内容
+  "UpdateStatus": 1, // 更新状态，1-需要更新，0-不需要更新
+  "VersionCode": 348, // 应用的 VersionCode
+  "VersionName": "1.4.84" // 应用版本号
+}
+```
+
+## 获取云湖新版本（Windows 版本）
+
+```http request
+POST https://chat-go.jwzhd.com/v1/check/check-version
+```
+
+### 请求体
+
+```jsonc
+{
+  "packageInfo": "{\"appName\":\"云湖\",\"packageName\":\"云湖\",\"version\":\"1.6.50\",\"buildNumber\":\"225\"}", // 当前应用信息，为 JSON 数组，需转义后才可使用
+  "platform": "windows", // 平台
+  "deviceinfo": "", // 这里填写设备信息
+  "deviceId": "" // 设备 ID
+}
+```
+
+::: info
+
+`packageInfo` 转换后的 JSON 结构
+
+```JSONC
+{
+  "appName": "云湖", // 软件名称
+  "packageName": "云湖", // 软件包名
+  "version": "1.6.50", // 软件版本
+  "buildNumber": "225" // 软件构建号
+}
+```
+
+:::
+
+::: info
+
+`deviceinfo` 设备信息示例。
+
+```JSONC
+{
+  "computerName":"", // 设备名称
+  "numberOfCores":12, // CPU 线程数
+  "systemMemoryInMegabytes":16384, // 内存 MiB
+  "userName":"", // 用户名
+  "majorVersion":10, // Windows 10, Windows 11
+  "minorVersion":0,
+  "buildNumber":26200, // Windows 操作系统版本
+  "platformId":2,
+  "csdVersion":"",
+  "servicePackMajor":0,
+  "servicePackMinor":0,
+  "suitMask":256,
+  "productType":1,
+  "reserved":0,
+  "buildLab":"26100.ge_release.240331-1435", // Windows 操作系统版本
+  "buildLabEx":"26100.1.amd64fre.ge_release.240331-1435",
+  "digitalProductId":[], // 数字产品 ID (数字数组)
+  "displayVersion":"25H2", // Windows 版本号
+  "editionId":"Professional", // Windows 版本
+  "installDate":"2024-12-01T15:40:13.000", // 安装时间
+  "productId":"", // 产品 ID
+  "productName":"Windows 11 Pro", // Windows 全名
+  "registeredOwner":"", // 所有者
+  "releaseId":"2009",
+  "deviceId":"" // 设备 ID
+}
+```
+
+:::
+
+### 响应体
+
+```jsonc
+{
+  "code": 1, // 成功
+  "data": {
+    "latestDesc": "1、全新发布云湖APP\\n2、修复多个bug", // 更新日志
+    "latestVersion": "1.6.50", // 最新版本
+    "update": 0
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/v1/coin.md
+---
+# coin
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 商品获取
+
+POST /v1/coin/shop/product-recommend
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "size": 100, // 字号
+  "page": 1 // 商品页数
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "id": 1, // 商品id
+        "type": 1, //
+        "cycle": 7, //会员持续时间（持续7天
+        "info": "7",
+        "name": "【云湖】会员7天", // 商品名
+        "imageUrls": "[\"https://chat-img.jwznb.com/999955a351c67b761ed078dc40d28ede.png\"]", // 商品图片url，为json数组，需转义后才可使用
+        "price": 100, // 价格（单位为金币）
+        "priceVip": 90, // vip专项价格
+        "stock": 49, // 商品库存
+        "sale": 0, // 已经出售了0件
+        "description": "云湖会员7天，享受所有会员服务\r\n\r\n### **商品不定期补充库存，请留意全员群及官方消息**\r\n##### 注意事项\r\n1. 该商品每7天可兑换一次\r\n2. 兑换后直接开通或续费会员，无额外操作\r\n3. 虚拟商品，兑换后不支持退换\r\n4. 如有疑问联系官方客服", // 商品描述
+        "delTime": 0, // 商品下架时间
+        "createTime": 0, // 商品上架时间
+        "lastUpdate": 0 // 商品更新时间
+      }
+    ],
+    "total": 1 // 商品总数
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 我的金币任务获取
+
+POST /v1/coin/task/my-task-info
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "adsWatchNumber": 5,  // 广告观看次数
+    "avatarEditNumber": 0, // 判断是否改了头像，0是未更改，1是已更改
+    "nicknameEditNumber": 1, // 判断是否改了名字，同上
+    "raffleTimes": 1 // 抽奖时间（来自bing翻译
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取商品详情
+
+POST /v1/coin/shop/product-detail
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "id": 1 // 商品id
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "product": {
+      "id": 1, // 商品id
+      "type": 1,
+      "cycle": 7, //会员持续时间（持续7天
+      "info": "7",
+      "name": "【云湖】会员7天", // 商品名
+      "imageUrls": "[\"https://chat-img.jwznb.com/999955a351c67b761ed078dc40d28ede.png\"]", // 商品图片url，为json数组，需转义后才可使用
+      "price": 100, // 价格（单位为金币）
+      "priceVip": 90, // vip专项价格
+      "stock": 49, // 商品库存
+      "sale": 0, // 已经出售了0件
+      "description": "云湖会员7天，享受所有会员服务\r\n\r\n### **商品不定期补充库存，请留意全员群及官方消息**\r\n##### 注意事项\r\n1. 该商品每7天可兑换一次\r\n2. 兑换后直接开通或续费会员，无额外操作\r\n3. 虚拟商品，兑换后不支持退换\r\n4. 如有疑问联系官方客服", // 商品描述
+      "delTime": 0, // 商品下架时间
+      "createTime": 0, // 商品上架时间
+      "lastUpdate": 0 // 商品更新时间
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 让金币机器人给你发领金币信息
+
+POST /v1/coin/task/raffle
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回成功信息
+}
+```
+
+---
+
+---
+url: /api/v1/community.md
+---
+# community
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 创建文章
+
+POST /v1/community/posts/create
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "baId": 40, // 文章分区ID
+  "groupId": "123", // 文本引用群聊ID
+  "title": "测试文章标题", // 文章标题
+  "content": "测试文章内容", // 文章内容
+  "contentType": 1, // 文章内容类别，1-文本，2-markdown
+  "draftId": 123 // 草稿ID，若此值不为0则云湖会删除这里设定的草稿ID所对应的草稿
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "audioUrl": 123, // 文章ID
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 删除文章
+
+POST /v1/community/posts/delete
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "postId": 123 // 文章ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 打赏文章
+
+POST /v1/community/posts/post-reward
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "postId": 123, // 文章ID
+  "amount": 1.0 // 打赏金币数
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 打赏文章评论
+
+POST /v1/community/comment/comment-reward
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "postId": 123, // 文章ID
+  "commentId": 123, // 打赏评论
+  "amount": 1.0// 打赏金币数
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 点赞/取消点赞文章
+
+POST /v1/community/posts/post-like
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "id": 123, // 文章ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 收藏/取消收藏文章
+
+POST /v1/community/posts/post-collect
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "id": 123, // 文章ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 编辑文章
+
+POST /v1/community/posts/edit
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "postId": 123, // 文章ID
+  "title": "测试文章标题",
+  "content": "测试文章内容", // 文章内容
+  "contentType": 2 // 文章内容类别，1-文本，2-markdown
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "id": 123 // 文章ID(不知道为什么要再返回一遍)
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取文章列表
+
+POST /v1/community/posts/post-list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "typ": 1, // 典型值
+  "baId": 41, // 分区id
+  "size": 20, // 尺寸
+  "page": 1 // 页数
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "posts": [
+      {
+        "id": 123, // 文章id
+        "baId": 41, // 分区id
+        "senderId": "114514", // 文章作者id
+        "senderNicknameId": 123, // 发送者昵称 Id
+        "senderAvatarId": 123, // 发送者头像 Id
+        "groupId": "", // 绑定该分区且从这个群聊发送文章的群聊id
+        "title": "我是标题", // 标题
+        "contentType": 2, // 文章类型(2是Markdown，1是普通文本)
+        "content": "文章内容部分预览",
+        "delTime": 0, // 删除时间
+        "createTime": 1754382613, // 创建文章时间戳
+        "updateTime": 0, // 更新时间
+        "editTime": 1754382741, // 编辑时间
+        "lastActive": 1754474179, // 上次活跃时间
+        "likeNum": 2, // 此文章点赞数量
+        "commentNum": 4, // 评论数量
+        "collectNum": 0, // 收藏数量
+        "amountNum": 0, // 投币数量
+        "senderNickname": "文章作者id",
+        "senderAvatar": "https://.。。", // 作者头像url
+        "createTimeText": "2025-08-05 16:30:13", // 创建文章时间
+        "group": { // 以下是绑定该分区且从这个群聊发送文章的群聊id
+          "id": 0, //
+          "groupId": "", // 群聊id
+          "name": "", // 群聊名字
+          "introduction": "", // 群聊简介
+          "createBy": "", // 群主id
+          "createTime": 0, // 创建时间戳
+          "avatarId": 0, // 群聊头像id
+          "del_flag": 0,
+          "avatarUrl": "", // 群聊头像url
+          "headcount": 0, // 群聊人数
+          "readHistory": 0, // 是否开启新成员浏览历史信息（1为开启，0为关闭）
+          "alwaysAgree": 0, // 是否直接进群（1为开启，0为关闭）
+          "categoryId": 0, // 群聊分类Id
+          "category": "", // 群聊所属分类
+          "private": 0, // 是否私有（1为开启，0为关闭）
+          "banId": 0, // 被禁言的id
+          "gag": 0, // 是否禁言
+          "gagBy": "", // 禁言者
+          "msgTypeLimit": "" // 消息类型限制
+        },
+        "isLiked": "0", // 你有没有给这个文章点赞（1为是，0则不是）
+        "isCollected": 0, // 你有没有收藏这个文章（1为是，0则不是）
+        "isReward": 0, // 你有没有给这个文章投币 （1为是，0则不是）
+        "isVip": 0 // 你是不是vip（1为是，0则不是）
+      }
+    // ...
+    ],
+    "total": 360 // 已经加载的文章（共360篇文章）
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 分区信息获取
+
+POST /v1/community/ba/info
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "id": 41 // 分区id
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "ba": {
+      "id": 41, // 分区id
+      "name": "云湖", // 分区名
+      "avatar": "https://chat-img2.jwznb.com/FoHHKnX-QNuD33-NnGWlq74xkgpg.webp", // 分区头像url
+      "delTime": 0, // 删除时间
+      "createTime": 1665233353, // 创建时间戳
+      "lastActive": 1754474179, // 上次活跃时间戳
+      "memberNum": 1053, // 加入此分区的成员
+      "postNum": 9656, // 该分区的文章数量
+      "groupNum": 55, // 绑定该分区的群聊数量
+      "createTimeText": "2022-10-08 20:49:13", // 分区创建时间
+      "isFollowed": "1" // 你是否关注了此分区（1为已关注，0为未关注）
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取分区列表
+
+POST /v1/community/ba/following-ba-list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "typ": 2, // 类型
+  "size": 20, // 排序
+  "page": 1 // 页数
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "ba": [
+      {
+        "id": 41, // 分区id
+        "name": "云湖", // 分区名字
+        "avatar": "https://chat-img2.jwznb.com/FoHHKnX-QNuD33-NnGWlq74xkgpg.webp", // 分区头像url
+        "delTime": 0, // 删除时间
+        "createTime": 1665233353, // 创建时间
+        "lastActive": 1754474179, // 上次活跃时间
+        "memberNum": 1053, // 该分区的成员数
+        "postNum": 9656, // 该分区的文章数
+        "groupNum": 55, // 该分区绑定的群聊数
+        "createTimeText": "2022-10-08 20:49:13" // 分区创建时间
+      }
+    // ...
+    ],
+    "total": 11 // 总共的分区数量（共11个）
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取文章打赏记录
+
+POST /v1/community/reward-record
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "typ": "post", // 类型（post-文章,comment-评论）
+  "size": 20, // 尺寸
+  "page": 1 // 页数
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "rewards": [
+      {
+        "id": 123, // 打赏id
+        "senderId": "123", // 打赏者id
+        "recvId": "123", // 文章作者id
+        "postId": 123, // 文章id
+        "commentId": 123, // 评论id
+        "amount": 0.01, // 打赏者减少金币的数量
+        "recvAmount": 0.01, // 收到的金币数量
+        "createTime": 1753427517,
+        "reason": "打赏文章扣金币", // 扣大赏者金币原因
+        "remark": "", // 备注
+        "post": {
+          "id": 123, // 文章id
+          "baId": 41,  // 分区id
+          "senderId": "123", // 文章作者id
+          "senderNicknameId": 123, // 发送者名字id
+          "senderAvatarId": 84, // 发送者头像id
+          "groupId": "", // 文章关联群组id
+          "title": "测试文章标题", // 文章标题
+          "contentType": 1, // 文章类型（1-Markdown，0-普通文章）
+          "delTime": 0, // 删除时间戳
+          "createTime": 1751721707, // 创建时间时间戳
+          "updateTime": 0, // 更新时间时间戳
+          "lastActive": 1753194392, // 上次活跃时间戳
+          "likeNum": 4, // 文章点赞数量
+          "commentNum": 2, // 评论数量
+          "collectNum": 6, // 收藏数量
+          "amountNum": 0.01, // 文章投币数量
+          "senderNickname": "测试打赏者名称", // 文章作者昵称
+          "senderAvatar": "https://...", // 文章作者头像url
+          "createTimeText": "2025-07-05 21:21:47", // 创建文章时间
+          "auditStatus": 0
+        },
+        "sender": {
+          "id": 106634, // 打赏id
+          "user_id": "123", // 打赏者id
+          "nickname": "测试打赏者昵称", // 打赏者昵称
+          "avatar_url": "https://..." // 打赏者头像url
+        },
+        "comment": {
+          "id": 0,
+          "postId": 0,
+          "parentId": 0,
+          "senderId": "",
+          "sender_nicknameId": 0,
+          "sender_avatarUd": 0,
+          "content": "",
+          "delTime": 0,
+          "createTime": 0,
+          "likeNum": 0,
+          "repliesNum": 0,
+          "amountNum": 0,
+          "senderNickname": "",
+          "senderAvatar": "",
+          "createTimeText": "",
+          "isLiked": "",
+          "isReward": 0
+        }
+      }
+    // ...
+    ],
+    "total": 1 // 总共的记录
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 评论文章
+
+POST /v1/community/comment/comment
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "postId": 123, // 文章id
+  "commentId": 123, // 评论id（若直接评论文章那id=0）
+  "content": "🤣" // 评论内容
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取文章评论列表
+
+POST /v1/community/comment/comment-list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "postId": 31153, // 文章id
+  "size": 10, // 尺寸
+  "page": 1 // 页数
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "comments": [
+      {
+        "id": 123, // 评论id
+        "postId": 123, // 文章id
+        "parentId": 0, // 父id
+        "senderId": "114514", //发送者id
+        "sender_nicknameId": 123, // 发送者名称id
+        "sender_avatarUd": 123, // 发送者头像id
+        "content": "？", // 评论内容
+        "delTime": 0, // 删除时间戳
+        "createTime": 1754746982, // 发送时间戳
+        "likeNum": 0, // 该评论的赞数
+        "repliesNum": 0, // 该评论下的回复
+        "amountNum": 0, // 该评论的投币数
+        "auditStatus": 0, // 审核状态
+        "replies": [], // 评论内容
+        "senderNickname": "测试评论发送者名称", // 发送者昵称
+        "senderAvatar": "https://...", // 发送者头像url
+        "createTimeText": "2025-08-09 21:43:02", // 评论时间
+        "isLiked": "0", // 是否点赞(1-是，0-否)
+        "isReward": 0, // 是否投币(1-是，0-否)
+        "isVip": 0 // 判断是否为vip(1-是，0-否)
+      },
+    // ...
+    ],
+    "isAdmin": 0, // 判断你是否为管理员(1/是，2-否)
+    "total": 3 // 总共评论数量(3个)
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 查找文章
+
+POST /v1/community/search
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "typ": 3, // 未知
+  "keyword": "123", // 关键词文本
+  "size": 10, // 返回文章数量
+  "page": 1 // 页数
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "ba": [],
+      "posts": [
+        {
+          "id": 30315, // 文章ID
+          "baId": 43, // 文章所属分区ID
+          "senderId": "123", // 文章发送者ID
+          "senderNicknameId": 123, // 文章发送者名称ID
+          "senderAvatarId": 123, // 文章发送者头像ID
+          "groupId": "", // 文章引用群聊ID
+          "title": "测试文章标题", // 文章标题
+          "contentType": 2, // 文章内容类别，1-文本，2-Markdown
+          "content": "测试文章内容", // 文章内容
+          "delTime": 0, // 未知
+          "createTime": 1749736140, // 文章创建时间戳
+          "updateTime": 0, // 未知
+          "editTime": 0, // 未知
+          "lastActive": 1749736140, // 文章上次活跃时间戳
+          "likeNum": 0, // 文章点赞人数
+          "commentNum": 0, // 文章评论人数
+          "collectNum": 0, // 文章收藏人数
+          "amountNum": 0, // 文章打赏金币数量
+          "senderNickname": "测试文章发送者名称", // 文章发送者名称
+          "senderAvatar": "https://...",
+          "createTimeText": "2025-06-12 21:49:00", // 文章发送时间
+          "group": {
+            "id": 0, // 未知
+            "groupId": "", // 未知
+            "name": "", // 未知
+            "introduction": "", // 未知
+            "createBy": "", // 未知
+            "createTime": 0, // 未知
+            "avatarId": 0, // 未知
+            "del_flag": 0, // 未知
+            "avatarUrl": "", // 未知
+            "headcount": 0, // 未知
+            "readHistory": 0, // 未知
+            "alwaysAgree": 0, // 未知
+            "categoryId": 0, // 未知
+            "category": "", // 未知
+            "private": 0, // 未知
+            "banId": 0, // 未知
+            "gag": 0, // 未知
+            "gagBy": "", // 未知
+            "msgTypeLimit": "" // 未知
+          },
+        "ba": {
+          "id": 123, // 文章所处分区ID
+          "name": "测试文章所处分区名称", // 文章所处分区名称
+          "avatar": "https://...", // 文章所处分区头像
+          "delTime": 0, // 未知
+          "createTime": 1675671165, // 文章所处分区创建时间戳
+          "lastActive": 1755075037, // 文章所处分区最近活跃时间戳
+          "memberNum": 123, // 文章所处分区关注数
+          "postNum": 123, // 文章所处分区贴子数
+          "groupNum": 123 // 文章所处分区引用群聊数
+          },
+        "isLiked": 0, // 未知
+        "isCollected": 0, // 未知
+        "isReward": 0, // 未知
+        "isVip": 0 // 未知
+        }
+      // ...
+      ]
+    },
+  "msg": "success" // 返回消息
+}
+```
+
+## 屏蔽指定用户文章
+
+POST /v1/community/set-black-list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "isAdd": 0, // 0-取消屏蔽，1-屏蔽
+  "authorId": "123"
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取屏蔽指定用户文章列表
+
+POST /v1/community/black-list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "size": 20, // 返回文章数量
+  "page": 1 // 页数
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "id": 0, // 屏蔽ID
+        "user_id": "123", // 屏蔽用户ID
+        "nickname": "测试屏蔽用户", // 屏蔽用户名称
+        "avatar_url": "https://..." // 屏蔽用户头像
+      }
+      // ...
+    ],
+    "total": 1 // 屏蔽用户数
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 查看文章详情
+
+POST /v1/community/posts/post-detail
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "id": 31622 //文章id
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "ba": {
+      "id": 41, // 文章分区id
+      "name": "云湖", // 分区名称
+      "avatar": "https://chat-img2.jwznb.com/FoHHKnX-QNuD33-NnGWlq74xkgpg.webp", // 作者头像url
+      "delTime": 0, // 删除时间(戳)
+      "createTime": 1665233353, // 文章创建时间戳
+      "lastActive": 1757794419, // 上次活跃时间戳
+      "memberNum": 1118, // 该分区订阅的人数
+      "postNum": 9752, // 该分区的文章数量
+      "groupNum": 64, // 该分区绑定的群聊数量
+      "createTimeText": "2022-10-08 20:49:13", // 分区创建时间
+      "isFollowed": "0"
+    },
+    "isAdmin": 0, // 文章作者是否为管理员
+    "post": {
+      "id": 123, // 文章id
+      "baId": 41, // 该文章所处的分区id
+      "senderId": "7384288", // 文章作者id
+      "senderNicknameId": 123, // 文章作者名称id
+      "senderAvatarId": 123, // 文章作者头像id
+      "groupId": "", // 该文章所处的群聊id
+      "title": "文章标题", // 文章标题
+      "contentType": 2, // 文章类型，1-普通文字，2-Markdown
+      "content": "文章内容", // 文章内容
+      "delTime": 0, // 删除时间(戳)
+      "createTime": 1757755754, // 文章发送时间戳
+      "updateTime": 0, // 文章更新时间戳
+      "editTime": 1757755828, // 文章上次编辑时间戳
+      "lastActive": 1757755828, // 文章上次活跃(编辑)时间戳
+      "likeNum": 0, // 文章点赞数量
+      "commentNum": 0, // 文章评论数量
+      "collectNum": 0, // 文章收藏数量
+      "isDraft": 0, // 是否为草稿，0-不是，1-是
+      "isSticky": 0, // 置顶时间戳，若不是置顶则为0
+      "amountNum": 0, // 文章投币数量
+      "senderNickname": "作者名称", // 文章作者名称
+      "senderAvatar": "https://c...", // 文章作者头像url
+      "createTimeText": "2025-09-13 17:29:14", // 文章发送时间
+      "group": { // 该文章下绑定的群聊信息
+        "id": 0, // 会话类型id
+        "groupId": "", // 群聊id
+        "name": "", // 群聊名称
+        "introduction": "", // 群聊简介
+        "createBy": "", // 该群群主id
+        "createTime": 0, // 群聊创建时间戳
+        "avatarId": 0, // 群头像id
+        "del_flag": 0,
+        "avatarUrl": "", // 群头像url
+        "headcount": 0, // 群聊人数
+        "readHistory": 0, // 是否开启群聊历史消息选项，0-关，1-开
+        "alwaysAgree": 0, // 是否总是默认新成员进群选项，0-关，1-开
+        "categoryId": 0, // 群聊类型id
+        "category": "", // 群聊类型
+        "private": 0, // 是否私有选项，0-关，1-开
+        "banId": 0, // 被ban的id
+        "gag": 0, // 被禁言群成员id
+        "gagBy": "", // 谁禁言的成员id
+        "msgTypeLimit": "" // 群聊消息类型限制
+      },
+      "ba": { // 分区相关信息
+        "id": 41, // 该文章所属分区id
+        "name": "云湖", // 分区名称
+        "avatar": "https://chat-img.jwznb.com/1665235278282.2976yunhu192.png", // 分区头像url
+        "delTime": 0, // 分区删除时间戳
+        "createTime": 1665233353, // 分区创建时间戳
+        "lastActive": 1757794419, // 分区上次活跃时间戳
+        "memberNum": 1118, // 分区成员数量
+        "postNum": 9752, // 分区文章数量
+        "groupNum": 64 // 该分区下绑定的群聊数量
+      },
+      "isLiked": 0, // (你)是否给文章点赞，0-没有，1-点了
+      "isCollected": 0, // (你)是否收藏该文章，0-没有，1-收了
+      "isReward": 0, // (你)是否给文章投币，0-没有，1-投了
+      "isVip": 0 // 文章作者是否为vip，0-没有，1-有
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 查看自己发布的文章
+
+POST /v1/community/posts/my-post-list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "size": 20, // 显示文章数量
+  "page": 1 // 页数
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1,  // 请求状态码，1为正常
+  "data": {
+    "posts": [ // 帖子相关
+      {
+        "id": 123, // 文章id
+        "baId": 49, // 文章所属分区id
+        "senderId": "1659829", // 文章作者
+        "senderNicknameId": 123, // 作者名称id
+        "senderAvatarId": 123, // 作者头像id
+        "groupId": "", // 文章所属群聊id
+        "title": "test", // 文章标题
+        "contentType": 1, // 文章类型，1-普通文字，2-Markdown
+        "content": "内容", // 文章内容
+        "delTime": 0, // 删除时间
+        "createTime": 1757818078, // 文章发布时间戳
+        "updateTime": 0, // 文章更新时间戳
+        "editTime": 0, // 文章编辑时间戳
+        "lastActive": 1757818078, // 文章上次活跃时间
+        "likeNum": 0, // 文章赞数
+        "commentNum": 0, // 文章评论数量
+        "collectNum": 0, // 文章收藏数量
+        "isDraft": 0, // 是否为草稿，0-不是，1-是
+        "isSticky": 0, // 置顶时间戳，若不是置顶则为0
+        "amountNum": 0, // 文章投币数量
+        "senderNickname": "作者", // 文章作者名称
+        "auditStatus": 0, // 审核状态，0-通过，1-不通过
+        "senderAvatar": "https://...", // 文章作者头像url
+        "createTimeText": "2025-09-14 10:47:58", // 文章发布时间
+        "group": { // 文章绑定群聊相关
+          "id": 0, // 文章所属群聊的类型id
+          "groupId": "", // 文章所属群聊id
+          "name": "", // 群聊名称
+          "introduction": "", // 群聊简介
+          "createBy": "", // 群聊群主id
+          "createTime": 0, // 群聊创建时间戳
+          "avatarId": 0, // 群聊头像id
+          "del_flag": 0,
+          "avatarUrl": "", // 群聊头像url
+          "headcount": 0, // 群聊人数
+          "readHistory": 0, // 是否开启聊天历史记录，0-没有，1-开了
+          "alwaysAgree": 0, // 新成员是否直接进入群聊，0-没有，1-开了
+          "categoryId": 0, // 群聊类型id
+          "category": "", // 群聊类型
+          "private": 0, // 群聊是否私有，0-没有，1-开了
+          "banId": 0, // 被banid
+          "gag": 0, // 被禁言者id
+          "gagBy": "", // 禁言者id
+          "msgTypeLimit": "" // 消息类型限制
+        },
+        "isLiked": "0",  // (你)是否点赞该文章，0-没有，1-点了
+        "isCollected": 0, // (你)是否收藏该文章，0-没有，1-点了
+        "isReward": 0, // (你)是否投币该文章，0-没有，1-点了
+        "isVip": 0 // 暂时不清楚
+      }
+    ],
+    "total": 1 // 文章数量
+  },
+  "msg": "success" // 返回成功消息
+}
+```
+
+## 查看分区下绑定的群聊列表
+
+POST /v1/community/ba/group-list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "baId": 41, //分区id
+  "size": 10, // 分页大小
+  "page": 1 // 页数
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1,  // 请求状态码，1为正常
+  "data": {
+    "groups": [
+      {
+        "id": 10497, // 群聊创建id
+        "groupId": "554470989", // 群聊id
+        "name": "这个是群聊", // 群聊名称
+        "introduction": "这个是介绍", // 群聊简介
+        "createBy": "6016104", // 群聊创建者id(群主id)
+        "createTime": 1757207765, // 群聊创建时间戳
+        "avatarId": 47524, // 头像id
+        "del_flag": 0,
+        "avatarUrl": "https://chat-img.jwznb.com/922717b67b6c61b79155fdb11bc1f796.jpg", // 群头像url
+        "headcount": 35, // 群聊人数
+        "readHistory": 1, // 是否开启新成员查看消息历史记录（1为开启，0为关闭）
+        "alwaysAgree": 1, // 是否直接进群（1为开启，0为关闭）
+        "categoryId": 21, // 绑定分区的id
+        "category": "兴趣爱好-其他", // 群聊分类名称
+        "private": 0, // 群聊是否私有（1为开启，0为关闭）
+        "banId": 0, // 被ban者id
+        "gag": 0,  // 是否禁言（1为开启，0为关闭）
+        "gagBy": "",  // 禁言者id
+        "msgTypeLimit": "", // 被限制的消息类型,如1,2,3,使用","分格。1-文本消息，2-图片消息，3-Markdown消息，4-文件消息，6-帖子消息，7-表情消息，8-HTML消息，10-视频消息，11-语音消息，13-语音通话（限制多个消息类型一般是 1,2,3,4··· 之类）
+        "uri": "https://chat-go.jwzhd.com/open-apis/v1/bot/send?token\u003d", // 机器人消息发送接口
+        "groupBotRel": null
+      },
+      {
+        "id": 10494,
+        "groupId": "960023663",
+        "name": "测试群",
+        "introduction": "114514",
+        "createBy": "6016104",
+        "createTime": 1757170885,
+        "avatarId": 47509,
+        "del_flag": 0,
+        "avatarUrl": "https://chat-img.jwznb.com/b63c826d9a1906f8811b2c6df8aa8adf.jpg",
+        "headcount": 20,
+        "readHistory": 1,
+        "alwaysAgree": 1,
+        "categoryId": 0,
+        "category": "",
+        "private": 0,
+        "banId": 0,
+        "gag": 0,
+        "gagBy": "",
+        "msgTypeLimit": "",
+        "uri": "https://chat-go.jwzhd.com/open-apis/v1/bot/send?token\u003d",
+        "groupBotRel": null
+      }
+    // ...
+    ],
+    "total": 72 // 群聊总数
+  },
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 分享文章分区
+
+POST /v1/community/ba/forward
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "baId": 0,
+  "receive": [
+    {
+      "chatId": "123", // 对象ID
+      "chatType": 2 // 对象列表，1-用户，2-群聊，3-机器人
+    }
+    // ...
+  ]
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 管理文章分区
+
+POST /v1/community/ba/manage
+
+请求头:
+
+| 名称  | 必须 | 备注                 |
+| ----- | ---- | -------------------- |
+| token | 是   | 必须为文章分区所有者 |
+
+请求体：
+
+```JSONC
+{
+  "baId": 0, // 分区ID
+  "visibleRange": 0, // 分区可见状态，0-所有人可见，1-只有分区所有者可见
+  "publishAuthority": 0 // 分区开放度，0-所有人都可以发文章和评论，1-仅分区所有者可以发文章任何人都可以评论，2-仅分区所有者可以发文章和评论
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 创建文章分区
+
+POST /v1/community/ba/create
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "name": "1111111111", // 分区名称，最多10字
+  "avatar": "https://..." // 分区头像
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "id": 0 // 分区ID
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 编辑文章分区
+
+POST /v1/community/ba/edit
+
+请求头:
+
+| 名称  | 必须 | 备注                 |
+| ----- | ---- | -------------------- |
+| token | 是   | 必须为文章分区所有者 |
+
+请求体：
+
+```JSONC
+{
+  "baId": 0, // 分区ID
+  "name": "1111111111", // 分区名称，最多10字
+  "avatar": "https://..." // 分区头像
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 删除文章分区
+
+POST /v1/community/ba/delete
+
+请求头:
+
+| 名称  | 必须 | 备注                 |
+| ----- | ---- | -------------------- |
+| token | 是   | 必须为文章分区所有者 |
+
+请求体：
+
+```JSONC
+{
+  "baId": 0 // 分区ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 创建文章草稿
+
+POST /v1/community/posts/create-draft
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "baId": 0, // 草稿所在分区ID
+  "title": "测试完整草稿标题", // 草稿标题
+  "content": "测试文章草稿内容", // 草稿内容
+  "contentType": 1, // 草稿类别，1-文本，2-Markdown
+  "draftId": 0 // 草稿ID，若此值不为0云湖将会删除这里设定的草稿ID所对应的草稿，以此实现草稿编辑
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "id": 123 // 草稿ID
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取文章草稿信息
+
+POST /v1/community/posts/get-draft
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "baId": 0, // 草稿所处文章分区ID，一般为0
+  "draftId": 123 // 草稿ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "posts": { // 帖子相关
+      "id": 123, // 文章id
+      "baId": 41, // 文章所属分区id
+      "senderId": "123", // 文章作者
+      "senderNicknameId": 123, // 作者名称id
+      "senderAvatarId": 123, // 作者头像id
+      "groupId": "", // 文章所属群聊id
+      "title": "test", // 文章标题
+      "contentType": 1, // 文章类型，1-普通文字，2-Markdown
+      "content": "内容", // 文章内容
+      "delTime": 0, // 删除时间
+      "createTime": 1757818078, // 文章发布时间戳
+      "updateTime": 0, // 文章更新时间戳
+      "editTime": 0, // 文章编辑时间戳
+      "lastActive": 1757818078, // 文章上次活跃时间
+      "likeNum": 0, // 文章赞数
+      "commentNum": 0, // 文章评论数量
+      "collectNum": 0, // 文章收藏数量
+      "isDraft": 0, // 是否为草稿，0-不是，1-是
+      "isSticky": 0, // 置顶时间戳，若不是置顶则为0
+      "amountNum": 0, // 文章投币数量
+      "senderNickname": "作者", // 文章作者名称
+      "senderAvatar": "https://...", // 文章作者头像url
+      "createTimeText": "2025-09-14 10:47:58", // 文章发布时间
+      "group": { // 文章绑定群聊相关
+      "id": 0, // 文章所属群聊的类型id
+      "groupId": "", // 文章所属群聊id
+      "name": "", // 群聊名称
+      "introduction": "", // 群聊简介
+      "createBy": "", // 群聊群主id
+      "createTime": 0, // 群聊创建时间戳
+      "avatarId": 0, // 群聊头像id
+      "del_flag": 0,
+      "avatarUrl": "", // 群聊头像url
+      "headcount": 0, // 群聊人数
+      "readHistory": 0, // 是否开启聊天历史记录，0-没有，1-开了
+      "alwaysAgree": 0, // 新成员是否直接进入群聊，0-没有，1-开了
+      "categoryId": 0, // 群聊类型id
+      "category": "", // 群聊类型
+      "private": 0, // 群聊是否私有，0-没有，1-开了
+      "banId": 0, // 被banid
+      "gag": 0, // 被禁言者id
+      "gagBy": "", // 禁言者id
+      "msgTypeLimit": "" // 消息类型限制
+      },
+    "isLiked": "0",  // (你)是否点赞该文章，0-没有，1-点了
+    "isCollected": 0, // (你)是否收藏该文章，0-没有，1-点了
+    "isReward": 0, // (你)是否投币该文章，0-没有，1-点了
+    "isVip": 0 // 暂时不清楚
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 删除文章草稿
+
+POST /v1/community/posts/cancel-draft
+
+请求头:
+
+| 名称  | 必须 | 备注             |
+| ----- | ---- | ---------------- |
+| token | 是   | 必须为草稿创建者 |
+
+请求体：
+
+```JSONC
+{
+  "draftId": 123 // 草稿ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 关注分区
+
+POST /v1/community/ba/user-follow-ba
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "baId": 45, // 分区id
+  "followSource": 2
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 取关分区
+
+POST /v1/community/ba/user-unfollow-ba
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "baId": 45, // 分区id
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 置顶/取消置顶文章
+
+POST /v1/community/posts/edit-sticky
+
+请求头:
+
+| 名称  | 必须 | 备注             |
+| ----- | ---- | ---------------- |
+| token | 是   | 必须是分区管理者 |
+
+请求体：
+
+```JSONC
+{
+  "postId": 45008 // 文章id（如果已经置顶了，则会取消置顶）
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取分区关注者列表
+
+POST /v1/community/ba/follower-list
+
+请求头:
+
+| 名称  | 必须 | 备注             |
+| ----- | ---- | ---------------- |
+| token | 是   | 必须是分区管理者 |
+
+请求体：
+
+```JSONC
+{
+  "id": 115, // 分区id
+  "size": 20, // 每页显示的数量
+  "page": 1, // 第1页
+  "memberName": "" // 搜索关注者的关键词
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "followers": [
+      {
+        "id": 11930, //关注id（应该是）
+        "baId": 115, // 分区id
+        "userId": "1234567", // 关注者用户id
+        "delTime": 0,
+        "followSource": 2,
+        "createTime": 1763132265, // 关注时间戳
+        "userLevel": 0, // 关注者等级（0-普通，2-分区管理员）
+        "nickname": "是个人", // 关注者名称
+        "avatarUrl": "https://chat-img.jwznb.com/6900488d625d48ac45ba34eff5b1246c.jpg", // 关注者头像url
+        "vipUserid": "1234567", // 关注者vip用户id
+        "vipEndTime": 1765728069 // vip结束时间戳
+      }
+    ],
+    "total": 1 // 总关注者数量
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 设置分区管理员
+
+POST /v1/community/ba/manage-setting
+
+请求头:
+
+| 名称  | 必须 | 备注             |
+| ----- | ---- | ---------------- |
+| token | 是   | 必须是分区创建者 |
+
+请求体：
+
+```JSONC
+{
+  "baId": 115, // 分区id
+  "userId": "1234567", // 用户id
+  "userLevel": 2 // 关注者(用户)等级（0-普通，2-分区管理员）
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取用户创建的分区
+
+POST /v1/community/ba/list-by-create
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "userId": "1234567" // 用户id
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "ba": [
+      {
+        "id": 50, // 分区id
+        "name": "123", // 分区名称
+        "avatar": "https://..." // 分区头像url
+      }
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取推荐文章
+
+POST /v1/community/posts/post-list-recommend
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+ "size":1, // 每页的文章数量
+ "page":2 // 页数
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "posts": [
+      {
+        "id": 29950, // 文章id
+        "baId": 41, // 文章所属分区id
+        "senderId": "1234567", // 文章作者id
+        "senderNicknameId": 127504, // 作者昵称id
+        "senderAvatarId": 32537, // 作者头像id
+        "groupId": "", // 文章所属群聊id
+        "title": "测试", // 文章标题
+        "contentType": 2, // 文章类型，1-普通文字，2-Markdown
+        "content": "如果缺少您所在的城市，欢迎反馈添加。", // 文章部分内容
+        "delTime": 0, // 删除时间戳
+        "createTime": 1748067660, // 创建时间戳
+        "updateTime": 0, // 更新时间戳
+        "editTime": 1767086078, // 编辑时间戳
+        "lastActive": 1767086078, // 上次活跃时间戳
+        "likeNum": 14, // 文章点赞数量
+        "commentNum": 522, // 文章评论数量
+        "collectNum": 1, // 文章收藏数量
+        "isDraft": 0, // 是否为草稿，0-不是，1-是
+        "isSticky": 0, // 置顶时间戳，0-不是，1-是
+        "amountNum": 0, // 文章投币数量
+        "auditStatus": 0, // 审核状态
+        "delBy": "",
+        "senderNickname": "昵称", // 作者昵称
+        "senderAvatar": "https://chat-img.jwznb.com/xxx.jpg", // 作者头像url
+        "createTimeText": "",
+        "group": {
+          "id": 0,
+          "groupId": "",
+          "name": "",
+          "introduction": "",
+          "createBy": "",
+          "createTime": 0,
+          "avatarId": 0,
+          "del_flag": 0,
+          "avatarUrl": "",
+          "headcount": 0,
+          "readHistory": 0,
+          "alwaysAgree": 0,
+          "categoryId": 0,
+          "category": "",
+          "private": 0,
+          "banId": 0,
+          "gag": 0,
+          "gagBy": "",
+          "msgTypeLimit": "",
+          "keyword": "",
+          "hideMember": 0,
+          "allowRecommend": 0,
+          "blockFriends": 0,
+          "autoDeleteMessage": 0
+        },
+        "isLiked": "1", // 是否点赞，0-不是，1-是
+        "isCollected": 0, // 是否收藏，0-不是，1-是
+        "isReward": 0, // 是否投币，0-不是，1-是
+        "isVip": 1, // 作者是否为vip
+        "score": 877.005014928 // 文章分数（猜测）
+      }
+    ],
+    "total": 3933 // 总文章数量
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/v1/conversation.md
+---
+# conversation
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 将对话设为已读
+
+POST /v1/conversation/dismiss-notification
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+ "chatId": "123" // 用户/机器人/群组ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+ "code": 1, // 返回状态码,1为正常
+ "msg": "success" // 返回信息
+}
+```
+
+## 获取对话列表
+
+POST /v1/conversation/list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体:
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+data {
+  chat_id: "7356666" // 对象ID
+  chat_type: 1 // 对象类型,1-用户 2-群聊 3-机器人
+  name: "测试" // 名称
+  chat_content: "我信(" // 会话内容
+  timestamp_ms: 1755566778727 // 时间戳(毫秒)
+  unread_message: 1 // 是否存在未读消息
+  at: 1 // 是否被@,1表示被@
+  avatar_id: 12345 // 头像ID
+  avatar_url: "https://chat-img.jwznb.com/..." // 头像URL
+  do_not_disturb: 1 // 免打扰,1表示开启
+  timestamp: 1755566778 // 时间戳(秒)
+  at_data {
+    unknown: 123456 // 似乎是名称ID
+    mentioned_id: "7356666" // 被@的ID
+    mentioned_name: "测试" // 被@人名称
+    mentioned_in: "8826666" // @消息所属的对话ID,例如群ID
+    mentioner_id: "8827777" // 发起@的对象的ID
+    mentioner_name: "测试" // 发起@的对象的名称
+    msg_seq: 1234 // 消息序列
+  }
+  certification_level: 1 // 认证相关,1是官方,2是地区
+}
+// ...
+total: 8 // 会话数目
+request_id: "abcdef"
+
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 列出对话
+message list {
+    Status status = 1;
+    repeated Data data = 2;
+    uint64 total = 3; // 列表中对话的数量
+    string request_id = 4; // 似乎是请求ID
+
+    message Data {
+        string chat_id = 1; // 对象ID
+        uint64 chat_type = 2; // 对象类型
+        string name = 3; // 名称
+        string chat_content = 4; // 消息内容
+        uint64 timestamp_ms = 5; // 毫秒时间戳
+        uint64 unread_message = 6; // 1表示有未读消息
+        uint64 at = 7; // 是否被@
+        uint64 avatar_id = 8; // 头像ID
+        string avatar_url = 9; // 头像URL
+        uint64 do_not_disturb = 11; // 免打扰
+        uint64 timestamp = 12; // 秒级时间戳
+        At_data at_data = 14; // @数据
+        // 15和3重了就不解析了
+        uint64 certification_level = 16; // 认证,1是官方 2是地区
+
+        message At_data {
+            uint64 unknown = 1; // 似乎是名称ID
+            string mentioned_id = 2; // 被@的ID,感觉没啥用
+            string mentioned_name = 3; // 被@的名称,感觉也没啥用
+            string mentioned_in = 4; // @消息所属的对话ID(例如群ID),感觉还没啥用
+            string mentioner_id = 6; // 发起@的对象ID
+            string mentioner_name = 7; // 发起@对象的名称
+            uint64 msg_seq = 8; // 发起@的消息序列
+        }
+    }
+}
+```
+
+:::
+
+## 更改对话排序
+
+POST /v1/conversation/sort-change
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "userId": "123" // 对象ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+ "code": 1, // 返回状态码,1为正常
+ "msg": "success" // 返回信息
+}
+```
+
+---
+
+---
+url: /api/v1/disk.md
+---
+# disk
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 创建群网盘文件夹
+
+POST /v1/disk/create-folder
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "chatId": "群聊id", // 群聊id
+  "chatType": 2, // 会话类型
+  "folderName": "文件名",
+  "parentFolderId": 0 // 父文件夹id
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取群网盘文件列表
+
+POST /v1/disk/file-list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "chatId": "群聊id",
+  "chatType": 2, // 会话类型
+  "folderId": 0, // 文件夹id（在根目录就是0）
+  "sort": "name_asc" // 排序
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1,
+  "data": {
+    "list": [
+      {
+        "id": 1818, // 文件id
+        "name": "114514", // 文件名称
+        "fileSize": 0, // 文件大小
+        "objectType": 1, // 对象类型
+        "uploadTime": 1754534188, // 更新时间
+        "uploadBy": "114514", // 上传者id
+        "uploadByName": "上传者名称",
+        "qiniuKey": "" // 七牛云密钥
+      }
+     // ...
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 上传文件（需搭配[获取上传文件token](/api/v1/misc.html#%E8%8E%B7%E5%8F%96%E5%8A%9F%E8%83%BD%E8%B7%AF%E7%94%B1)使用）
+
+POST /v1/disk/upload-file
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "chatId": "群聊id",
+  "chatType": 2, // 会话类型
+  "fileSize": 124080, // 文件大小（单位是KB）
+  "fileName": "1114514.png", // 文件名
+  "fileMd5": "6b14eab6a86c93c802de85e09561cb5c.png", // 文件的md5+文件拓展名（你的文件上传到云端文件名就是“文件的md5.文件拓展名”）
+  "fileEtag": "FqhRXAMU8qSP_omDntW7D6BUk50q", // Etag
+  "qiniuKey": "disk/6b14eab6a86c93c802de85e09561cb5c.png", // 七牛云key（目测在七牛云文件的路径）
+  "folderId": 0 // 文件夹id（在根目录就是0）
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 更改文件名
+
+POST /v1/disk/rename
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "id": 123, // 文件ID
+  "objectType": 2, // 会话类型
+  "name": "测试文件名称" // 文件名称
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 删除文件
+
+POST /v1/disk/remove
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "id": 123, // 文件ID
+  "objectType": 2, // 会话类型
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/v1/event.md
+---
+# event
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取机器人事件订阅配置
+
+POST /v1/event/list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "botId": "123" // 机器人id
+}
+```
+
+响应体：
+
+```JSONC
+{
+    "code": 1, // 请求状态码，1为正常
+    "data": {
+        "list": {
+            "id": 123, // 列表ID
+            "botId": "123", // 机器人ID
+            "messageReceiveNormal": 1, // 推送普通信息事件，0-不推送，1-推送
+            "messageReceiveInstruction": 1, // 推送指令信息事件，0-不推送，1-推送
+            "groupJoin": 0, // 推送加入群事件，0-不推送，1-推送
+            "groupLeave": 0, // 推送退出群事件，0-不推送，1-推送
+            "botFollowed": 0, // 推送关注机器人事件，0-不推送，1-推送
+            "botUnfollowed": 0, // 推送取关机器人事件，0-不推送，1-推送
+            "botSetting": 0, // 推送机器人信息设置事件，0-不推送，1-推送
+            "del_flag": 0 // 删除flag标签
+        }
+    },
+    "msg": "success" // 返回消息
+}
+```
+
+## 机器人消息订阅设置
+
+POST /v1/event/edit
+
+请求头:
+
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 机器人管理员token |
+
+请求体：
+
+```JSONC
+{
+  "botId": "75282754", // 机器人id
+  "messageReceiveNormal": 1, // 普通消息事件，1开启，0-关闭
+  "messageReceiveInstruction": 0, // 指令消息事件，1开启，0-关闭
+  "botFollowed": 1, // 关注机器人事件，1开启，0-关闭
+  "botUnfollowed": 1, // 取关机器人事件，1开启，0-关闭
+  "groupJoin": 1, // 加入群事件，1开启，0-关闭
+  "groupLeave": 1, // 退出群事件，1开启，0-关闭
+  "botSetting": 1, // 机器人设置消息事件，1开启，0-关闭
+  "typ": "messageReceiveInstruction" // 每次机器人设置的key值，为该请求2-8的key值中的一个
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/v1/expression.md
+---
+# expression
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取个人表情收藏
+
+POST /v1/expression/list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体:
+
+```JSONC
+{
+  "code": 1,
+  "data": {
+    "expression": [
+      {
+        "id": 114514,
+        "url": "expression/abcdef123456789abcdef123456789ab.jpg", // 需要前面加上 https://chat-img.jwznb.com/
+        "urlOriginal": "https://chat-img.jwznb.com/123456789abcdefabcf43bce54e4e242.jpg", // 来源URL
+        "delFlag": 0,
+        "createTime": 114514, // 创建时间戳
+        "createBy": "7356666" // 创建者ID
+      }
+    ]
+  },
+  "msg": "success"
+}
+```
+
+## 添加图片到个人表情收藏
+
+POST /v1/expression/create
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "url": "https://chat-img.jwznb.com/......" // 图片URL
+}
+```
+
+响应体:
+
+```JSONC
+{
+    "code": 1, // 状态码，正常为1
+    "msg": "success" // 状态信息
+}
+```
+
+## 删除个人表情收藏中的表情
+
+POST /v1/expression/delete
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "id": 114514 // // 要删除的表情ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+    "code": 1, // 状态码，正常为1
+    "msg": "success" // 状态信息
+}
+```
+
+## 置顶个人表情收藏中的表情
+
+POST /v1/expression/topping
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "id": 114514 // 要置顶的表情ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+    "code": 1, // 状态码，正常为1
+    "msg": "success" // 状态信息
+}
+```
+
+## 添加已有表情包
+
+POST /v1/expression/add
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "id": 123 // 表情ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+    "code": 1, // 状态码，正常为1
+    "msg": "success" // 状态信息
+}
+```
+
+---
+
+---
+url: /api/v1/file.md
+---
+# file
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 发送超级文件分享申请
+
+POST /v1/file/send
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "userId": "123", // 目标用户ID
+  "deviceId": "123", // 目标用户指定分享的设备ID，为空则为发送给目标用户的所有设备
+  "fileData": "{}" // 文件分享数据，格式为json转义
+}
+```
+
+::: fileData属性，json数据格式
+
+```JSONC
+{
+  "path": "C:\\Windows\\test.exe", // 文件原始目录
+  "size": 5774088, // 文件大小
+  "name": "test.exe", // 文件名称
+  "isDirectory": 0, // 未知
+  "count": 1, // 未知
+  "current": 1, // 未知
+  "uuid": "123123123123123123" // 文件分享uuid，应该是随机的，可以随便写
+}
+```
+
+:::
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 拒绝超级文件分享
+
+POST /v1/file/reply
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "deviceId": "123123123123", // 拒绝请求的设备ID
+  "isAccept": "0", // 未知
+  "userId": "123", // 拒绝请求的用户ID
+  "fileData": "" // 未知
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 建立超级文件分享
+
+POST /v1/file/offer
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "deviceId": "123", // 目标用户指定分享的设备ID
+  "description": "{}", // 连接协议，为json格式数据转义，未完成
+  "userId": "123", //目标用户ID
+  "sessionId": "123123123123123123123" // 连接请求标识ID，应该是随机的，可以随便写
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/v1/friend.md
+---
+# friend
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 添加用户/群聊/机器人
+
+```http request
+POST /v1/friend/apply
+```
+
+### 请求头
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+### 请求体
+
+```JSONC
+{
+  "chatId": "123", // 目标对象ID
+  "chatType": 2, // 目标对象类别，1-用户，2-群聊，3-机器人
+  "remark": "测试申请简介" // 申请简介
+}
+```
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+::: warning
+
+群主无法退群，会响应:
+
+```JSONC
+{
+  "code": -1,
+  "msg": "群主不可退群，请先转移群聊"
+}
+```
+
+:::
+
+## 删除用户/群聊/机器人
+
+```http request
+POST /v1/friend/delete-friend
+```
+
+### 请求头
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+### 请求体
+
+```JSONC
+{
+  "chatId": "123", // 目标对象ID
+  "chatType": 2, // 目标对象类别，1-用户，2-群聊，3-机器人
+}
+```
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 处理用户/群聊/机器人添加申请
+
+```http request
+POST /v1/friend/agree-apply
+```
+
+### 请求头
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+### 请求体
+
+```JSONC
+{
+  "id": 123, // 申请ID
+  "agree": 1 // 1-通过请求，2-拒绝请求，3-显示请求过期，4-显示已解散
+}
+```
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取所有聊天对象
+
+```http request
+POST /v1/friend/address-book-list
+```
+
+### 请求头
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+### 请求体
+
+```ProtoBuf
+number: "123123" // 请求标识ID，可以随便写
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 请求标识符
+message address_book_list_send {
+    string number = 2;
+}
+```
+
+:::
+
+### 响应体
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1 // 请求状态码，1为正常
+  msg: "success" // 返回消息
+}
+data {
+  list_name: "测试聊天对象列表名称" // 聊天对象列表名称，为"用户"，"我加入的群聊"，"机器人"
+  data: {
+    chat_id: "123" // 聊天对象ID
+    chat_name: "测试聊天对象名称" // 聊天对象名称
+    chat_avatar_url: "https://..." // 聊天对象头像url
+    permisson_level: 2 // 群权限等级(普通用户无此项(数值为0或无此项),群主100,管理员2),只有群列表才有此项
+    temp_text1 = 1 // 未知
+    chat_name_up: "测试聊天对象名称" // 聊天对象名称
+  }
+  // ...单个列表输出完成后，连带list_name一起重复
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 聊天对话列表
+message address_book_list {
+  Status status = 1;
+  repeated Data data = 2;
+
+  // 列表数据
+  message Data {
+    string list_name = 1; // 聊天对象列表名称，为"用户"，"我加入的群聊"，"机器人"
+    repeated Data_list data = 2;
+
+    // 聊天对象数据
+    message Data_list {
+      string chat_id = 1; // 聊天对象ID
+      string name = 2; // 聊天对象名称
+      string avatar_url = 3; // 聊天对象头像url
+      int32 permisson_level = 4; // 群权限等级(普通用户无此项(数值为0或无此项),群主100,管理员2),只有群列表才有此项
+      bool noDisturb = 5; // 免打扰
+      //int32 field6 = 6; // 未知
+    }
+  }
+}
+```
+
+:::
+
+## 获取对象请求列表
+
+```http request
+POST /v1/friend/request-list
+```
+
+### 请求头
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+### 响应体
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1 // 请求状态码，1为正常
+  msg: "success" // 返回消息
+}
+requests {
+  receiverName: "测试接收者名称" // 接收者名称
+  receiverAvatar: "https://..." // 接收者头像
+  name: "测试用户名称" // 请求方名称
+  avatar: "https://..." // 请求方头像
+  groupName: "测试群组名称" // 群组名称
+  groupAvata: "https://..." // 群组头像
+  inviterId: "123" // 邀请者ID (字段8同此含义)
+  ourceType: 1 // 来源类型
+  targetType: 1 // 目标类型
+  targetId: "123" // 目标ID
+  receiverId: "123" // 接收者ID
+  result: 0 // 处理结果
+  processedAt: 1231231230 // 处理时间戳
+  inviteAt: 1231231230 // 邀请时间戳
+  inviteAtStr: "1231-23-12 31:23:00" // 邀请时间字符串
+  requestI: 123; // 请求ID
+  botName: "测试机器人名称" // 机器人名称
+  botAvatar: "https://..." // 机器人头像
+  processorName: "测试处理者名称" // 处理者名称
+  note: "测试对象请求" // 备注信息
+}
+total: 1 // 总请求数
+pending: 0 // 待处理请求数
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 对象请求列表
+message Response {
+  Status status = 1;
+  message Request {
+      string receiverName = 1; // 接收者名称
+      string receiverAvatar = 2; // 接收者头像
+      string name = 3; // 请求方名称
+      string avatar = 4; // 请求方头像
+      string groupName = 5; // 群组名称
+      string groupAvatar = 6; // 群组头像
+      string inviterId = 7; // 邀请者ID (字段8同此含义)
+      int32 sourceType = 9; // 来源类型
+      int32 targetType = 10; // 目标类型
+      string targetId = 11; // 目标ID
+      string receiverId = 12; // 接收者ID
+      int32 result = 13; // 处理结果
+      int64 processedAt = 14; // 处理时间戳
+      int64 inviteAt = 16; // 邀请时间戳
+      string inviteAtStr = 17; // 邀请时间字符串
+      int32 requestId = 18; // 请求ID
+      string botName = 19; // 机器人名称
+      string botAvatar = 20; // 机器人头像
+      string processorName = 22; // 处理者名称
+      string note = 23; // 备注信息
+    }
+    repeated Request requests = 2; // 请求列表
+    int32 total = 3; // 总请求数
+    int32 pending = 4; // 待处理请求数
+}
+```
+
+:::
+
+## 设置会话免打扰
+
+```http request
+POST /v1/friend/no-notify
+```
+
+### 请求头
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+### 请求体
+
+```JSONC
+{
+  "chatId": "118738312", // 会话ID
+  "noNotify": 0 // 0-取消免打扰，1-设置免打扰
+}
+```
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 删除好友/邀请请求
+
+```http request
+POST /v1/friend/delete-request
+```
+
+### 请求头
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+### 请求体
+
+```JSONC
+{
+  "id": 123 // 请求ID
+}
+```
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/v1/group-tag.md
+---
+# group-tag
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取群组标签列表
+
+POST /v1/group-tag/list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+    "groupId": "123456789", //要获取的群聊ID
+    "size": 20,// 页面总数
+    "page": 1,//页码
+    "tag": ""// 搜索词语
+}
+```
+
+响应体:
+
+```JSONC
+{
+    "code": 1,
+    "data": {
+        "list": [
+            {
+                "id": 1234, // 标签ID
+                "groupId": "123456789", // 群聊ID
+                "tag": "一个标签", // 标签名称
+                "color": "#E91E63", // 标签颜色
+                "desc": "", // 描述
+                "sort": 0, // 排序
+                "delFlag": 0,
+                "createTime": 1753719847 // 创建时间
+            }
+        ]
+    },
+    "msg": "success"
+}
+```
+
+## 关联用户标签
+
+POST /v1/group-tag/relate
+
+请求头:
+
+| 名称  | 必须 | 备注                  |
+| ----- | ---- | --------------------- |
+| token | 是   | 必须为群聊管理员token |
+
+请求体:
+
+```JSONC
+{
+    "userId": "1234567", // 要关联的用户ID
+    "tagGroupId": 1145 // 要关联的标签ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 取消关联用户标签
+
+POST /v1/group-tag/relate-cancel
+
+请求头:
+
+| 名称  | 必须 | 备注                  |
+| ----- | ---- | --------------------- |
+| token | 是   | 必须为群聊管理员token |
+
+请求体:
+
+```JSONC
+{
+    "userId": "1234567", // 要关联的用户ID
+    "tagGroupId": 1145 // 要关联的标签ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 编辑群组标签
+
+POST /v1/group-tag/edit
+
+请求头:
+
+| 名称  | 必须 | 备注                  |
+| ----- | ---- | --------------------- |
+| token | 是   | 必须为群聊管理员token |
+
+请求体:
+
+```JSONC
+{
+    "id": 1234, // 要更改的标签ID
+    "groupId": "123456789", // 要更改的标签所在的群聊ID
+    "tag": "一个标签", // 标签名称
+    "color": "#E91E63", // 标签颜色
+    "desc": "", //，标签描述
+    "sort": 0 // 标签排序
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 新增群组标签
+
+POST /v1/group-tag/create
+
+请求头:
+
+| 名称  | 必须 | 备注                  |
+| ----- | ---- | --------------------- |
+| token | 是   | 必须为群聊管理员token |
+
+请求体：
+
+```JSONC
+{
+    "groupId": "123456789", // 要创建标签的群聊ID
+    "tag": "标签名称", // 标签名称
+    "color": "#2196F3", // 标签颜色
+    "desc": "", // 标签描述
+    "sort": 0 // 标签排序
+}
+
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 删除群组标签
+
+POST /v1/group-tag/delete
+
+请求头:
+
+| 名称  | 必须 | 备注                  |
+| ----- | ---- | --------------------- |
+| token | 是   | 必须为群聊管理员token |
+
+请求体:
+
+```JSONC
+{
+    "id": 1234 // 要删除的标签ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 获取标签绑定的用户列表
+
+POST /v1/group-tag/members
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```ProtoBuf
+data {
+  size: 50 // 分页大小
+  page: 1 // 页数
+}
+group_id: "123" // 群聊ID
+tag_id: 123 // 标签ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message tag_member_send {
+    Data data = 2;
+    message Data {
+        int32 size = 1; // 分页大小
+        int32 page = 2; // 页数
+    }
+    string group_id = 3; // 标签所处群聊ID
+    int64 tag_id = 4; // 标签ID
+}
+```
+
+:::
+
+响应体:
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+user {
+  group_id: "big" // 所属群聊ID
+  user_info {
+    user_id: "123" // 用户ID
+    name: "测试用户名" // 用户名
+    avatar_url: "https://..." // 头像URL
+    int32 is_vip: 0 // 是否为vip，0-非vip用户，1-vip用户
+  }
+    permission_level: 0 // 权限等级, 群主100 管理员2 普通用户无/0
+    gag_time: 123 // 禁言时间戳
+    is_gag: 0; // 是否被禁言，0-未被禁言，1-已被禁言
+}
+total: 1 // 总数
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 标签绑定的用户列表
+message tag_member {
+    Status status = 1;
+    repeated User user = 2;
+    message User {
+        string group_id = 1;
+        User_info user_info = 2;
+
+        message User_info {
+            string user_id = 1;
+            string name = 2;
+            string avatar_url = 4;
+            int32 is_vip = 6;
+        }
+        int32 permission_level = 3; // 权限等级, 群主100 管理员2 普通用户无/0
+        int64 gag_time = 4; // 禁言时间戳
+        int32 is_gag = 5; // 是否被禁言
+    }
+    int64 total = 3; // 总数
+}
+```
+
+:::
+
+---
+
+---
+url: /api/v1/group.md
+---
+# group
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取群聊信息
+
+```http request
+POST /v1/group/info
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+::: warning
+此处响应数据部分项目需要在打开相应开关后才会出现,例如private必须打开群聊私有才能在响应数据中看到.\
+:::
+
+### 请求体
+
+```ProtoBuf
+group_id: "123123" // 群聊 ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message info_send {
+    string group_id = 2;
+}
+```
+
+:::
+
+### 响应数据
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+data {
+  id: "123" //群聊ID
+  name: "测试群聊" // 群聊名称
+  avatar_url: "https://..." // 头像url
+  avatar_id: 123 // 头像ID
+  introduction: "测试群聊" // 群聊简介
+  member: 123 // 群人数
+  create_by: "123" // 创建者ID
+  direct_join: 0 // 进群免审核,1为开启
+  permisson_level: 2 // 权限等级(普通用户无此项(数值为0或无此项),群主100,管理员2)
+  history_msg: 1 // 历史消息,1为开启
+  category_name: "无" // 分类名
+  category_id: 40 // 分类ID
+  private: 0 // 是否私有,1为私有
+  do_not_disturb: 1 // 免打扰,1为开启
+  community_id: 123 // 加入社区的ID
+  community_name: "云湖" // 加入社区的名称
+  top: 0 // 置顶会话,1为开启
+  admin: "123" // 管理员ID,可以有多个
+  limited_msg_type: "" // 被限制的消息类型,如1,2,3,使用","分格
+  owner: "123" // 群主ID
+  recommandation: 1 // 是否加入群推荐,1为开启
+  tag_old: "冲刺一百万用户！" // 标签
+  tag {
+    id: 123 // 标签id
+    text: "" // 标签文字
+    color: "#FFFFFFFF" // 标签颜色
+  }
+  my_group_nickname: "12345" // 我的群昵称
+  group_code: "test1234" // 群口令
+  hide_group_members: 1 // 隐藏群成员（开启时为1）
+  auto_delete_message: 730 // 消息自动销毁时间（0-永久不删，90-2个月后删除，365-1年后删除，730-2年后删除）
+  deny_members_upload_to_group_disk: 1 // 禁止群成员上传文件到群云盘（开启时为1）
+
+}
+history_bot {
+  id: "123" // 机器人ID
+  name: "测试" // 机器人名称
+  name_id: 123 // 机器人名称的序列(数据库中第N个用户/机器人/群组)
+  avatar_url: "https://..." // 头像URL
+  avatar_id: 123 // 头像ID
+  introduction: "测试机器人" // 机器人简介
+  create_by: "123" // 创建者ID
+  create_time: 1231231230 // 创建时间戳
+  user_number: 123 // 使用人数
+  private: 1 // 1表示私有机器人.
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 群聊信息
+message info {
+    Status status = 1;
+    Group_data data = 2;
+    repeated Bot_data history_bot = 3;
+
+    // 群聊数据
+    message Group_data {
+        string group_id = 1;
+        string name = 2;
+        string avatar_url = 3;
+        uint64 avatar_id = 4; // 头像ID
+        string introduction = 5;
+        uint64 member = 6; // 群人数
+        string create_by = 7;
+        uint64 direct_join = 8; // 进群免审核
+        uint64 permisson_level = 9; // 权限等级
+        uint64 history_msg = 10; // 历史消息
+        string category_name = 11; // 分类名
+        uint64 category_id = 12; // 分类ID
+        uint64 private = 13; // 是否为私有群聊
+        uint64 do_not_disturb = 14; // 免打扰
+        uint64 community_id = 15;
+        string community_name = 16;
+        uint64 top = 19; // 会话置顶
+        repeated string admin = 20;
+        string limited_msg_type = 22; // 被限制的消息类型,例如 1,2,3
+        string owner = 23;
+        uint64 recommandation = 24; // 是否加入群推荐
+        repeated string tag_old = 26; // 标签(旧版)
+        repeated Tag tag = 27;
+        string my_group_nickname = 28; // 我的群昵称
+        string group_code = 29; // 群口令
+        uint64 hide_group_members = 30; // 隐藏群成员（开启时为1）
+        uint64 auto_delete_message = 32; // 消息自动销毁时间
+        uint64 deny_members_upload_to_group_disk = 33; // 禁止群成员上传文件到群云盘（开启时为1）
+
+        // 已使用标签信息,2没啥用不解析了
+        message Tag {
+            uint64 id = 1; // 标签ID(貌似)
+            string text = 3;
+            string color = 4;
+        }
+    }
+
+    // 群聊中使用过的机器人数据
+    message Bot_data {
+        string id = 1;
+        string name = 2;
+        uint64 name_id = 3; // 机器人名称在数据库中序列,包括用户,群聊,机器人
+        string avatar_url = 4;
+        uint64 avatar_id = 5;
+        string introduction = 6;
+        string create_by = 7;
+        uint64 create_time = 8;
+        uint64 user_number = 9; // 使用人数
+        uint64 private = 10; // 是否为私有机器人
+    }
+}
+```
+
+:::
+
+## 获取群成员列表
+
+```http request
+POST /v1/group/list-member
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+### 请求体
+
+```ProtoBuf
+data {
+  size: 50 // 分页大小
+  page: 1 // 页数
+}
+group_id: "big" // 群聊ID
+keywords: "测试群成员" // 搜索关键词
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message list_member_send {
+    Data data = 2;
+
+    message Data {
+        int32 size = 1; // 分页大小
+        int32 page = 2; // 页数
+    }
+
+    string group_id = 3; // 群聊ID
+    string keywords = 4; // 搜索关键词
+}
+```
+
+:::
+
+### 响应数据
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+user {
+  group_id: "big" // 所属群聊ID
+  user_info {
+    user_id: "7356666" // 用户ID
+    name: "Feng" // 用户名
+    avatar_url: "https://..." // 头像URL
+    is_vip: 0 // 是否为vip用户, 0-不为vip用户, 1-vip用户
+
+  }
+  permission_level: 100 // 权限等级, 群主100 管理员2 普通用户无/0
+  gag_time: 123456 // 禁言时间戳
+  is_gag: 0 // 是否处于禁言状态
+}
+// 可以有多个
+// ...
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message list_member {
+    Status status = 1;
+    repeated User user = 2;
+
+    message User {
+      string group_id = 1;
+      User_info user_info = 2;
+
+      message User_info {
+          string user_id = 1;
+          string name = 2;
+          string avatar_url = 4;
+          int32 is_vip = 6;
+      }
+
+      int32 permission_level = 3;
+      int64 gag_time = 4; // 禁言时间
+      int32 is_gag = 5; c
+  }
+}
+```
+
+:::
+
+## 获取群聊语音房间
+
+```http request
+POST /v1/group/live-room
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+### 请求体
+
+```JSONC
+{
+  "groupId": "123" // 群聊id
+}
+```
+
+### 响应数据
+
+```JSONC
+{
+  "code": 1,  // 请求状态码，1为正常
+  "data": {
+    "rooms": [
+      {
+        "userId": "123", // 房间管理员用户ID
+        "roomId": "123", // 房间ID
+        "chatId": "123", // 房间所属对象ID
+        "title": "测试房间", // 房间名称
+        "chatType": 2, // 房间所属对象类别，一般为2-群聊
+        "status": 0, // 房间状态码
+        "createBy": "123", // 房间创建用户ID
+        "createTime": 1231231230, //房间创建时间戳
+        "nickname": "测试用户", // 房间创建用户名称
+        "count": 123, // 房间内人数
+        "avatarUrl": "https://..." // 房间头像url
+      }
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取群指令列表
+
+```http request
+POST /v1/group/instruction-list
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+### 请求体
+
+```JSONC
+{
+  "groupId": "big" // 目标群聊
+}
+```
+
+### 响应数据
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "instructions": [
+      {
+        "botId": "123", // 机器人ID
+        "botName": "测试机器人", // 机器人名称
+        "name": "测试指令", // 指令名称
+        "desc": "测试指令简介", // 指令简介
+        "id": 123, // 指令ID
+        "sort": 0, // 未知
+        "auth": 0 // 可用状态，0-所有人可用，1-所有人禁用，2-群主可用，3-群主管理员可用
+      },
+      // ...
+    ]
+  },
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 邀请加入群聊
+
+```http request
+POST /v1/group/invite
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+### 请求体
+
+```JSONC
+{
+  "chatId": "123", // 邀请成员ID，必须为目标用户token已添加的token
+  "chatType": 1, // 邀请成员类别，1-用户，3-机器人
+  "groupId": "123" // 目标群聊
+}
+```
+
+### 响应数据
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 踢出用户
+
+```http request
+POST /v1/group/remove-member
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注                    |
+| ----- | ---- |-------------------------|
+| token | 是   | 必须为群主或管理员token |
+
+### 请求体
+
+```JSONC
+{
+  "groupId": "123", // 目标群聊ID
+  "userId": "123" // 踢出用户ID
+}
+```
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 禁言用户
+
+```http request
+POST /v1/group/gag-member
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注                    |
+| ----- | ---- |-------------------------|
+| token | 是   | 必须为群主或管理员token |
+
+### 请求体
+
+```JSONC
+{
+  "groupId": "123", // 目标群聊ID
+  "userId": "123", // 禁言用户ID
+  "gag": 0 // 禁言时间，只能为这些时间，0-取消禁言，600-10分钟，3600-1小时，21600-6小时，43200-12小时，1-永久禁言
+}
+```
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 获取群聊推荐分类
+
+```http request
+GET /v1/group/category
+```
+
+### 响应体
+
+```JSONC
+{
+  "code": 1,
+  "data": {
+    "category": [
+      {
+        "id": 27,
+        "name": "云湖",
+        "parent_id": 0,
+        "subItems": [
+          {
+            "id": 26,
+            "name": "云湖反馈",
+            "parent_id": 27,
+            "subItems": null
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "技术",
+        "parent_id": 0,
+        "subItems": [
+          {
+            "id": 22,
+            "name": "IT/互联网",
+            "parent_id": 6,
+            "subItems": null
+          },
+          {
+            "id": 23,
+            "name": "玩机",
+            "parent_id": 6,
+            "subItems": null
+          },
+          {
+            "id": 24,
+            "name": "其他技术",
+            "parent_id": 6,
+            "subItems": null
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "游戏",
+        "parent_id": 0,
+        "subItems": [
+          {
+            "id": 11,
+            "name": "手游",
+            "parent_id": 3,
+            "subItems": null
+          },
+          {
+            "id": 12,
+            "name": "单机游戏",
+            "parent_id": 3,
+            "subItems": null
+          },
+          {
+            "id": 13,
+            "name": "主机游戏",
+            "parent_id": 3,
+            "subItems": null
+          },
+          {
+            "id": 14,
+            "name": "网络游戏",
+            "parent_id": 3,
+            "subItems": null
+          },
+          {
+            "id": 15,
+            "name": "其他游戏",
+            "parent_id": 3,
+            "subItems": null
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "兴趣爱好",
+        "parent_id": 0,
+        "subItems": [
+          {
+            "id": 16,
+            "name": "影视",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 17,
+            "name": "摄影",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 18,
+            "name": "音乐",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 19,
+            "name": "动漫",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 20,
+            "name": "运动",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 21,
+            "name": "其他",
+            "parent_id": 5,
+            "subItems": null
+          },
+          {
+            "id": 25,
+            "name": "资讯订阅",
+            "parent_id": 5,
+            "subItems": null
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "其他",
+        "parent_id": 0,
+        "subItems": [
+          {
+            "id": 29,
+            "name": "粉丝群",
+            "parent_id": 2,
+            "subItems": null
+          },
+          {
+            "id": 28,
+            "name": "地区",
+            "parent_id": 2,
+            "subItems": null
+          },
+          {
+            "id": 8,
+            "name": "同事",
+            "parent_id": 2,
+            "subItems": null
+          },
+          {
+            "id": 9,
+            "name": "朋友",
+            "parent_id": 2,
+            "subItems": null
+          },
+          {
+            "id": 10,
+            "name": "家人",
+            "parent_id": 2,
+            "subItems": null
+          }
+        ]
+      }
+    ]
+  },
+  "msg": "success"
+}
+```
+
+## 搜索推荐群聊
+
+```http request
+POST /v1/group/recommend/list
+```
+
+### 请求体
+
+```JSONC
+{
+  "categoryId": 22, // 群聊分类id， 0 代表全部
+  "keyword": "114514" // 搜索关键词，留空获取全部群聊
+}
+```
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "groups": [
+      {
+        "id": 9910,
+        "groupId": "114514",
+        "name": "这是群聊名字",
+        "introduction": "这是个群聊介绍",
+        "createBy": "114514", // 创建者id
+        "createTime": 1754113069, // 创建时间戳
+        "avatarId": 43821, // 头像id
+        "del_flag": 0,
+        "avatarUrl": "https://chat-img.jwznb.com/3d805b635cc54829e461102ab315381b.gif", // 群头像url
+        "headcount": 16, // 群聊人数
+        "readHistory": 1, // 是否开启新成员查看消息历史记录（1为开启，0为关闭）
+        "alwaysAgree": 1, // 是否直接进群（1为开启，0为关闭）
+        "categoryId": 22, // 群聊分类id
+        "category": "技术-IT/互联网", // 群聊分类名称
+        "private": 0, // 群聊是否私有（1为开启，0为关闭）
+        "banId": 0, //
+        "gag": 0,  // 是否禁言（1为开启，0为关闭）
+        "gagBy": "", // 被禁言的id
+        "msgTypeLimit": "" // 消息类型限制
+      },
+    // ...
+    ]
+  },
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 设置消息类型限制
+
+```http request
+POST /v1/group/msg-type-limit
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注                   |
+| ----- | ---- | ---------------------- |
+| token | 是   | 必须是群主/管理员token |
+
+### 请求体
+
+```JSONC
+{
+  "groupId": "群聊id",
+  "type": "消息类型" // 1-文本消息，2-图片消息，3-Markdown消息，4-文件消息，6-帖子消息，7-表情消息，8-HTML消息，10-视频消息，11-语音消息，13-语音通话（限制多个消息类型一般是 1,2,3,4··· 之类）
+}
+```
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 编辑群聊信息
+
+```http request
+POST /v1/group/edit-group
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注            |
+| ----- | ---- | --------------- |
+| token | 是   | 群聊管理员token |
+
+### 请求体
+
+```ProtoBuf
+group_id: "123" // 目标群聊ID
+name: "测试群聊名称" // 群聊名称
+introduction: "测试群聊简介" // 群聊简介
+avatarUrl: "https://..." // 群聊头像url
+direct_join: 0 // 进群免审核,1为开启
+history_msg: 1 // 历史消息,1为开启
+category_name: "无" // 分类名
+category_id: 40 // 分类ID
+private: 0 // 是否私有,1为私有
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message edit_group_send {
+  string group_id = 2; // 目标群聊ID
+  string name = 3; // 群聊名称
+  string introduction = 4; // 群聊简介
+  string avatarUrl = 5; // 群聊头像url
+  uint64 direct_join = 6; // 进群免审核,1为开启
+  uint64 history_msg = 7; // 历史消息,1为开启
+  string category_name = 8; // 分类名
+  uint64 category_id = 9; // 分类ID
+  uint64 private = 10; // 是否私有,1为私有
+}
+```
+
+:::
+
+### 响应体
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message edit_group {
+    Status status = 1;
+}
+```
+
+:::
+
+## 获取群机器人列表
+
+```http request
+POST /v1/group/bot-list
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注     |
+| ----- | ---- | -------- |
+| token | 是   | 群内成员 |
+
+### 请求体
+
+```ProtoBuf
+group_id: "123" // 目标群聊ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message edit_group_send {
+  string group_id = 2; // 目标群聊ID
+}
+```
+
+:::
+
+### 响应体
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+// ...
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 获取群机器人列表
+message bot_list_send {
+    string group_id = 2;
+}
+
+message bot_list {
+    Status status = 1;
+    repeated Bot_data bot = 2;
+
+    repeated Instruction_data instruction = 3;
+
+    message Instruction_data {
+        int64 id = 1;
+        string bot_id = 2;
+        string name = 3; // 指令名
+        string desc = 4; // 指令描述
+        int32 type = 5; // 指令类型
+        string hint_text = 6; // 输入框提示文字
+        string default_text = 7; // 输入框默认文字
+        // int32 hidden/del_flag = 8; // 是否隐藏/删除,猜的,有误欢迎指正
+        int64 sort = 9; // 和排序相关 不确定
+        string form = 10; // 表单
+        string bot_name = 11; // 机器人名称
+    }
+    repeated Menu_data menu = 4; // 快捷菜单相关
+
+    message Menu_data {
+        int64 id = 1;
+        string bot_id = 2;
+        // int32 hidden/del_flag = 3; // 是否隐藏/删除,猜的
+        string name = 4;
+        string content = 5; // 内容
+        int32 menu_type = 6; // 按钮类型,1-普通按钮 2-选中按钮 3-下拉选择
+        int64 create_time = 7;
+        // 8,9没找到
+        int32 menu_action = 10; // 操作类型
+        string select = 99; // 选择的选项,在选择按钮的时候也作为状态,选中为1,未选中为0
+    }
+}
+```
+
+:::
+
+## 移除群聊内机器人
+
+```http request
+POST /v1/group/remove-bot
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注     |
+| ----- | ---- | -------- |
+| token | 是   | 群内成员 |
+
+### 请求体
+
+```JSONC
+{
+  "groupId": "123", // 群聊id
+  "botId": "123" // 机器人id
+}
+```
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 设置我的群昵称
+
+```http request
+POST /v1/group/edit-my-group-nickname
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注     |
+| ----- | ---- | -------- |
+| token | 是   | 群内成员 |
+
+### 请求体
+
+```JSONC
+{
+  "groupId": "123", // 目标群聊ID
+  "nickname": "测试群昵称" // 欲设置的群昵称
+}
+```
+
+### 响应体
+
+```JSONC
+{
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 设置群口令
+
+```http request
+POST /v1/group/edit-group-keyword
+```
+
+::: details 功能简介
+在 /v1/group/info-add-friend 中
+搜索群口令就会显示群口令绑定的相应群聊
+也就是在聊天主页列表最顶上的搜索栏搜索指定群口令时会显示设置为该群口令的群聊
+:::
+
+### 请求头
+
+| 名称  | 必须 | 备注                        |
+| ----- | ---- | --------------------------- |
+| token | 是   | 必须为vip用户且是目标群群主 |
+
+### 请求体
+
+```JSONC
+{
+  "groupId": "123", // 目前群聊ID
+  "keyword": "测试群口令" // 欲设置的群口令
+}
+```
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 获取指定群口令关联群聊
+
+```http request
+POST /v1/group/info-add-friend
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+### 请求体
+
+```ProtoBuf
+keyword: "测试群口令" // 欲要搜索的群口令
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message info_add_friend_send {
+  string keyword = 2; // 欲要搜索的群口令
+}
+```
+
+:::
+
+### 响应体
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+
+Data {
+  id: "123" // 群聊ID
+  name: "测试群名称" // 群聊名称
+  avatar_url: "https://..." // 群聊头像url
+  avatar_id: 123; // 群聊头像ID
+  introduction: "测试群聊简介" // 群聊简介
+  headcount: 123 // 群人数
+  createBy: "123" // 群聊创建者ID
+  readHistory: 1 // 是否允许阅读历史信息，0-不允许，1-允许
+  limited_msg_type: "1" // 被限制的消息类型,如1,2,3,使用","分格
+  keyword: "测试群口令" // 群聊设置的口令
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message info_add_friend {
+    Status status = 1;
+    Data data = 1;
+
+    message Data {
+      string id = 1; // 群聊ID
+      string name = 2; // 群聊名称
+      string avatar_url = 3; // 群聊头像url
+      uint64 avatar_id = 4; // 群聊头像ID
+      string introduction = 5; // 群聊简介
+      uint64 headcount = 6; // 群人数
+      string createBy = 7; // 群聊创建者ID
+      uint64 readHistory = 10; // 是否允许阅读历史信息，0-不允许，1-允许
+      string limited_msg_type = 22; // 被限制的消息类型,如1,2,3,使用","分格
+      string keyword = 29; // 群聊设置的口令
+  }
+}
+```
+
+:::
+
+## 设置群聊消息自动销毁时间
+
+```http request
+POST /v1/group/edit-auto-delete-message
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注            |
+| ----- | ---- | --------------- |
+| token | 是   | 必须是群主token |
+
+### 请求体
+
+```JSONC
+{
+  "groupId": "123", // 群聊id
+  "autoDeleteMessage": 0 // 消息自动销毁时间（0-永久不删，90-2个月后删除，365-1年后删除，730-2年后删除）
+}
+```
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 设置禁止群成员上传到群云盘
+
+```http request
+POST /v1/group/edit-stop-member-upload-group-file
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注            |
+| ----- | ---- | --------------- |
+| token | 是   | 必须是群主token |
+
+### 请求体
+
+```JSONC
+{
+ "groupId": "123456789", // 群聊id
+ "stopMemberUploadGroupFile":1 // 是否开启（0-关闭，1-开启）
+}
+```
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 解散群聊
+
+```http request
+POST /v1/group/dismiss-group
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注         |
+| ----- | ---- |--------------|
+| token | 是   | 必须为群主的 |
+
+### 请求体
+
+```ProtoBuf
+group_id: "123123" // 群聊 ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message dismiss_send {
+    string group_id = 2;
+}
+```
+
+:::
+
+### 响应数据
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message dismiss_group {
+    Status status = 1;
+}
+```
+
+:::
+
+---
+
+---
+url: /api/v1/instruction.md
+---
+# instruction
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项项目表示不需要相关参数.
+
+## 获取机器人指令列表（网页控制台）
+
+POST /v1/instruction/web-list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "botId": "45669202" // 机器人id
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "id": 2062, // 指令Id
+        "botId": "45669202", // 机器人id
+        "name": "普通指令", // 指令名称
+        "desc": "指令描述", // 指令描述
+        "instructionType": 1, // 指令类型，1-普通指令，2-直发指令，5-自定义输入指令，更多（如下两个指令）
+        "hintText": "输入框提示文字", // 输入框提示文字
+        "defaultText": "输入框默认文字", // 输入框默认文字
+        "customJson": "", // 自定义输入指令json数组
+        "createTime": 0, // 创建时间戳
+        "sort": 0, // 排序
+        "hidden": 0 // 是否隐藏(0-显示，1-隐藏)
+      },
+      {
+        "id": 2063,
+        "botId": "45669202",
+        "name": "直发指令",
+        "desc": "指令描述",
+        "instructionType": 2,
+        "hintText": "",
+        "defaultText": "",
+        "customJson": "",
+        "createTime": 0,
+        "sort": 0,
+        "hidden": 0
+      },
+      {
+        "id": 2064,
+        "botId": "45669202",
+        "name": "自定义输入指令",
+        "desc": "指令描述",
+        "instructionType": 5,
+        "hintText": "",
+        "defaultText": "",
+        "customJson": "[{\"key\":0,\"type\":\"radio\",\"title\":\"Radio 单选框\",\"propsValue\":{\"label\":\"标签\",\"options\":\"用#分割，比如：北京#上海#天津\"},\"props\":[{\"type\":\"label\",\"name\":\"标签\",\"value\":\"\"},{\"type\":\"options\",\"name\":\"选项\",\"placeholder\":\"用#分割，如：北京#上海#天津\",\"value\":\"\"}],\"id\":\"ykwmdt\"}]",
+        "createTime": 0,
+        "sort": 0,
+        "hidden": 0
+      }
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+::: details 自定义输入指令部分解释
+
+```JSONC
+[{
+  "key": 0,
+  "type": "radio",
+  "title": "Radio 单选框",
+  "propsValue": { // propsValue是成品，保存了当前组件实际生效的配置数据。用于组件在页面上显示和运行。
+    "label": "标签",
+    "options": "用#分割，比如：北京#上海#天津"
+  },
+  "props": [{ // prop是蓝图，定义了可以配置什么，以及默认值是什么。用于渲染一个配置界面。
+    "type": "label", // 类型，一个用于设置“标签”的配置项，有radio-单选框，input-输入框，switch-开关，chexkbox-多选框，textarea-多行输入框，select-选择器
+    "name": "标签", // 显示给用户的名字叫“标签”
+    "value": "" // 这个type预定的值，默认空
+  }, {
+    "type": "options",
+    "name": "选项", // 显示给用户的名字叫“选项”
+    "placeholder": "用#分割，如：北京#上海#天津", // 输入框里的提示文字，通常只有Radio-单选框，Checkbox-多选框，Select-选择器会有这个key
+    "value": ""
+  }],
+  "id": "ykwmdt" // 该表单的id
+}]
+```
+
+:::
+
+## 创建机器人指令
+
+POST /v1/instruction/create
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "name": "名称", // 指令名称
+  "desc": "描述", // 指令描述
+  "hintText": "输入框提示文字", // 输入框提示文字
+  "defaultText": "输入框默认文字", // 输入框默认文字
+  "type": 1, // 指令类型，1-普通指令，2-直发指令，5-自定义输入指令
+  "botId": "45669202" // 机器人id
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 编辑机器人指令
+
+POST v1/instruction/edit
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "id": 2064, // 已有的指令id
+  "name": "自定义输入指令", // 指令名称
+  "desc": "指令描述", // 指令描述
+  "botId": "45669202", // 机器人id
+  "customJson": "", // 自定义输入指令（表单指令），只有type为5的自定义输入指令需要，这个是json数组，需转义，具体设置可以看 **获取机器人指令列表（网页控制台）** 对一些表单指令的解释
+  "type": 5, // 指令类型，1-普通指令，2-直发指令，5-自定义输入指令
+  "delFlag": 0
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取机器人私聊指令
+
+POST /v1/instruction/list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```protobuf
+id: "123123123"
+```
+
+```proto
+message get_bot_instruction {
+    string id = 3;
+}
+```
+
+响应体：
+
+```protobuf
+status {
+  number: 123456
+  code: 1 // 请求状态码，1为正常
+  msg: "success" // 返回消息
+}
+data {
+  command_id: 123 // 指令id
+  bot_id： 123123123 // 机器人id
+  command_name: "测试指令名称" // 指令名称
+  instruction_type: 5 // 指令类型，1-普通指令，2-直发指令，5-自定义输入指令
+  command_defaultText: "测试默认输入文本" // 指令输入框默认文本
+  command_settingsJso: "{}" // 指令设置JSON（表单指令，自定义输入指令）
+}
+```
+
+```proto
+message Status {
+    uint64 number = 1; // 不知道干啥的,可能是请求ID
+    uint64 code = 2; // 状态码,1为正常
+    string msg = 3; // 返回消息
+}
+
+message instruction_list {
+   Status status = 1;
+   Data data = 2;
+   message Data {
+    uint64 command_id = 1; // 指令id
+    string bot_id = 2; // 机器人id
+    string command_name = 3; // 指令名称
+    uint64 instruction_type = 5; // 指令类型，1-普通指令，2-直发指令，5-自定义输入指令
+    string command_defaultText = 7; // 指令输入框默认文本
+    string command_settingsJson = 10; // 指令设置JSON（表单指令，自定义输入指令）
+   }
+}
+```
+
+---
+
+---
+url: /api/v1/live.md
+---
+# live
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取语音频道进入token
+
+POST /v1/live/add
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "roomId": "123123123123", // 目标语音频道ID
+  "chatId": "123" // 目标语言频道所处对象ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "joinToken: ": "123123123123123123", // 语音频道进入token
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 关闭语音频道
+
+POST /v1/live/close
+
+请求头:
+
+| 名称  | 必须 | 备注                |
+| ----- | ---- | ------------------- |
+| token | 是   | 语音频道管理员token |
+
+请求体：
+
+```JSONC
+{
+  "roomId": "123123123123", // 目标语音频道ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 挂断语音频道
+
+POST /v1/live/hang\_up
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "roomId": "123123123123", // 目标语音频道ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {},
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取语音频道信息
+
+POST /v1/live/room-info
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "roomId": "123123123123", // 目标语音频道ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "room": {
+      "id": 18658,
+      "userId": "123", // 房间管理员用户ID
+      "roomId": "ef8beba697c84a5f889af45211b449a1", // 房间ID
+      "recvIds": "", // 未知
+      "chatId": "872440499", // 房间ID所属对象
+      "title": "测试频道", // 房间ID标题
+      "chatType": 2, // 房间ID所属对象类别
+      "status": 0, //房间状态
+      "duration": 0, // 未知
+      "typ": 2, // 未知
+      "createBy": "8264925", // 房间创建用户名称
+      "createTime": 1754454550, // 房间创建时间戳
+      "updateBy": "8264925", // 房间更新用户名称
+      "updateTime": 1754455159 // 房间创建时间戳
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 编辑语音频道标题
+
+POST /v1/live/title-edit
+
+请求头:
+
+| 名称  | 必须 | 备注                |
+| ----- | ---- | ------------------- |
+| token | 是   | 语音频道管理员token |
+
+请求体：
+
+```JSONC
+{
+  "roomId": "123123123123", // 目标语音频道ID
+  "title": "测试语音频道名称" //目标语音频道名称
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取正在发起的通话
+
+POST /v1/live/get-calling
+
+请求头:
+
+| 名称  | 必须 | 备注                  |
+| ----- | ---- | --------------------- |
+| token | 是   | 必须是被打的用户token |
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "callTime": 12, // 请求呼叫时间
+    "chatType": 1, // 发起通话的会话类型
+    "message": {
+      "msgId": "20902d6a256d436ebfc4a2xxxxxxxxxx", // 发起通话的消息id
+      "senderId": "1234567", // 发起通话的用户id
+      "senderType": 0, // 未知
+      "senderAvatarId": 123456, // 发送者头像id
+      "senderNicknameId": 123456, // 发送者名称id
+      "contentType": 13, // 发起通话的消息类型
+      "content": "" // 语音通话参数
+    },
+    "senderAvatar": "https://chat-img.jwznb.com/123....jpg", // 发起通话的用户头像Url
+    "senderNickname": "1114" // 发起通话的用户名称
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+::: details content值示例内容（语音通话参数，未经处理）
+
+```JSON
+{\"formJson\":{\"type\":\"offer\",\"sdp\":\"v=0\\r\\no=- 4594442093964212757 2 IN IP4 127.0.0.1\\r\\ns=-\\r\\nt=0 0\\r\\na=group:BUNDLE 0\\r\\na=extmap-allow-mixed\\r\\na=msid-semantic: WMS c86e64f8-1cfd-49f9-ba89-c64c1edf02fc\\r\\nm=audio 9 UDP/TLS/RTP/SAVPF 111 63 9 0 8 13 110 126\\r\\nc=IN IP4 0.0.0.0\\r\\na=rtcp:9 IN IP4 0.0.0.0\\r\\na=ice-ufrag:2ubM\\r\\na=ice-pwd:TZ8aa+rVZqfUlbQMj5hPRtaS\\r\\na=ice-options:trickle renomination\\r\\na=fingerprint:sha-256 E8:A6:6A:DE:D1:51:EE:30:CB:C6:A9:4F:D1:C7:54:10:3A:2A:80:D9:0A:9D:F0:27:A7:BA:E2:D8:FC:DF:57:7F\\r\\na=setup:actpass\\r\\na=mid:0\\r\\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\\r\\na=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\\r\\na=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01\\r\\na=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid\\r\\na=sendrecv\\r\\na=msid:c86e64f8-1cfd-49f9-ba89-c64c1edf02fc 5f7cf8af-4691-4645-9a92-5449530064c2\\r\\na=rtcp-mux\\r\\na=rtcp-rsize\\r\\na=rtpmap:111 opus/48000/2\\r\\na=rtcp-fb:111 transport-cc\\r\\na=fmtp:111 minptime=10;useinbandfec=1\\r\\na=rtpmap:63 red/48000/2\\r\\na=fmtp:63 111/111\\r\\na=rtpmap:9 G722/8000\\r\\na=rtpmap:0 PCMU/8000\\r\\na=rtpmap:8 PCMA/8000\\r\\na=rtpmap:13 CN/8000\\r\\na=rtpmap:110 telephone-event/48000\\r\\na=rtpmap:126 telephone-event/8000\\r\\na=ssrc:1148727064 cname:SVr9elEOhHAAZrJH\\r\\na=ssrc:1148727064 msid:c86e64f8-1cfd-49f9-ba89-c64c1edf02fc 5f7cf8af-4691-4645-9a92-5449530064c2\\r\\n\"},\"liveInviteUserIds\":[\"8516939\"],\"liveType\":\"语音通话\",\"liveStatusText\":\"等待接通\"}
+```
+
+:::
+
+## 获取语音房间列表
+
+POST /v1/group/live-room
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "groupId": "big" // 群聊id
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "rooms": [
+      {
+        "userId": "1234567", // 用户id
+        "roomId": "c7552ca7c79546dd93baca4e4adxxxxx", // 房间id
+        "chatId": "123456789", // 房间所发起的会话id
+        "title": "", // 房间标题
+        "chatType": 2, // 房间所发起的会话类型
+        "status": 0, // 房间状态
+        "createBy": "1234567", // 发起房间的用户id
+        "createTime": 1775881889, // 房间创建时间戳
+        "nickname": "111", // 房间创建者名称
+        "count": 1, // 房间人数
+        "avatarUrl": "https://chat-img.jwznb.com/defalut-avatars/Nellie%20Bly.png" // 房间创建者头像Url
+      }
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/v1/menu.md
+---
+# menu
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 点击消息输入框上面按钮的反馈
+
+POST /v1/menu/event
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求头：
+
+```JSONC
+{
+  "id": 338, // 按钮id
+  "chatId": "114514", // 聊天id
+  "chatType": 2, // 会话类型
+  "value": "" // 按钮的值
+}
+```
+
+响应头：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/v1/misc.md
+---
+# misc
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取功能路由
+
+GET /v1/misc/configure-distribution
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "audioUrl": "https://chat-audio1.jwznb.com/", // 音频路由
+    "fileUrl": "https://chat-file.jwznb.com/", // 文件路由
+    "imageUrl": "https://chat-img.jwznb.com/", // 图片路由
+    "serverUrl": "http://chat.jwznb.com:8888/", // 未知
+    "shareUrl": "https://yhfx.jwznb.com/", // 分享链接路由
+    "videoUrl": "https://chat-video1.jwznb.com/", // 视频路由
+    "websocketUrl": "wss://chat-ws-go.jwzhd.com/ws" // ws路由
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取图片上传token
+
+GET /v1/misc/qiniu-token
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "token": "123:123" // 图片上传token
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取音频上传token
+
+GET /v1/misc/qiniu-token-audio
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 否   | 无   |
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "token": "123:123" // 音频上传token
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取文件上传token
+
+GET /v1/misc/qiniu-token2
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "token": "123:123" // 文件上传token
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取视频上传token
+
+GET /v1/misc/qiniu-token-video
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "token": "123:123" // 视频上传token
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取群文件上传token
+
+GET /v1/misc/qiniu-token-group-disk
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "token": "123:123" // 群文件上传token
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取云端设置
+
+GET /v1/misc/setting
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 否   | 无   |
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "fileSizeLimitNormal": 40, // 非vip用户文件上传大小，单位MB
+    "fileeSizeLimitVip": 1024, // VIP用户文件上传大小 /单位MB
+    "imageSizeLimitNormal": 40, // 非vip用户图片上传大小，单位MB
+    "imageSizeLimitVip": 50, // vip用户图片上传大小，单位MB
+    "videoSizeLimitNormal": 40, // 非vip用户视频上传大小，单位MB
+    "videoSizeLimitVip": 200 // vip用户视频上传大小，单位MB
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取灰色状态
+
+GET /v1/misc/gray-status
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "status": 0 // 0-不为灰色状态，1-灰色状态，处于灰色状态下云湖窗口将加上一层灰色滤镜
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取自动更新最新版本
+
+GET /v1/misc/auto-update
+
+URL 参数:
+
+```TEXT
+platform=windows // 目标平台标识符，windows，android，macos，ios
+userId=123 // 获取更新的用户ID
+```
+
+响应体:
+
+```XML
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>云湖社交</title>
+    <description>云湖社交更新中</description>
+    <item>
+      <enclosure url="" sparkle:dsaSignature="" sparkle:version="+0" sparkle:os="windows" length="0" type="application/octet-stream"></enclosure>
+// url属性为更新安装包网址，参数platform为macos，ios是此值可能为空
+// version属性为版本号
+    </item>
+  </channel>
+</rss>
+```
+
+---
+
+---
+url: /api/v1/mount-setting.md
+---
+# mount-setting
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 添加群WebDAV挂载
+
+POST /v1/mount-setting/create
+
+请求头:
+
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 目标群管理员token |
+
+请求体:
+
+```JSONC
+{
+  "groupId": "big", // 目标群聊ID
+  "mountName": "测试挂载名称", // 挂载名称
+  "webdavUrl": "https://...", // 挂载网址
+  "webdavUserName": "测试挂载用户名", // 挂载用户名
+  "webdavPassword": "测试挂载密码", // 挂载密码
+  "webdavRootPath": "测试挂载目录" // 挂载目录
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 删除群WebDAV挂载
+
+POST /v1/mount-setting/delete
+
+请求头:
+
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 目标群管理员token |
+
+请求体:
+
+```JSONC
+{
+  "id": 123 // 挂载ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/v1/msg.md
+---
+# msg
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 发送信息
+
+POST /v1/msg/send-message
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:\
+建议参考proto文件中的内容.
+
+```ProtoBuf
+msg_id: "信息ID"
+chat_id: "欲发送到的信息对象"
+chat_type: 1 // 欲发送到的信息对象的类别，1-用户，2-群聊，3-机器人
+data {
+  text: "信息文本"
+  quote_msg_text: "引用信息文本"
+  image_key: "欲发送图片key"
+  msg_text1: "信息文本"
+  msg_text2: "信息文本"
+  form: "" // 表单消息
+  temp_text2: ""
+  temp_text3: ""
+  temp_code1: 0
+}
+content_type: 1
+temp_code: 0
+quote_msg_id: "引用信息ID"
+temp_text: ""
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 发送消息
+message send_message_send {
+    string msg_id = 2; // 信息ID
+    string chat_id = 3; // 欲发送到的信息对象
+    uint64 chat_type = 4; // 欲发送到的信息对象的类别，1-用户，2-群聊，3-机器人
+    Data data = 5;
+    message Data {
+        string text = 1; // 信息文本
+        string buttons = 2; // 按钮
+        string file_name = 4; // 欲发送文件名称
+        string file_key = 5; // 欲发送文件key
+        repeated string mentioned_id = 6; // @用户ID,可以填写多个
+        string form = 7; // 表单消息
+        string quote_msg_text = 8; // 引用信息文本
+        string image = 9; // 欲发送图片key/url(expression/abcdef.jpg)
+        string post_id = 10; // 文章ID
+        string post_title = 11; // 文章标题
+        string post_content = 12; // 文章内容
+        string post_type = 13; // 文章类型:1-文本,2-Markdown
+        string expression_id = 15; // 个人表情ID(不知道为啥为STR)
+        string quote_image_url = 16; // 引用图片直链,https://...
+        string quote_image_name = 17; // 引用图片文件名称
+        uint64 file_size = 18; // 欲发送文件大小
+        string video = 19; // 欲发送视频key/url(123.mp4)
+        string audio = 21; // 语音key/url(123.m4a)
+        uint64 audio_time = 22; // 语音秒数
+        string quote_video_url = 23; // 引用视频直链,https://...
+        uint64 quote_video_time = 24; // 引用视频时长
+        uint64 sticker_item_id = 25; // 表情ID
+        uint64 sticker_pack_id = 26; // 表情包ID
+        string room_name = 29; // 语音房间发送显示信息的文本
+    }
+    uint64 content_type = 6; // 信息类别，1-文本，2-图片，3-markdown，4-文件，5-表单，6-文章，7-表情，8-html，11-语音，13-语音通话
+    uint64 command_id = 7; // 所使用命令ID
+    string quote_msg_id = 8; // 引用信息ID
+    Media media = 9;
+    message Media { // 在media发送对象为，图片/音频/视频
+        string file_key = 1; // 发送对象key(就是上传后七牛对象存储给你返回的file_key)
+        string file_hash = 2; // 发送对象上传返回哈希
+        string file_type = 3; // 发送对象类别，image/jpeg-图片，video/mp4-音频
+        uint64 image_height = 5; // 图片高度
+        uint64 image_width = 6; // 图片宽度
+        uint64 file_size = 7; // 发送对象大小
+        string file_key2 = 8; // 发送对象key,和1一样,据说不写会报错
+        string file_suffix = 9; // 发送对象后缀名
+    }
+}
+```
+
+:::
+
+:::: details 发送消息指引
+
+### 任何消息
+
+下面说的各种消息是需要额外注意/填写部分,填写内容建议看 proto 的注释.
+
+必填:
+
+* `msg_id` # 可以使用 `uuid.uuid4.hex()` 生成一个.
+* `chat_id`
+* `chat_type`
+* `content_type` # 按照实际填写
+
+可选:
+
+* `data.mentioned_id`
+* `data.buttons` # 部分消息填写此项会非常生草
+* `quote_msg_id` # 服务端会自动忽略无效的 `msg_id`,部分消息不支持
+* `data.quote_msg_text` # 可以自定义,服务端不校验,格式: `用户名: 消息内容`
+* `data.quote_image_name` # 填写图片 URL(例如说 test.jpg)
+* `data.quote_video_time` # 填写引用视频 URL,示例同上
+* `command_id`
+
+::: tabs
+@tab:active 文本类消息
+
+此处文本类消息指 `普通文本`,`html 消息`,`markdown 消息`.
+必填:
+
+* `data.text`
+
+@tab 图片消息
+
+必填:
+
+* `data.image`
+
+@tab 文件消息
+
+必填:
+
+* `data.file_key` # 直接填文件 URL,例如 123.bin
+* `data.file_size` # 文件大小,服务端不校验,建议如实填写
+
+@tab 视频消息
+
+必填:
+
+* `data.video` # 直接填视频 URL,例如 123.mp4
+
+@tab 语音消息
+
+必填:
+
+* `data.audio` # 语音文件 URL(例如说 test.m4a)
+* `data.audio_time` # 语音时长,服务端不校验,建议按照实际填写
+
+注: 服务端会忽略引用消息相关的参数.
+
+@tab 个人收藏表情
+
+必填:
+
+* `data.image`
+* `data.expression_id` # 注意 proto 中此项为 str 类型,服务端不校验,建议如实填写否则会导致无法添加/添加表情和图片不一致等问题
+
+@tab 表情包表情
+
+必填:
+
+* `data.image`
+* `data.sticker_item_id` # 表情 ID,服务端不校验,建议如实填写,否则会出现不一致/无法添加等问题
+* `data.sticker_pack_id` # 表情包 ID,服务端不校验,建议如实填写否则会出现不一致/无法预览等问题
+
+@tab 文章消息
+
+建议使用 community 的转发文章 API 而不是手动填写,手动填写容易出问题.
+
+@tab 表单消息
+
+必填:
+
+* `data.form` # 具体内容自己抓包看吧
+
+:::
+::::
+
+响应体:
+
+```ProtoBuf
+status {
+  number: 123456
+  code: 1
+  msg: "success"
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 信息发送是否成功状态信息
+message send_message {
+    Status status = 1; // 状态码
+}
+```
+
+:::
+
+## 编辑消息
+
+POST /v1/msg/edit-message
+
+::: warning
+云湖会限制一些编辑,例如说你不能把文本消息编辑为语音消息等.\
+:::
+
+!!其实云湖的编辑消息和发送消息的 proto 可以共用,只需要 msg\_id 改成要编辑的消息即可.!!
+
+请求头:
+
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 消息发送者的Token |
+
+请求体:
+
+```ProtoBuf
+msg_id: "123456" // 要编辑的消息ID
+chat_id: "big" // 消息所属聊天对象的ID
+chat_type: 2 // 消息所属聊天对象的类型,1-用户 2-群组 3-机器人
+content {
+  text: "123" // 文本
+  // 剩下的建议看proto文件
+}
+content_type: 1 // 要编辑为的消息类型,1-文本 3-markdown 8-html
+quote_msg_id: "11451419180" // 引用的消息ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 编辑消息
+message edit_message_send {
+    string msg_id = 2;
+    string chat_id = 3;
+    int32 chat_type = 4;
+    Content content = 5;
+    message Content {
+        string text = 1; // 文本
+        string buttons = 2; // 按钮
+        string quote_msg_text = 8; // 引用消息文字
+    }
+    uint64 content_type = 6; // 信息类别，1-文本，3-markdown，8-html
+    string quote_msg_id = 8; // 引用信息ID
+}
+```
+
+:::
+
+响应体:
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message edit_message {
+    Status status = 1;
+}
+```
+
+:::
+
+## 按消息序列列出消息（不包含指定消息）
+
+POST /v1/msg/list-message-by-seq
+
+::: warning
+由于没有所有消息情况,因此此处响应相关内容(尤其是指令等测试群不常见部分)可能会有缺失/错误,见谅.同时建议参照proto文件理解相关内容.也欢迎来PR补充.\
+:::
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```ProtoBuf
+msg_start: 1234 // 开始的消息序列
+chat_type: 2 // 对象类型, 1-用户 2-群聊 3-机器人
+chat_id: "big" // 对象ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 通过消息序列列出消息
+message list_message_by_seq_send {
+    uint64 msg_start = 3; // 从第N个消息开始
+    uint64 chat_type = 4; // 对象类型
+    string chat_id = 5; // 对象ID
+}
+```
+
+:::
+
+响应体:
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+msg {
+  msg_id: "abcdef" // 消息ID
+  sender {
+    chat_id: "7356666" // 发送者ID
+    chat_type: 1 // 发送者类型。
+    name: "测试" // 发送者名称
+    avatar_url: "https://chat-img.jwznb.com/..." // 头像URL
+    tag_old: "测试成员" // 标签(旧版显示)
+    // ...
+    tag {
+      id: 114514 // 标签ID
+      text: "测试成员" // 标签文字
+      color: "#FFFFFFFF" // 颜色
+    }
+    // ...
+  }
+  direction: "left" // 在聊天中的位置(左边/右边)
+  content_type: 1 // 消息类型
+  content {
+    text: "ok" // 消息内容
+    // 剩下的建议看ProtoBuf序列文件,太多不写了
+  }
+  send_time: 123456789 // 发送时间(毫秒时间戳)
+  cmd {
+    name: "指令名" // 指令名
+    type: 1 // 指令类型
+  }
+  msg_delete_time: 8888 // 消息撤回时间(毫秒时间戳)
+  quote_msg_id: "abcdef" // 引用消息的ID
+  msg_seq: 6666 // 消息序列
+  edit_time: 1234 // 最后编辑时间
+}
+// ...
+total: 23 // 获取的消息数量,貌似最大31个,实际获取的数量是请求中的数量+1
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message Tag {
+    uint64 id = 1; // 标签ID(貌似)
+    string text = 3;
+    string color = 4;
+}
+
+message list_message_by_seq {
+    Status status = 1;
+    repeated Msg msg = 2;
+    uint64 msg_count = 3; // 消息数
+
+    message Msg {
+        string msg_id = 1; // 消息ID
+        Sender sender = 2;
+        string direction = 3; // 消息位置,左边/右边
+        uint64 content_type = 4;
+        Content content = 5;
+        uint64 send_time = 6; // 时间戳(毫秒)
+        Cmd cmd = 7; // 指令
+        uint64 msg_delete_time = 8; // 消息撤回时间
+        string quote_msg_id = 9; // 引用消息ID
+        uint64 msg_seq = 10;
+        uint64 edit_time = 12; // 最后编辑时间
+
+        message Cmd {
+            string name = 2; // 指令名
+            uint64 type = 4; // 指令类型
+        }
+        // 消息
+        message Content {
+            string text = 1; // 消息内容
+            string buttons = 2; // 按钮
+            string image_url = 3; // 图像URL
+            string file_name = 4; // 文件名
+            string file_url = 5; // 文件URL
+            string form = 7; // 表单消息
+            string quote_msg_text = 8; // 引用消息文字
+            string sticker_url = 9; // 表情URL
+            string post_id = 10; // 文章ID
+            string post_title = 11; // 文章标题
+            string post_content = 12; // 文章内容
+            string post_content_type = 13; // 文章类型
+            string expression_id = 15; // 个人表情ID(不知道为啥为STR)
+            string quote_image_url = 16; // 引用图片直链,https://...
+            string quote_image_name = 17; // 引用图片文件名称
+            uint64 file_size = 18; // 文件/图片大小(字节)
+            string video_url = 19; // 视频URL
+            string audio_url = 21; // 语音URL
+            uint64 audio_time = 22; // 语音时长
+            string quote_video_url = 23; // 引用视频直链,https://...
+            uint64 quote_video_time = 24; // 引用视频时长
+            uint64 sticker_item_id = 25; // 表情ID
+            uint64 sticker_pack_id = 26; // 表情包ID
+            string call_text = 29; // 语音通话文字
+            string call_status_text = 32; // 语音通话状态文字
+            uint64 width = 33; // 图片的宽度
+            uint64 height = 34; // 图片的高度
+            string tip = 37; // 提示信息
+        }
+        // 发送者信息
+        message Sender {
+            string chat_id = 1; // 发送者ID
+            uint64 chat_type = 2; // 发送者类型
+            string name = 3; // 发送者名称
+            string avatar_url = 4; // 头像URL
+            repeated string tag_old = 6; // 标签(旧版显示)
+            repeated Tag tag = 7; // 标签
+        }
+    }
+}
+```
+
+:::
+
+## 列出消息
+
+POST /v1/msg/list-message
+
+::: warning
+由于没有所有消息情况,因此此处响应相关内容(尤其是指令等测试群不常见部分)可能会有缺失/错误,见谅.同时建议参照proto文件理解相关内容.也欢迎来PR补充.\
+:::
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```ProtoBuf
+msg_count: 233 // 获取的消息数
+msg_id: "abcdef" // 从指定消息id开始,可不写
+chat_type: 2 // 对象类型,1-用户 2-群聊 3-机器人
+chat_id: "big" // 对象ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message list_message_send {
+    uint64 msg_count = 2; // 获取消息数
+    string msg_id = 3; // 从指定消息ID开始
+    uint64 chat_type = 4; // 对象类型
+    string chat_id = 5; // 对象ID
+}
+```
+
+:::
+
+响应体:\
+列出的是指定消息ID前的消息.
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+msg {
+  msg_id: "abcdef" // 消息ID
+  sender {
+    chat_id: "7356666" // 发送者ID
+    chat_type: 1 // 发送者类型。
+    name: "测试" // 发送者名称
+    avatar_url: "https://chat-img.jwznb.com/..." // 头像URL
+    tag_old: "测试成员" // 标签(旧版显示)
+    // ...
+    tag {
+      id: 114514 // 标签ID
+      text: "测试成员" // 标签文字
+      color: "#FFFFFFFF" // 颜色
+    }
+    // ...
+  }
+  direction: "left" // 在聊天中的位置(左边/右边)
+  content_type: 1 // 消息类型
+  content {
+    text: "ok" // 消息内容
+    // 剩下的建议看ProtoBuf序列文件,太多不写了
+  }
+  send_time: 123456789 // 发送时间(毫秒时间戳)
+  cmd {
+    name: "指令名" // 指令名
+    type: 1 // 指令类型
+  }
+  msg_delete_time: 8888 // 消息撤回时间(毫秒时间戳)
+  quote_msg_id: "abcdef" // 引用消息的ID
+  msg_seq: 6666 // 消息序列
+  edit_time: 1234 // 最后编辑时间
+}
+// ...
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 标签
+message Tag {
+    uint64 id = 1; // 标签ID(貌似)
+    string text = 3;
+    string color = 4;
+}
+
+message Msg {
+    string msg_id = 1; // 消息ID
+    Sender sender = 2;
+    string direction = 3; // 消息位置,左边/右边
+    uint64 content_type = 4;
+    Content content = 5;
+    uint64 send_time = 6; // 时间戳(毫秒)
+    Cmd cmd = 7; // 指令
+    uint64 msg_delete_time = 8; // 消息撤回时间
+    string quote_msg_id = 9; // 引用消息ID
+    uint64 msg_seq = 10;
+    uint64 edit_time = 12; // 最后编辑时间
+
+    message Cmd {
+        string name = 2; // 指令名
+        uint64 type = 4; // 指令类型
+    }
+    // 消息
+    message Content {
+        string text = 1; // 消息内容
+        string buttons = 2; // 按钮
+        string image_url = 3;
+        string file_name = 4;
+        string file_url = 5;
+        string form = 7; // 表单消息
+        string quote_msg_text = 8; // 引用消息文字
+        string sticker_url = 9; // 表情URL
+        string post_id = 10; // 文章ID
+        string post_title = 11; // 文章标题
+        string post_content = 12; // 文章内容
+        string post_content_type = 13; // 文章类型
+        string expression_id = 15; // 个人表情ID(不知道为啥为STR)
+        string quote_image_url = 16; // 引用图片直链,https://...
+        string quote_image_name = 17; // 引用图片文件名称
+        uint64 file_size = 18; // 文件/图片大小(字节)
+        string video_url = 19; // 视频URL
+        string audio_url = 21; // 语音URL
+        uint64 audio_time = 22; // 语音时长
+        string quote_video_url = 23; // 引用视频直链,https://...
+        uint64 quote_video_time = 24; // 引用视频时长
+        uint64 sticker_item_id = 25; // 表情ID
+        uint64 sticker_pack_id = 26; // 表情包ID
+        string call_text = 29; // 语音通话文字
+        string call_status_text = 32; // 语音通话状态文字
+        uint64 width = 33; // 图片的宽度
+        uint64 height = 34; // 图片的高度
+        string tip = 37; // 提示信息
+    }
+    // 发送者信息
+    message Sender {
+        string chat_id = 1;
+        uint64 chat_type = 2;
+        string name = 3;
+        string avatar_url = 4;
+        repeated string tag_old = 6;
+        repeated Tag tag = 7;
+    }
+}
+
+// 获取消息
+message list_message { // 其实可以和 list-message-by-seq共用的。
+    Status status = 1;
+    repeated Msg msg = 2;
+}
+```
+
+:::
+
+## 按消息ID列出消息（包含消息id指定的消息）
+
+POST /v1/msg/list-message-by-mid-seq
+
+::: warning
+由于没有所有消息情况,因此此处响应相关内容(尤其是指令等测试群不常见部分)可能会有缺失/错误,见谅.同时建议参照proto文件理解相关内容.也欢迎来PR补充.\
+:::
+
+::: tip
+此接口和 list-message 的区别在于此接口获取到的消息包含请求的消息ID的消息内容. 实际获取到的消息数量是请求消息数量+1
+:::
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```ProtoBuf
+msg_seq: 123456 // 开始消息的seq,不写默认0
+chat_type: 2 // 对象类型,1-用户 2-群聊 3-机器人
+chat_id: "big" // 对象ID
+unknown: 0 // 不知道干啥的
+msg_count: 10 // 请求获取消息数量
+msg_id: abcdef // 消息ID
+```
+
+::: details ProtoBuf 数据结构
+
+```proto
+// 列出包含请求 msg_id 消息
+message list_message_by_mid_seq_send {
+    uint64 msg_seq = 3; // 开始消息的seq
+    uint64 chat_type = 4;
+    string chat_id = 5;
+    uint64 unknown = 6; // 不知道干啥的
+    uint64 msg_count = 7;
+    string msg_id = 8;
+}
+```
+
+:::
+
+响应体:
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+msg {
+  msg_id: "abcdef" // 消息ID
+  sender {
+    chat_id: "7356666" // 发送者ID
+    chat_type: 1 // 发送者类型。
+    name: "测试" // 发送者名称
+    avatar_url: "https://chat-img.jwznb.com/..." // 头像URL
+    tag_old: "测试成员" // 标签(旧版显示)
+    // ...
+    tag {
+      id: 114514 // 标签ID
+      text: "测试成员" // 标签文字
+      color: "#FFFFFFFF" // 颜色
+    }
+    // ...
+  }
+  direction: "left" // 在聊天中的位置(左边/右边)
+  content_type: 1 // 消息类型
+  content {
+    text: "ok" // 消息内容
+    // 剩下的建议看ProtoBuf序列文件,太多不写了
+  }
+  send_time: 123456789 // 发送时间(毫秒时间戳)
+  cmd {
+    name: "指令名" // 指令名
+    type: 1 // 指令类型
+  }
+  msg_delete_time: 8888 // 消息撤回时间(毫秒时间戳)
+  quote_msg_id: "abcdef" // 引用消息的ID
+  msg_seq: 6666 // 消息序列
+  edit_time: 1234 // 最后编辑时间
+}
+// ...
+total: 11 // 获取的消息数量
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 标签
+message Tag {
+    uint64 id = 1; // 标签ID(貌似)
+    string text = 3;
+    string color = 4;
+}
+
+message Msg {
+    string msg_id = 1; // 消息ID
+    Sender sender = 2;
+    string direction = 3; // 消息位置,左边/右边
+    uint64 content_type = 4;
+    Content content = 5;
+    uint64 send_time = 6; // 时间戳(毫秒)
+    Cmd cmd = 7; // 指令
+    uint64 msg_delete_time = 8; // 消息撤回时间
+    string quote_msg_id = 9; // 引用消息ID
+    uint64 msg_seq = 10;
+    uint64 edit_time = 12; // 最后编辑时间
+
+    message Cmd {
+        string name = 2; // 指令名
+        uint64 type = 4; // 指令类型
+    }
+    // 消息
+    message Content {
+        string text = 1; // 消息内容
+        string buttons = 2; // 按钮
+        string image_url = 3;
+        string file_name = 4;
+        string file_url = 5;
+        string form = 7; // 表单消息
+        string quote_msg_text = 8; // 引用消息文字
+        string sticker_url = 9; // 表情URL
+        string post_id = 10; // 文章ID
+        string post_title = 11; // 文章标题
+        string post_content = 12; // 文章内容
+        string post_content_type = 13; // 文章类型
+        string expression_id = 15; // 个人表情ID(不知道为啥为STR)
+        string quote_image_url = 16; // 引用图片直链,https://...
+        string quote_image_name = 17; // 引用图片文件名称
+        uint64 file_size = 18; // 文件/图片大小(字节)
+        string video_url = 19; // 视频URL
+        string audio_url = 21; // 语音URL
+        uint64 audio_time = 22; // 语音时长
+        string quote_video_url = 23; // 引用视频直链,https://...
+        uint64 quote_video_time = 24; // 引用视频时长
+        uint64 sticker_item_id = 25; // 表情ID
+        uint64 sticker_pack_id = 26; // 表情包ID
+        string call_text = 29; // 语音通话文字
+        string call_status_text = 32; // 语音通话状态文字
+        uint64 width = 33; // 图片的宽度
+        uint64 height = 34; // 图片的高度
+        string tip = 37; // 提示信息
+    }
+    // 发送者信息
+    message Sender {
+        string chat_id = 1;
+        uint64 chat_type = 2;
+        string name = 3;
+        string avatar_url = 4;
+        repeated string tag_old = 6;
+        repeated Tag tag = 7;
+    }
+}
+
+message list_message_by_mid_seq {
+    Status status = 1;
+    repeated Msg msg = 2;
+    uint64 total = 3; // 消息数
+}
+
+```
+
+:::
+
+## 获取信息历史编辑内容
+
+POST /v1/msg/list-message-edit-record
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体：
+
+```JSONC
+{
+  "msgId": "12312312312312312312312313", // 信息ID
+  "size": 10, // 获取的历史编辑内容数
+  "page": 1 // 页面数
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "id": 1018684, // 信息编辑ID
+        "msgId": "123123123123123123123123", // 信息ID
+        "contentType": 1, // 信息类别
+        "contentOld": "{\"text\":\"测试原始编辑文本\"}", // 信息文本，转义后json数据
+        "createTime": 1231231231230, // 信息创建时间戳
+        "msgTime": 1231231231230 // 编辑时间戳
+      }
+      // ...
+    ],
+    "total": 1 // 历史编辑总数
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 发送按钮点击事件
+
+POST /v1/msg/button-report
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体:
+
+```ProtoBuf
+msg_id: "123123123123123123" // 信息ID
+chat_type: 2 // 对象类型, 1-用户 2-群聊 3-机器人
+chat_id: "123" // 对象ID
+user_id: "123" // 按钮事件发送者ID
+button_value: "测试按钮文本" // 欲点击按钮的值
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 通过按钮事件点击消息
+message button_report_send {
+    string msg_id = 2; // 信息ID
+    uint64 chat_type = 3; // 对象类型, 1-用户 2-群聊 3-机器人
+    string chat_id = 4; // 对象ID
+    string user_id = 5; // 按钮事件发送者ID
+    string button_value = 6; // 欲点击按钮的值
+}
+```
+
+:::
+
+响应体:\
+列出的是指定消息ID前的消息.
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 按钮事件点击返回状态信息
+message button_report {
+    Status status = 1;
+}
+```
+
+:::
+
+## 撤回信息
+
+POST /v1/msg/recall-msg
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体:
+
+```ProtoBuf
+msg_id: "123123123123123123" // 信息ID
+chat_id: "123" // 信息所属对象ID
+chat_type: 2 // 信息所属对象类型, 1-用户 2-群聊 3-机器人
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 通过msgId撤回消息
+message recall_msg_send {
+    string msg_id = 2; // 信息ID
+    string chat_id = 3; // 信息所属对象ID
+    uint64 chat_type = 4; // 信息所属对象类型, 1-用户 2-群聊 3-机器人
+}
+```
+
+:::
+
+响应体:
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 撤回消息返回数据
+message recall_msg {
+    Status status = 1;
+}
+```
+
+:::
+
+## 批量撤回消息
+
+POST /v1/msg/recall-msg-batch
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体:
+
+```ProtoBuf
+msg_id: "123123123123123123" // 信息ID
+// ...
+chat_id: "123" // 信息所属对象ID
+chat_type: 2 // 信息所属对象类型, 1-用户 2-群聊 3-机器人
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 通过msgId撤回消息
+message recall_msg_batch_send {
+    repeated string msg_id = 2; // 信息ID
+    string chat_id = 3; // 信息所属对象ID
+    uint64 chat_type = 4; // 信息所属对象类型, 1-用户 2-群聊 3-机器人
+}
+```
+
+:::
+
+响应体:
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 批量信息撤回返回状态
+message recall_msg_batch {
+    Status status = 1;
+}
+```
+
+:::
+
+## 文件消息下载记录
+
+POST /v1/msg/file-download-record
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体:
+
+```JSONC
+{
+  "msgId": "5040d27fc975416680a14e5a1b37ef06", // 文件消息id
+  "downloadPath": "/storage/emulated/0/Download/云湖/恶臭(1).txt" // 下载路径
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 转发消息
+
+POST v1/msg/msg-forward
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体:
+
+```JSONC
+{
+  "msgId": "e22342a5a1a54f03bc3xxxxxxxxxxxx", // 被转发的消息msgId
+  "chatType": 2, // 被转发消息的会话类型
+  "receive": [
+    {
+      "chatId": "1234567", // 要转发到的会话id
+      "chatType": 1 // 要转发到的会话类型
+    }
+  ]
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取消息列表内的图片（未完成）
+
+POST v1/msg/pic-list-message-by-mid-seq
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体：
+
+```ProtoBuf
+image_id: 110617 // 图片id
+chat_type: 2 // 会话类型
+chat_id: "418769995" // 会话id
+unknown: 10 // 未知
+unknown: 0 //未知
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+meassage pic-list-message-by-mid-seq {
+    uint64 image_id = 3; // 图片id
+    uint64 chat_type = 4; // 会话类型
+    string chat_id = 5; // 会话id
+    uint64 unknown = 6; // 未知
+    uint64 unknown = 7; // 未知
+}
+```
+
+:::
+
+响应体：
+
+```proto
+// 和list-message的proto共用
+```
+
+---
+
+---
+url: /api/v1/report.md
+---
+# report
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 提交举报
+
+POST /v1/report/create
+
+请求体：
+
+```JSONC
+{
+  "chatId": "123", // 对象id
+  "chatType": 2, // 对象类型，1-用户，2-群聊，3-机器人
+  "chatName": "测试会话名称", // 对象名称
+  "content": "测试举报内容", // 举报内容
+  "url": "https://...", // 举报提交的图片
+  "reason": "色情低俗" // 举报原因（有色情低俗，时政不时消息，垃圾广告，青少年不易，辱骂攻击，侵犯权益，违法犯罪，开盒网暴，其他）
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+---
+
+---
+url: /api/v1/search.md
+---
+# search
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 群聊首页搜索
+
+POST /v1/search/home-search
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "word": "114514" // 搜索关键词
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "title": "用户", // 类型标题
+        "list": null // 搜索用户，没有就显示null
+      },
+      {
+        "title": "群组", // 类型标题
+        "list": [
+          {
+            "friendId": "114514", // 群聊id
+            "friendType": 2,  // 识别对象类别，1-用户，2-群聊，3-机器人
+            "nickname": "114514", // 群聊名字
+            "name": "",
+            "avatarUrl": "https://chat-img.jwznb.com/ba7631819aaff2fc5799bbf6f279c606.jpg", // 群聊头像url
+            "hit": 1
+          }
+        ]
+      },
+      {
+        "title": "机器人", // 类型标题
+        "list": null // 搜索机器人，没有就显示null
+      }
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 聊天记录搜索
+
+POST /v1/search/chat-search
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "word": "3598257", // 搜索词
+  "chatId": "test", // 对象ID
+  "chatType": 2, // 对象类别
+  "type": "all", // 信息类别，1-文本，3-markdown，4-文件，6-文章，7-表情包，8-html
+  "size": 30, //
+  "time": 9999999999999, // 涵盖信息时间戳，只返回此时间戳内的信息
+  "direction":1 // 未知
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "id": "123", // 信息ID
+        "sequence": 123, // 第几条信息
+        "chatId": "123", // 信息所处对象ID
+        "chatType": 0, // 未知，不是信息所处对象类别
+        "name": "测试发送者名称", // 发送者名称
+        "avatarUrl": "https://...",
+        "content": "测试信息文本", // 信息文本
+        "type": "1", // 信息类别，1-文本，3-markdown，4-文件，6-文章，7-表情包，8-html
+        "time": 123123123123, // 发送时间
+        "timeText": "1231-23-12 31:23:00" // 发送时间戳
+      }
+      // ...
+     ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/v1/share.md
+---
+# share
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 分享链接获取群聊信息
+
+POST /v1/share/info
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "key": "9o5UKnYgLk6z", // 分享链接key（来自 https://yhfx.jwznb.com/share?key=9o5UKnYgLk6z&ts=1754730310 内key的值 ）
+  "ts": "1754730310" // 创建分享链接时间戳（ts=timestamp）
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "share": {
+      "id": 33110, // 第33110个群聊
+      "user_id": "114514", // 用户id
+      "chat_name": "咸料", // 分享链接会话名称
+      "chat_type": 2, // 分享链接会话类型
+      "chat_id": "65535", // 会话id
+      "key": "123123",  // 分享链接key（来自 https://yhfx.jwznb.com/share?key=123123&ts=123123123 内key的值 ）
+      "create_by": "114514", // 分享链接创建者id
+      "create_time": 123123123, // 创建分享链接时间戳
+      "imageUrl": "share/...", // 分享链接会话头像url
+      "imageName": "resources/share_bg/bg1.jpg" // 图片名称
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 创建分享链接
+
+POST /v1/share/create
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "chatId": "会话id",
+  "chatType": 2, // 会话类型，1-用户，2-群聊，3-机器人
+  "chatName": "会话名称"
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "imageKey": "share/...", // 图片key
+    "key": "123123123", // 分享链接的key
+    "shareUrl": "https://yhfx.jwznb.com/", // 分享开头的url
+    "ts": 123123123 // 分享链接创建时间戳
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/v1/sticker.md
+---
+# sticker
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取收藏表情包
+
+POST /v1/sticker/list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体:
+
+```JSONC
+{
+ "code": 1,
+ "data": {
+  "stickerPacks": [
+   {
+    "id": 114514,
+    "name": "表情包名称",
+    "createBy": "7356666", // 创建者ID
+    "createTime": 114514, // 创建时间戳
+    "delFlag": 0, // 是否被删除
+    "userCount": 2, // 使用人数
+    "hot": 0, // 表情包热度,不知道为啥全0
+    "uuid": "dddddddd-dddd-2333-1145-ddddddabcdef", // UUID
+    "updateTime": 2333, // 更新时间戳
+    "sort": 0, // 分类?我这边都是0
+    "stickerItems": [
+     {
+      "id": 114514,
+      "name": "表情名称",
+      "url": "sticker/114514abcdd444456aaaaaaaaee0d454.jpg", // 表情包URL,需要前面加上 https://chat-img.jwznb.com/
+      "stickerPackId": 114514, // 所属表情包ID
+      "createBy": "7356666", // 创建者ID
+      "createTime": 2333, // 更新时间戳
+      "delFlag": 0
+     }
+    ]
+   }
+  ]
+ },
+ "msg": "success"
+}
+```
+
+## 查看表情包详情
+
+POST /v1/sticker/detail
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "id": 123 // 表情包ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+    "code": 1,
+    "data": {
+        "stickerPack": {
+            "id": 894, // 表情包ID
+            "name": "图标梗", // 表情包名称
+            "createBy": "9120256", // 创建者
+            "createTime": 1730724963, // 创建时间(时间戳)
+            "delFlag": 0,
+            "userCount": 8, // 用户人数
+            "hot": 0, // 热度? 我这边抓到的都是0
+            "uuid": "216d7881-64ae-4409-aa0a-4f4d1a8f649d", // uuid
+            "updateTime": 1754363209, // 更新时间
+            "sort": 0, // 分类相关?
+            "stickerItems": [
+                {
+                    "id": 18951, // 表情ID
+                    "name": "汇总部分", // 表情名称
+                    "url": "sticker/4599f91519364bcc2be6718c3915d388.jpg", // 表情URL,前面需加上 https://chat-img.jwznb.com/
+                    "stickerPackId": 894, // 所属表情包ID
+                    "createBy": "9120256", // 创建者ID
+                    "createTime": 1730724991, // 创建时间
+                    "delFlag": 0
+                },
+                // ...
+            ]
+        },
+        "user": {
+            "id": 56922, // 似乎是名称ID?
+            "user_id": "9120256", // 创建者用户ID
+            "nickname": "千米", // 创建者用户名
+            "avatar_url": "https://uapis.cn/api/imgapi/bq/youshou.php" // 头像地址
+        }
+    },
+    "msg": "success"
+}
+```
+
+## 添加表情包
+
+POST /v1/sticker/add
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "id": 894 // 表情包ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 移除收藏表情包
+
+POST /v1/sticker/remove-sticker-pack
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "id": 123 // 要移除的表情包的ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 更改收藏表情包的排序
+
+POST /v1/sticker/sort
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "sort": "[
+    {
+      \"id\":\"123\", // 表情包ID
+      \"sort\":\"2\" // 排序,数字越大越靠前
+    },
+    {
+      \"id\":\"456\",
+      \"sort\":\"1\"
+    },
+    // ...
+    ]"
+}
+```
+
+::: details 备注: 使用Python请求代码
+
+```Python
+headers = {"token": token}
+sticker = [
+            {
+              "id": "1","sort": "1", # 不知道为啥id前面是数值这里为啥变成了字符串,sort越大排序越靠前
+            },
+            {
+              "id": "2","sort": "2"
+            }
+          ]
+payload = {"sort": json.dumps(sticker)} # 注意是 json.dumps,不是 str
+response = httpx.post("https://chat-go.jwzhd.com/v1/sticker/sort", headers = headers, json = payload)
+print(response.text)
+```
+
+:::
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+---
+
+---
+url: /api/v1/sticky.md
+---
+# sticky
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 首页置顶信息获取
+
+POST /v1/sticky/list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "sticky": [
+      {
+        "id": 8977, // 置顶ID
+        "chatType": 2, // 会话对象类别，1-用户，2-群聊，3-机器人
+        "chatId": "114514", // 会话对象id
+        "chatName": "example", // 会话对象名字
+        "sort": 1751616217, // 不知道，跟群聊创建时间戳一样（?
+        "avatarUrl": "https://chat-img.jwznb.com/xxxxxxxxxxxxxxx.jpg", // 群聊头像地址
+        "createTime": 1751616217, // 会话对象创建时间戳
+        "delFlag": 0,
+        "userId": "1234567", // 用户id
+        "certificationLevel": 0 // 识别是否为官方出品，1为官方出品，0则不是
+      }
+      // ...
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 置顶会话
+
+POST /v1/sticky/add
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "chatId": "430084557", // 会话id
+  "chatType": 2 // 会话类型，1-用户，2-群聊，3-机器人
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 取消置顶会话
+
+POST /v1/sticky/delete
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "chatId": "430084557", // 会话id
+  "chatType": 2 // 会话类型，1-用户，2-群聊，3-机器人
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 把其中一个已置顶会话移到最前
+
+POST /v1/sticky/topping
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "id": 5753 // 置顶id
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+---
+
+---
+url: /api/v1/user.md
+---
+# user
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取人机验证图片
+
+POST /v1/user/captcha
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "b64s": "image//png;base64...", // 人机验证图片base64
+    "id": "123" // 人机验证ID
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 短信验证码登录
+
+POST /v1/user/verification-login
+
+请求体:
+
+```JSONC
+{
+  "mobile": "12312312300", // 登录手机号
+  "captcha": "123123", // 手机验证码
+  "deviceId": "awa", // 登录设备唯一标识符，可自定义
+  "platform": "windows" // 登录平台名称,一般为windows,web等可自定义
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "token": "f87TJHF9-****-****-************" // 账户登录token
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取用户自身信息
+
+GET /v1/user/info
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体:
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1 // 请求状态码，1为正常
+  msg: "success" // 返回消息
+}
+data {
+  id: "123" // 用户id
+  name: "测试用户" // 用户名
+  avatar_url: "https://..." // 头像URL
+  avatar_id: 123 //头像ID
+  phone: "12312312300" // 手机号
+  email: "123@123.com" // 邮箱
+  coin: 123 // 金币数
+  is_vip: 0 // 是否为VIP
+  vip_expired_time: 1231231230 // VIP过期时间
+  invitation_code: "123" // 邀请码
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 用户自身信息
+message info {
+
+    Status status = 1;
+    message Data {
+        // 11是描述手机号长整数的,懒得解析了
+        string id = 1; // 用户id
+        string name = 2; // 用户名
+        string avatar_url = 4; // 头像URL
+        uint64 avatar_id = 5; // 头像ID
+        string phone = 6; // 手机号
+        string email = 7; // 邮箱
+        double coin = 8; // 金币数
+        int32 is_vip = 9; // 是否为VIP
+        uint64 vip_expired_time = 10; // VIP过期时间
+        string invitation_code = 12; // 邀请码
+    }
+    Data data = 2;
+}
+```
+
+:::
+
+## 获取用户信息
+
+POST /v1/user/get-user
+
+请求头:
+
+| 名称  | 必须 | 备注         |
+| ----- | ---- | ------------ |
+| token | 是   | 可以瞎写一个 |
+
+请求体:
+
+```ProtoBuf
+id: "用户id"
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message get_user_send {
+    string id = 2;
+}
+```
+
+:::
+
+响应体:
+
+```ProtoBuf
+status {
+  number: 123456
+  code: 1 // 请求状态码，1为正常
+  msg: "success" // 返回消息
+}
+data {
+  id: "123" // 用户ID
+  name: "测试用户" // 用户名
+  name_id: 123 // 名称ID
+  avatar_url: "https://..." // 头像URL
+  avatar_id: 123 // 头像ID
+  register_time: "1234-12-12 12:12:12" // 注册时间(YYYY-MM-DD hh:mm:ss)
+  online_day: 123 // 在线时长
+  continuous_online_day: 123 // 连续在线时长
+  is_vip: 1 // 是否为VIP
+  vip_expired_time: 123123123 // VIP过期时间(时间戳)
+  ban_time: 123123123 // 封禁结束时间(时间戳)
+  medal [
+    {
+      "name": "徽章1", // 徽章名称
+      "icon": "徽章1", // ?徽章图标?
+      "sort": 1, // 徽章顺序（在服务端）
+      "_id": "id", // ?徽章介绍?
+      "level": 100, // 等级
+      "_level": "level" // ?等级介绍?
+     },
+     {
+      "name": "徽章2", // 徽章名称
+      "icon": "徽章2", // ?徽章图标?
+      "sort": 3, // 徽章顺序（在服务端）
+      "_id": "id", // ?徽章介绍?
+      "level": 500, // 等级
+      "_level": "level" // ?等级介绍?
+    }
+  ],
+  "remark_info": {
+    "date": "", // 备注时间
+    "remarks": "" // 备注内容
+  },
+  "profile_info": {
+    "flag": 1, // ？
+    "scoreOrId": 1295971200,
+    "province": "省（自治区）", // IP归属地
+    "city": "市", // IP归属地
+    "district": "区（县）", // IP归属地
+  },
+  "country": "国家或地区" // IP归属地
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 勋章信息
+message Medal_info {
+    uint64 id = 1; // 勋章ID
+    string name = 2; // 勋章名称
+    uint64 sort = 5;  // 勋章顺序
+}
+
+message Remark_info {
+    string remark_name = 1; // 备注名
+    string phone_number = 2; // 手机号
+    string extra_remark = 3; // 其他备注（格式为JSON，示例：'[{"key":"他是","value":"我的朋友"},{"key":"职业","value":"打工人"}]'
+}
+
+message Profile_info {
+    string last_active_time = 1; // 该用户上次活跃时间
+    string introduction = 2; // 简介
+    int32 gender = 3; // 性别（1-男，2-女，3-其他）
+    uint64 birthday_timestamp = 4; // 生日时间戳
+    string city = 5; // 城市
+    string district = 6; // 地区
+    string address = 7; // 详细地址
+}
+
+// 获取用户信息
+message get_user {
+    Status status = 1; // 状态码
+    Data data = 2; //数据
+    message Data {
+        string id = 1; // 用户id
+        string name = 2; // 用户名
+        uint64 name_id = 3; // 名称ID
+        string avatar_url = 4; //头像URL
+        uint64 avatar_id = 5; // 头像ID
+        repeated Medal_info medal = 6; // 勋章信息
+        string register_time = 7; // 注册时间,格式: YYYY-MM-DD hh:mm:ss
+        uint64 ban_time = 10; // 封禁结束时间(时间戳)
+        uint64 online_day = 11; // 在线天数
+        uint64 continuous_online_day = 12; // 连续在线天数
+        int32 is_vip = 13; // 是否为vip
+        uint64 vip_expired_time = 14; // VIP过期时间(时间戳)
+        Remark_info remark_info = 18; // 备注信息
+        Profile_info profile_info = 19; // 用户资料信息
+        string ipGeo = 20; // IP归属地（国家）
+    }
+}
+```
+
+:::
+
+## 用户勋章
+
+POST /v1/user/medal
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+响应体:
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1 // 请求状态码，1为正常
+  msg: "success" // 返回消息
+}
+medal {
+  id: 1 // 勋章ID
+  name: "测试勋章" // 勋章名称
+  sort: 100 // 勋章顺序
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 勋章
+message medal {
+    Status status = 1; // 状态信息
+    repeated Medal_info medal = 2; // 勋章信息
+}
+
+// 勋章信息
+message Medal_info {
+    uint64 id = 1; // 勋章ID
+    string name = 2; // 勋章名称
+    uint64 sort = 5;  // 勋章顺序
+}
+```
+
+:::
+
+## 更改用户名称
+
+POST /v1/user/edit-nickname
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体:
+
+```ProtoBuf
+name: "123" // 用户名称
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message edit_nickname_send {
+    string name = 3;
+}
+```
+
+:::
+
+响应体:
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1 // 请求状态码，1为正常
+  msg: "success" // 返回消息
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 更改名称状态信息
+message edit_nickname {
+    Status status = 1; // 状态信息
+}
+```
+
+:::
+
+## 更改用户头像
+
+POST /v1/user/edit-avatar
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体:
+
+```ProtoBuf
+url: "https://..." // 用户头像url
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message edit_avatar_send {
+    string url = 2;
+}
+```
+
+:::
+
+响应体:
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1 // 请求状态码，1为正常
+  msg: "success" // 返回消息
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 更改名称状态信息
+message edit_avatar {
+    Status status = 1; // 状态信息
+}
+```
+
+:::
+
+## 用户邮箱密码登录
+
+POST /v1/user/email-login
+
+请求体：
+
+```JSONC
+{
+    "email": "123456@example.com", // 登录邮箱
+    "password": "123456", // 登录密码
+    "deviceId": "awa", // 登录设备唯一标识符
+    "platform": "android" // 登录平台名称
+}
+```
+
+响应体:
+
+```JSONC
+{
+    "code": 1, // 请求状态码，1为正常
+    "data": {
+        "token": "abcdefg1-xxxx-xxxx-xxxxxxxxxx" // 登录效验令牌
+    },
+    "msg": "success" // 返回消息
+}
+```
+
+## 退出登录
+
+POST /v1/user/logout
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体:
+
+```JSONC
+{
+  "device-id": "123123123" // 设备ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+    "code": 1, // 请求状态码，1为正常
+    "msg": "success" // 返回消息
+}
+```
+
+## 获取发现群聊分区
+
+POST /v1/user/recommend-category-list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体：
+
+```JSONC
+{
+ "appChannel": "default"
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 状态码，正常为1
+  "data": {
+    "categories": [ // 群聊类别
+      "精选",
+      "粉丝群",
+      "地区",
+      "IT/互联网",
+      "玩机",
+      "游戏",
+      "资讯订阅"
+    ]
+  },
+  "msg": "success" // 状态信息
+}
+```
+
+## 获取发现群聊列表
+
+POST /v1/user/recommend-list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体：
+
+```JSONC
+{
+  "category": "精选", // 群聊类别
+  "keyword": "", // 关键词
+  "size": 30, // 尺寸
+  "page": 1 // 页码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 状态码，正常为1
+  "data": {
+    "groupList": [
+      {
+        "chatId": "123", // 群聊id
+        "banId": 0, // 顾名思义
+        "nickname": "测试群聊名称", // 群聊名字
+        "introduction": "测试群聊简介", // 群聊介绍
+        "avatarUrl": "https://...", // 群聊头像
+        "headcount": 123, // 群聊内人数
+        "createTime": 1231231230 // 创建时间戳
+      }
+     // ...
+    ]
+  },
+  "msg": "success" // 状态信息
+}
+```
+
+## 获取机器人推荐列表
+
+POST /v1/user/recommend
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "botList": [
+      {
+        "chatId": "123", // 机器人id
+        "chatType": "3", // 识别对象类别，1-用户，2-群聊，3-机器人
+        "headcount": "123", // 使用人数
+        "nickname": "测试机器人名称", // 机器人名称
+        "introduction": "测试机器人简介", // 机器人简介
+        "introductions": "",
+        "avatarUrl": "https://...", // 机器人头像url
+        "isAdd": 1, // 是否添加（1为可添加，0为不可添加）
+        "isApply": 0, // 是否应用
+        "alwaysAgree": 0 // 是否总是同意
+      }
+    // ...
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 模块忽略信息获取
+
+POST /v1/user/module-ignore-info
+
+请求头:
+
+| 名称  | 必须 | 备注    |
+| ----- | ---- | ------- |
+| token | 是   | 需要vip |
+
+请求体：
+
+```JSONC
+{
+ "deviceId": "1234"
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "ignore": {
+      "id": 0, // 可能是模块设置id
+      "userId": "1234567", // 用户id
+      "updateTime": 123455660, // 更新时间戳
+      "deviceId": "1234", // 设备id
+      "ignore": ",30,20,10" // 模块id，10-隐藏社区页面，20-隐藏发现页面，30-精简我的界面
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 设置自定义模块
+
+POST /v1/user/module-ignore
+
+请求头:
+
+| 名称  | 必须 | 备注    |
+| ----- | ---- | ------- |
+| token | 是   | 需要vip |
+
+请求体：
+
+```JSONC
+{
+ "deviceId": "1234"
+ "ignore": ",30,20,10" // 模块id，10-隐藏社区页面，20-隐藏发现页面，30-精简我的界面
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取通知状态
+
+POST /v1/user/notification-status
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体：
+
+```JSONC
+{
+  "deviceId": "1114514", // 设备id
+  "registrationId": "114514" // 注册id
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "notification": { // 通知json
+      "id": 110061, // 注册id
+      "userId": "114514", // 用户id
+      "deviceId": "114514", // 设备id
+      "registrationId": "114514", // 通知注册id
+      "isOpen": 1, // 是否打开系统消息通知（设置”系统消息通知“选项可控制这个数值，1-打开，0-关闭）
+      "type": 2, // 类型
+      "delFlag": 0,
+      "createTime": 1231231230, // 创建时间戳
+      "updateTime": 1231231230 // 更新时间戳
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取通知注册信息
+
+POST /v1/user/notification-info
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体：
+
+```JSONC
+{
+  "deviceId": "114514", // 设备id
+  "registrationId": "114514", // 注册通知id
+  "isOpen": 1, // // 是否打开系统消息通知（设置”系统消息通知“选项可控制这个数值，1-打开，0-关闭）
+  "type": 2 // 类型
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 金币增减记录
+
+POST /v1/user/gold-coin-increase-decrease-record
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "size": 20, // 尺寸
+  "page": 1 // 页数
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "goldCoinRecord": [
+      {
+        "id": 193275, // 金币记录id
+        "userId": "用户id",
+        "typ": 8, // 类型
+        "beforeAmount": 55.01, // 之前金币数量
+        "afterAmount": 57.01, // 之后的金币数量
+        "changeAmount": 2, // 增加/减少的金币数量
+        "reason": "抽奖金币", // 增加/减少金币的原因
+        "remark": "", // 备注
+        "createTime": 1754669040 // 创建时间戳
+      }
+    // ...
+    ],
+    "total": 243 // 总共的金币记录
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 绑定手机号
+
+POST /v1/user/bing-phone
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "phone": "12312311230", // 欲绑定手机号
+  "captcha": "123123" // 短信验证码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 绑定邮箱
+
+POST /v1/user/bing-email
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "email": "123@123.com", // 欲绑定邮箱
+  "captcha": "123123" // 邮件验证码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 更改绑定手机号
+
+POST /v1/user/change-phone-check
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "phone": "12312341230", // 欲绑定手机号
+  "captcha": "123123" // 短信验证码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 更改绑定邮箱
+
+POST /v1/user/change-email-check
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "email": "123@123.com", // 欲绑定邮箱
+  "captcha": "123123" // 邮件验证码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 更改登录密码
+
+POST /v1/user/forget-password
+
+请求体：
+
+```JSONC
+{
+  "email": "123@123.com", // 欲绑定邮箱
+  "captcha": "123123", // 邮件验证码
+  "password": "测试登录密码" // 登录密码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 修改自身个人资料
+
+POST /v1/user/save-user-data
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体：
+
+```JSONC
+{
+  "introduction": "111", // 个人简介
+  "gender": 3, // 性别，1-男，2-女，3-其他
+  "birthday": 1231231230, // 生日时间戳
+  "province": "北京市", // 所在地省份
+  "city": "北京城区", // 所在地城市
+  "district": "东城区", // 所在地城区
+  "locationCode": "110101" // 所在地邮政编码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取自身个人资料
+
+POST /v1/user/get-user-data
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "data": {
+      "id": 123, // 个人简介ID
+      "userId": "123", // 用户ID
+      "lastLoginTime": 1231231230, // 最后登录时间戳
+      "update_time": 1231231230, // 个人简介最后更新时间戳
+      "introduction": "测试个人简介", // 个人简介
+      "gender": 3, // 性别，1-男，2-女，3-其他
+      "birthday": 1231231230, // 生日时间戳
+      "province": "北京市", // 所在地省份
+      "city": "北京城区", // 所在地城市
+      "district": "东城区", // 所在地城区
+     "locationCode": "110101" // 所在地邮政编码
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取用户显示广告
+
+POST /v1/user/get-user-show-adv
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "androidCodeId": "123", // Android代码ID
+    "bottomHeight": 123, // 底部高度
+    "iosCodeId": "123", // IOS代码ID
+    "isShow": 0 // 是否显示，0-不显示，1-显示
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 设置好友备注
+
+POST /v1/user/save-user-remarks
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 空   |
+
+请求体：
+
+```JSONC
+{
+  "friendId": "123123123", // 好友ID
+  "name": "测试好友备注名称", // 备注名称
+  "phone": "123123123", // 备注手机号
+  "others": "[{\"key\":\"123\",\"value\":\"123\"}]" // 更多备注，需将数据按照此格式转义后填入
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 注销账号
+
+POST /v1/user/cancel-user
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "phone": "123123123", // 手机号，手机号与邮箱之中只要有一个就行
+  "email": "123123123@123.com", // 邮箱，手机号与邮箱之中只要有一个就行
+  "captcha": "123123" // 短信/邮件验证码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+## 下线设备
+
+POST /v1/user/device-offline
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "deviceId": "123123123123123" // 设备ID，为登陆时填写的设备ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回状态消息
+}
+```
+
+---
+
+---
+url: /api/v1/verification.md
+---
+# verification
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取短信验证码
+
+POST /v1/verification/get-verification-code
+
+请求体:
+
+```JSONC
+{
+  "mobile": "12312312300", // 手机号
+  "code": "123123", // 人机验证校验码
+  "id": "123", // 人机验证ID
+  "platform": "windows" // 登录平台名称,一般为windows,web等可自定义
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取邮箱验证码
+
+POST /v1/verification/get-email-verification-code
+
+请求体:
+
+```JSONC
+{
+  "email": "123@123.123", // 邮箱
+  "typ": "forget_password", // 验证类别，forget_password-更改密码验证，其他所有验证都为空
+  "code": "123123", // 人机验证校验码
+  "id": "123" // 人机验证ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/v1/vip.md
+---
+# vip
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## vip价格获取
+
+POST /v1/vip/vip-product-list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "platform": "Web"  // 平台标识码，为web/Windows/android等
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "id": 1, // 商品id
+        "name": "VIP月付", // 商品名
+        "description": "1个月", // 商品描述
+        "price": 10, // 商品价格（单位为人民币(元)
+        "priceOriginal": 20, // 商品原价
+        "day": 31, // vip持续时间
+        "productId": "" // 产品id（？
+      }
+      // ...
+    ],
+    "qrCodeUrl": "https://www.yhchat.com/" // 二维码(QRCode)获取地址（？
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## vip特权获取
+
+GET /v1/vip/vip-benefits-list
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "id": 1, // 特权id
+        "name": "尊贵身份标识", // 特权主名
+        "description": "贵族身份的象征", // 特权描述
+        "target": "", //  针对xxx
+        "sort": 100 // 排序
+      }
+      // ...
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/web/index.md
+---
+# Web API
+Web 端 API 文档
+
+> [v1](./v1/)
+
+---
+
+---
+url: /api/web/v1/index.md
+---
+# v1
+这里存放的是 `chat-web-go.jwzhd.com` 的API文档.\
+无特别说明,请求域名均为 `chat-web-go.jwzhd.com`.\
+若无请求头/请求体部分表示此项无需特别填写.
+
+---
+
+---
+url: /api/web/v1/bot.md
+---
+# bot
+未特别说明情况下请求域名均为 `chat-web-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取机器人信息
+
+POST /v1/bot/bot-info
+
+请求体:
+
+```JSONC
+{
+  "botId": "13972254" // 你要查询bot的ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1,
+  "data": {
+    "bot": {
+      "id": 44, // 机器人在数据库中的序列(?)
+      "botId": "13972254", // botID
+      "nickname": "迎宾小精灵", // 名称
+      "nicknameId": 42878, // 名称ID
+      "avatarId": 10959, // 头像ID
+      "avatarUrl": "https://chat-img.jwznb.com/...", // 头像URL
+      "token": "", // bot token(实际上就是空)
+      "link": "", // bot订阅接口URL(实际上也是空)
+      "introduction": "全员群机器人", // 简介
+      "createBy": "7058262", // 创建者
+      "createTime": 1650849911, // 创建时间
+      "headcount": 1, // 使用人数
+      "private": 1, // 私有
+      "checkChatInfoRecord": {
+        "id": 39, // 某种神秘的ID(?)
+        "chatId": "13972254", // 对象ID
+        "chatType": 3, // 对象类型
+        "checkWay": "", // 也不知道干啥的
+        "reason": "", // 原因(?)
+        "status": 0, // 状态
+        "createTime": 1670654316, // 创建时间
+        "updateTime": 0, // 更新时间
+        "delFlag": 0 // 是否被删除
+      }
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 恢复机器人订阅
+
+POST /v1/bot/bot-link-reset
+
+请求头:
+
+| 名称  | 必须 | 备注              |
+| ----- | ---- | ----------------- |
+| token | 是   | 机器人管理员token |
+
+请求体：
+
+```JSONC
+{
+  "botId": "123", // 机器人ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/web/v1/common.md
+---
+# common
+未特别说明情况下请求域名均为 `chat-web-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取全平台最新版本
+
+GET /v1/common/get-version
+
+响应体：
+
+```JSONC
+{
+  "code": 1,
+  "data": {
+    "androidVersion": "1.5.6", // 安卓最新版本号(截至2025-11-12，以下均同)
+    "androidVersionDate": "2025/11/11", // 安卓最新版本更新时间(截至2025-11-12，以下均同)
+    "harmonyVersion": "1.0.0", // 鸿蒙Next最新版本号
+    "harmonyVersionDate": "2025/05/15", // 鸿蒙Next最新版本更新时间
+    "iosVersion": "1.1.11", // IOS最新版本号
+    "iosVersionDate": "2025/05/15", // IOS最新版本更新时间
+    "linuxVersion": "1.5.33", // Linux最新版本号
+    "linuxVersionDate": "2025/05/15", // Linux最新版本更新时间
+    "macosVersion": "1.4.25", // MacOS最新版本号
+    "macosVersionDate": "2025/05/15", // MacOS最新版本更新时间
+    "windowsVersion": "1.6.39", // Windows最新版本号
+    "windowsVersionDate": "2025/11/02" // Windows最新版本更新时间
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/web/v1/community.md
+---
+# community
+未特别说明情况下请求域名均为 `chat-web-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取分区列表
+
+POST /v1/community/c/following-ba-list
+
+请求体：
+
+```JSONC
+{
+  "size": 100, // 一页返回的数量
+  "page": 1 // 页码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "ba": [
+      {
+        "id": 41, // 分区 id
+        "name": "云湖\u0026功能反馈", // 分区名字
+        "avatar": "https://chat-img.jwznb.com/1665235278282.2976yunhu192.png", // 分区头像 url
+        "delTime": 0, // 删除时间
+        "createTime": 1665233353, // 分区创建时间戳
+        "lastActive": 1771478468, // 上次活跃时间
+        "memberNum": 4184, // 该分区的成员数
+        "postNum": 10254, // 该分区的文章数
+        "groupNum": 112, // 该分区绑定的群聊数
+        "createTimeText": "2022-10-08 20:49:13" // 分区创建时间文本
+      }
+      // ...
+    ],
+    "total": 11 // 分区总数
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取文章列表
+
+POST /v1/community/posts/post-list
+
+请求体：
+
+```JSONC
+{
+  "typ": 1, // 典型值
+  "baId": 41, // 分区 id
+  "size": 10, // 一页返回的数量
+  "page": 1 // 页码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "posts": [
+      {
+        "id": 123, // 文章 id
+        "baId": 41, // 分区 id
+        "senderId": "114514", // 作者 id
+        "senderNicknameId": 123, // 作者昵称 id
+        "senderAvatarId": 123, // 作者头像 id
+        "groupId": "", // 绑定该分区且从这个群聊发送文章的群聊 id
+        "title": "我是标题", // 标题
+        "contentType": 2, // 文章类型(2 是Markdown，1 是普通文本)
+        "content": "文章内容部分预览",
+        "delTime": 0, // 删除时间
+        "createTime": 1754382613, // 创建文章时间戳
+        "updateTime": 0, // 更新时间戳
+        "lastActive": 1754474179, // 上次活跃时间戳
+        "likeNum": 2, // 点赞数量
+        "collectNum": 0, // 收藏数量
+        "amountNum": 0, // 投币数量
+        "commentNum": 4, // 评论数量
+        "senderNickname": "文章作者", // 作者昵称
+        "senderAvatar": "https://.。。", // 作者头像 url
+        "createTimeText": "2025-08-05 16:30:13", // 创建文章时间文本
+        "group": { // 以下是绑定该分区且从这个群聊发送文章的群聊 id
+          "id": 0, // 群聊序号
+          "groupId": "", // 群聊 id
+          "name": "", // 群聊名字
+          "introduction": "", // 群聊简介
+          "createBy": "", // 群主 id
+          "createTime": 0, // 创建时间戳
+          "avatarId": 0, // 群聊头像 id
+          "avatarUrl": "", // 群聊头像 url
+          "headcount": 0, // 群聊人数
+          "readHistory": 0, // 是否开启新成员浏览历史信息（1为开启，0为关闭）
+          "category": "", // 群聊所属分类
+        },
+        "isLiked": "0", // 你有没有给这个文章点赞（1为是，0则不是）
+        "isCollected": 0, // 你有没有收藏这个文章（1为是，0则不是）
+        "isReward": 0, // 你有没有给这个文章投币 （1为是，0则不是）
+      }
+      // ...
+    ],
+    "total": 750 // 文章总数
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取分区信息
+
+POST /v1/community/c/info
+
+请求体：
+
+```JSONC
+{
+  "id": 41 // 分区 id
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "ba": {
+      "id": 41, // 分区 id
+      "name": "云湖\u0026功能反馈", // 分区名
+      "avatar": "https://chat-img.jwznb.com/1665235278282.2976yunhu192.png", // 分区头像url
+      "delTime": 0, // 删除时间
+      "createTime": 1665233353, // 分区创建时间戳
+      "lastActive": 1771478468, // 上次活跃时间戳
+      "memberNum": 4184, // 加入此分区的成员
+      "postNum": 10254, // 该分区的文章数量
+      "groupNum": 112, // 绑定该分区的群聊数量
+      "createTimeText": "2022-10-08 20:49:13", // 分区创建时间文本
+      "isFollowed": "0" // 你是否关注了此分区（1为已关注，0为未关注）
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/web/v1/document.md
+---
+# document
+未特别说明情况下请求域名均为 `chat-web-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取开放文档菜单选项
+
+GET /v1/document/menus
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "menu": [
+      {
+        "id": 1, // 菜单Id
+        "name": "接入准备", // 菜单名称
+        "parent_id": 0, // 父id（0-一整个大菜单，1-所属一个大菜单其中的一个选项）
+        "subItems": [
+          {
+            "id": 3,
+            "name": "开发须知",
+            "parent_id": 1,
+            "subItems": null
+          },
+          {
+            "id": 4,
+            "name": "服务端API列表",
+            "parent_id": 1,
+            "subItems": null
+          },
+          {
+            "id": 5,
+            "name": "服务端错误代码",
+            "parent_id": 1,
+            "subItems": null
+          }
+        ]
+      }
+    // ...
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取开放文档(Markdown版本)
+
+GET /v1/document/detail
+
+请求参数：
+
+| 名称       | 必须 | 备注                           |
+| ---------- | ---- | ------------------------------ |
+| documentId | 是   | Id必须大写，这个参数必须带数字 |
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "detail": {
+      "id": 4, // 文档id
+      "name": "服务端API列表", // 该文档名称
+      "parentId": 1, // 父id（0-一整个大菜单，1-所属一个大菜单其中的一个选项）
+      "markdown": "# **服务端API列表** ...", // 文档内容（Markdown）
+      "sort": 20, // 排序（全是20）
+      "version": 0, // 版本（全是0）
+      "delFlag": 0,
+      "createBy": 0, // 创建者（全是0）
+      "createTime": "2022-03-21T17:23:21+08:00", // 创建时间
+      "updateBy": 0, // 更新该文档的用户id（全是0）
+      "updateTime": "2022-03-21T17:23:25+08:00", // 更新时间
+      "remark": "11" // 不知道
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/web/v1/group.md
+---
+# group
+未特别说明情况下请求域名均为 `chat-web-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取群聊信息
+
+POST /v1/group/group-info
+
+请求体:
+
+```JSONC
+{
+  "groupId": "big" // 你要查询群组的ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1,
+  "data": {
+    "group": {
+      "id": 1, // 群聊在数据库中的序列(?)
+      "groupId": "big", // 群聊ID
+      "name": "全员群", // 群聊名称
+      "introduction": "15亿用户总群\n新注册用户默认加入这个群，请不要刷屏发消息\n不想用全员群可以选择退群，退群后也可以重新加入\n玩机问题进对应手机群询问，不要在全员群询问\n\n在开始聊天前请阅读全员群规范: https://www.yhchat.com/c/p/796\n\n如有引导性消费或者不在正规平台进行交易的 请谨慎交易\n如有人称是本软件官方人员 请公开询问此群管理员或ID ", // 群聊简介
+      "createBy": "7058262", // 创建者
+      "createTime": 0, // 创建时间戳
+      "avatarId": 32040, // 头像ID
+      "avatarUrl": "https://chat-img.jwznb.com/...", // 头像URL
+      "headcount": 112998, // 群人数
+      "readHistory": 1, // 历史消息, 1表示允许新成员获取以前的历史消息
+      "category": "", // 分类
+      "uri": "http://chat.jwznb.com:8888/open-apis/v1/bot/send?token=", // 不知道干啥的
+      "groupBotRel": { // 也不知道干啥的
+        "id": 0,
+        "groupId": "",
+        "botId": "",
+        "delFlag": 0,
+        "createTime": 0,
+        "updateTsime": 0,
+        "bot": {
+          "id": 0,
+          "botId": "",
+          "nickname": "",
+          "nicknameId": 0,
+          "avatarId": 0,
+          "avatarUrl": "",
+          "token": "",
+          "link": "",
+          "introduction": "",
+          "createBy": "",
+          "createTime": 0,
+          "headcount": 0,
+          "private": 0,
+          "checkChatInfoRecord": {
+            "id": 0,
+            "chatId": "",
+            "chatType": 0,
+            "checkWay": "",
+            "reason": "",
+            "status": 0,
+            "createTime": 0,
+            "updateTime": 0,
+            "delFlag": 0
+          }
+        }
+      },
+      "checkChatInfoRecord": {
+        "id": 1160, // 似乎是某种神秘的ID
+        "chatId": "big", // 对象ID
+        "chatType": 2, // 对象类型
+        "checkWay": "", // 不知道干啥的
+        "reason": "", // 还是不知道干啥的
+        "status": 0, // 状态?
+        "createTime": 1670655084, // 创建时间戳
+        "updateTime": 1748487950, // 最近更新时间戳
+        "delFlag": 0 // 是否被删除
+      }
+    }
+  },
+  "msg": "success"
+}
+```
+
+---
+
+---
+url: /api/web/v1/misc.md
+---
+# misc
+未特别说明情况下请求域名均为 `chat-web-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取更新日志
+
+POST /v1/misc/updates
+
+请求体:
+
+```JSONC
+{
+    "platform": "android", // 平台，可选 android/ios/harmony/windows/macos/linux
+    "size": 5, // 一页返回的数量
+    "page": 1 // 页码
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "total": 23, // 更新日志总数
+    "updates": [
+      {
+        "id": 53, // 版本 id
+        "version": "1.5.24+385", // 版本 号
+        "platform": "android", // 平台
+        "content": "1. 深色模式下举报页面优化\n2. 用户详情页页面优化，支持小尺寸屏幕\n3. 软件冷启动速度提升\n4. 群推荐列表按钮优化\n5. 群成员可以看标签组列表\n6. 社区主页改为文章列表", // 更新日志
+        "createTime": 1769585053 // 发布时间戳
+      },
+      {
+        "id": 50,
+        "version": "1.5.18+379",
+        "platform": "android",
+        "content": "1. 增加文章置顶功能\n2. 设置管理员功能改到群成员列表中\n3. 封禁用户增加申诉功能\n4. 个人页面增加社区板块入口\n5. 其他问题修复",
+        "createTime": 1767094135
+      },
+      {
+        "id": 49,
+        "version": "1.5.15+376",
+        "platform": "android",
+        "content": "1. 好友请求列表支持分页加载\n2. 修复没有手机卡的情况下点击登录的问题\n3. 增加社区板块管理功能",
+        "createTime": 1766124219
+      },
+      {
+        "id": 47,
+        "version": "1.5.9+370",
+        "platform": "android",
+        "content": "1. 增加隐藏群成员列表功能，避免乱加好友\n2. 解决群内限制文本消息类型时导致markdown也不能发送的问题",
+        "createTime": 1763476085
+      },
+      {
+        "id": 46,
+        "version": "1.5.7+368",
+        "platform": "android",
+        "content": "1. 开放社区板块创建功能\n2. 创建群时群简介支持多行\n3. 个人资料解决日期错误问题\n4. 其他问题修复",
+        "createTime": 1763113823
+      }
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/web/v1/rss.md
+---
+# rss
+未特别说明情况下请求域名均为 `chat-web-go.jwzhd.com`\
+没写请求/响应项目表示不需要相关参数.
+
+## 获取 RSS 推荐大全
+
+GET /v1/rss/recommend-list
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "list": [
+      {
+        "id": 1, // RSS 推荐 id
+        "categoryId": 2, // 分类 id
+        "title": "少数派", // 标题
+        "rssUrl": "https://sspai.com/feed", // RSS 链接
+        "description": "少数派致力于更好地运用数字产品或科学方法，帮助用户提升工作效率和生活品质", // 分类
+        "siteUrl": "https://sspai.com", // 网站链接
+        "lastPubTime": 1771479180, // 最新内容时间戳
+        "sort": 0, // 排序
+        "delFlag": 0, // 是否被删除
+        "lastPubTimeText": "6小时前", // 最新内容时间文本
+        "category": { // 分类
+          "id": 2, // 分类 id
+          "name": "🖥️ 科技数码", // 分类标题
+          "anchor": "technology", // 分类英文
+          "sort": 100, // 分类排序
+          "delFlag": 0 // 分类是否被删除
+        }
+      }
+      // ...
+    ],
+    "total": 28 // RSS 推荐总数
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 提交 RSS
+
+POST /v1/rss/recommend-apply
+
+请求体:
+
+```JSONC
+{
+    "title": "轻雨Purainity的小站", // 网站标题
+    "rssUrl": "https://jibukeshi.dpdns.org/rss.xml", // RSS 地址
+    "siteUrl": "https://jibukeshi.dpdns.org/", // 网站地址
+    "description": "一位热爱钻研技术、分享经验的互联网爱好者" // 描述
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/web/v1/user.md
+---
+# user
+## 获取用户自身信息
+
+GET /v1/user/info
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 响应码,1表示正常
+  "data": {
+    "user": {
+      "userId": "7356666", // 用户ID
+      "nickname": "test", // 用户名
+      "phone": "17588888888", // 手机号
+      "avatarId": "11451", // 头像ID
+      "avatarUrl": "https://...", // 头像URL
+      "goldCoinAmount": 114.51 // 金币数
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 获取用户主页信息
+
+GET /v1/user/homepage?userId={你要查询的用户ID(例如1231230)}
+
+::: tip
+如果用户不存在/已注销仍然会返回数据,特点就是无头像,名称,注册时间戳为0等.\
+:::
+
+响应体:
+
+```JSONC
+{
+  "code": 1,
+  "data": {
+    "user": {
+      "userId": "7058262", // 用户ID
+      "nickname": "Feng", // 用户名
+      "avatarUrl": "https://chat-img.jwznb.com/...", // 头像URL
+      "registerTime": 1639627226, // 注册时间(时间戳)
+      "registerTimeText": "2021-12-16 12:00:26", // 注册时间文本
+      "onLineDay": 1190, // 在线天数
+      "continuousOnLineDay": 277, // 连续在线天数
+      "medals": [
+        {
+          "id": 1, // 勋章ID
+          "name": "内测用户", // 勋章名称
+          "desc": "内测用户", // 勋章描述
+          "imageUrl": "", // 图像URL(?)
+          "sort": 100 // 排序
+        },
+        // ...
+      ],
+      "isVip": 1 // 是否为 VIP, 1为是VIP
+    }
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+## 复制用户token
+
+GET /v1/user/get-token?token={需要复制的用户token}
+
+响应体:
+
+```JSONC
+{
+  "code": 1, // 响应码,1表示正常
+  "data": {
+    "token": "19d7k3js-****-****-****-************"
+  },
+  "msg": "success" // 返回消息
+}
+```
+
+---
+
+---
+url: /api/wss/index.md
+---
+# WebSocket API
+这里存放的是云湖 WebSocket 相关的内容.
+
+---
+
+---
+url: /api/wss/chat-ws-go.jwzhd.com.md
+---
+# chat-ws-go.jwzhd.com
+> 本文章下所有 wss 请求地址均为 `wss://chat-ws-go.jwzhd.com/ws`
+
+没写 请求/响应项目 表示不需要相关参数，使用以下功能前必须先链接 wss 并 **登录云湖账号** 。
+
+如果登录失败或未登录直接发送数据，会返回"数据不合法"或其二进制格式或无任何响应。
+
+本教程中未特别说明情况下 proto 的 INFO 均为以下部分:
+
+```proto
+message INFO {
+    string seq = 1; // 请求标识码
+    string cmd = 2; // 操作类型
+}
+```
+
+## 登录云湖账号
+
+### 发送数据
+
+```JSONC
+{
+  "seq": "123123123123123123123", // 请求标识码，可以随便写
+  "cmd": "login", // 为login，代表登录
+  "data": {
+    "userId": "123", // 登录用户ID
+    "token": "nj104901-****-****-****-************",
+    "platform": "windows", // 登录平台，只能为 windows，Web 等特定值,乱写云湖不认
+    "deviceId": "123" //设备识别码，可随便写
+  }
+}
+```
+
+### 允许的平台
+
+注：**大小写敏感，填写错误会导致登录失败**.
+
+* `windows`
+* `macos`
+* `android`
+* `linux`
+* `ios`
+* `fuchsia`
+* `Web`
+
+## 发送心跳包
+
+### 发送数据
+
+```JSONC
+{
+  "seq": "123123123123123123123", // 请求标识码，可以随便写
+  "cmd": "heartbeat", // 为heartbeat，代表心跳包
+  "data": {}
+}
+```
+
+### 返回数据
+
+```ProtoBuf
+data: {
+  seq: "123123123123123123123", // 请求标识码
+  cmd: "heartbeat_ack" // 为heartbeat_ack，代表心跳包的返回
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 心跳包返回信息
+message heartbeat_ack_info {
+    Data data = 1; //数据
+    message Data {
+        string id = 1; // 请求标识码，可以随便写
+        string cmd = 2; // 为heartbeat，代表心跳包
+    }
+}
+```
+
+:::
+
+## 发送笔记同步
+
+### 发送数据
+
+```JSONC
+{
+  "seq": "123123123123123123123", // 请求标识码，可以随便写
+  "cmd": "inputInfo", // 为inputInfo，代表发送笔记同步
+  "data": {
+    "chatId": "872440499", // 用户ID
+    "input": "测试笔记同步", // 笔记同步内容
+    "deviceId": "123" // 设备唯一识别码
+  }
+}
+```
+
+## 接收笔记同步
+
+### 返回数据
+
+```ProtoBuf
+info {
+  seq: "abcdef" // 请求标识符
+  cmd: "draft_input" // 操作类型
+}
+
+data {
+  any: "type.googleapis.com/proto.MsgInput" // ProtoBuf 的 any 字段
+  draft {
+    chat_id: "8826687" // 聊天对象ID
+    input: "测试草稿同步" // 草稿内容
+  }
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 草稿同步
+message draft_input {
+    INFO info = 1;
+    Data data = 2;
+
+    message Data {
+        string any = 1;
+        Draft draft = 2;
+
+        message Draft {
+            string chat_id = 1; // 对象ID
+            string input = 2; // 草稿内容
+        }
+    }
+}
+```
+
+:::
+
+## 推送消息
+
+### 返回数据
+
+```ProtoBuf
+info {
+  seq: "1234567abcd" // 请求标识码
+  cmd: "push_message" // 推送消息
+}
+
+data {
+  any: "type.googleapis.com/proto.PushMessage" // ProtoBuf 的 any 字段
+  msg {
+    msg_id: "abcdef" // 消息ID
+    sender {
+      chat_id: "7357777" // 发送者ID
+      chat_type: 1 // 发送者类型,1-用户 3-机器人
+      name: "测试" // 发送者名称
+      avatar_url: "https://chat-img.jwznb.com/...." // 头像URL
+      tag_old: "测试成员" // 标签(旧版)
+      // ...
+      tag {
+        id: 123 // 标签id
+        text: "" // 标签文字
+        color: "#FFFFFFFF" // 标签颜色
+      }
+      // ...
+    }
+    recv_id: "7356666" // 接收者ID
+    chat_id: "big" // 会话的ID
+    chat_type: 2 // 会话的类型,1-用户 2-群组 3-机器人
+    content {
+      text: "Feng的大手发力了" // 消息文字
+      // 剩下的建议参考proto,太多不写了
+    }
+    content_type: 1 // 消息类型
+    timestamp: 123456789 // 时间戳(毫秒)
+    cmd {
+      id; 999 // 指令ID
+      name: "MAC地址查询" // 指令名称
+    }
+    msg_seq: 1145 // 消息序列
+  }
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 共用区
+
+// 标签
+message Tag {
+    uint64 id = 1; // 标签ID(貌似)
+    string text = 3;
+    string color = 4;
+}
+// 共用区结束
+
+// ws推送消息
+message push_message {
+    INFO info = 1;
+    Data data = 2;
+
+    message Data {
+        string any = 1;
+        Msg msg = 2;
+
+        message Msg {
+            string msg_id = 1;
+            Sender sender = 2;
+            string recv_id = 3; // 接收者ID
+            string chat_id = 4; // 会话的ID
+            uint64 chat_type = 5; // 会话类型
+            Content content = 6; // 消息内容
+            uint64 content_type = 7;
+            uint64 timestamp = 8; // 时间戳(毫秒)
+            Cmd cmd = 9; // 指令
+            uint64 delete_timestamp = 10; // 撤回消息时间,和8差别不大
+            string quote_msg_id = 11; // 引用消息ID
+            uint64 msg_seq = 12; // 消息序列,在撤回时也是被撤回消息的序列
+
+            message Cmd {
+                uint64 id = 1; // 命令ID
+                string name = 2; // 命令名称
+            }
+
+            message Sender {
+                string chat_id = 1;
+                uint64 chat_type = 2;
+                string name = 3;
+                string avatar_url = 4;
+                repeated string tag_old = 6;
+                repeated Tag tag = 7;
+            }
+
+            message Content {
+                string text = 1; // 消息内容
+                string buttons = 2; // 按钮
+                string image_url = 3;
+                string file_name = 4;
+                string file_url = 5;
+                string form = 7; // 表单消息
+                string quote_msg_text = 8; // 引用消息文字
+                string sticker_url = 9; // 表情URL
+                string post_id = 10; // 文章ID
+                string post_title = 11; // 文章标题
+                string post_content = 12; // 文章内容
+                string post_content_type = 13; // 文章类型
+                string expression_id = 15; // 个人表情ID(不知道为啥为STR)
+                string quote_image_url = 16; // 引用图片直链,https://...
+                string quote_image_name = 17; // 引用图片文件名称
+                uint64 file_size = 18; // 文件/图片大小(字节)
+                string video_url = 19; // 视频URL
+                string audio_url = 21; // 语音URL
+                uint64 audio_time = 22; // 语音时长
+                string quote_video_url = 23; // 引用视频直链,https://...
+                uint64 quote_video_time = 24; // 引用视频时长
+                uint64 sticker_item_id = 25; // 表情ID
+                uint64 sticker_pack_id = 26; // 表情包ID
+                string call_text = 29; // 语音通话文字
+                string call_status_text = 32; // 语音通话状态文字
+                uint64 width = 33; // 图片的宽度
+                uint64 height = 34; // 图片的高度
+                string tip = 37; // 提示信息
+            }
+        }
+    }
+}
+```
+
+:::
+
+### 消息类型列表
+
+* `1`: 文本消息
+* `2`: 图片消息
+* `3`: Markdown 消息
+* `4`: 文件消息
+* `6`: 帖子消息
+* `7`: 表情消息
+* `8`: HTML 消息
+* `10`: 视频消息
+* `11`: 语音消息
+* `13`: 语音通话
+* `14`: A2UI 消息
+
+## 推送超级文件分享
+
+### 返回数据
+
+```ProtoBuf
+info {
+  seq: "1234567abcd" // 请求标识码
+  cmd: "file_send_message" // 推送超级文件分享
+}
+
+data {
+  any: "type.googleapis.com/proto.PushMessage" // ProtoBuf 的 any 字段
+  file_send: {
+      send_user_id: "123" // 分享者用户ID
+      user_id: "123" // 接收者用户ID
+      temp_code: 1 // 未知
+      send_type: "candidate" // 分享类别区分文本
+      data: "{}" // 经过转义义的json格式发送数据
+      send_deviceId: "123123123123" // 发送者设备唯一标识符
+    }
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 超级文件分享
+message file_send_message {
+  INFO info = 1;
+  Data data = 2;
+
+  message Data {
+    string any = 1;
+    Sender sender = 2;
+
+    message Sender {
+      string send_user_id = 1; // 分享者用户ID
+      string user_id = 2; // 接收者用户ID
+      uint64 temp_code = 3; // 未知
+      string send_type = 4; // 分享类别区分文本
+      string data = 5; // 经过转义后的json格式发送数据
+      string send_deviceId = 6; // 发送者设备唯一标识符
+    }
+  }
+}
+```
+
+:::
+
+## 编辑消息接收
+
+!!其实可以和接收消息推送的 proto 基本共用,只是编辑消息额外多了个14 edit\_time.!!
+
+### 返回数据
+
+```ProtoBuf
+info {
+  seq: "123123123123123123123" // 请求标识码
+  cmd: "edit_message" // 消息编辑推送
+}
+
+data {
+  any: "type.googleapis.com/proto.PushMessage" // ProtoBuf 的 any 字段
+  msg {
+    "msg_id": "123123123123" // 信息ID
+    "chat_id": "123" // 信息对象ID
+    "content": {
+      "text": "测试信息文本" // 信息文本
+      "buttons": "测试信息文本" // 按钮信息文本数据
+      "quote_msg_text": "测试引用信息文本" // 引用信息文本
+    }
+    "content_type": 1 // 信息类别，1-文本，3-markdown，8-html
+    "quote_msg_id": "123123123123" // 引用信息ID
+  }
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message Msg {
+    string msg_id = 1;
+    string recv_id = 3; // 接收者ID,但是不知道为啥到编辑这里就和4一样了
+    string chat_id = 4; // 会话的ID
+    Content content = 6; // 消息内容
+    uint64 content_type = 7;
+    string quote_msg_id = 11; // 引用消息ID
+    uint64 edit_time = 14; // 编辑时间
+
+    message Content {
+        string text = 1; // 消息内容
+        string buttons = 2; // 按钮
+        string quote_msg_text = 8; // 引用消息文字
+    }
+}
+
+// ws接收编辑消息
+message edit_message {
+    INFO info = 1;
+    Data data = 2;
+
+    message Data {
+        string any = 1;
+        Msg msg = 2;
+    }
+}
+```
+
+:::
+
+## 接受邀请消息
+
+::: tip 提示
+本项只提供了“有人邀请我”的这种状态，并没有提供相关信息，如邀请人、群聊ID等，建议配合邀请列表进行使用。
+:::
+
+### 返回数据
+
+```ProtoBuf
+info {
+  seq: "123123123123123123123" // 请求标识码
+  cmd: "invite_apply" // 邀请信息推送
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message InviteApply {
+    INFO info = 1;
+}
+```
+
+:::
+
+## 流式消息
+
+::: tip
+流式消息第一个推送是 push\_message,后续才是 stream\_message,需要将 content 里面的内容追加到消息内容后面.
+:::
+
+### 返回数据
+
+```ProtoBuf
+info {
+    seq: "114aaaa" // 请求ID
+    cmd: "stream_message"
+}
+
+data {
+  any: "type.googleapis.com/proto.StreamMessage" // ProtoBuf 的 any 字段
+  msg {
+    msgId: "11451419180" // 消息ID
+    recvId: "6666666" // 接受者ID
+    chatId: "26146395" // 发送者ID
+    content: "我是追加内容" // 要追加的内容
+  }
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 流式消息
+message stream_message {
+    INFO info = 1;
+    Data data = 2;
+
+    message Data {
+        string any = 1;
+        StreamMsg msg = 2;
+
+        message StreamMsg {
+            string msg_id = 1;
+            string recv_id = 2;
+            string chat_id = 3; // 似乎是会话ID
+            string content = 4; // 消息内容
+        }
+    }
+}
+```
+
+:::
+
+## 用户挂断语音
+
+### 返回数据
+
+```ProtoBuf
+info {
+    seq: "114aaaa" // 请求ID
+    cmd: "live_video_user_hang_up"
+}
+
+data {
+  any: "type.googleapis.com/proto.LiveMessage" // ProtoBuf 的 any 字段
+  msg {
+    msgId: "11451419180" // 语音消息ID
+    cmd: "live_video_user_hang_up" // 用户挂断语音指令
+  }
+}
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 用户挂起通话消息
+message live_video_user_hang_up {
+    INFO info = 1;
+    Data data = 2;
+
+    message Data {
+        string any = 1;
+        UserHangUpMsg msg = 2;
+
+        message UserHangUpMsMsg {
+            string msg_id = 1; // 语音消息id
+            string cmd = 5; // 指令
+        }
+    }
+}
+```
