@@ -20,17 +20,17 @@ POST /v1/check/get-latest-version
 
 ```JSONC
 {
- "packageInfo":"{\"appName\":\"云湖\",\"packageName\":\"com.yhchat.app\",\"version\":\"1.4.83\",\"buildNumber\":\"347\"}", // 当前应用信息，为json数组，需转义后才可使用
+ "packageInfo":"{\"appName\":\"云湖\",\"packageName\":\"com.yhchat.app\",\"version\":\"1.4.83\",\"buildNumber\":\"347\"}", // 当前应用信息，为 JSON 数组，需转义后才可使用
  "platform":"android", // 设备标识
  "deviceinfo":"", // 这里填写设备信息
- "deviceId":"114514", // 设备id
- "userId":"114514" // 用户id （可带可不带）
+ "deviceId":"114514", // 设备 ID
+ "userId":"114514" // 用户 ID（可带可不带）
 }
 ```
 
 ::: info
 
-`packageInfo` 转换后的 json 结构
+`packageInfo` 转换后的 JSON 结构
 
 ```JSONC
 {
@@ -47,7 +47,7 @@ POST /v1/check/get-latest-version
 
 ```JSONC
 {
-  "ApkMd5": "", // 更新包MD5
+  "ApkMd5": "", // 更新包 MD5
   "ApkSize": 74491, // 包体大小
   "Code": 0,
   "DownloadUrl": "https://app-cdn1.jwznb.com/android/yunhu-1.4.84.apk", // 下载地址
@@ -55,7 +55,7 @@ POST /v1/check/get-latest-version
   "Message": "success", // 返回消息
   "ModifyContent": "1、全新发布云湖APP\n2、修复多个bug", // 更新内容
   "UpdateStatus": 1, // 更新状态，1-需要更新，0-不需要更新
-  "VersionCode": 348, // 应用的versioncode
+  "VersionCode": 348, // 应用的 VersionCode
   "VersionName": "1.4.84" // 应用版本号
 }
 ```
@@ -70,16 +70,16 @@ POST https://chat-go.jwzhd.com/v1/check/check-version
 
 ```jsonc
 {
-  "packageInfo": "{\"appName\":\"云湖\",\"packageName\":\"云湖\",\"version\":\"1.6.50\",\"buildNumber\":\"225\"}", // 当前应用信息，为 json 数组，需转义后才可使用
+  "packageInfo": "{\"appName\":\"云湖\",\"packageName\":\"云湖\",\"version\":\"1.6.50\",\"buildNumber\":\"225\"}", // 当前应用信息，为 JSON 数组，需转义后才可使用
   "platform": "windows", // 平台
   "deviceinfo": "", // 这里填写设备信息
-  "deviceId": "" // 设备id
+  "deviceId": "" // 设备 ID
 }
 ```
 
 ::: info
 
-`packageInfo` 转换后的 json 结构
+`packageInfo` 转换后的 JSON 结构
 
 ```JSONC
 {
@@ -122,7 +122,7 @@ POST https://chat-go.jwzhd.com/v1/check/check-version
   "productName":"Windows 11 Pro", // Windows 全名
   "registeredOwner":"", // 所有者
   "releaseId":"2009",
-  "deviceId":"" // 设备ID
+  "deviceId":"" // 设备 ID
 }
 ```
 
