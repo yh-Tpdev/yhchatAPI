@@ -1,6 +1,7 @@
 import { defineUserConfig } from "vuepress";
 
 import theme from "./theme.js";
+import { llmsPlugin } from "@vuepress/plugin-llms";
 
 export default defineUserConfig({
   base: "/",
@@ -13,4 +14,8 @@ export default defineUserConfig({
 
   // 和 PWA 一起启用
   // shouldPrefetch: false,
+  plugins: [
+    llmsPlugin({
+    })
+  ]
 });
