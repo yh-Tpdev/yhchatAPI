@@ -29,7 +29,7 @@ POST /v1/live/add
 {
   "code": 1, // 请求状态码，1为正常
   "data": {
-    "joinToken: ": "123123123123123123", // 语音频道进入token
+    "joinToken": "123123123123123123", // 语音频道进入token,是 livekit 的 access_token
   },
   "msg": "success" // 返回消息
 }
@@ -204,47 +204,3 @@ POST /v1/live/get-calling
 ```
 
 :::
-
-## 获取语音房间列表
-
-POST /v1/group/live-room
-
-请求头:
-
-| 名称  | 必须 | 备注 |
-| ----- | ---- | ---- |
-| token | 是   | 无   |
-
-请求体：
-
-```JSONC
-{
-  "groupId": "big" // 群聊id
-}
-```
-
-响应体：
-
-```JSONC
-{
-  "code": 1, // 请求状态码，1为正常
-  "data": {
-    "rooms": [
-      {
-        "userId": "1234567", // 用户id
-        "roomId": "c7552ca7c79546dd93baca4e4adxxxxx", // 房间id
-        "chatId": "123456789", // 房间所发起的会话id
-        "title": "", // 房间标题
-        "chatType": 2, // 房间所发起的会话类型
-        "status": 0, // 房间状态
-        "createBy": "1234567", // 发起房间的用户id
-        "createTime": 1775881889, // 房间创建时间戳
-        "nickname": "111", // 房间创建者名称
-        "count": 1, // 房间人数
-        "avatarUrl": "https://chat-img.jwznb.com/defalut-avatars/Nellie%20Bly.png" // 房间创建者头像Url
-      }
-    ]
-  },
-  "msg": "success" // 返回消息
-}
-```

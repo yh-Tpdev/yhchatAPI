@@ -12,7 +12,7 @@ POST /v1/mount-setting/create
 
 | 名称  | 必须 | 备注              |
 | ----- | ---- | ----------------- |
-| token | 是   | 目标群管理员token |
+| token | 是   | 普通用户的 token 也可(若后续改了欢迎 PR) |
 
 请求体:
 
@@ -44,7 +44,7 @@ POST /v1/mount-setting/delete
 
 | 名称  | 必须 | 备注              |
 | ----- | ---- | ----------------- |
-| token | 是   | 目标群管理员token |
+| token | 是   | 普通用户的 token 也可(若后续改了欢迎 PR) |
 
 请求体:
 

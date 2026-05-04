@@ -1,7 +1,7 @@
 ---
 url: /api/v1/check.md
 ---
-> 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com` .
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com` .
 
 没写请求/响应项目表示不需要相关参数.
 
@@ -62,7 +62,7 @@ POST /v1/check/get-latest-version
 ## 获取云湖新版本（Windows 版本）
 
 ```http request
-POST https://chat-go.jwzhd.com/v1/check/check-version
+POST /v1/check/check-version
 ```
 
 ### 请求体

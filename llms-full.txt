@@ -2,9 +2,9 @@
 url: /index.md
 ---
 # 主页
-云湖已发现API及调用的非官方参考文档.目的是方便开发者进行二次开发使用.\
+云湖已发现API及调用的非官方参考文档.方便开发者进行二次开发使用.\
 **本文档默认你拥有相关编程基础,不解决过于小白的问题.**\
-**所有API信息只做为公开参考**\
+**所有API信息仅限参考**\
 **所有API调用请遵循相关法律法规以及云湖的用户协议,本项目仅用于学习研究用途.**\
 **由于文档的特殊性,可能会因为某些原因随时停止服务.**
 
@@ -644,7 +644,7 @@ POST /open-apis/v1/bot/messages?token={机器人token}&chat-id={目标信息ID}&
 url: /api/v1/index.md
 ---
 # v1 API
-这里存放的是 `v1` API 的文档.\
+这里存放的是 `v1` 路由下的 API 的文档.\
 无特别说明,请求域名均为 `https://chat-go.jwzhd.com/`\
 一般为 JSON 或者是 ProtoBuf 格式.\
 Proto 文件中的 Status 未特别备注均为下面内容:
@@ -1880,7 +1880,7 @@ POST /v1/chat-background/list
 url: /api/v1/check.md
 ---
 # check
-> 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com` .
+未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com` .
 
 没写请求/响应项目表示不需要相关参数.
 
@@ -1941,7 +1941,7 @@ POST /v1/check/get-latest-version
 ## 获取云湖新版本（Windows 版本）
 
 ```http request
-POST https://chat-go.jwzhd.com/v1/check/check-version
+POST /v1/check/check-version
 ```
 
 ### 请求体
@@ -6163,6 +6163,50 @@ message dismiss_group {
 
 :::
 
+## 获取语音房间列表
+
+POST /v1/group/live-room
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSONC
+{
+  "groupId": "big" // 群聊id
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "data": {
+    "rooms": [
+      {
+        "userId": "1234567", // 用户id
+        "roomId": "c7552ca7c79546dd93baca4e4adxxxxx", // 房间id
+        "chatId": "123456789", // 房间所发起的会话id
+        "title": "", // 房间标题
+        "chatType": 2, // 房间所发起的会话类型
+        "status": 0, // 房间状态
+        "createBy": "1234567", // 发起房间的用户id
+        "createTime": 1775881889, // 房间创建时间戳
+        "nickname": "111", // 房间创建者名称
+        "count": 1, // 房间人数
+        "avatarUrl": "https://chat-img.jwznb.com/defalut-avatars/Nellie%20Bly.png" // 房间创建者头像Url
+      }
+    ]
+  },
+  "msg": "success" // 返回消息
+}
+```
+
 ---
 
 ---
@@ -6429,7 +6473,7 @@ POST /v1/live/add
 {
   "code": 1, // 请求状态码，1为正常
   "data": {
-    "joinToken: ": "123123123123123123", // 语音频道进入token
+    "joinToken": "123123123123123123", // 语音频道进入token,是 livekit 的 access_token
   },
   "msg": "success" // 返回消息
 }
@@ -6604,50 +6648,6 @@ POST /v1/live/get-calling
 ```
 
 :::
-
-## 获取语音房间列表
-
-POST /v1/group/live-room
-
-请求头:
-
-| 名称  | 必须 | 备注 |
-| ----- | ---- | ---- |
-| token | 是   | 无   |
-
-请求体：
-
-```JSONC
-{
-  "groupId": "big" // 群聊id
-}
-```
-
-响应体：
-
-```JSONC
-{
-  "code": 1, // 请求状态码，1为正常
-  "data": {
-    "rooms": [
-      {
-        "userId": "1234567", // 用户id
-        "roomId": "c7552ca7c79546dd93baca4e4adxxxxx", // 房间id
-        "chatId": "123456789", // 房间所发起的会话id
-        "title": "", // 房间标题
-        "chatType": 2, // 房间所发起的会话类型
-        "status": 0, // 房间状态
-        "createBy": "1234567", // 发起房间的用户id
-        "createTime": 1775881889, // 房间创建时间戳
-        "nickname": "111", // 房间创建者名称
-        "count": 1, // 房间人数
-        "avatarUrl": "https://chat-img.jwznb.com/defalut-avatars/Nellie%20Bly.png" // 房间创建者头像Url
-      }
-    ]
-  },
-  "msg": "success" // 返回消息
-}
-```
 
 ---
 
@@ -6922,7 +6922,7 @@ POST /v1/mount-setting/create
 
 | 名称  | 必须 | 备注              |
 | ----- | ---- | ----------------- |
-| token | 是   | 目标群管理员token |
+| token | 是   | 普通用户的 token 也可(若后续改了欢迎 PR) |
 
 请求体:
 
@@ -6954,7 +6954,7 @@ POST /v1/mount-setting/delete
 
 | 名称  | 必须 | 备注              |
 | ----- | ---- | ----------------- |
-| token | 是   | 目标群管理员token |
+| token | 是   | 普通用户的 token 也可(若后续改了欢迎 PR) |
 
 请求体:
 
@@ -9224,7 +9224,7 @@ POST /v1/user/module-ignore
 
 ```JSONC
 {
- "deviceId": "1234"
+ "deviceId": "1234",
  "ignore": ",30,20,10" // 模块id，10-隐藏社区页面，20-隐藏发现页面，30-精简我的界面
 }
 ```
@@ -9814,8 +9814,6 @@ url: /api/web/index.md
 # Web API
 Web 端 API 文档
 
-> [v1](./v1/)
-
 ---
 
 ---
@@ -10160,7 +10158,7 @@ GET /v1/document/detail
 
 | 名称       | 必须 | 备注                           |
 | ---------- | ---- | ------------------------------ |
-| documentId | 是   | Id必须大写，这个参数必须带数字 |
+| documentId | 是   | 大小写敏感,类型必须是 int |
 
 响应体：
 
@@ -10226,7 +10224,7 @@ POST /v1/group/group-info
       "headcount": 112998, // 群人数
       "readHistory": 1, // 历史消息, 1表示允许新成员获取以前的历史消息
       "category": "", // 分类
-      "uri": "http://chat.jwznb.com:8888/open-apis/v1/bot/send?token=", // 不知道干啥的
+      "uri": "http://chat.jwznb.com:8888/open-apis/v1/bot/send?token=", // 不知道干啥的,别问为什么是 uri,我也不知道
       "groupBotRel": { // 也不知道干啥的
         "id": 0,
         "groupId": "",

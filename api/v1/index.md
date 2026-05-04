@@ -1,7 +1,7 @@
 ---
 url: /api/v1/index.md
 ---
-这里存放的是 `v1` API 的文档.\
+这里存放的是 `v1` 路由下的 API 的文档.\
 无特别说明,请求域名均为 `https://chat-go.jwzhd.com/`\
 一般为 JSON 或者是 ProtoBuf 格式.\
 Proto 文件中的 Status 未特别备注均为下面内容:
