@@ -35,7 +35,7 @@ POST /v1/group/group-info
       "headcount": 112998, // 群人数
       "readHistory": 1, // 历史消息, 1表示允许新成员获取以前的历史消息
       "category": "", // 分类
-      "uri": "http://chat.jwznb.com:8888/open-apis/v1/bot/send?token=", // 不知道干啥的
+      "uri": "http://chat.jwznb.com:8888/open-apis/v1/bot/send?token=", // 不知道干啥的,别问为什么是 uri,我也不知道
       "groupBotRel": { // 也不知道干啥的
         "id": 0,
         "groupId": "",
