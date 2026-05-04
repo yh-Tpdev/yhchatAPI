@@ -598,7 +598,7 @@ POST /v1/user/module-ignore
 
 ```JSONC
 {
- "deviceId": "1234"
+ "deviceId": "1234",
  "ignore": ",30,20,10" // 模块id，10-隐藏社区页面，20-隐藏发现页面，30-精简我的界面
 }
 ```
