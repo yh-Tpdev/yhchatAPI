@@ -81,23 +81,23 @@ message heartbeat_ack_info {
 
 :::
 
-## 发送笔记同步
+## 发送草稿同步
 
 ### 发送数据
 
 ```JSONC
 {
   "seq": "123123123123123123123", // 请求标识码，可以随便写
-  "cmd": "inputInfo", // 为inputInfo，代表发送笔记同步
+  "cmd": "inputInfo", // 为inputInfo，代表发送草稿同步
   "data": {
-    "chatId": "872440499", // 用户ID
-    "input": "测试笔记同步", // 笔记同步内容
+    "chatId": "872440499", // 对象 ID
+    "input": "测试草稿同步", // 草稿同步内容,会直接覆盖原有的草稿
     "deviceId": "123" // 设备唯一识别码
   }
 }
 ```
 
-## 接收笔记同步
+## 接收草稿同步
 
 ### 返回数据
 
@@ -111,7 +111,7 @@ data {
   any: "type.googleapis.com/proto.MsgInput" // ProtoBuf 的 any 字段
   draft {
     chat_id: "8826687" // 聊天对象ID
-    input: "测试草稿同步" // 草稿内容
+    input: "测试草稿同步" // 草稿内容,注意是覆盖不是追加
   }
 }
 ```

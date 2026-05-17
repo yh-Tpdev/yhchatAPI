@@ -4,6 +4,10 @@ url: /api/v1/live.md
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
 没写请求/响应项目表示不需要相关参数.
 
+::: tip
+云湖的语音频道使用的是标准的 livekit,wss 地址: `wss://livekit.jwznb.com`
+:::
+
 ## 获取语音频道进入token
 
 POST /v1/live/add
@@ -29,7 +33,7 @@ POST /v1/live/add
 {
   "code": 1, // 请求状态码，1为正常
   "data": {
-    "joinToken": "123123123123123123", // 语音频道进入token,是 livekit 的 access_token
+    "joinToken": "123123123123123123", // livekit 的 access_token
   },
   "msg": "success" // 返回消息
 }
