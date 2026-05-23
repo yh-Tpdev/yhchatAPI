@@ -1092,3 +1092,161 @@ POST /v1/bot/group-permission-edit
   "msg": "success" // 返回状态消息
 }
 ```
+
+## 获取关注者列表
+
+```http request
+POST /v1/bot/follower-list
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+### 请求体
+
+```ProtoBuf
+data {
+  size: 20 // 分页大小
+  page: 1 // 页数
+}
+bot_id: "123" // 机器人ID
+keywords: "测试" // 搜索关键词
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message list_follower {
+    Data data = 2;
+    string bot_id = 3; // 机器人ID
+    string keywords = 4; // 搜索关键词
+
+    message Data {
+        int32 size = 1; // 分页大小
+        int32 page = 2; // 页数
+    }
+}
+```
+
+:::
+
+### 响应数据
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+user {
+    user_id: "7356666" // 用户ID
+    name: "Feng" // 用户名
+    avatar_url: "https://..." // 头像URL
+    is_vip: 0 // 是否为vip用户, 0-不为vip用户, 1-vip用户
+  }
+  totol: 32 // 关注该机器人的用户总数
+}
+// 可以有多个
+// ...
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message list_follower {
+    Status status = 1;
+    repeated User user = 2;
+    int32 totol = 3;
+
+    message User {
+      string user_id = 1;
+      string name = 2;
+      string avatar_url = 4;
+      int32 is_vip = 6;
+    }
+  }
+}
+```
+
+:::
+
+## 获取加入群聊列表
+
+```http request
+POST /v1/bot/join-group-list
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+### 请求体
+
+```ProtoBuf
+data {
+  size: 20 // 分页大小
+  page: 1 // 页数
+}
+bot_id: "123" // 机器人ID
+keywords: "测试用户名" // 搜索关键词
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message list_join_group {
+    Data data = 2;
+    string bot_id = 3; // 机器人ID
+    string keywords = 4; // 搜索关键词
+
+    message Data {
+        int32 size = 1; // 分页大小
+        int32 page = 2; // 页数
+    }
+}
+```
+
+:::
+
+### 响应数据
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+group {
+    user_id: "123" // 群聊ID
+    name: "测试群聊名称" // 群聊名字
+    avatar_url: "https://..." // 头像URL
+  }
+  totol: 32 // 机器人加入的群聊总数
+}
+// 可以有多个
+// ...
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message list_join_group {
+    Status status = 1;
+    repeated Group group = 2;
+    int32 total = 3;
+
+    message Group {
+        string id = 1;
+        string name = 2;
+        string avatarUrl = 3;
+    }
+
+}
+```
+
+:::
