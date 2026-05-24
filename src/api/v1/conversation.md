@@ -53,15 +53,15 @@ status {
 data {
   chat_id: "7356666" // 对象ID
   chat_type: 1 // 对象类型,1-用户 2-群聊 3-机器人
-  name: "测试" // 名称
+  remark: "测试" // 备注名称
   chat_content: "我信(" // 会话内容
-  timestamp_ms: 1755566778727 // 时间戳(毫秒)
+  timestamp_ms: 1755566778727 // 加入对话列表时间戳(毫秒)
   unread_message: 1 // 是否存在未读消息
   at: 1 // 是否被@,1表示被@
   avatar_id: 12345 // 头像ID
   avatar_url: "https://chat-img.jwznb.com/..." // 头像URL
   do_not_disturb: 1 // 免打扰,1表示开启
-  timestamp: 1755566778 // 时间戳(秒)
+  send_timestamp: 1755566778 // 消息发送时间戳(秒)
   at_data {
     unknown: 123456 // 似乎是名称ID
     mentioned_id: "7356666" // 被@的ID
@@ -71,6 +71,7 @@ data {
     mentioner_name: "测试" // 发起@的对象的名称
     msg_seq: 1234 // 消息序列
   }
+  name: "测试"; // 用户真实名称
   certification_level: 1 // 认证相关,1是官方,2是地区
 }
 // ...
@@ -92,17 +93,17 @@ message list {
     message Data {
         string chat_id = 1; // 对象ID
         uint64 chat_type = 2; // 对象类型
-        string name = 3; // 名称
+        string remark = 3; // 备注名称
         string chat_content = 4; // 消息内容
-        uint64 timestamp_ms = 5; // 毫秒时间戳
+        uint64 timestamp_ms = 5; // 加入对话列表时间戳(毫秒)
         uint64 unread_message = 6; // 1表示有未读消息
         uint64 at = 7; // 是否被@
         uint64 avatar_id = 8; // 头像ID
         string avatar_url = 9; // 头像URL
         uint64 do_not_disturb = 11; // 免打扰
-        uint64 timestamp = 12; // 秒级时间戳
+        uint64 send_timestamp = 12; // 消息发送时间戳(秒)
         At_data at_data = 14; // @数据
-        // 15和3重了就不解析了
+        string name = 15; // 用户真实名称
         uint64 certification_level = 16; // 认证,1是官方 2是地区
 
         message At_data {
@@ -135,6 +136,33 @@ POST /v1/conversation/sort-change
 ```JSONC
 {
   "userId": "123" // 对象ID
+}
+```
+
+响应体:
+
+```JSONC
+{
+ "code": 1, // 返回状态码,1为正常
+ "msg": "success" // 返回信息
+}
+```
+
+## 删除对话
+
+POST /v1/conversation/remove
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "chatId": "123" // 用户/机器人/群组ID
 }
 ```
 
