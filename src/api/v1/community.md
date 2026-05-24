@@ -82,6 +82,7 @@ POST /v1/community/posts/post-reward
 ```JSONC
 {
   "postId": 123, // 文章ID
+  "recvId": "123", // 接受用户ID
   "amount": 1.0 // 打赏金币数
 }
 ```
@@ -351,7 +352,7 @@ POST /v1/community/ba/following-ba-list
 
 ```JSONC
 {
-  "typ": 2, // 类型
+  "typ": 2, // 类型（1-关注, 2-热门, 3-我的, 4-全部）
   "size": 20, // 排序
   "page": 1 // 页数
 }
