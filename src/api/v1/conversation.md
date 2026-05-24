@@ -42,6 +42,23 @@ POST /v1/conversation/list
 | ----- | ---- | ---- |
 | token | 是   | 无   |
 
+请求体
+
+```ProtoBuf
+md5: "123123" // 上次获取对话列表的md5，如果与服务器一致则返回空列表
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+// 请求标识符
+message address_book_list_send {
+    string md5 = 2;
+}
+```
+
+:::
+
 响应体:
 
 ```ProtoBuf
@@ -76,7 +93,7 @@ data {
 }
 // ...
 total: 8 // 会话数目
-request_id: "abcdef"
+md5: "abcdef" // 对话列表的md5
 
 ```
 
@@ -88,7 +105,7 @@ message list {
     Status status = 1;
     repeated Data data = 2;
     uint64 total = 3; // 列表中对话的数量
-    string request_id = 4; // 似乎是请求ID
+    string md5 = 4; // 对话列表的md5
 
     message Data {
         string chat_id = 1; // 对象ID
