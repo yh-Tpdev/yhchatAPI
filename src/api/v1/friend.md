@@ -154,7 +154,7 @@ POST /v1/friend/address-book-list
 ### 请求体
 
 ```ProtoBuf
-number: "123123" // 上次获取通讯录的md5，如果与服务器一致则返回空列表
+md5: "123123" // 上次获取通讯录的md5，如果与服务器一致则返回空列表
 ```
 
 ::: details ProtoBuf数据结构
@@ -162,7 +162,7 @@ number: "123123" // 上次获取通讯录的md5，如果与服务器一致则返
 ```proto
 // 请求标识符
 message address_book_list_send {
-    string number = 2;
+    string md5 = 2;
 }
 ```
 
