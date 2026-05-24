@@ -80,6 +80,37 @@ POST /v1/disk/file-list
 }
 ```
 
+## 获取群网盘文件总大小
+
+POST /v1/disk/file-size
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```JSONC
+{
+  "chatId": "群聊id",
+  "chatType": 2, // 会话类型
+}
+```
+
+响应体:
+
+```JSONC
+{
+  "code": 1,
+  "data": {
+    "totalSize": 0 // 群网盘总占用大小（单位：B）
+  },
+  "msg": "success" // 返回消息
+}
+```
+
 ## 上传文件（需搭配[获取上传文件token](/api/v1/misc.html#%E8%8E%B7%E5%8F%96%E5%8A%9F%E8%83%BD%E8%B7%AF%E7%94%B1)使用）
 
 POST /v1/disk/upload-file
@@ -129,7 +160,7 @@ POST /v1/disk/rename
 ```JSONC
 {
   "id": 123, // 文件ID
-  "objectType": 2, // 会话类型
+  "objectType": 2, // 文件类型（1-文件夹, 2-文件）
   "name": "测试文件名称" // 文件名称
 }
 ```
@@ -158,7 +189,7 @@ POST /v1/disk/remove
 ```JSONC
 {
   "id": 123, // 文件ID
-  "objectType": 2, // 会话类型
+  "objectType": 2, // 文件类型（1-文件夹, 2-文件）
 }
 ```
 
