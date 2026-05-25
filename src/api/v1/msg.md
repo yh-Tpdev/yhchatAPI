@@ -339,8 +339,9 @@ msg {
   }
   send_time: 123456789 // 发送时间(毫秒时间戳)
   cmd {
+    cmd_id = 123; // 指令ID
     name: "指令名" // 指令名
-    type: 1 // 指令类型
+    type: 1 // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
   }
   msg_delete_time: 8888 // 消息撤回时间(毫秒时间戳)
   quote_msg_id: "abcdef" // 引用消息的ID
@@ -379,8 +380,9 @@ message list_message_by_seq {
         uint64 edit_time = 12; // 最后编辑时间
 
         message Cmd {
-            string name = 2; // 指令名
-            uint64 type = 4; // 指令类型
+        uint64 cmd_id = 1; // 指令ID
+        string name = 2; // 指令名
+        uint64 type = 4; // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
         }
         // 消息
         message Content {
@@ -389,6 +391,7 @@ message list_message_by_seq {
             string image_url = 3; // 图像URL
             string file_name = 4; // 文件名
             string file_url = 5; // 文件URL
+            repeated string at = 6; // @
             string form = 7; // 表单消息
             string quote_msg_text = 8; // 引用消息文字
             string sticker_url = 9; // 表情URL
@@ -497,8 +500,9 @@ msg {
   }
   send_time: 123456789 // 发送时间(毫秒时间戳)
   cmd {
+    cmd_id = 123; // 指令ID
     name: "指令名" // 指令名
-    type: 1 // 指令类型
+    type: 1 // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
   }
   msg_delete_time: 8888 // 消息撤回时间(毫秒时间戳)
   quote_msg_id: "abcdef" // 引用消息的ID
@@ -532,8 +536,9 @@ message Msg {
     uint64 edit_time = 12; // 最后编辑时间
 
     message Cmd {
+        uint64 cmd_id = 1; // 指令ID
         string name = 2; // 指令名
-        uint64 type = 4; // 指令类型
+        uint64 type = 4; // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
     }
     // 消息
     message Content {
@@ -542,6 +547,7 @@ message Msg {
         string image_url = 3;
         string file_name = 4;
         string file_url = 5;
+        repeated string at = 6; // @
         string form = 7; // 表单消息
         string quote_msg_text = 8; // 引用消息文字
         string sticker_url = 9; // 表情URL
@@ -663,8 +669,9 @@ msg {
   }
   send_time: 123456789 // 发送时间(毫秒时间戳)
   cmd {
+    cmd_id = 123; // 指令ID
     name: "指令名" // 指令名
-    type: 1 // 指令类型
+    type: 1 // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
   }
   msg_delete_time: 8888 // 消息撤回时间(毫秒时间戳)
   quote_msg_id: "abcdef" // 引用消息的ID
@@ -699,8 +706,9 @@ message Msg {
     uint64 edit_time = 12; // 最后编辑时间
 
     message Cmd {
+        uint64 cmd_id = 1; // 指令ID
         string name = 2; // 指令名
-        uint64 type = 4; // 指令类型
+        uint64 type = 4; // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
     }
     // 消息
     message Content {
@@ -709,6 +717,7 @@ message Msg {
         string image_url = 3;
         string file_name = 4;
         string file_url = 5;
+        repeated string at = 6; // @
         string form = 7; // 表单消息
         string quote_msg_text = 8; // 引用消息文字
         string sticker_url = 9; // 表情URL
@@ -1059,4 +1068,35 @@ meassage pic-list-message-by-mid-seq {
 
 ```proto
 // 和list-message的proto共用
+```
+
+## 删除消息（不是撤回）
+
+```http request
+POST /v1/msg/delete
+```
+
+请求头：
+
+| 名称  | 必须 | 备注         |
+| ----- | ---- |--------------|
+| token | 是   | 无 |
+
+请求体：
+
+```JSONC
+{
+  "chatId": "123", // 聊天ID
+  "msgId": "123", // 消息ID
+  "chatType": 1 // 聊天类型
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
 ```
