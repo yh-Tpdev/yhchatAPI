@@ -64,6 +64,7 @@ data {
   community_name: "云湖" // 加入社区的名称
   top: 0 // 置顶会话,1为开启
   admin: "123" // 管理员ID,可以有多个
+  create_time: 1231231230 // 群聊创建时间
   limited_msg_type: "" // 被限制的消息类型,如1,2,3,使用","分格
   owner: "123" // 群主ID
   recommandation: 1 // 是否加入群推荐,1为开启
@@ -123,6 +124,7 @@ message info {
         string community_name = 16;
         uint64 top = 19; // 会话置顶
         repeated string admin = 20;
+        uint64 create_time = 21; // 群聊创建时间
         string limited_msg_type = 22; // 被限制的消息类型,例如 1,2,3
         string owner = 23;
         uint64 recommandation = 24; // 是否加入群推荐
@@ -246,7 +248,7 @@ message list_member {
 
       int32 permission_level = 3;
       int64 gag_time = 4; // 禁言时间
-      int32 is_gag = 5; c
+      int32 is_gag = 5;
   }
 }
 ```
@@ -718,6 +720,7 @@ history_msg: 1 // 历史消息,1为开启
 category_name: "无" // 分类名
 category_id: 40 // 分类ID
 private: 0 // 是否私有,1为私有
+hide_group_members: 0 // 隐藏群成员
 ```
 
 ::: details ProtoBuf数据结构
@@ -733,6 +736,8 @@ message edit_group_send {
   string category_name = 8; // 分类名
   uint64 category_id = 9; // 分类ID
   uint64 private = 10; // 是否私有,1为私有
+  uint64 hide_group_members = 11; // 隐藏群成员
+
 }
 ```
 
@@ -1073,6 +1078,60 @@ POST /v1/group/edit-stop-member-upload-group-file
 }
 ```
 
+## 创建群聊
+
+```http request
+POST /v1/group/create-group
+```
+
+### 请求头
+
+| 名称  | 必须 | 备注         |
+| ----- | ---- |--------------|
+| token | 是   | 无 |
+
+### 请求体
+
+```ProtoBuf
+name: "测试群聊" // 群聊名称
+introduction: "测试群聊" // 群聊简介
+avatar_url: "https://..." // 头像url
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message create_send {
+    string name = 2;
+    string introduction = 3;
+    string avatar_url = 4;
+}
+```
+
+:::
+
+### 响应数据
+
+```ProtoBuf
+status {
+  number: 114514
+  code: 1
+  msg: "success"
+}
+group_id: "123" // 新群聊ID
+```
+
+::: details ProtoBuf数据结构
+
+```proto
+message dismiss_group {
+    Status status = 1;
+    string group_id = 2;
+}
+```
+
+:::
+
 ## 解散群聊
 
 ```http request
@@ -1161,6 +1220,96 @@ POST /v1/group/live-room
       }
     ]
   },
+  "msg": "success" // 返回消息
+}
+```
+
+## 同意进群申请、同意机器人进群
+
+```http request
+POST /v1/group/agree-invite
+```
+
+请求头：
+
+| 名称  | 必须 | 备注         |
+| ----- | ---- |--------------|
+| token | 是   | 无 |
+
+请求体：
+
+```JSONC
+{
+  "id": 123, // 申请ID
+  "agree": 1 // 1-通过请求，2-拒绝请求，3-显示请求过期，4-显示已解散
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
+## 用户被是否被该群踢过
+
+```http request
+POST /v1/group/member-is-removed
+```
+
+请求头：
+
+| 名称  | 必须 | 备注         |
+| ----- | ---- |--------------|
+| token | 是   | 无 |
+
+请求体：
+
+```JSONC
+{
+  "userId": "123", // 用户ID
+  "groupId": "123" // 群聊ID
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 1-踢过，2-没踢过
+  "msg": "success" // 返回消息
+}
+```
+
+## 加入群推荐
+
+```http request
+POST /v1/group/switch
+```
+
+请求头：
+
+| 名称  | 必须 | 备注         |
+| ----- | ---- |--------------|
+| token | 是   | 无 |
+
+请求体：
+
+```JSONC
+{
+  "groupId": "123", // 群聊ID
+  "hide": 0 // 0-关闭隐藏（加入群推荐），1-隐藏（不加入群推荐）
+}
+```
+
+响应体：
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
   "msg": "success" // 返回消息
 }
 ```
