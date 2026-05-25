@@ -821,7 +821,7 @@ message bot_list {
         string bot_id = 2;
         string name = 3; // 指令名
         string desc = 4; // 指令描述
-        int32 type = 5; // 指令类型
+        int32 type = 5; // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
         string hint_text = 6; // 输入框提示文字
         string default_text = 7; // 输入框默认文字
         // int32 hidden/del_flag = 8; // 是否隐藏/删除,猜的,有误欢迎指正
