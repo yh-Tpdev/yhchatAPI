@@ -30,7 +30,7 @@ POST /v1/friend/apply
 
 ```JSONC
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1, // 请求状态码，1为正常，-1为群聊不存在，-9为已在群聊中
   "msg": "success" // 返回消息
 }
 ```
@@ -108,6 +108,36 @@ POST /v1/friend/agree-apply
 }
 ```
 
+## 忽略申请
+
+```http request
+POST /v1/friend/ignore-apply
+```
+
+### 请求头
+
+|名称|必须|备注|
+|-----|-----|-----|
+|token|是|无|
+
+### 请求体
+
+```JSONC
+{
+  "id": 123, // 申请ID
+  "ignore": 1
+}
+```
+
+### 响应体
+
+```JSONC
+{
+  "code": 1, // 请求状态码，1为正常
+  "msg": "success" // 返回消息
+}
+```
+
 ## 获取所有聊天对象
 
 ```http request
@@ -123,7 +153,7 @@ POST /v1/friend/address-book-list
 ### 请求体
 
 ```ProtoBuf
-number: "123123" // 请求标识ID，可以随便写
+md5: "123123" // 上次获取通讯录的md5，如果与服务器一致则返回空列表
 ```
 
 ::: details ProtoBuf数据结构
@@ -131,7 +161,7 @@ number: "123123" // 请求标识ID，可以随便写
 ```proto
 // 请求标识符
 message address_book_list_send {
-    string number = 2;
+    string md5 = 2;
 }
 ```
 
@@ -155,8 +185,10 @@ data {
     temp_text1 = 1 // 未知
     chat_name_up: "测试聊天对象名称" // 聊天对象名称
   }
-  // ...单个列表输出完成后，连带list_name一起重复
+  chat_type: 1
+  // ...单个列表输出完成后，连带list_name和chat_type一起重复
 }
+md5: "123123" // 通讯录的md5
 ```
 
 ::: details ProtoBuf数据结构
@@ -166,20 +198,23 @@ data {
 message address_book_list {
   Status status = 1;
   repeated Data data = 2;
+  string md5 = 3;
 
   // 列表数据
   message Data {
     string list_name = 1; // 聊天对象列表名称，为"用户"，"我加入的群聊"，"机器人"
     repeated Data_list data = 2;
+    int32 chat_type = 3;
 
     // 聊天对象数据
     message Data_list {
       string chat_id = 1; // 聊天对象ID
-      string name = 2; // 聊天对象名称
+      string remark = 2; // 聊天对象备注名称
       string avatar_url = 3; // 聊天对象头像url
       int32 permisson_level = 4; // 群权限等级(普通用户无此项(数值为0或无此项),群主100,管理员2),只有群列表才有此项
       bool noDisturb = 5; // 免打扰
       //int32 field6 = 6; // 未知
+      string name = 8; // 聊天对象真实名称
     }
   }
 }
