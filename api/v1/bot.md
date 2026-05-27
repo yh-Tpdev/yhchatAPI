@@ -1098,13 +1098,13 @@ POST /v1/bot/group-permission-edit
 POST /v1/bot/follower-list
 ```
 
-### 请求头
+请求头：
 
 | 名称  | 必须 | 备注 |
 | ----- | ---- | ---- |
 | token | 是   | 无   |
 
-### 请求体
+请求体：
 
 ```ProtoBuf
 data {
@@ -1132,7 +1132,7 @@ message list_follower {
 
 :::
 
-### 响应数据
+响应体：
 
 ```ProtoBuf
 status {
@@ -1146,10 +1146,9 @@ user {
     avatar_url: "https://..." // 头像URL
     is_vip: 0 // 是否为vip用户, 0-不为vip用户, 1-vip用户
   }
-  totol: 32 // 关注该机器人的用户总数
-}
 // 可以有多个
 // ...
+totol: 32 // 关注该机器人的用户总数
 ```
 
 ::: details ProtoBuf数据结构
@@ -1166,7 +1165,6 @@ message list_follower {
       string avatar_url = 4;
       int32 is_vip = 6;
     }
-  }
 }
 ```
 
@@ -1178,13 +1176,13 @@ message list_follower {
 POST /v1/bot/join-group-list
 ```
 
-### 请求头
+请求头：
 
 | 名称  | 必须 | 备注 |
 | ----- | ---- | ---- |
 | token | 是   | 无   |
 
-### 请求体
+请求体：
 
 ```ProtoBuf
 data {
@@ -1212,7 +1210,7 @@ message list_join_group {
 
 :::
 
-### 响应数据
+响应体：
 
 ```ProtoBuf
 status {
@@ -1224,11 +1222,10 @@ group {
     user_id: "123" // 群聊ID
     name: "测试群聊名称" // 群聊名字
     avatar_url: "https://..." // 头像URL
-  }
-  totol: 32 // 机器人加入的群聊总数
 }
 // 可以有多个
 // ...
+totol: 32 // 机器人加入的群聊总数
 ```
 
 ::: details ProtoBuf数据结构
@@ -1242,7 +1239,7 @@ message list_join_group {
     message Group {
         string id = 1;
         string name = 2;
-        string avatarUrl = 3;
+        string avatar_url = 3;
     }
 
 }
