@@ -208,3 +208,50 @@ POST /v1/live/get-calling
 ```
 
 :::
+
+## 获取推流信息
+
+POST /v1/live/stream-info
+
+请求头:
+
+| 名称  | 必须 |   备注   |
+| ----- | ---- | ------- |
+| token | 是   | VIP 用户 |
+
+请求体：
+
+```JSON
+{ "roomId":"11451419180123456abcdefe0fed533" } // 要获取推流码的房间 ID
+```
+
+响应体:
+
+::: tabs
+
+@tab:active 正常响应
+
+```JSON
+{
+  "code": 1,
+  "data": {
+    "streamKey": "abcdef", // 推流码
+    "url": "https://live-push.jwzhd.com/whip" // 推流地址
+  },
+  "msg": "success"
+}
+```
+
+@tab 不带 token/无效 token
+
+```JSON
+{ "code":-101, "msg":"未登录" }
+```
+
+@tab 非 VIP 用户的 token
+
+```JSON
+{ "code":-1, "msg":"功能仅限VIP用户使用" }
+```
+
+:::
