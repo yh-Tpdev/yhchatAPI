@@ -12,6 +12,7 @@
 - [API](/api/index.md)
 - [Bot API](/api/bot/index.md)
 - [bot](/api/bot/v1/bot.md)
+- [url_scheme](/api/url_scheme.md)
 - [v1 API](/api/v1/index.md)
 - [beta](/api/v1/beta.md)
 - [bot](/api/v1/bot.md)
