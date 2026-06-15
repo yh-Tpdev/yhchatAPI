@@ -10,9 +10,9 @@ GET /v1/document/menus
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "menu": [
       {
@@ -43,7 +43,7 @@ GET /v1/document/menus
     // ...
     ]
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -53,15 +53,15 @@ GET /v1/document/detail
 
 请求参数：
 
-| 名称       | 必须 | 备注                           |
-| ---------- | ---- | ------------------------------ |
+| 名称       | 必须 | 备注                      |
+| ---------- | ---- | ------------------------- |
 | documentId | 是   | 大小写敏感,类型必须是 int |
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "detail": {
       "id": 4, // 文档id
@@ -78,6 +78,6 @@ GET /v1/document/detail
       "remark": "11" // 不知道
     }
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```

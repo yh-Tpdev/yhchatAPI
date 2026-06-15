@@ -10,9 +10,9 @@ GET /v1/rss/recommend-list
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "list": [
       {
@@ -38,7 +38,7 @@ GET /v1/rss/recommend-list
     ],
     "total": 28 // RSS 推荐总数
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -48,7 +48,7 @@ POST /v1/rss/recommend-apply
 
 请求体:
 
-```JSONC
+```JSON
 {
     "title": "轻雨Purainity的小站", // 网站标题
     "rssUrl": "https://jibukeshi.dpdns.org/rss.xml", // RSS 地址
@@ -59,7 +59,7 @@ POST /v1/rss/recommend-apply
 
 响应体：
 
-```JSONC
+```JSON
 {
   "code": 1, // 请求状态码，1为正常
   "msg": "success" // 返回消息

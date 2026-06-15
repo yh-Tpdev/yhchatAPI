@@ -10,7 +10,7 @@ POST /v1/community/c/following-ba-list
 
 请求体：
 
-```JSONC
+```JSON
 {
   "size": 100, // 一页返回的数量
   "page": 1 // 页码
@@ -19,7 +19,7 @@ POST /v1/community/c/following-ba-list
 
 响应体：
 
-```JSONC
+```JSON
 {
   "code": 1, // 请求状态码，1为正常
   "data": {
@@ -50,7 +50,7 @@ POST /v1/community/posts/post-list
 
 请求体：
 
-```JSONC
+```JSON
 {
   "typ": 1, // 典型值
   "baId": 41, // 分区 id
@@ -61,7 +61,7 @@ POST /v1/community/posts/post-list
 
 响应体：
 
-```JSONC
+```JSON
 {
   "code": 1, // 请求状态码，1为正常
   "data": {
@@ -118,7 +118,7 @@ POST /v1/community/c/info
 
 请求体：
 
-```JSONC
+```JSON
 {
   "id": 41 // 分区 id
 }
@@ -126,9 +126,9 @@ POST /v1/community/c/info
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "ba": {
       "id": 41, // 分区 id
@@ -144,6 +144,6 @@ POST /v1/community/c/info
       "isFollowed": "0" // 你是否关注了此分区（1为已关注，0为未关注）
     }
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```

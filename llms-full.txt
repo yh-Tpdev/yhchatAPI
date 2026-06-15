@@ -10442,15 +10442,15 @@ POST /v1/bot/bot-info
 
 请求体:
 
-```JSONC
+```JSON
 {
-  "botId": "13972254" // 你要查询bot的ID
+  "botId": "13972254" // 你要查询 bot 的 ID
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
   "code": 1,
   "data": {
@@ -10481,7 +10481,7 @@ POST /v1/bot/bot-info
       }
     }
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -10497,7 +10497,7 @@ POST /v1/bot/bot-link-reset
 
 请求体：
 
-```JSONC
+```JSON
 {
   "botId": "123", // 机器人ID
 }
@@ -10505,7 +10505,7 @@ POST /v1/bot/bot-link-reset
 
 响应体：
 
-```JSONC
+```JSON
 {
   "code": 1, // 请求状态码，1为正常
   "msg": "success" // 返回消息
@@ -10527,7 +10527,7 @@ GET /v1/common/get-version
 
 响应体：
 
-```JSONC
+```JSON
 {
   "code": 1,
   "data": {
@@ -10544,7 +10544,7 @@ GET /v1/common/get-version
     "windowsVersion": "1.6.39", // Windows最新版本号
     "windowsVersionDate": "2025/11/02" // Windows最新版本更新时间
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -10563,7 +10563,7 @@ POST /v1/community/c/following-ba-list
 
 请求体：
 
-```JSONC
+```JSON
 {
   "size": 100, // 一页返回的数量
   "page": 1 // 页码
@@ -10572,7 +10572,7 @@ POST /v1/community/c/following-ba-list
 
 响应体：
 
-```JSONC
+```JSON
 {
   "code": 1, // 请求状态码，1为正常
   "data": {
@@ -10603,7 +10603,7 @@ POST /v1/community/posts/post-list
 
 请求体：
 
-```JSONC
+```JSON
 {
   "typ": 1, // 典型值
   "baId": 41, // 分区 id
@@ -10614,7 +10614,7 @@ POST /v1/community/posts/post-list
 
 响应体：
 
-```JSONC
+```JSON
 {
   "code": 1, // 请求状态码，1为正常
   "data": {
@@ -10671,7 +10671,7 @@ POST /v1/community/c/info
 
 请求体：
 
-```JSONC
+```JSON
 {
   "id": 41 // 分区 id
 }
@@ -10679,9 +10679,9 @@ POST /v1/community/c/info
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "ba": {
       "id": 41, // 分区 id
@@ -10697,7 +10697,7 @@ POST /v1/community/c/info
       "isFollowed": "0" // 你是否关注了此分区（1为已关注，0为未关注）
     }
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -10716,9 +10716,9 @@ GET /v1/document/menus
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "menu": [
       {
@@ -10749,7 +10749,7 @@ GET /v1/document/menus
     // ...
     ]
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -10759,15 +10759,15 @@ GET /v1/document/detail
 
 请求参数：
 
-| 名称       | 必须 | 备注                           |
-| ---------- | ---- | ------------------------------ |
+| 名称       | 必须 | 备注                      |
+| ---------- | ---- | ------------------------- |
 | documentId | 是   | 大小写敏感,类型必须是 int |
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "detail": {
       "id": 4, // 文档id
@@ -10784,7 +10784,7 @@ GET /v1/document/detail
       "remark": "11" // 不知道
     }
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -10966,9 +10966,9 @@ GET /v1/rss/recommend-list
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "list": [
       {
@@ -10994,7 +10994,7 @@ GET /v1/rss/recommend-list
     ],
     "total": 28 // RSS 推荐总数
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -11004,7 +11004,7 @@ POST /v1/rss/recommend-apply
 
 请求体:
 
-```JSONC
+```JSON
 {
     "title": "轻雨Purainity的小站", // 网站标题
     "rssUrl": "https://jibukeshi.dpdns.org/rss.xml", // RSS 地址
@@ -11015,7 +11015,7 @@ POST /v1/rss/recommend-apply
 
 响应体：
 
-```JSONC
+```JSON
 {
   "code": 1, // 请求状态码，1为正常
   "msg": "success" // 返回消息
@@ -11669,6 +11669,7 @@ url: /contribution_guide.md
 3. 遵循[中文排版指南](https://github.com/aaranxu/chinese-copywriting-guidelines)\
    不要求遵循争议和推荐部分,标点符号的全角半角不强制要求遵循.
 4. 所写内容应能通过 VuePress 构建并且页面内容正常显示.
+5. commit 提交内容必须有意义.
 
 ## 如何贡献:
 
@@ -11676,7 +11677,7 @@ url: /contribution_guide.md
 2. 通过抓包等方式获取修改依据.
 3. Git clone Fork 后的仓库到本地后修改并提交或者是直接在 GitHub 网页编辑器(不推荐)修改.
 4. 测试是否能够正常构建.
-5. 提交更改到远程仓库
+5. 提交更改到远程仓库.
 6. 创建一个 Pull Request 提交更改.\
    请务必如实填写要求填写的内容,不符合要求可能会被打回.您可以到相关群聊询问审核人员请求审查和合并.
 

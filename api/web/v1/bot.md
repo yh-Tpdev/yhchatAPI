@@ -10,15 +10,15 @@ POST /v1/bot/bot-info
 
 请求体:
 
-```JSONC
+```JSON
 {
-  "botId": "13972254" // 你要查询bot的ID
+  "botId": "13972254" // 你要查询 bot 的 ID
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
   "code": 1,
   "data": {
@@ -49,7 +49,7 @@ POST /v1/bot/bot-info
       }
     }
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -65,7 +65,7 @@ POST /v1/bot/bot-link-reset
 
 请求体：
 
-```JSONC
+```JSON
 {
   "botId": "123", // 机器人ID
 }
@@ -73,7 +73,7 @@ POST /v1/bot/bot-link-reset
 
 响应体：
 
-```JSONC
+```JSON
 {
   "code": 1, // 请求状态码，1为正常
   "msg": "success" // 返回消息

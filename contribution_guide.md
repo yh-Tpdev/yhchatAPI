@@ -31,6 +31,7 @@ url: /contribution_guide.md
 3. 遵循[中文排版指南](https://github.com/aaranxu/chinese-copywriting-guidelines)\
    不要求遵循争议和推荐部分,标点符号的全角半角不强制要求遵循.
 4. 所写内容应能通过 VuePress 构建并且页面内容正常显示.
+5. commit 提交内容必须有意义.
 
 ## 如何贡献:
 
@@ -38,7 +39,7 @@ url: /contribution_guide.md
 2. 通过抓包等方式获取修改依据.
 3. Git clone Fork 后的仓库到本地后修改并提交或者是直接在 GitHub 网页编辑器(不推荐)修改.
 4. 测试是否能够正常构建.
-5. 提交更改到远程仓库
+5. 提交更改到远程仓库.
 6. 创建一个 Pull Request 提交更改.\
    请务必如实填写要求填写的内容,不符合要求可能会被打回.您可以到相关群聊询问审核人员请求审查和合并.
 
