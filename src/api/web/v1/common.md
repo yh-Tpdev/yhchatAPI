@@ -11,7 +11,7 @@ GET /v1/common/get-version
 
 响应体：
 
-```JSONC
+```JSON
 {
   "code": 1,
   "data": {
@@ -28,6 +28,6 @@ GET /v1/common/get-version
     "windowsVersion": "1.6.39", // Windows最新版本号
     "windowsVersionDate": "2025/11/02" // Windows最新版本更新时间
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```

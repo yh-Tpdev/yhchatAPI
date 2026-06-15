@@ -133,7 +133,7 @@ export default hopeTheme({
     },
 
     copyCode: {
-      showInMobile: true
+      showInMobile: true,
     },
 
     icon: {
