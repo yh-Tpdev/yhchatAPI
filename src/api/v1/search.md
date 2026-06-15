@@ -17,7 +17,7 @@ POST /v1/search/home-search
 
 请求体：
 
-```JSONC
+```JSON
 {
   "word": "114514" // 搜索关键词
 }
@@ -25,35 +25,35 @@ POST /v1/search/home-search
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "list": [
       {
         "title": "用户", // 类型标题
-        "list": null // 搜索用户，没有就显示null
+        "list": null // 搜索用户，没有就显示 null
       },
       {
         "title": "群组", // 类型标题
         "list": [
           {
-            "friendId": "114514", // 群聊id
-            "friendType": 2,  // 识别对象类别，1-用户，2-群聊，3-机器人
+            "friendId": "114514", // 群聊 id
+            "friendType": 2,  // 识别对象类别
             "nickname": "114514", // 群聊名字
             "name": "",
-            "avatarUrl": "https://chat-img.jwznb.com/ba7631819aaff2fc5799bbf6f279c606.jpg", // 群聊头像url
+            "avatarUrl": "https://chat-img.jwznb.com/ba7631819aaff2fc5799bbf6f279c606.jpg", // 群聊头像 url
             "hit": 1
           }
         ]
       },
       {
         "title": "机器人", // 类型标题
-        "list": null // 搜索机器人，没有就显示null
+        "list": null // 搜索机器人，没有就显示 null
       }
     ]
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -69,12 +69,12 @@ POST /v1/search/chat-search
 
 请求体：
 
-```JSONC
+```JSON
 {
   "word": "3598257", // 搜索词
-  "chatId": "test", // 对象ID
+  "chatId": "test", // 对象 ID
   "chatType": 2, // 对象类别
-  "type": "all", // 信息类别，1-文本，3-markdown，4-文件，6-文章，7-表情包，8-html
+  "type": "all", // 信息类别，1-文本，3-markdown，4-文件，6-文章，7-表情，8-html
   "size": 30, //
   "time": 9999999999999, // 涵盖信息时间戳，只返回此时间戳内的信息
   "direction":1 // 未知
@@ -83,15 +83,15 @@ POST /v1/search/chat-search
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "list": [
       {
-        "id": "123", // 信息ID
+        "id": "123", // 信息 ID
         "sequence": 123, // 第几条信息
-        "chatId": "123", // 信息所处对象ID
+        "chatId": "123", // 信息所处对象 ID
         "chatType": 0, // 未知，不是信息所处对象类别
         "name": "测试发送者名称", // 发送者名称
         "avatarUrl": "https://...",
@@ -103,6 +103,6 @@ POST /v1/search/chat-search
       // ...
      ]
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```

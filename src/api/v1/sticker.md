@@ -17,7 +17,7 @@ POST /v1/sticker/list
 
 响应体:
 
-```JSONC
+```JSON
 {
  "code": 1,
  "data": {
@@ -25,24 +25,25 @@ POST /v1/sticker/list
    {
     "id": 114514,
     "name": "表情包名称",
-    "createBy": "7356666", // 创建者ID
+    "createBy": "7356666", // 创建者 ID
     "createTime": 114514, // 创建时间戳
     "delFlag": 0, // 是否被删除
     "userCount": 2, // 使用人数
-    "hot": 0, // 表情包热度,不知道为啥全0
+    "hot": 0, // 表情包热度,不知道为啥全 0
     "uuid": "dddddddd-dddd-2333-1145-ddddddabcdef", // UUID
     "updateTime": 2333, // 更新时间戳
-    "sort": 0, // 分类?我这边都是0
+    "sort": 0, // 分类?我这边都是 0
     "stickerItems": [
      {
       "id": 114514,
       "name": "表情名称",
-      "url": "sticker/114514abcdd444456aaaaaaaaee0d454.jpg", // 表情包URL,需要前面加上 https://chat-img.jwznb.com/
-      "stickerPackId": 114514, // 所属表情包ID
-      "createBy": "7356666", // 创建者ID
+      "url": "sticker/114514abcdd444456aaaaaaaaee0d454.jpg", // 表情包 URL,需要前面加上 https://chat-img.jwznb.com/
+      "stickerPackId": 114514, // 所属表情包 ID
+      "createBy": "7356666", // 创建者 ID
       "createTime": 2333, // 更新时间戳
       "delFlag": 0
-     }
+     },
+     // ...
     ]
    }
   ]
@@ -63,36 +64,36 @@ POST /v1/sticker/detail
 
 请求体:
 
-```JSONC
+```JSON
 {
-  "id": 123 // 表情包ID
+  "id": 123 // 表情包 ID
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
     "code": 1,
     "data": {
         "stickerPack": {
-            "id": 894, // 表情包ID
+            "id": 894, // 表情包 ID
             "name": "图标梗", // 表情包名称
             "createBy": "9120256", // 创建者
             "createTime": 1730724963, // 创建时间(时间戳)
             "delFlag": 0,
             "userCount": 8, // 用户人数
-            "hot": 0, // 热度? 我这边抓到的都是0
-            "uuid": "216d7881-64ae-4409-aa0a-4f4d1a8f649d", // uuid
+            "hot": 0, // 热度? 我这边抓到的都是 0
+            "uuid": "216d7881-64ae-4409-aa0a-4f4d1a8f649d", // UUID
             "updateTime": 1754363209, // 更新时间
             "sort": 0, // 分类相关?
             "stickerItems": [
                 {
                     "id": 18951, // 表情ID
                     "name": "汇总部分", // 表情名称
-                    "url": "sticker/4599f91519364bcc2be6718c3915d388.jpg", // 表情URL,前面需加上 https://chat-img.jwznb.com/
-                    "stickerPackId": 894, // 所属表情包ID
-                    "createBy": "9120256", // 创建者ID
+                    "url": "sticker/4599f91519364bcc2be6718c3915d388.jpg", // 表情 URL,前面需加上 https://chat-img.jwznb.com/
+                    "stickerPackId": 894, // 所属表情包 ID
+                    "createBy": "9120256", // 创建者 ID
                     "createTime": 1730724991, // 创建时间
                     "delFlag": 0
                 },
@@ -100,8 +101,8 @@ POST /v1/sticker/detail
             ]
         },
         "user": {
-            "id": 56922, // 似乎是名称ID?
-            "user_id": "9120256", // 创建者用户ID
+            "id": 56922, // 似乎是名称 ID?
+            "user_id": "9120256", // 创建者用户 ID
             "nickname": "千米", // 创建者用户名
             "avatar_url": "https://uapis.cn/api/imgapi/bq/youshou.php" // 头像地址
         }
@@ -122,18 +123,18 @@ POST /v1/sticker/add
 
 请求体:
 
-```JSONC
+```JSON
 {
-  "id": 894 // 表情包ID
+  "id": 894 // 表情包 ID
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -149,18 +150,18 @@ POST /v1/sticker/remove-sticker-pack
 
 请求体:
 
-```JSONC
+```JSON
 {
-  "id": 123 // 要移除的表情包的ID
+  "id": 123 // 要移除的表情包的 ID
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -176,11 +177,11 @@ POST /v1/sticker/sort
 
 请求体:
 
-```JSONC
+```JSON
 {
   "sort": "[
     {
-      \"id\":\"123\", // 表情包ID
+      \"id\":\"123\", // 表情包 ID
       \"sort\":\"2\" // 排序,数字越大越靠前
     },
     {
@@ -192,13 +193,13 @@ POST /v1/sticker/sort
 }
 ```
 
-::: details 备注: 使用Python请求代码
+::: details 备注: 使用 Python 请求代码
 
 ```Python
 headers = {"token": token}
 sticker = [
             {
-              "id": "1","sort": "1", # 不知道为啥id前面是数值这里为啥变成了字符串,sort越大排序越靠前
+              "id": "1","sort": "1", # 不知道为啥 id 前面是数值这里为啥变成了字符串,sort 越大排序越靠前
             },
             {
               "id": "2","sort": "2"
@@ -213,9 +214,9 @@ print(response.text)
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```

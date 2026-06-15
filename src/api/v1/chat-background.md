@@ -19,7 +19,7 @@ POST /v1/chat-background/edit
 
 ### 请求体
 
-```JSONC
+```JSON
 {
   "userId": "用户 id",
   "chatId": "群聊 id", // 如果设置全部背景则填 all
@@ -29,10 +29,10 @@ POST /v1/chat-background/edit
 
 ### 响应体
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1 为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -50,9 +50,9 @@ POST /v1/chat-background/list
 
 ### 响应体
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1 为正常
+  "code": 1,
   "data": {
     "list": [
       {
@@ -67,6 +67,6 @@ POST /v1/chat-background/list
     // ...
     ]
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```

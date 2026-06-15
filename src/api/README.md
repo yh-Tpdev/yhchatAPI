@@ -18,7 +18,10 @@ title: API
 - 视频路由:
 - `https://chat-video1.jwznb.com/`
   
-云湖数据床地址需要请求头加上 `Referer: http://myapp.jwznb.com` 才可正常获取内容，否则会403.
+云湖数据床地址需要请求头加上 `Referer: http://myapp.jwznb.com` 才可正常获取内容，否则会403.  
+
+chat_type 聊天对象的类型: 1-用户, 2-群组, 3-机器人  
+content_type 信息类型: 1-文本，2-图片，3-markdown，4-文件，5-表单，6-文章，7-表情，8-html，11-语音，13-语音通话, 14-A2UI  
 :::
 
 ::: tip 如何让 LLM 写出可用性更高的代码
@@ -44,6 +47,8 @@ https://yh-api.yyyyt.top/llms-full.txt
 **请务必注意 protobuf 协议本身的特性.**
 **云湖账号的 Token 请务必小心对待不要泄露,不要将 token 硬编码到代码中.**
 ```
-::::
+
+:::
+
 
 <Catalog />

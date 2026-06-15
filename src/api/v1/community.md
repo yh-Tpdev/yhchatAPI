@@ -17,26 +17,26 @@ POST /v1/community/posts/create
 
 请求体:
 
-```JSONC
+```JSON
 {
-  "baId": 40, // 文章分区ID
-  "groupId": "123", // 文本引用群聊ID
+  "baId": 40, // 文章分区 ID
+  "groupId": "123", // 文本引用群聊 ID
   "title": "测试文章标题", // 文章标题
   "content": "测试文章内容", // 文章内容
-  "contentType": 1, // 文章内容类别，1-文本，2-markdown
-  "draftId": 123 // 草稿ID，若此值不为0则云湖会删除这里设定的草稿ID所对应的草稿
+  "contentType": 1, // 文章内容类别: 1-文本，2-markdown
+  "draftId": 123 // 草稿 ID，若此值不为 0 则云湖会删除这里设定的草稿 ID 所对应的草稿
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
-    "audioUrl": 123, // 文章ID
+    "audioUrl": 123, // 文章 ID
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -52,18 +52,18 @@ POST /v1/community/posts/delete
 
 请求体:
 
-```JSONC
+```JSON
 {
-  "postId": 123 // 文章ID
+  "postId": 123 // 文章 ID
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -79,20 +79,20 @@ POST /v1/community/posts/post-reward
 
 请求体:
 
-```JSONC
+```JSON
 {
-  "postId": 123, // 文章ID
-  "recvId": "123", // 接受用户ID
+  "postId": 123, // 文章 ID
+  "recvId": "123", // 接受用户 ID
   "amount": 1.0 // 打赏金币数
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -108,9 +108,9 @@ POST /v1/community/comment/comment-reward
 
 请求体:
 
-```JSONC
+```JSON
 {
-  "postId": 123, // 文章ID
+  "postId": 123, // 文章 ID
   "commentId": 123, // 打赏评论
   "amount": 1.0// 打赏金币数
 }
@@ -118,10 +118,10 @@ POST /v1/community/comment/comment-reward
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -137,18 +137,18 @@ POST /v1/community/posts/post-like
 
 请求体:
 
-```JSONC
+```JSON
 {
-  "id": 123, // 文章ID
+  "id": 123, // 文章 ID
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -164,18 +164,18 @@ POST /v1/community/posts/post-collect
 
 请求体:
 
-```JSONC
+```JSON
 {
-  "id": 123, // 文章ID
+  "id": 123, // 文章 ID
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -191,24 +191,24 @@ POST /v1/community/posts/edit
 
 请求体:
 
-```JSONC
+```JSON
 {
-  "postId": 123, // 文章ID
+  "postId": 123, // 文章 ID
   "title": "测试文章标题",
   "content": "测试文章内容", // 文章内容
-  "contentType": 2 // 文章内容类别，1-文本，2-markdown
+  "contentType": 2 // 文章内容类别: 1-文本，2-markdown
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
-    "id": 123 // 文章ID(不知道为什么要再返回一遍)
+    "id": 123 // 文章 ID(不知道为什么要再返回一遍)
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -224,10 +224,10 @@ POST /v1/community/posts/post-list
 
 请求体：
 
-```JSONC
+```JSON
 {
   "typ": 1, // 典型值
-  "baId": 41, // 分区id
+  "baId": 41, // 分区 ID
   "size": 20, // 尺寸
   "page": 1 // 页数
 }
@@ -235,18 +235,18 @@ POST /v1/community/posts/post-list
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "posts": [
       {
-        "id": 123, // 文章id
-        "baId": 41, // 分区id
-        "senderId": "114514", // 文章作者id
-        "senderNicknameId": 123, // 发送者昵称 Id
-        "senderAvatarId": 123, // 发送者头像 Id
-        "groupId": "", // 绑定该分区且从这个群聊发送文章的群聊id
+        "id": 123, // 文章 ID
+        "baId": 41, // 分区 ID
+        "senderId": "114514", // 文章作者 ID
+        "senderNicknameId": 123, // 发送者昵称 ID
+        "senderAvatarId": 123, // 发送者头像 ID
+        "groupId": "", // 绑定该分区且从这个群聊发送文章的群聊 ID
         "title": "我是标题", // 标题
         "contentType": 2, // 文章类型(2是Markdown，1是普通文本)
         "content": "文章内容部分预览",
@@ -259,26 +259,26 @@ POST /v1/community/posts/post-list
         "commentNum": 4, // 评论数量
         "collectNum": 0, // 收藏数量
         "amountNum": 0, // 投币数量
-        "senderNickname": "文章作者id",
-        "senderAvatar": "https://.。。", // 作者头像url
+        "senderNickname": "文章作者 ID",
+        "senderAvatar": "https://.。。", // 作者头像 URL
         "createTimeText": "2025-08-05 16:30:13", // 创建文章时间
-        "group": { // 以下是绑定该分区且从这个群聊发送文章的群聊id
+        "group": { // 以下是绑定该分区且从这个群聊发送文章的群聊 ID
           "id": 0, //
-          "groupId": "", // 群聊id
+          "groupId": "", // 群聊 ID
           "name": "", // 群聊名字
           "introduction": "", // 群聊简介
-          "createBy": "", // 群主id
+          "createBy": "", // 创建者 ID
           "createTime": 0, // 创建时间戳
-          "avatarId": 0, // 群聊头像id
+          "avatarId": 0, // 群聊头像 ID
           "del_flag": 0,
-          "avatarUrl": "", // 群聊头像url
+          "avatarUrl": "", // 群聊头像 URL
           "headcount": 0, // 群聊人数
           "readHistory": 0, // 是否开启新成员浏览历史信息（1为开启，0为关闭）
           "alwaysAgree": 0, // 是否直接进群（1为开启，0为关闭）
-          "categoryId": 0, // 群聊分类Id
+          "categoryId": 0, // 群聊分类 ID
           "category": "", // 群聊所属分类
           "private": 0, // 是否私有（1为开启，0为关闭）
-          "banId": 0, // 被禁言的id
+          "banId": 0, // 被禁言的 ID
           "gag": 0, // 是否禁言
           "gagBy": "", // 禁言者
           "msgTypeLimit": "" // 消息类型限制
@@ -286,13 +286,13 @@ POST /v1/community/posts/post-list
         "isLiked": "0", // 你有没有给这个文章点赞（1为是，0则不是）
         "isCollected": 0, // 你有没有收藏这个文章（1为是，0则不是）
         "isReward": 0, // 你有没有给这个文章投币 （1为是，0则不是）
-        "isVip": 0 // 你是不是vip（1为是，0则不是）
+        "isVip": 0 // 是否 vip（1为是，0则不是）
       }
     // ...
     ],
     "total": 360 // 已经加载的文章（共360篇文章）
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -308,22 +308,22 @@ POST /v1/community/ba/info
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "id": 41 // 分区id
+  "id": 41 // 分区 ID
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "ba": {
-      "id": 41, // 分区id
+      "id": 41, // 分区 ID
       "name": "云湖", // 分区名
-      "avatar": "https://chat-img2.jwznb.com/FoHHKnX-QNuD33-NnGWlq74xkgpg.webp", // 分区头像url
+      "avatar": "https://chat-img2.jwznb.com/FoHHKnX-QNuD33-NnGWlq74xkgpg.webp", // 分区头像 URL
       "delTime": 0, // 删除时间
       "createTime": 1665233353, // 创建时间戳
       "lastActive": 1754474179, // 上次活跃时间戳
@@ -331,10 +331,10 @@ POST /v1/community/ba/info
       "postNum": 9656, // 该分区的文章数量
       "groupNum": 55, // 绑定该分区的群聊数量
       "createTimeText": "2022-10-08 20:49:13", // 分区创建时间
-      "isFollowed": "1" // 你是否关注了此分区（1为已关注，0为未关注）
+      "isFollowed": "1" // 是否关注了此分区（1为已关注，0为未关注）
     }
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -350,7 +350,7 @@ POST /v1/community/ba/following-ba-list
 
 请求体：
 
-```JSONC
+```JSON
 {
   "typ": 2, // 类型（1-关注, 2-热门, 3-我的, 4-全部）
   "size": 20, // 排序
@@ -360,15 +360,15 @@ POST /v1/community/ba/following-ba-list
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "ba": [
       {
-        "id": 41, // 分区id
+        "id": 41, // 分区 ID
         "name": "云湖", // 分区名字
-        "avatar": "https://chat-img2.jwznb.com/FoHHKnX-QNuD33-NnGWlq74xkgpg.webp", // 分区头像url
+        "avatar": "https://chat-img2.jwznb.com/FoHHKnX-QNuD33-NnGWlq74xkgpg.webp", // 分区头像 URL
         "delTime": 0, // 删除时间
         "createTime": 1665233353, // 创建时间
         "lastActive": 1754474179, // 上次活跃时间
@@ -381,7 +381,7 @@ POST /v1/community/ba/following-ba-list
     ],
     "total": 11 // 总共的分区数量（共11个）
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -397,7 +397,7 @@ POST /v1/community/reward-record
 
 请求体：
 
-```JSONC
+```JSON
 {
   "typ": "post", // 类型（post-文章,comment-评论）
   "size": 20, // 尺寸
@@ -407,29 +407,29 @@ POST /v1/community/reward-record
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "rewards": [
       {
-        "id": 123, // 打赏id
-        "senderId": "123", // 打赏者id
-        "recvId": "123", // 文章作者id
-        "postId": 123, // 文章id
-        "commentId": 123, // 评论id
+        "id": 123, // 打赏 ID
+        "senderId": "123", // 打赏者 ID
+        "recvId": "123", // 文章作者 ID
+        "postId": 123, // 文章 ID
+        "commentId": 123, // 评论 ID
         "amount": 0.01, // 打赏者减少金币的数量
         "recvAmount": 0.01, // 收到的金币数量
         "createTime": 1753427517,
         "reason": "打赏文章扣金币", // 扣大赏者金币原因
         "remark": "", // 备注
         "post": {
-          "id": 123, // 文章id
-          "baId": 41,  // 分区id
-          "senderId": "123", // 文章作者id
-          "senderNicknameId": 123, // 发送者名字id
-          "senderAvatarId": 84, // 发送者头像id
-          "groupId": "", // 文章关联群组id
+          "id": 123, // 文章 ID
+          "baId": 41,  // 分区 ID
+          "senderId": "123", // 文章作者 ID
+          "senderNicknameId": 123, // 发送者名称 ID
+          "senderAvatarId": 84, // 发送者头像 ID
+          "groupId": "", // 文章关联群组的 ID
           "title": "测试文章标题", // 文章标题
           "contentType": 1, // 文章类型（1-Markdown，0-普通文章）
           "delTime": 0, // 删除时间戳
@@ -441,15 +441,15 @@ POST /v1/community/reward-record
           "collectNum": 6, // 收藏数量
           "amountNum": 0.01, // 文章投币数量
           "senderNickname": "测试打赏者名称", // 文章作者昵称
-          "senderAvatar": "https://...", // 文章作者头像url
+          "senderAvatar": "https://...", // 文章作者头像 URL
           "createTimeText": "2025-07-05 21:21:47", // 创建文章时间
           "auditStatus": 0
         },
         "sender": {
-          "id": 106634, // 打赏id
-          "user_id": "123", // 打赏者id
+          "id": 106634, // 打赏 ID
+          "user_id": "123", // 打赏者 ID
           "nickname": "测试打赏者昵称", // 打赏者昵称
-          "avatar_url": "https://..." // 打赏者头像url
+          "avatar_url": "https://..." // 打赏者头像 URL
         },
         "comment": {
           "id": 0,
@@ -475,7 +475,7 @@ POST /v1/community/reward-record
     ],
     "total": 1 // 总共的记录
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -491,20 +491,20 @@ POST /v1/community/comment/comment
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "postId": 123, // 文章id
-  "commentId": 123, // 评论id（若直接评论文章那id=0）
+  "postId": 123, // 文章 ID
+  "commentId": 123, // 评论 ID（若直接评论文章那 id=0）
   "content": "🤣" // 评论内容
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -520,9 +520,9 @@ POST /v1/community/comment/comment-list
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "postId": 31153, // 文章id
+  "postId": 31153, // 文章 ID
   "size": 10, // 尺寸
   "page": 1 // 页数
 }
@@ -530,18 +530,18 @@ POST /v1/community/comment/comment-list
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "comments": [
       {
-        "id": 123, // 评论id
-        "postId": 123, // 文章id
-        "parentId": 0, // 父id
-        "senderId": "114514", //发送者id
-        "sender_nicknameId": 123, // 发送者名称id
-        "sender_avatarUd": 123, // 发送者头像id
+        "id": 123, // 评论 ID
+        "postId": 123, // 文章 ID
+        "parentId": 0, // 父 ID
+        "senderId": "114514", // 发送者 ID
+        "sender_nicknameId": 123, // 发送者名称 ID
+        "sender_avatarUd": 123, // 发送者头像 ID
         "content": "？", // 评论内容
         "delTime": 0, // 删除时间戳
         "createTime": 1754746982, // 发送时间戳
@@ -551,7 +551,7 @@ POST /v1/community/comment/comment-list
         "auditStatus": 0, // 审核状态
         "replies": [], // 评论内容
         "senderNickname": "测试评论发送者名称", // 发送者昵称
-        "senderAvatar": "https://...", // 发送者头像url
+        "senderAvatar": "https://...", // 发送者头像 URL
         "createTimeText": "2025-08-09 21:43:02", // 评论时间
         "isLiked": "0", // 是否点赞(1-是，0-否)
         "isReward": 0, // 是否投币(1-是，0-否)
@@ -562,7 +562,7 @@ POST /v1/community/comment/comment-list
     "isAdmin": 0, // 判断你是否为管理员(1/是，2-否)
     "total": 3 // 总共评论数量(3个)
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -578,7 +578,7 @@ POST /v1/community/search
 
 请求体：
 
-```JSONC
+```JSON
 {
   "typ": 3, // 未知
   "keyword": "123", // 关键词文本
@@ -589,21 +589,21 @@ POST /v1/community/search
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "ba": [],
       "posts": [
         {
-          "id": 30315, // 文章ID
-          "baId": 43, // 文章所属分区ID
-          "senderId": "123", // 文章发送者ID
-          "senderNicknameId": 123, // 文章发送者名称ID
-          "senderAvatarId": 123, // 文章发送者头像ID
-          "groupId": "", // 文章引用群聊ID
+          "id": 30315, // 文章 ID
+          "baId": 43, // 文章所属分区 ID
+          "senderId": "123", // 文章发送者 ID
+          "senderNicknameId": 123, // 文章发送者名称 ID
+          "senderAvatarId": 123, // 文章发送者头像 ID
+          "groupId": "", // 文章引用群聊 ID
           "title": "测试文章标题", // 文章标题
-          "contentType": 2, // 文章内容类别，1-文本，2-Markdown
+          "contentType": 2, // 文章内容类别: 1-文本，2-markdown
           "content": "测试文章内容", // 文章内容
           "delTime": 0, // 未知
           "createTime": 1749736140, // 文章创建时间戳
@@ -639,7 +639,7 @@ POST /v1/community/search
             "msgTypeLimit": "" // 未知
           },
         "ba": {
-          "id": 123, // 文章所处分区ID
+          "id": 123, // 文章所处分区 ID
           "name": "测试文章所处分区名称", // 文章所处分区名称
           "avatar": "https://...", // 文章所处分区头像
           "delTime": 0, // 未知
@@ -657,7 +657,7 @@ POST /v1/community/search
       // ...
       ]
     },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -673,7 +673,7 @@ POST /v1/community/set-black-list
 
 请求体：
 
-```JSONC
+```JSON
 {
   "isAdd": 0, // 0-取消屏蔽，1-屏蔽
   "authorId": "123"
@@ -682,10 +682,10 @@ POST /v1/community/set-black-list
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -701,7 +701,7 @@ POST /v1/community/black-list
 
 请求体：
 
-```JSONC
+```JSON
 {
   "size": 20, // 返回文章数量
   "page": 1 // 页数
@@ -710,14 +710,14 @@ POST /v1/community/black-list
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "list": [
       {
-        "id": 0, // 屏蔽ID
-        "user_id": "123", // 屏蔽用户ID
+        "id": 0, // 屏蔽 ID
+        "user_id": "123", // 屏蔽用户 ID
         "nickname": "测试屏蔽用户", // 屏蔽用户名称
         "avatar_url": "https://..." // 屏蔽用户头像
       }
@@ -725,7 +725,7 @@ POST /v1/community/black-list
     ],
     "total": 1 // 屏蔽用户数
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -741,22 +741,22 @@ POST /v1/community/posts/post-detail
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "id": 31622 //文章id
+  "id": 31622 //文章 ID
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "ba": {
-      "id": 41, // 文章分区id
+      "id": 41, // 文章分区 ID
       "name": "云湖", // 分区名称
-      "avatar": "https://chat-img2.jwznb.com/FoHHKnX-QNuD33-NnGWlq74xkgpg.webp", // 作者头像url
+      "avatar": "https://chat-img2.jwznb.com/FoHHKnX-QNuD33-NnGWlq74xkgpg.webp", // 作者头像 URL
       "delTime": 0, // 删除时间(戳)
       "createTime": 1665233353, // 文章创建时间戳
       "lastActive": 1757794419, // 上次活跃时间戳
@@ -768,12 +768,12 @@ POST /v1/community/posts/post-detail
     },
     "isAdmin": 0, // 文章作者是否为管理员
     "post": {
-      "id": 123, // 文章id
-      "baId": 41, // 该文章所处的分区id
-      "senderId": "7384288", // 文章作者id
+      "id": 123, // 文章 ID
+      "baId": 41, // 该文章所处的分区 ID
+      "senderId": "7384288", // 文章作者 ID
       "senderNicknameId": 123, // 文章作者名称id
       "senderAvatarId": 123, // 文章作者头像id
-      "groupId": "", // 该文章所处的群聊id
+      "groupId": "", // 该文章所处的群聊 ID
       "title": "文章标题", // 文章标题
       "contentType": 2, // 文章类型，1-普通文字，2-Markdown
       "content": "文章内容", // 文章内容
@@ -789,11 +789,11 @@ POST /v1/community/posts/post-detail
       "isSticky": 0, // 置顶时间戳，若不是置顶则为0
       "amountNum": 0, // 文章投币数量
       "senderNickname": "作者名称", // 文章作者名称
-      "senderAvatar": "https://c...", // 文章作者头像url
+      "senderAvatar": "https://c...", // 文章作者头像 URL
       "createTimeText": "2025-09-13 17:29:14", // 文章发送时间
       "group": { // 该文章下绑定的群聊信息
         "id": 0, // 会话类型id
-        "groupId": "", // 群聊id
+        "groupId": "", // 群聊 ID
         "name": "", // 群聊名称
         "introduction": "", // 群聊简介
         "createBy": "", // 该群群主id
@@ -813,9 +813,9 @@ POST /v1/community/posts/post-detail
         "msgTypeLimit": "" // 群聊消息类型限制
       },
       "ba": { // 分区相关信息
-        "id": 41, // 该文章所属分区id
+        "id": 41, // 该文章所属分区 ID
         "name": "云湖", // 分区名称
-        "avatar": "https://chat-img.jwznb.com/1665235278282.2976yunhu192.png", // 分区头像url
+        "avatar": "https://chat-img.jwznb.com/1665235278282.2976yunhu192.png", // 分区头像 URL
         "delTime": 0, // 分区删除时间戳
         "createTime": 1665233353, // 分区创建时间戳
         "lastActive": 1757794419, // 分区上次活跃时间戳
@@ -829,7 +829,7 @@ POST /v1/community/posts/post-detail
       "isVip": 0 // 文章作者是否为vip，0-没有，1-有
     }
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -845,7 +845,7 @@ POST /v1/community/posts/my-post-list
 
 请求体：
 
-```JSONC
+```JSON
 {
   "size": 20, // 显示文章数量
   "page": 1 // 页数
@@ -854,18 +854,18 @@ POST /v1/community/posts/my-post-list
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1,  // 请求状态码，1为正常
+  "code": 1, 
   "data": {
     "posts": [ // 帖子相关
       {
-        "id": 123, // 文章id
-        "baId": 49, // 文章所属分区id
+        "id": 123, // 文章 ID
+        "baId": 49, // 文章所属分区 ID
         "senderId": "1659829", // 文章作者
         "senderNicknameId": 123, // 作者名称id
         "senderAvatarId": 123, // 作者头像id
-        "groupId": "", // 文章所属群聊id
+        "groupId": "", // 文章所属群聊 ID
         "title": "test", // 文章标题
         "contentType": 1, // 文章类型，1-普通文字，2-Markdown
         "content": "内容", // 文章内容
@@ -882,18 +882,18 @@ POST /v1/community/posts/my-post-list
         "amountNum": 0, // 文章投币数量
         "senderNickname": "作者", // 文章作者名称
         "auditStatus": 0, // 审核状态，0-通过，1-不通过
-        "senderAvatar": "https://...", // 文章作者头像url
+        "senderAvatar": "https://...", // 文章作者头像 URL
         "createTimeText": "2025-09-14 10:47:58", // 文章发布时间
         "group": { // 文章绑定群聊相关
           "id": 0, // 文章所属群聊的类型id
-          "groupId": "", // 文章所属群聊id
+          "groupId": "", // 文章所属群聊 ID
           "name": "", // 群聊名称
           "introduction": "", // 群聊简介
           "createBy": "", // 群聊群主id
           "createTime": 0, // 群聊创建时间戳
-          "avatarId": 0, // 群聊头像id
+          "avatarId": 0, // 群聊头像 ID
           "del_flag": 0,
-          "avatarUrl": "", // 群聊头像url
+          "avatarUrl": "", // 群聊头像 URL
           "headcount": 0, // 群聊人数
           "readHistory": 0, // 是否开启聊天历史记录，0-没有，1-开了
           "alwaysAgree": 0, // 新成员是否直接进入群聊，0-没有，1-开了
@@ -929,9 +929,9 @@ POST /v1/community/ba/group-list
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "baId": 41, //分区id
+  "baId": 41, //分区 ID
   "size": 10, // 分页大小
   "page": 1 // 页数
 }
@@ -939,14 +939,14 @@ POST /v1/community/ba/group-list
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1,  // 请求状态码，1为正常
+  "code": 1, 
   "data": {
     "groups": [
       {
         "id": 10497, // 群聊创建id
-        "groupId": "554470989", // 群聊id
+        "groupId": "554470989", // 群聊 ID
         "name": "这个是群聊", // 群聊名称
         "introduction": "这个是介绍", // 群聊简介
         "createBy": "6016104", // 群聊创建者id(群主id)
@@ -1010,7 +1010,7 @@ POST /v1/community/ba/forward
 
 请求体：
 
-```JSONC
+```JSON
 {
   "baId": 0,
   "receive": [
@@ -1025,10 +1025,10 @@ POST /v1/community/ba/forward
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -1044,9 +1044,9 @@ POST /v1/community/ba/manage
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "baId": 0, // 分区ID
+  "baId": 0, // 分区 ID
   "visibleRange": 0, // 分区可见状态，0-所有人可见，1-只有分区所有者可见
   "publishAuthority": 0 // 分区开放度，0-所有人都可以发文章和评论，1-仅分区所有者可以发文章任何人都可以评论，2-仅分区所有者可以发文章和评论
 }
@@ -1054,10 +1054,10 @@ POST /v1/community/ba/manage
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -1073,7 +1073,7 @@ POST /v1/community/ba/create
 
 请求体：
 
-```JSONC
+```JSON
 {
   "name": "1111111111", // 分区名称，最多10字
   "avatar": "https://..." // 分区头像
@@ -1082,13 +1082,13 @@ POST /v1/community/ba/create
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
-    "id": 0 // 分区ID
+    "id": 0 // 分区 ID
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -1104,9 +1104,9 @@ POST /v1/community/ba/edit
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "baId": 0, // 分区ID
+  "baId": 0, // 分区 ID
   "name": "1111111111", // 分区名称，最多10字
   "avatar": "https://..." // 分区头像
 }
@@ -1114,10 +1114,10 @@ POST /v1/community/ba/edit
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -1133,18 +1133,18 @@ POST /v1/community/ba/delete
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "baId": 0 // 分区ID
+  "baId": 0 // 分区 ID
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -1160,9 +1160,9 @@ POST /v1/community/posts/create-draft
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "baId": 0, // 草稿所在分区ID
+  "baId": 0, // 草稿所在分区 ID
   "title": "测试完整草稿标题", // 草稿标题
   "content": "测试文章草稿内容", // 草稿内容
   "contentType": 1, // 草稿类别，1-文本，2-Markdown
@@ -1172,13 +1172,13 @@ POST /v1/community/posts/create-draft
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "id": 123 // 草稿ID
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -1194,26 +1194,26 @@ POST /v1/community/posts/get-draft
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "baId": 0, // 草稿所处文章分区ID，一般为0
+  "baId": 0, // 草稿所处文章分区 ID，一般为0
   "draftId": 123 // 草稿ID
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "posts": { // 帖子相关
-      "id": 123, // 文章id
-      "baId": 41, // 文章所属分区id
+      "id": 123, // 文章 ID
+      "baId": 41, // 文章所属分区 ID
       "senderId": "123", // 文章作者
       "senderNicknameId": 123, // 作者名称id
       "senderAvatarId": 123, // 作者头像id
-      "groupId": "", // 文章所属群聊id
+      "groupId": "", // 文章所属群聊 ID
       "title": "test", // 文章标题
       "contentType": 1, // 文章类型，1-普通文字，2-Markdown
       "content": "内容", // 文章内容
@@ -1229,18 +1229,18 @@ POST /v1/community/posts/get-draft
       "isSticky": 0, // 置顶时间戳，若不是置顶则为0
       "amountNum": 0, // 文章投币数量
       "senderNickname": "作者", // 文章作者名称
-      "senderAvatar": "https://...", // 文章作者头像url
+      "senderAvatar": "https://...", // 文章作者头像 URL
       "createTimeText": "2025-09-14 10:47:58", // 文章发布时间
       "group": { // 文章绑定群聊相关
       "id": 0, // 文章所属群聊的类型id
-      "groupId": "", // 文章所属群聊id
+      "groupId": "", // 文章所属群聊 ID
       "name": "", // 群聊名称
       "introduction": "", // 群聊简介
       "createBy": "", // 群聊群主id
       "createTime": 0, // 群聊创建时间戳
-      "avatarId": 0, // 群聊头像id
+      "avatarId": 0, // 群聊头像 ID
       "del_flag": 0,
-      "avatarUrl": "", // 群聊头像url
+      "avatarUrl": "", // 群聊头像 URL
       "headcount": 0, // 群聊人数
       "readHistory": 0, // 是否开启聊天历史记录，0-没有，1-开了
       "alwaysAgree": 0, // 新成员是否直接进入群聊，0-没有，1-开了
@@ -1258,7 +1258,7 @@ POST /v1/community/posts/get-draft
     "isVip": 0 // 暂时不清楚
     }
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -1274,7 +1274,7 @@ POST /v1/community/posts/cancel-draft
 
 请求体：
 
-```JSONC
+```JSON
 {
   "draftId": 123 // 草稿ID
 }
@@ -1282,10 +1282,10 @@ POST /v1/community/posts/cancel-draft
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -1301,19 +1301,19 @@ POST /v1/community/ba/user-follow-ba
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "baId": 45, // 分区id
+  "baId": 45, // 分区 ID
   "followSource": 2
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -1329,18 +1329,18 @@ POST /v1/community/ba/user-unfollow-ba
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "baId": 45, // 分区id
+  "baId": 45, // 分区 ID
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -1356,18 +1356,18 @@ POST /v1/community/posts/edit-sticky
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "postId": 45008 // 文章id（如果已经置顶了，则会取消置顶）
+  "postId": 45008 // 文章 ID（如果已经置顶了，则会取消置顶）
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -1383,9 +1383,9 @@ POST /v1/community/ba/follower-list
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "id": 115, // 分区id
+  "id": 115, // 分区 ID
   "size": 20, // 每页显示的数量
   "page": 1, // 第1页
   "memberName": "" // 搜索关注者的关键词
@@ -1394,28 +1394,28 @@ POST /v1/community/ba/follower-list
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "followers": [
       {
         "id": 11930, //关注id（应该是）
-        "baId": 115, // 分区id
-        "userId": "1234567", // 关注者用户id
+        "baId": 115, // 分区 ID
+        "userId": "1234567", // 关注者用户 ID
         "delTime": 0,
         "followSource": 2,
         "createTime": 1763132265, // 关注时间戳
         "userLevel": 0, // 关注者等级（0-普通，2-分区管理员）
         "nickname": "是个人", // 关注者名称
         "avatarUrl": "https://chat-img.jwznb.com/6900488d625d48ac45ba34eff5b1246c.jpg", // 关注者头像url
-        "vipUserid": "1234567", // 关注者vip用户id
+        "vipUserid": "1234567", // 关注者vip用户 ID
         "vipEndTime": 1765728069 // vip结束时间戳
       }
     ],
     "total": 1 // 总关注者数量
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -1431,20 +1431,20 @@ POST /v1/community/ba/manage-setting
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "baId": 115, // 分区id
-  "userId": "1234567", // 用户id
+  "baId": 115, // 分区 ID
+  "userId": "1234567", // 用户 ID
   "userLevel": 2 // 关注者(用户)等级（0-普通，2-分区管理员）
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -1460,27 +1460,27 @@ POST /v1/community/ba/list-by-create
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "userId": "1234567" // 用户id
+  "userId": "1234567" // 用户 ID
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "ba": [
       {
-        "id": 50, // 分区id
+        "id": 50, // 分区 ID
         "name": "123", // 分区名称
-        "avatar": "https://..." // 分区头像url
+        "avatar": "https://..." // 分区头像 URL
       }
     ]
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -1496,7 +1496,7 @@ POST /v1/community/posts/post-list-recommend
 
 请求体：
 
-```JSONC
+```JSON
 {
  "size":1, // 每页的文章数量
  "page":2 // 页数
@@ -1505,18 +1505,18 @@ POST /v1/community/posts/post-list-recommend
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "posts": [
       {
-        "id": 29950, // 文章id
-        "baId": 41, // 文章所属分区id
-        "senderId": "1234567", // 文章作者id
-        "senderNicknameId": 127504, // 作者昵称id
-        "senderAvatarId": 32537, // 作者头像id
-        "groupId": "", // 文章所属群聊id
+        "id": 29950, // 文章 ID
+        "baId": 41, // 文章所属分区 ID
+        "senderId": "1234567", // 文章作者 ID
+        "senderNicknameId": 127504, // 作者昵称 ID
+        "senderAvatarId": 32537, // 作者头像 ID
+        "groupId": "", // 文章所属群聊 ID
         "title": "测试", // 文章标题
         "contentType": 2, // 文章类型，1-普通文字，2-Markdown
         "content": "如果缺少您所在的城市，欢迎反馈添加。", // 文章部分内容
@@ -1534,7 +1534,7 @@ POST /v1/community/posts/post-list-recommend
         "auditStatus": 0, // 审核状态
         "delBy": "",
         "senderNickname": "昵称", // 作者昵称
-        "senderAvatar": "https://chat-img.jwznb.com/xxx.jpg", // 作者头像url
+        "senderAvatar": "https://chat-img.jwznb.com/xxx.jpg", // 作者头像 URL
         "createTimeText": "",
         "group": {
           "id": 0,
@@ -1571,6 +1571,6 @@ POST /v1/community/posts/post-list-recommend
     ],
     "total": 3933 // 总文章数量
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
