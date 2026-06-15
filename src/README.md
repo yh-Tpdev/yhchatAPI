@@ -2,7 +2,7 @@
 home: true
 icon: house
 title: 主页
-heroImage: https://theme-hope-assets.vuejs.press/logo.svg
+heroImage: /logo.webp
 bgImage: /assets/Hiro.avif
 bgImageStyle:
   background-attachment: fixed

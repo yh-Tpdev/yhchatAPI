@@ -13,8 +13,8 @@ Proto 文件中的 Status 未特别备注均为下面内容:
 
 ```proto
 message Status {
-    uint64 number = 1; // 不知道干啥的,可能是请求ID
-    uint64 code = 2; // 状态码,1为正常
+    uint64 request_id = 1; // 请求 ID
+    uint64 code = 2; // 状态码,1 为正常
     string msg = 3; // 返回消息
 }
 ```
@@ -23,8 +23,8 @@ message Status {
 
 ```JSONC
 {
-    "code":1, // 返回状态码
-    "msg":"success" //返回状态信息
+    "code":1, // 返回状态码,1 为正常
+    "msg":"success" //返回状态消息
 }
 ```
 

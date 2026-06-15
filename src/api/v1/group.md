@@ -18,7 +18,7 @@ POST /v1/group/info
 | token | 是   | 无   |
 
 ::: warning
-此处响应数据部分项目需要在打开相应开关后才会出现,例如private必须打开群聊私有才能在响应数据中看到.  
+此处响应数据部分项目需要在打开相应开关后才会出现,例如 private 必须打开群聊私有才能在响应数据中看到.  
 :::
 
 ### 请求体
@@ -27,7 +27,7 @@ POST /v1/group/info
 group_id: "123123" // 群聊 ID
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 message info_send {
@@ -41,61 +41,61 @@ message info_send {
 
 ```ProtoBuf
 status {
-  number: 114514
+  request_id: 114514
   code: 1
   msg: "success"
 }
 data {
-  id: "123" //群聊ID
+  id: "123" //群聊 ID
   name: "测试群聊" // 群聊名称
-  avatar_url: "https://..." // 头像url
-  avatar_id: 123 // 头像ID
+  avatar_url: "https://..." // 头像 url
+  avatar_id: 123 // 头像 ID
   introduction: "测试群聊" // 群聊简介
   member: 123 // 群人数
-  create_by: "123" // 创建者ID
+  create_by: "123" // 创建者 ID
   direct_join: 0 // 进群免审核,1为开启
-  permisson_level: 2 // 权限等级(普通用户无此项(数值为0或无此项),群主100,管理员2)
+  permisson_level: 2 // 权限等级(普通用户无此项(数值为0或无此项),群主 100,管理员 2)
   history_msg: 1 // 历史消息,1为开启
   category_name: "无" // 分类名
-  category_id: 40 // 分类ID
-  private: 0 // 是否私有,1为私有
-  do_not_disturb: 1 // 免打扰,1为开启
-  community_id: 123 // 加入社区的ID
+  category_id: 40 // 分类I D
+  private: 0 // 是否私有,1 为私有
+  do_not_disturb: 1 // 免打扰,1 为开启
+  community_id: 123 // 加入社区的 ID
   community_name: "云湖" // 加入社区的名称
-  top: 0 // 置顶会话,1为开启
-  admin: "123" // 管理员ID,可以有多个
+  top: 0 // 置顶会话,1 为开启
+  admin: "123" // 管理员 ID,可以有多个
   create_time: 1231231230 // 群聊创建时间
   limited_msg_type: "" // 被限制的消息类型,如1,2,3,使用","分格
-  owner: "123" // 群主ID
-  recommandation: 1 // 是否加入群推荐,1为开启
+  owner: "123" // 群主 ID
+  recommandation: 1 // 是否加入群推荐,1 为开启
   tag_old: "冲刺一百万用户！" // 标签
   tag {
-    id: 123 // 标签id
+    id: 123 // 标签 id
     text: "" // 标签文字
     color: "#FFFFFFFF" // 标签颜色
   }
   my_group_nickname: "12345" // 我的群昵称
   group_code: "test1234" // 群口令
-  hide_group_members: 1 // 隐藏群成员（开启时为1）
+  hide_group_members: 1 // 隐藏群成员（开启时为 1）
   auto_delete_message: 730 // 消息自动销毁时间（0-永久不删，90-2个月后删除，365-1年后删除，730-2年后删除）
   deny_members_upload_to_group_disk: 1 // 禁止群成员上传文件到群云盘（开启时为1）
 
 }
 history_bot {
-  id: "123" // 机器人ID
+  id: "123" // 机器人 ID
   name: "测试" // 机器人名称
   name_id: 123 // 机器人名称的序列(数据库中第N个用户/机器人/群组)
-  avatar_url: "https://..." // 头像URL
-  avatar_id: 123 // 头像ID
+  avatar_url: "https://..." // 头像 URL
+  avatar_id: 123 // 头像 ID
   introduction: "测试机器人" // 机器人简介
-  create_by: "123" // 创建者ID
+  create_by: "123" // 创建者 ID
   create_time: 1231231230 // 创建时间戳
   user_number: 123 // 使用人数
-  private: 1 // 1表示私有机器人.
+  private: 1 // 1 表示私有机器人.
 }
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 // 群聊信息
@@ -109,7 +109,7 @@ message info {
         string group_id = 1;
         string name = 2;
         string avatar_url = 3;
-        uint64 avatar_id = 4; // 头像ID
+        uint64 avatar_id = 4; // 头像 ID
         string introduction = 5;
         uint64 member = 6; // 群人数
         string create_by = 7;
@@ -117,7 +117,7 @@ message info {
         uint64 permisson_level = 9; // 权限等级
         uint64 history_msg = 10; // 历史消息
         string category_name = 11; // 分类名
-        uint64 category_id = 12; // 分类ID
+        uint64 category_id = 12; // 分类 ID
         uint64 private = 13; // 是否为私有群聊
         uint64 do_not_disturb = 14; // 免打扰
         uint64 community_id = 15;
@@ -132,13 +132,13 @@ message info {
         repeated Tag tag = 27;
         string my_group_nickname = 28; // 我的群昵称
         string group_code = 29; // 群口令
-        uint64 hide_group_members = 30; // 隐藏群成员（开启时为1）
+        uint64 hide_group_members = 30; // 隐藏群成员（开启时为 1）
         uint64 auto_delete_message = 32; // 消息自动销毁时间
-        uint64 deny_members_upload_to_group_disk = 33; // 禁止群成员上传文件到群云盘（开启时为1）
+        uint64 deny_members_upload_to_group_disk = 33; // 禁止群成员上传文件到群云盘（开启时为 1）
 
         // 已使用标签信息,2没啥用不解析了
         message Tag {
-            uint64 id = 1; // 标签ID(貌似)
+            uint64 id = 1; // 标签 ID (貌似)
             string text = 3;
             string color = 4;
         }
@@ -181,11 +181,11 @@ data {
   size: 50 // 分页大小
   page: 1 // 页数
 }
-group_id: "big" // 群聊ID
+group_id: "big" // 群聊 ID
 keywords: "测试群成员" // 搜索关键词
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 message list_member_send {
@@ -196,7 +196,7 @@ message list_member_send {
         int32 page = 2; // 页数
     }
 
-    string group_id = 3; // 群聊ID
+    string group_id = 3; // 群聊 ID
     string keywords = 4; // 搜索关键词
 }
 ```
@@ -207,20 +207,20 @@ message list_member_send {
 
 ```ProtoBuf
 status {
-  number: 114514
+  request_id: 114514
   code: 1
   msg: "success"
 }
 user {
-  group_id: "big" // 所属群聊ID
+  group_id: "big" // 所属群聊 ID
   user_info {
-    user_id: "7356666" // 用户ID
+    user_id: "7356666" // 用户 ID
     name: "Feng" // 用户名
-    avatar_url: "https://..." // 头像URL
-    is_vip: 0 // 是否为vip用户, 0-不为vip用户, 1-vip用户
+    avatar_url: "https://..." // 头像 URL
+    is_vip: 0 // 是否为 vip 用户,: 0-非 vip 用户, 1-vip 用户
 
   }
-  permission_level: 100 // 权限等级, 群主100 管理员2 普通用户无/0
+  permission_level: 100 // 权限等级, 群主 100 管理员 2 普通用户无/0
   gag_time: 123456 // 禁言时间戳
   is_gag: 0 // 是否处于禁言状态
 }
@@ -228,7 +228,7 @@ user {
 // ...
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 message list_member {
@@ -269,35 +269,35 @@ POST /v1/group/live-room
 
 ### 请求体
 
-```JSONC
+```JSON
 {
-  "groupId": "123" // 群聊id
+  "groupId": "123" // 群聊 id
 }
 ```
 
 ### 响应数据
 
-```JSONC
+```JSON
 {
-  "code": 1,  // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "rooms": [
       {
-        "userId": "123", // 房间管理员用户ID
-        "roomId": "123", // 房间ID
-        "chatId": "123", // 房间所属对象ID
+        "userId": "123", // 房间管理员用户 ID
+        "roomId": "123", // 房间 ID
+        "chatId": "123", // 房间所属对象 ID
         "title": "测试房间", // 房间名称
         "chatType": 2, // 房间所属对象类别，一般为2-群聊
         "status": 0, // 房间状态码
-        "createBy": "123", // 房间创建用户ID
+        "createBy": "123", // 房间创建用户 ID
         "createTime": 1231231230, //房间创建时间戳
         "nickname": "测试用户", // 房间创建用户名称
         "count": 123, // 房间内人数
-        "avatarUrl": "https://..." // 房间头像url
+        "avatarUrl": "https://..." // 房间头像 url
       }
     ]
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -315,7 +315,7 @@ POST /v1/group/instruction-list
 
 ### 请求体
 
-```JSONC
+```JSON
 {
   "groupId": "big" // 目标群聊
 }
@@ -323,24 +323,24 @@ POST /v1/group/instruction-list
 
 ### 响应数据
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "instructions": [
       {
-        "botId": "123", // 机器人ID
+        "botId": "123", // 机器人 ID
         "botName": "测试机器人", // 机器人名称
         "name": "测试指令", // 指令名称
         "desc": "测试指令简介", // 指令简介
-        "id": 123, // 指令ID
+        "id": 123, // 指令 ID
         "sort": 0, // 未知
-        "auth": 0 // 可用状态，0-所有人可用，1-所有人禁用，2-群主可用，3-群主管理员可用
+        "auth": 0 // 可用状态: 0-所有人可用，1-所有人禁用，2-群主可用，3-群主管理员可用
       },
       // ...
     ]
   },
-  "msg": "success" // 返回状态消息
+  "msg": "success"
 }
 ```
 
@@ -358,9 +358,9 @@ POST /v1/group/invite
 
 ### 请求体
 
-```JSONC
+```JSON
 {
-  "chatId": "123", // 邀请成员ID，必须为目标用户token已添加的token
+  "chatId": "123", // 邀请成员 ID，必须添加目标对象为好友
   "chatType": 1, // 邀请成员类别，1-用户，3-机器人
   "groupId": "123" // 目标群聊
 }
@@ -368,10 +368,10 @@ POST /v1/group/invite
 
 ### 响应数据
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -389,19 +389,19 @@ POST /v1/group/remove-member
 
 ### 请求体
 
-```JSONC
+```JSON
 {
-  "groupId": "123", // 目标群聊ID
-  "userId": "123" // 踢出用户ID
+  "groupId": "123", // 目标群聊 ID
+  "userId": "123" // 踢出用户 ID
 }
 ```
 
 ### 响应体
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -419,20 +419,20 @@ POST /v1/group/gag-member
 
 ### 请求体
 
-```JSONC
+```JSON
 {
-  "groupId": "123", // 目标群聊ID
-  "userId": "123", // 禁言用户ID
-  "gag": 0 // 禁言时间，只能为这些时间，0-取消禁言，600-10分钟，3600-1小时，21600-6小时，43200-12小时，1-永久禁言
+  "groupId": "123", // 目标群聊 ID
+  "userId": "123", // 禁言用户 ID
+  "gag": 0 // 禁言时间，只能为这些时间: 0-取消禁言，600-10分钟，3600-1小时，21600-6小时，43200-12小时，(-1)-永久禁言
 }
 ```
 
 ### 响应体
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -444,7 +444,7 @@ GET /v1/group/category
 
 ### 响应体
 
-```JSONC
+```JSON
 {
   "code": 1,
   "data": {
@@ -624,18 +624,18 @@ POST /v1/group/recommend/list
 
 ### 请求体
 
-```JSONC
+```JSON
 {
-  "categoryId": 22, // 群聊分类id， 0 代表全部
+  "categoryId": 22, // 群聊分类 id， 0 代表全部
   "keyword": "114514" // 搜索关键词，留空获取全部群聊
 }
 ```
 
 ### 响应体
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "groups": [
       {
@@ -643,26 +643,26 @@ POST /v1/group/recommend/list
         "groupId": "114514",
         "name": "这是群聊名字",
         "introduction": "这是个群聊介绍",
-        "createBy": "114514", // 创建者id
+        "createBy": "114514", // 创建者 id
         "createTime": 1754113069, // 创建时间戳
         "avatarId": 43821, // 头像id
         "del_flag": 0,
-        "avatarUrl": "https://chat-img.jwznb.com/3d805b635cc54829e461102ab315381b.gif", // 群头像url
+        "avatarUrl": "https://chat-img.jwznb.com/3d805b635cc54829e461102ab315381b.gif", // 群头像 url
         "headcount": 16, // 群聊人数
         "readHistory": 1, // 是否开启新成员查看消息历史记录（1为开启，0为关闭）
         "alwaysAgree": 1, // 是否直接进群（1为开启，0为关闭）
-        "categoryId": 22, // 群聊分类id
+        "categoryId": 22, // 群聊分类 id
         "category": "技术-IT/互联网", // 群聊分类名称
         "private": 0, // 群聊是否私有（1为开启，0为关闭）
         "banId": 0, //
         "gag": 0,  // 是否禁言（1为开启，0为关闭）
-        "gagBy": "", // 被禁言的id
+        "gagBy": "", // 被禁言的 id
         "msgTypeLimit": "" // 消息类型限制
       },
     // ...
     ]
   },
-  "msg": "success" // 返回状态消息
+  "msg": "success"
 }
 ```
 
@@ -680,7 +680,7 @@ POST /v1/group/msg-type-limit
 
 ### 请求体
 
-```JSONC
+```JSON
 {
   "groupId": "群聊id",
   "type": "消息类型" // 1-文本消息，2-图片消息，3-Markdown消息，4-文件消息，6-帖子消息，7-表情消息，8-HTML消息，10-视频消息，11-语音消息，13-语音通话（限制多个消息类型一般是 1,2,3,4··· 之类）
@@ -689,10 +689,10 @@ POST /v1/group/msg-type-limit
 
 ### 响应体
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -711,31 +711,31 @@ POST /v1/group/edit-group
 ### 请求体
 
 ```ProtoBuf
-group_id: "123" // 目标群聊ID
+group_id: "123" // 目标群聊 ID
 name: "测试群聊名称" // 群聊名称
 introduction: "测试群聊简介" // 群聊简介
-avatarUrl: "https://..." // 群聊头像url
-direct_join: 0 // 进群免审核,1为开启
-history_msg: 1 // 历史消息,1为开启
+avatarUrl: "https://..." // 群聊头像u rl
+direct_join: 0 // 进群免审核,1 为开启
+history_msg: 1 // 历史消息,1 为开启
 category_name: "无" // 分类名
-category_id: 40 // 分类ID
-private: 0 // 是否私有,1为私有
+category_id: 40 // 分类 ID
+private: 0 // 是否私有,1 为私有
 hide_group_members: 0 // 隐藏群成员
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 message edit_group_send {
-  string group_id = 2; // 目标群聊ID
+  string group_id = 2; // 目标群聊 ID
   string name = 3; // 群聊名称
   string introduction = 4; // 群聊简介
-  string avatarUrl = 5; // 群聊头像url
-  uint64 direct_join = 6; // 进群免审核,1为开启
-  uint64 history_msg = 7; // 历史消息,1为开启
+  string avatarUrl = 5; // 群聊头像 url
+  uint64 direct_join = 6; // 进群免审核,1 为开启
+  uint64 history_msg = 7; // 历史消息,1 为开启
   string category_name = 8; // 分类名
-  uint64 category_id = 9; // 分类ID
-  uint64 private = 10; // 是否私有,1为私有
+  uint64 category_id = 9; // 分类 ID
+  uint64 private = 10; // 是否私有,1 为私有
   uint64 hide_group_members = 11; // 隐藏群成员
 
 }
@@ -747,13 +747,13 @@ message edit_group_send {
 
 ```ProtoBuf
 status {
-  number: 114514
+  request_id: 114514
   code: 1
   msg: "success"
 }
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 message edit_group {
@@ -778,14 +778,14 @@ POST /v1/group/bot-list
 ### 请求体
 
 ```ProtoBuf
-group_id: "123" // 目标群聊ID
+group_id: "123" // 目标群聊 ID
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 message edit_group_send {
-  string group_id = 2; // 目标群聊ID
+  string group_id = 2; // 目标群聊 ID
 }
 ```
 
@@ -795,14 +795,14 @@ message edit_group_send {
 
 ```ProtoBuf
 status {
-  number: 114514
+  request_id: 114514
   code: 1
   msg: "success"
 }
 // ...
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 // 获取群机器人列表
@@ -837,11 +837,11 @@ message bot_list {
         // int32 hidden/del_flag = 3; // 是否隐藏/删除,猜的
         string name = 4;
         string content = 5; // 内容
-        int32 menu_type = 6; // 按钮类型,1-普通按钮 2-选中按钮 3-下拉选择
+        int32 menu_type = 6; // 按钮类型: 1-普通按钮 2-选中按钮 3-下拉选择
         int64 create_time = 7;
         // 8,9没找到
         int32 menu_action = 10; // 操作类型
-        string select = 99; // 选择的选项,在选择按钮的时候也作为状态,选中为1,未选中为0
+        string select = 99; // 选择的选项,在选择按钮的时候也作为状态,选中为 1,未选中为 0
     }
 }
 ```
@@ -862,19 +862,19 @@ POST /v1/group/remove-bot
 
 ### 请求体
 
-```JSONC
+```JSON
 {
-  "groupId": "123", // 群聊id
-  "botId": "123" // 机器人id
+  "groupId": "123", // 群聊 id
+  "botId": "123" // 机器人 id
 }
 ```
 
 ### 响应体
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -892,18 +892,18 @@ POST /v1/group/edit-my-group-nickname
 
 ### 请求体
 
-```JSONC
+```JSON
 {
-  "groupId": "123", // 目标群聊ID
+  "groupId": "123", // 目标群聊 ID
   "nickname": "测试群昵称" // 欲设置的群昵称
 }
 ```
 
 ### 响应体
 
-```JSONC
+```JSON
 {
-  "msg": "success" // 返回状态消息
+  "msg": "success"
 }
 ```
 
@@ -927,19 +927,19 @@ POST /v1/group/edit-group-keyword
 
 ### 请求体
 
-```JSONC
+```JSON
 {
-  "groupId": "123", // 目前群聊ID
+  "groupId": "123", // 目前群聊 ID
   "keyword": "测试群口令" // 欲设置的群口令
 }
 ```
 
 ### 响应体
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -961,7 +961,7 @@ POST /v1/group/info-add-friend
 keyword: "测试群口令" // 欲要搜索的群口令
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 message info_add_friend_send {
@@ -975,26 +975,26 @@ message info_add_friend_send {
 
 ```ProtoBuf
 status {
-  number: 114514
+  request_id: 114514
   code: 1
   msg: "success"
 }
 
 Data {
-  id: "123" // 群聊ID
+  id: "123" // 群聊 ID
   name: "测试群名称" // 群聊名称
-  avatar_url: "https://..." // 群聊头像url
-  avatar_id: 123; // 群聊头像ID
+  avatar_url: "https://..." // 群聊头像 url
+  avatar_id: 123; // 群聊头像 ID
   introduction: "测试群聊简介" // 群聊简介
   headcount: 123 // 群人数
-  createBy: "123" // 群聊创建者ID
-  readHistory: 1 // 是否允许阅读历史信息，0-不允许，1-允许
+  createBy: "123" // 群聊创建者 ID
+  readHistory: 1 // 是否允许阅读历史信息: 0-不允许，1-允许
   limited_msg_type: "1" // 被限制的消息类型,如1,2,3,使用","分格
-  keyword: "测试群口令" // 群聊设置的口令
+  keyword: "测试群口令" // 群聊设置的群口令
 }
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 message info_add_friend {
@@ -1002,16 +1002,16 @@ message info_add_friend {
     Data data = 1;
 
     message Data {
-      string id = 1; // 群聊ID
+      string id = 1; // 群聊 ID
       string name = 2; // 群聊名称
-      string avatar_url = 3; // 群聊头像url
-      uint64 avatar_id = 4; // 群聊头像ID
+      string avatar_url = 3; // 群聊头像 url
+      uint64 avatar_id = 4; // 群聊头像 ID
       string introduction = 5; // 群聊简介
       uint64 headcount = 6; // 群人数
-      string createBy = 7; // 群聊创建者ID
-      uint64 readHistory = 10; // 是否允许阅读历史信息，0-不允许，1-允许
+      string createBy = 7; // 群聊创建者 ID
+      uint64 readHistory = 10; // 是否允许阅读历史信息: 0-不允许，1-允许
       string limited_msg_type = 22; // 被限制的消息类型,如1,2,3,使用","分格
-      string keyword = 29; // 群聊设置的口令
+      string keyword = 29; // 群聊设置的群口令
   }
 }
 ```
@@ -1032,19 +1032,19 @@ POST /v1/group/edit-auto-delete-message
 
 ### 请求体
 
-```JSONC
+```JSON
 {
-  "groupId": "123", // 群聊id
+  "groupId": "123", // 群聊 id
   "autoDeleteMessage": 0 // 消息自动销毁时间（0-永久不删，90-2个月后删除，365-1年后删除，730-2年后删除）
 }
 ```
 
 ### 响应体
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -1062,19 +1062,19 @@ POST /v1/group/edit-stop-member-upload-group-file
 
 ### 请求体
 
-```JSONC
+```JSON
 {
- "groupId": "123456789", // 群聊id
+ "groupId": "123456789", // 群聊 id
  "stopMemberUploadGroupFile":1 // 是否开启（0-关闭，1-开启）
 }
 ```
 
 ### 响应体
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -1095,10 +1095,10 @@ POST /v1/group/create-group
 ```ProtoBuf
 name: "测试群聊" // 群聊名称
 introduction: "测试群聊" // 群聊简介
-avatar_url: "https://..." // 头像url
+avatar_url: "https://..." // 头像 url
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 message create_send {
@@ -1114,14 +1114,14 @@ message create_send {
 
 ```ProtoBuf
 status {
-  number: 114514
+  request_id: 114514
   code: 1
   msg: "success"
 }
-group_id: "123" // 新群聊ID
+group_id: "123" // 新群聊 ID
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 message dismiss_group {
@@ -1142,7 +1142,7 @@ POST /v1/group/dismiss-group
 
 | 名称  | 必须 | 备注         |
 | ----- | ---- |--------------|
-| token | 是   | 必须为群主的 |
+| token | 是   | 群主 |
 
 ### 请求体
 
@@ -1150,7 +1150,7 @@ POST /v1/group/dismiss-group
 group_id: "123123" // 群聊 ID
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 message dismiss_send {
@@ -1164,13 +1164,13 @@ message dismiss_send {
 
 ```ProtoBuf
 status {
-  number: 114514
+  request_id: 114514
   code: 1
   msg: "success"
 }
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 message dismiss_group {
@@ -1192,35 +1192,35 @@ POST /v1/group/live-room
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "groupId": "big" // 群聊id
+  "groupId": "big" // 群聊 id
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "rooms": [
       {
-        "userId": "1234567", // 用户id
-        "roomId": "c7552ca7c79546dd93baca4e4adxxxxx", // 房间id
-        "chatId": "123456789", // 房间所发起的会话id
+        "userId": "1234567", // 用户 id
+        "roomId": "c7552ca7c79546dd93baca4e4adxxxxx", // 房间 id
+        "chatId": "123456789", // 房间所发起的会话 id
         "title": "", // 房间标题
         "chatType": 2, // 房间所发起的会话类型
         "status": 0, // 房间状态
-        "createBy": "1234567", // 发起房间的用户id
+        "createBy": "1234567", // 发起房间的用户 id
         "createTime": 1775881889, // 房间创建时间戳
         "nickname": "111", // 房间创建者名称
         "count": 1, // 房间人数
-        "avatarUrl": "https://chat-img.jwznb.com/defalut-avatars/Nellie%20Bly.png" // 房间创建者头像Url
+        "avatarUrl": "https://chat-img.jwznb.com/defalut-avatars/Nellie%20Bly.png" // 房间创建者头像 Url
       }
     ]
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -1238,19 +1238,19 @@ POST /v1/group/agree-invite
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "id": 123, // 申请ID
+  "id": 123, // 申请 ID
   "agree": 1 // 1-通过请求，2-拒绝请求，3-显示请求过期，4-显示已解散
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -1268,16 +1268,16 @@ POST /v1/group/member-is-removed
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "userId": "123", // 用户ID
-  "groupId": "123" // 群聊ID
+  "userId": "123", // 用户 ID
+  "groupId": "123" // 群聊 ID
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
   "code": 1, // 1-踢过，2-没踢过
   "msg": "success" // 返回消息
@@ -1298,18 +1298,18 @@ POST /v1/group/switch
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "groupId": "123", // 群聊ID
+  "groupId": "123", // 群聊 ID
   "hide": 0 // 0-关闭隐藏（加入群推荐），1-隐藏（不加入群推荐）
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
