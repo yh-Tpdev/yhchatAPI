@@ -16,9 +16,9 @@ GET /v1/misc/configure-distribution
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "audioUrl": "https://chat-audio1.jwznb.com/", // 音频路由
     "fileUrl": "https://chat-file.jwznb.com/", // 文件路由
@@ -26,9 +26,9 @@ GET /v1/misc/configure-distribution
     "serverUrl": "http://chat.jwznb.com:8888/", // 未知
     "shareUrl": "https://yhfx.jwznb.com/", // 分享链接路由
     "videoUrl": "https://chat-video1.jwznb.com/", // 视频路由
-    "websocketUrl": "wss://chat-ws-go.jwzhd.com/ws" // ws路由
+    "websocketUrl": "wss://chat-ws-go.jwzhd.com/ws" // WS 路由
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -44,13 +44,13 @@ GET /v1/misc/qiniu-token
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
-    "token": "123:123" // 图片上传token
+    "token": "123:123" // 图片上传 token
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -66,13 +66,13 @@ GET /v1/misc/qiniu-token-audio
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
-    "token": "123:123" // 音频上传token
+    "token": "123:123" // 音频上传 token
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -88,13 +88,13 @@ GET /v1/misc/qiniu-token2
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
-    "token": "123:123" // 文件上传token
+    "token": "123:123" // 文件上传 token
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -110,13 +110,13 @@ GET /v1/misc/qiniu-token-video
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
-    "token": "123:123" // 视频上传token
+    "token": "123:123" // 视频上传 token
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -132,13 +132,13 @@ GET /v1/misc/qiniu-token-group-disk
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
-    "token": "123:123" // 群文件上传token
+    "token": "123:123" // 群文件上传 token
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -154,18 +154,18 @@ GET /v1/misc/setting
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
-    "fileSizeLimitNormal": 40, // 非vip用户文件上传大小，单位MB
-    "fileeSizeLimitVip": 1024, // VIP用户文件上传大小 /单位MB
-    "imageSizeLimitNormal": 40, // 非vip用户图片上传大小，单位MB
-    "imageSizeLimitVip": 50, // vip用户图片上传大小，单位MB
-    "videoSizeLimitNormal": 40, // 非vip用户视频上传大小，单位MB
-    "videoSizeLimitVip": 200 // vip用户视频上传大小，单位MB
+    "fileSizeLimitNormal": 40, // 非 vip 用户文件上传大小，单位 MB
+    "fileeSizeLimitVip": 1024, // vip 用户文件上传大小 /单位 MB
+    "imageSizeLimitNormal": 40, // 非 vip 用户图片上传大小，单位 MB
+    "imageSizeLimitVip": 50, // vip 用户图片上传大小，单位 MB
+    "videoSizeLimitNormal": 40, // 非 vip 用户视频上传大小，单位 MB
+    "videoSizeLimitVip": 200 // vip 用户视频上传大小，单位 MB
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -175,13 +175,13 @@ GET /v1/misc/gray-status
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "status": 0 // 0-不为灰色状态，1-灰色状态，处于灰色状态下云湖窗口将加上一层灰色滤镜
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -192,8 +192,8 @@ GET /v1/misc/auto-update
 URL 参数:
 
 ```TEXT
-platform=windows // 目标平台标识符，windows，android，macos，ios
-userId=123 // 获取更新的用户ID
+platform=windows // 目标平台标识符: windows，android，macos，ios
+userId=123 // 获取更新的用户 ID
 ```
 
 响应体:
@@ -205,8 +205,8 @@ userId=123 // 获取更新的用户ID
     <description>云湖社交更新中</description>
     <item>
       <enclosure url="" sparkle:dsaSignature="" sparkle:version="+0" sparkle:os="windows" length="0" type="application/octet-stream"></enclosure>
-// url属性为更新安装包网址，参数platform为macos，ios是此值可能为空
-// version属性为版本号
+// url属性为更新安装包网址，参数 platform 为 macos，ios 是此值可能为空
+// version 属性为版本号
     </item>
   </channel>
 </rss>

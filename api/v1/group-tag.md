@@ -16,25 +16,25 @@ POST /v1/group-tag/list
 
 请求体:
 
-```JSONC
+```JSON
 {
-    "groupId": "123456789", //要获取的群聊ID
-    "size": 20,// 页面总数
-    "page": 1,//页码
-    "tag": ""// 搜索词语
+    "groupId": "123456789", //要获取的群聊 ID
+    "size": 20, // 页面总数
+    "page": 1, // 页码
+    "tag": "" // 搜索词语
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
     "code": 1,
     "data": {
         "list": [
             {
-                "id": 1234, // 标签ID
-                "groupId": "123456789", // 群聊ID
+                "id": 1234, // 标签 ID
+                "groupId": "123456789", // 群聊 ID
                 "tag": "一个标签", // 标签名称
                 "color": "#E91E63", // 标签颜色
                 "desc": "", // 描述
@@ -60,19 +60,19 @@ POST /v1/group-tag/relate
 
 请求体:
 
-```JSONC
+```JSON
 {
-    "userId": "1234567", // 要关联的用户ID
-    "tagGroupId": 1145 // 要关联的标签ID
+    "userId": "1234567", // 要关联的用户 ID
+    "tagGroupId": 1145 // 要关联的标签 ID
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -88,19 +88,19 @@ POST /v1/group-tag/relate-cancel
 
 请求体:
 
-```JSONC
+```JSON
 {
-    "userId": "1234567", // 要关联的用户ID
-    "tagGroupId": 1145 // 要关联的标签ID
+    "userId": "1234567", // 要关联的用户 ID
+    "tagGroupId": 1145 // 要关联的标签 ID
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -116,10 +116,10 @@ POST /v1/group-tag/edit
 
 请求体:
 
-```JSONC
+```JSON
 {
-    "id": 1234, // 要更改的标签ID
-    "groupId": "123456789", // 要更改的标签所在的群聊ID
+    "id": 1234, // 要更改的标签 ID
+    "groupId": "123456789", // 要更改的标签所在的群聊 ID
     "tag": "一个标签", // 标签名称
     "color": "#E91E63", // 标签颜色
     "desc": "", //，标签描述
@@ -129,10 +129,10 @@ POST /v1/group-tag/edit
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -148,9 +148,9 @@ POST /v1/group-tag/create
 
 请求体：
 
-```JSONC
+```JSON
 {
-    "groupId": "123456789", // 要创建标签的群聊ID
+    "groupId": "123456789", // 要创建标签的群聊 ID
     "tag": "标签名称", // 标签名称
     "color": "#2196F3", // 标签颜色
     "desc": "", // 标签描述
@@ -161,10 +161,10 @@ POST /v1/group-tag/create
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -180,18 +180,18 @@ POST /v1/group-tag/delete
 
 请求体:
 
-```JSONC
+```JSON
 {
-    "id": 1234 // 要删除的标签ID
+    "id": 1234 // 要删除的标签 ID
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -212,11 +212,11 @@ data {
   size: 50 // 分页大小
   page: 1 // 页数
 }
-group_id: "123" // 群聊ID
-tag_id: 123 // 标签ID
+group_id: "123" // 群聊 ID
+tag_id: 123 // 标签 ID
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 message tag_member_send {
@@ -225,8 +225,8 @@ message tag_member_send {
         int32 size = 1; // 分页大小
         int32 page = 2; // 页数
     }
-    string group_id = 3; // 标签所处群聊ID
-    int64 tag_id = 4; // 标签ID
+    string group_id = 3; // 标签所处群聊 ID
+    int64 tag_id = 4; // 标签 ID
 }
 ```
 
@@ -236,26 +236,26 @@ message tag_member_send {
 
 ```ProtoBuf
 status {
-  number: 114514
+  request_id: 114514
   code: 1
   msg: "success"
 }
 user {
-  group_id: "big" // 所属群聊ID
+  group_id: "big" // 所属群聊 ID
   user_info {
-    user_id: "123" // 用户ID
+    user_id: "123" // 用户 ID
     name: "测试用户名" // 用户名
-    avatar_url: "https://..." // 头像URL
-    int32 is_vip: 0 // 是否为vip，0-非vip用户，1-vip用户
+    avatar_url: "https://..." // 头像 URL
+    int32 is_vip: 0 // 是否为 vip: 0-非 vip 用户，1-vip 用户
   }
-    permission_level: 0 // 权限等级, 群主100 管理员2 普通用户无/0
+    permission_level: 0 // 权限等级, 群主 100 管理员 2 普通用户无/0
     gag_time: 123 // 禁言时间戳
     is_gag: 0; // 是否被禁言，0-未被禁言，1-已被禁言
 }
 total: 1 // 总数
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 // 标签绑定的用户列表
@@ -272,7 +272,7 @@ message tag_member {
             string avatar_url = 4;
             int32 is_vip = 6;
         }
-        int32 permission_level = 3; // 权限等级, 群主100 管理员2 普通用户无/0
+        int32 permission_level = 3; // 权限等级, 群主 100 管理员 2 普通用户无/0
         int64 gag_time = 4; // 禁言时间戳
         int32 is_gag = 5; // 是否被禁言
     }

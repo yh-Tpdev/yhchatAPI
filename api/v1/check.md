@@ -17,7 +17,7 @@ POST /v1/check/get-latest-version
 
 ### 请求体
 
-```JSONC
+```JSON
 {
  "packageInfo":"{\"appName\":\"云湖\",\"packageName\":\"com.yhchat.app\",\"version\":\"1.4.83\",\"buildNumber\":\"347\"}", // 当前应用信息，为 JSON 数组，需转义后才可使用
  "platform":"android", // 设备标识
@@ -31,7 +31,7 @@ POST /v1/check/get-latest-version
 
 `packageInfo` 转换后的 JSON 结构
 
-```JSONC
+```JSON
 {
   "appName": "云湖", // 软件名称
   "packageName": "com.yhchat.app", // 软件包名
@@ -44,7 +44,7 @@ POST /v1/check/get-latest-version
 
 ### 响应体
 
-```JSONC
+```JSON
 {
   "ApkMd5": "", // 更新包 MD5
   "ApkSize": 74491, // 包体大小
@@ -67,7 +67,7 @@ POST /v1/check/check-version
 
 ### 请求体
 
-```jsonc
+```JSON
 {
   "packageInfo": "{\"appName\":\"云湖\",\"packageName\":\"云湖\",\"version\":\"1.6.50\",\"buildNumber\":\"225\"}", // 当前应用信息，为 JSON 数组，需转义后才可使用
   "platform": "windows", // 平台
@@ -80,7 +80,7 @@ POST /v1/check/check-version
 
 `packageInfo` 转换后的 JSON 结构
 
-```JSONC
+```JSON
 {
   "appName": "云湖", // 软件名称
   "packageName": "云湖", // 软件包名
@@ -95,7 +95,7 @@ POST /v1/check/check-version
 
 `deviceinfo` 设备信息示例。
 
-```JSONC
+```JSON
 {
   "computerName":"", // 设备名称
   "numberOfCores":12, // CPU 线程数
@@ -129,14 +129,14 @@ POST /v1/check/check-version
 
 ### 响应体
 
-```jsonc
+```JSON
 {
-  "code": 1, // 成功
+  "code": 1,
   "data": {
     "latestDesc": "1、全新发布云湖APP\\n2、修复多个bug", // 更新日志
     "latestVersion": "1.6.50", // 最新版本
     "update": 0
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```

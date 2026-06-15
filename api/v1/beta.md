@@ -18,13 +18,13 @@ POST /v1/beta/info
 
 ### 响应体
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1 为正常
+  "code": 1,
   "data": {
     "beta": "allow", // 是否为内测用户，allow - 是，noapply - 否
     "info": "\n即将内测的功能：\n1、更加完整的内测功能\n2、邀请码自定义功能\n3、地区排名活动\n4、网页版云湖\n"
   }, // 内测信息
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```

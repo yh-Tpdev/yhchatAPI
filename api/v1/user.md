@@ -10,14 +10,14 @@ POST /v1/user/captcha
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
-    "b64s": "image//png;base64...", // 人机验证图片base64
-    "id": "123" // 人机验证ID
+    "b64s": "image//png;base64...", // 人机验证图片 Base64
+    "id": "123" // 人机验证 ID
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -27,24 +27,24 @@ POST /v1/user/verification-login
 
 请求体:
 
-```JSONC
+```JSON
 {
   "mobile": "12312312300", // 登录手机号
   "captcha": "123123", // 手机验证码
   "deviceId": "awa", // 登录设备唯一标识符，可自定义
-  "platform": "windows" // 登录平台名称,一般为windows,web等可自定义
+  "platform": "windows" // 登录平台名称,一般为 windows,web 等可自定义,不校验
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
-    "token": "f87TJHF9-****-****-************" // 账户登录token
+    "token": "f87TJHF9-****-****-************" // 账户 token
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -62,25 +62,25 @@ GET /v1/user/info
 
 ```ProtoBuf
 status {
-  number: 114514
-  code: 1 // 请求状态码，1为正常
-  msg: "success" // 返回消息
+  request_id: 114514
+  code: 1
+  msg: "success"
 }
 data {
-  id: "123" // 用户id
+  id: "123" // 用户 id
   name: "测试用户" // 用户名
-  avatar_url: "https://..." // 头像URL
-  avatar_id: 123 //头像ID
+  avatar_url: "https://..." // 头像 URL
+  avatar_id: 123 //头像 ID
   phone: "12312312300" // 手机号
   email: "123@123.com" // 邮箱
   coin: 123 // 金币数
-  is_vip: 0 // 是否为VIP
-  vip_expired_time: 1231231230 // VIP过期时间
+  is_vip: 0 // 是否为 VIP
+  vip_expired_time: 1231231230 // VIP 过期时间
   invitation_code: "123" // 邀请码
 }
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 // 用户自身信息
@@ -89,15 +89,15 @@ message info {
     Status status = 1;
     message Data {
         // 11是描述手机号长整数的,懒得解析了
-        string id = 1; // 用户id
+        string id = 1; // 用户 id
         string name = 2; // 用户名
-        string avatar_url = 4; // 头像URL
-        uint64 avatar_id = 5; // 头像ID
+        string avatar_url = 4; // 头像 URL
+        uint64 avatar_id = 5; // 头像 ID
         string phone = 6; // 手机号
         string email = 7; // 邮箱
         double coin = 8; // 金币数
-        int32 is_vip = 9; // 是否为VIP
-        uint64 vip_expired_time = 10; // VIP过期时间
+        int32 is_vip = 9; // 是否为 VIP
+        uint64 vip_expired_time = 10; // VIP 过期时间
         string invitation_code = 12; // 邀请码
     }
     Data data = 2;
@@ -119,10 +119,10 @@ POST /v1/user/get-user
 请求体:
 
 ```ProtoBuf
-id: "用户id"
+id: "用户 id"
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 message get_user_send {
@@ -136,21 +136,21 @@ message get_user_send {
 
 ```ProtoBuf
 status {
-  number: 123456
-  code: 1 // 请求状态码，1为正常
-  msg: "success" // 返回消息
+  request_id: 123456
+  code: 1
+  msg: "success"
 }
 data {
-  id: "123" // 用户ID
+  id: "123" // 用户 ID
   name: "测试用户" // 用户名
-  name_id: 123 // 名称ID
-  avatar_url: "https://..." // 头像URL
-  avatar_id: 123 // 头像ID
+  name_id: 123 // 名称 ID
+  avatar_url: "https://..." // 头像 URL
+  avatar_id: 123 // 头像 ID
   register_time: "1234-12-12 12:12:12" // 注册时间(YYYY-MM-DD hh:mm:ss)
   online_day: 123 // 在线时长
   continuous_online_day: 123 // 连续在线时长
-  is_vip: 1 // 是否为VIP
-  vip_expired_time: 123123123 // VIP过期时间(时间戳)
+  is_vip: 1 // 是否为 VIP
+  vip_expired_time: 123123123 // VIP 过期时间(时间戳)
   ban_time: 123123123 // 封禁结束时间(时间戳)
   medal [
     {
@@ -177,28 +177,28 @@ data {
   "profile_info": {
     "flag": 1, // ？
     "scoreOrId": 1295971200,
-    "province": "省（自治区）", // IP归属地
-    "city": "市", // IP归属地
-    "district": "区（县）", // IP归属地
+    "province": "省（自治区）", // IP 归属地
+    "city": "市", // IP 归属地
+    "district": "区（县）", // IP归 属地
   },
-  "country": "国家或地区" // IP归属地
+  "country": "国家或地区" // IP 归属地
 }
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 // 勋章信息
 message Medal_info {
-    uint64 id = 1; // 勋章ID
+    uint64 id = 1; // 勋章 ID
     string name = 2; // 勋章名称
     uint64 sort = 5;  // 勋章顺序
 }
 
 message Remark_info {
     string remark_name = 1; // 备注名
-    string phone_number = 2; // 手机号
-    string extra_remark = 3; // 其他备注（格式为JSON，示例：'[{"key":"他是","value":"我的朋友"},{"key":"职业","value":"打工人"}]'
+    string phone = 2; // 手机号
+    string extra_remark = 3; // 其他备注（格式为 JSON，示例：'[{"key":"他是","value":"我的朋友"},{"key":"职业","value":"打工人"}]'
 }
 
 message Profile_info {
@@ -213,24 +213,24 @@ message Profile_info {
 
 // 获取用户信息
 message get_user {
-    Status status = 1; // 状态码
-    Data data = 2; //数据
+    Status status = 1;
+    Data data = 2; // 数据
     message Data {
-        string id = 1; // 用户id
+        string id = 1; // 用户 id
         string name = 2; // 用户名
-        uint64 name_id = 3; // 名称ID
-        string avatar_url = 4; //头像URL
-        uint64 avatar_id = 5; // 头像ID
+        uint64 name_id = 3; // 名称 ID
+        string avatar_url = 4; //头像 URL
+        uint64 avatar_id = 5; // 头像 ID
         repeated Medal_info medal = 6; // 勋章信息
         string register_time = 7; // 注册时间,格式: YYYY-MM-DD hh:mm:ss
         uint64 ban_time = 10; // 封禁结束时间(时间戳)
         uint64 online_day = 11; // 在线天数
         uint64 continuous_online_day = 12; // 连续在线天数
-        int32 is_vip = 13; // 是否为vip
-        uint64 vip_expired_time = 14; // VIP过期时间(时间戳)
+        int32 is_vip = 13; // 是否为 vip
+        uint64 vip_expired_time = 14; // VIP 过期时间(时间戳)
         Remark_info remark_info = 18; // 备注信息
         Profile_info profile_info = 19; // 用户资料信息
-        string ipGeo = 20; // IP归属地（国家）
+        string ip_geo = 20; // IP归属地（国家）
     }
 }
 ```
@@ -251,29 +251,29 @@ POST /v1/user/medal
 
 ```ProtoBuf
 status {
-  number: 114514
-  code: 1 // 请求状态码，1为正常
-  msg: "success" // 返回消息
+  request_id: 114514
+  code: 1
+  msg: "success"
 }
 medal {
-  id: 1 // 勋章ID
+  id: 1 // 勋章 ID
   name: "测试勋章" // 勋章名称
   sort: 100 // 勋章顺序
 }
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 // 勋章
 message medal {
-    Status status = 1; // 状态信息
+    Status status = 1;
     repeated Medal_info medal = 2; // 勋章信息
 }
 
 // 勋章信息
 message Medal_info {
-    uint64 id = 1; // 勋章ID
+    uint64 id = 1; // 勋章 ID
     string name = 2; // 勋章名称
     uint64 sort = 5;  // 勋章顺序
 }
@@ -297,7 +297,7 @@ POST /v1/user/edit-nickname
 name: "123" // 用户名称
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 message edit_nickname_send {
@@ -311,18 +311,18 @@ message edit_nickname_send {
 
 ```ProtoBuf
 status {
-  number: 114514
-  code: 1 // 请求状态码，1为正常
-  msg: "success" // 返回消息
+  request_id: 114514
+  code: 1
+  msg: "success"
 }
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 // 更改名称状态信息
 message edit_nickname {
-    Status status = 1; // 状态信息
+    Status status = 1;
 }
 ```
 
@@ -341,10 +341,10 @@ POST /v1/user/edit-avatar
 请求体:
 
 ```ProtoBuf
-url: "https://..." // 用户头像url
+url: "https://..." // 用户头像 url
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 message edit_avatar_send {
@@ -358,18 +358,18 @@ message edit_avatar_send {
 
 ```ProtoBuf
 status {
-  number: 114514
-  code: 1 // 请求状态码，1为正常
-  msg: "success" // 返回消息
+  request_id: 114514
+  code: 1
+  msg: "success"
 }
 ```
 
-::: details ProtoBuf数据结构
+::: details ProtoBuf 数据结构
 
 ```proto
 // 更改名称状态信息
 message edit_avatar {
-    Status status = 1; // 状态信息
+    Status status = 1;
 }
 ```
 
@@ -381,7 +381,7 @@ POST /v1/user/email-login
 
 请求体：
 
-```JSONC
+```JSON
 {
     "email": "123456@example.com", // 登录邮箱
     "password": "123456", // 登录密码
@@ -392,13 +392,13 @@ POST /v1/user/email-login
 
 响应体:
 
-```JSONC
+```JSON
 {
-    "code": 1, // 请求状态码，1为正常
+    "code": 1,
     "data": {
-        "token": "abcdefg1-xxxx-xxxx-xxxxxxxxxx" // 登录效验令牌
+        "token": "abcdefg1-xxxx-xxxx-xxxxxxxxxx" // 账号 token
     },
-    "msg": "success" // 返回消息
+    "msg": "success"
 }
 ```
 
@@ -414,18 +414,18 @@ POST /v1/user/logout
 
 请求体:
 
-```JSONC
+```JSON
 {
-  "device-id": "123123123" // 设备ID
+  "device-id": "123123123" // 设备 ID
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
-    "code": 1, // 请求状态码，1为正常
-    "msg": "success" // 返回消息
+    "code": 1,
+    "msg": "success"
 }
 ```
 
@@ -441,7 +441,7 @@ POST /v1/user/recommend-category-list
 
 请求体：
 
-```JSONC
+```JSON
 {
  "appChannel": "default"
 }
@@ -449,9 +449,9 @@ POST /v1/user/recommend-category-list
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 状态码，正常为1
+  "code": 1,
   "data": {
     "categories": [ // 群聊类别
       "精选",
@@ -463,7 +463,7 @@ POST /v1/user/recommend-category-list
       "资讯订阅"
     ]
   },
-  "msg": "success" // 状态信息
+  "msg": "success"
 }
 ```
 
@@ -479,7 +479,7 @@ POST /v1/user/recommend-list
 
 请求体：
 
-```JSONC
+```JSON
 {
   "category": "精选", // 群聊类别
   "keyword": "", // 关键词
@@ -490,13 +490,13 @@ POST /v1/user/recommend-list
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 状态码，正常为1
+  "code": 1,
   "data": {
     "groupList": [
       {
-        "chatId": "123", // 群聊id
+        "chatId": "123", // 群聊 id
         "banId": 0, // 顾名思义
         "nickname": "测试群聊名称", // 群聊名字
         "introduction": "测试群聊简介", // 群聊介绍
@@ -507,7 +507,7 @@ POST /v1/user/recommend-list
      // ...
     ]
   },
-  "msg": "success" // 状态信息
+  "msg": "success"
 }
 ```
 
@@ -523,27 +523,27 @@ POST /v1/user/recommend
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "botList": [
       {
-        "chatId": "123", // 机器人id
+        "chatId": "123", // 机器人 id
         "chatType": "3", // 识别对象类别，1-用户，2-群聊，3-机器人
         "headcount": "123", // 使用人数
         "nickname": "测试机器人名称", // 机器人名称
         "introduction": "测试机器人简介", // 机器人简介
         "introductions": "",
-        "avatarUrl": "https://...", // 机器人头像url
+        "avatarUrl": "https://...", // 机器人头像 url
         "isAdd": 1, // 是否添加（1为可添加，0为不可添加）
-        "isApply": 0, // 是否应用
-        "alwaysAgree": 0 // 是否总是同意
+        "isApply": 0, // 是否启用
+        "alwaysAgree": 0 // 是否自动进群
       }
     // ...
     ]
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -559,7 +559,7 @@ POST /v1/user/module-ignore-info
 
 请求体：
 
-```JSONC
+```JSON
 {
  "deviceId": "1234"
 }
@@ -567,19 +567,19 @@ POST /v1/user/module-ignore-info
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "ignore": {
-      "id": 0, // 可能是模块设置id
-      "userId": "1234567", // 用户id
+      "id": 0, // 可能是模块设置 id
+      "userId": "1234567", // 用户 id
       "updateTime": 123455660, // 更新时间戳
-      "deviceId": "1234", // 设备id
-      "ignore": ",30,20,10" // 模块id，10-隐藏社区页面，20-隐藏发现页面，30-精简我的界面
+      "deviceId": "1234", // 设备 id
+      "ignore": ",30,20,10" // 模块id: 10-隐藏社区页面，20-隐藏发现页面，30-精简我的界面
     }
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -595,7 +595,7 @@ POST /v1/user/module-ignore
 
 请求体：
 
-```JSONC
+```JSON
 {
  "deviceId": "1234",
  "ignore": ",30,20,10" // 模块id，10-隐藏社区页面，20-隐藏发现页面，30-精简我的界面
@@ -604,10 +604,10 @@ POST /v1/user/module-ignore
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -623,7 +623,7 @@ POST /v1/user/notification-status
 
 请求体：
 
-```JSONC
+```JSON
 {
   "deviceId": "1114514", // 设备id
   "registrationId": "114514" // 注册id
@@ -632,15 +632,15 @@ POST /v1/user/notification-status
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
-    "notification": { // 通知json
-      "id": 110061, // 注册id
-      "userId": "114514", // 用户id
-      "deviceId": "114514", // 设备id
-      "registrationId": "114514", // 通知注册id
+    "notification": { // 通知 json
+      "id": 110061, // 注册 id
+      "userId": "114514", // 用户 id
+      "deviceId": "114514", // 设备 id
+      "registrationId": "114514", // 通知注册 id
       "isOpen": 1, // 是否打开系统消息通知（设置”系统消息通知“选项可控制这个数值，1-打开，0-关闭）
       "type": 2, // 类型
       "delFlag": 0,
@@ -648,7 +648,7 @@ POST /v1/user/notification-status
       "updateTime": 1231231230 // 更新时间戳
     }
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -664,10 +664,10 @@ POST /v1/user/notification-info
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "deviceId": "114514", // 设备id
-  "registrationId": "114514", // 注册通知id
+  "deviceId": "114514", // 设备 id
+  "registrationId": "114514", // 注册通知 id
   "isOpen": 1, // // 是否打开系统消息通知（设置”系统消息通知“选项可控制这个数值，1-打开，0-关闭）
   "type": 2 // 类型
 }
@@ -675,10 +675,10 @@ POST /v1/user/notification-info
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -694,7 +694,7 @@ POST /v1/user/gold-coin-increase-decrease-record
 
 请求体：
 
-```JSONC
+```JSON
 {
   "size": 20, // 尺寸
   "page": 1 // 页数
@@ -703,14 +703,14 @@ POST /v1/user/gold-coin-increase-decrease-record
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "goldCoinRecord": [
       {
-        "id": 193275, // 金币记录id
-        "userId": "用户id",
+        "id": 193275, // 金币记录 id
+        "userId": "用户 id",
         "typ": 8, // 类型
         "beforeAmount": 55.01, // 之前金币数量
         "afterAmount": 57.01, // 之后的金币数量
@@ -721,15 +721,17 @@ POST /v1/user/gold-coin-increase-decrease-record
       }
     // ...
     ],
-    "total": 243 // 总共的金币记录
+    "total": 243 // 金币记录的总数量
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
 ## 绑定手机号
 
 POST /v1/user/bing-phone
+
+!!不要问为什么是 bing,我也不知道.!!
 
 请求头:
 
@@ -739,7 +741,7 @@ POST /v1/user/bing-phone
 
 请求体：
 
-```JSONC
+```JSON
 {
   "phone": "12312311230", // 欲绑定手机号
   "captcha": "123123" // 短信验证码
@@ -748,16 +750,18 @@ POST /v1/user/bing-phone
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
 ## 绑定邮箱
 
 POST /v1/user/bing-email
+
+!!不要问为什么是 bing,我也不知道.!!
 
 请求头:
 
@@ -767,7 +771,7 @@ POST /v1/user/bing-email
 
 请求体：
 
-```JSONC
+```JSON
 {
   "email": "123@123.com", // 欲绑定邮箱
   "captcha": "123123" // 邮件验证码
@@ -776,10 +780,10 @@ POST /v1/user/bing-email
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -795,7 +799,7 @@ POST /v1/user/change-phone-check
 
 请求体：
 
-```JSONC
+```JSON
 {
   "phone": "12312341230", // 欲绑定手机号
   "captcha": "123123" // 短信验证码
@@ -804,10 +808,10 @@ POST /v1/user/change-phone-check
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -823,7 +827,7 @@ POST /v1/user/change-email-check
 
 请求体：
 
-```JSONC
+```JSON
 {
   "email": "123@123.com", // 欲绑定邮箱
   "captcha": "123123" // 邮件验证码
@@ -832,10 +836,10 @@ POST /v1/user/change-email-check
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -845,7 +849,7 @@ POST /v1/user/forget-password
 
 请求体：
 
-```JSONC
+```JSON
 {
   "email": "123@123.com", // 欲绑定邮箱
   "captcha": "123123", // 邮件验证码
@@ -855,10 +859,10 @@ POST /v1/user/forget-password
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -874,10 +878,10 @@ POST /v1/user/save-user-data
 
 请求体：
 
-```JSONC
+```JSON
 {
   "introduction": "111", // 个人简介
-  "gender": 3, // 性别，1-男，2-女，3-其他
+  "gender": 3, // 性别: 1-男，2-女，3-其他
   "birthday": 1231231230, // 生日时间戳
   "province": "北京市", // 所在地省份
   "city": "北京城区", // 所在地城市
@@ -888,10 +892,10 @@ POST /v1/user/save-user-data
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -907,17 +911,17 @@ POST /v1/user/get-user-data
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "data": {
-      "id": 123, // 个人简介ID
-      "userId": "123", // 用户ID
+      "id": 123, // 个人简介 ID
+      "userId": "123", // 用户 ID
       "lastLoginTime": 1231231230, // 最后登录时间戳
       "update_time": 1231231230, // 个人简介最后更新时间戳
       "introduction": "测试个人简介", // 个人简介
-      "gender": 3, // 性别，1-男，2-女，3-其他
+      "gender": 3, // 性别: 1-男，2-女，3-其他
       "birthday": 1231231230, // 生日时间戳
       "province": "北京市", // 所在地省份
       "city": "北京城区", // 所在地城市
@@ -925,7 +929,7 @@ POST /v1/user/get-user-data
      "locationCode": "110101" // 所在地邮政编码
     }
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -941,16 +945,16 @@ POST /v1/user/get-user-show-adv
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
-    "androidCodeId": "123", // Android代码ID
+    "androidCodeId": "123", // Android ID
     "bottomHeight": 123, // 底部高度
-    "iosCodeId": "123", // IOS代码ID
-    "isShow": 0 // 是否显示，0-不显示，1-显示
+    "iosCodeId": "123", // IOS ID
+    "isShow": 0 // 是否显示: 0-不显示，1-显示
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -966,27 +970,29 @@ POST /v1/user/save-user-remarks
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "friendId": "123123123", // 好友ID
+  "friendId": "123123123", // 好友 ID
   "name": "测试好友备注名称", // 备注名称
   "phone": "123123123", // 备注手机号
-  "others": "[{\"key\":\"123\",\"value\":\"123\"}]" // 更多备注，需将数据按照此格式转义后填入
+  "others": "[{\"key\":\"123\",\"value\":\"123\"}]" // 更多备注，需将数据转义后填入
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
 ## 注销账号
 
 POST /v1/user/cancel-user
+
+!!谁 TMD 想出来的这种命名?!!
 
 请求头:
 
@@ -996,7 +1002,7 @@ POST /v1/user/cancel-user
 
 请求体：
 
-```JSONC
+```JSON
 {
   "phone": "123123123", // 手机号，手机号与邮箱之中只要有一个就行
   "email": "123123123@123.com", // 邮箱，手机号与邮箱之中只要有一个就行
@@ -1006,10 +1012,10 @@ POST /v1/user/cancel-user
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -1025,17 +1031,17 @@ POST /v1/user/device-offline
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "deviceId": "123123123123123" // 设备ID，为登陆时填写的设备ID
+  "deviceId": "123123123123123" // 设备 ID，为登陆时填写的设备 ID
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```

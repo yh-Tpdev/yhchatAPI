@@ -16,10 +16,10 @@ POST /v1/menu/event
 
 请求头：
 
-```JSONC
+```JSON
 {
-  "id": 338, // 按钮id
-  "chatId": "114514", // 聊天id
+  "id": 338, // 按钮 id
+  "chatId": "114514", // 聊天 id
   "chatType": 2, // 会话类型
   "value": "" // 按钮的值
 }
@@ -27,9 +27,9 @@ POST /v1/menu/event
 
 响应头：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```

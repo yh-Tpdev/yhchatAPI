@@ -10,21 +10,21 @@ POST /v1/verification/get-verification-code
 
 请求体:
 
-```JSONC
+```JSON
 {
   "mobile": "12312312300", // 手机号
   "code": "123123", // 人机验证校验码
-  "id": "123", // 人机验证ID
-  "platform": "windows" // 登录平台名称,一般为windows,web等可自定义
+  "id": "123", // 人机验证 ID
+  "platform": "windows" // 登录平台名称,一般为 windows,web 等可自定义,后端不校验
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -34,20 +34,20 @@ POST /v1/verification/get-email-verification-code
 
 请求体:
 
-```JSONC
+```JSON
 {
   "email": "123@123.123", // 邮箱
-  "typ": "forget_password", // 验证类别，forget_password-更改密码验证，其他所有验证都为空
+  "typ": "forget_password", // 验证类别: forget_password-更改密码验证，其他所有验证都为空
   "code": "123123", // 人机验证校验码
-  "id": "123" // 人机验证ID
+  "id": "123" // 人机验证 ID
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```

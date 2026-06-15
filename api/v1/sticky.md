@@ -16,27 +16,27 @@ POST /v1/sticky/list
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "sticky": [
       {
-        "id": 8977, // 置顶ID
-        "chatType": 2, // 会话对象类别，1-用户，2-群聊，3-机器人
-        "chatId": "114514", // 会话对象id
+        "id": 8977, // 置顶 ID
+        "chatType": 2, // 会话对象类别: 1-用户，2-群聊，3-机器人
+        "chatId": "114514", // 会话对象 id
         "chatName": "example", // 会话对象名字
         "sort": 1751616217, // 不知道，跟群聊创建时间戳一样（?
         "avatarUrl": "https://chat-img.jwznb.com/xxxxxxxxxxxxxxx.jpg", // 群聊头像地址
         "createTime": 1751616217, // 会话对象创建时间戳
         "delFlag": 0,
-        "userId": "1234567", // 用户id
-        "certificationLevel": 0 // 识别是否为官方出品，1为官方出品，0则不是
+        "userId": "1234567", // 用户 id
+        "certificationLevel": 0 // 认证等级: 2-地区,1-官方,0-非官方
       }
       // ...
     ]
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -52,19 +52,19 @@ POST /v1/sticky/add
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "chatId": "430084557", // 会话id
-  "chatType": 2 // 会话类型，1-用户，2-群聊，3-机器人
+  "chatId": "430084557", // 会话 id
+  "chatType": 2 // 会话类型: 1-用户，2-群聊，3-机器人
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -80,19 +80,19 @@ POST /v1/sticky/delete
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "chatId": "430084557", // 会话id
-  "chatType": 2 // 会话类型，1-用户，2-群聊，3-机器人
+  "chatId": "430084557", // 会话 id
+  "chatType": 2 // 会话类型: 1-用户，2-群聊，3-机器人
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -108,17 +108,17 @@ POST /v1/sticky/topping
 
 请求体：
 
-```JSONC
+```JSON
 {
-  "id": 5753 // 置顶id
+  "id": 5753 // 置顶 id
 }
 ```
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回状态消息
+  "code": 1,
+  "msg": "success"
 }
 ```

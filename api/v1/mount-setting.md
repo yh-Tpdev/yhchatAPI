@@ -16,9 +16,9 @@ POST /v1/mount-setting/create
 
 请求体:
 
-```JSONC
+```JSON
 {
-  "groupId": "big", // 目标群聊ID
+  "groupId": "big", // 目标群聊 ID
   "mountName": "测试挂载名称", // 挂载名称
   "webdavUrl": "https://...", // 挂载网址
   "webdavUserName": "测试挂载用户名", // 挂载用户名
@@ -29,10 +29,10 @@ POST /v1/mount-setting/create
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
 
@@ -48,17 +48,17 @@ POST /v1/mount-setting/delete
 
 请求体:
 
-```JSONC
+```JSON
 {
-  "id": 123 // 挂载ID
+  "id": 123 // 挂载 ID
 }
 ```
 
 响应体:
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
-  "msg": "success" // 返回消息
+  "code": 1,
+  "msg": "success"
 }
 ```
