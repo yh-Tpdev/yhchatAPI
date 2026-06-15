@@ -732,7 +732,7 @@ POST /v1/user/gold-coin-increase-decrease-record
 
 POST /v1/user/bing-phone
 
-!!不要问为什么是 bing,我也不知道.!!  
+!!不要问为什么是 bing,我也不知道.!!
 
 请求头:
 
@@ -762,7 +762,7 @@ POST /v1/user/bing-phone
 
 POST /v1/user/bing-email
 
-!!不要问为什么是 bing,我也不知道.!!  
+!!不要问为什么是 bing,我也不知道.!!
 
 请求头:
 
@@ -993,7 +993,7 @@ POST /v1/user/save-user-remarks
 
 POST /v1/user/cancel-user
 
-!!谁 TMD 想出来的这种命名?!!  
+!!谁 TMD 想出来的这种命名?!!
 
 请求头:
 
