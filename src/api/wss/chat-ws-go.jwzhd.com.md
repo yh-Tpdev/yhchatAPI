@@ -2,7 +2,7 @@
 title: chat-ws-go.jwzhd.com
 ---
 
-> 本文章下所有 wss 请求地址均为 `wss://chat-ws-go.jwzhd.com/ws`  
+> 本文章下所有 wss 请求地址均为 `wss://chat-ws-go.jwzhd.com/ws`
 
 没写 请求/响应项目 表示不需要相关参数，使用以下功能前必须先链接 wss 并 **登录云湖账号** 。
 

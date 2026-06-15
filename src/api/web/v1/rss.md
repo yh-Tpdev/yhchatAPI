@@ -3,7 +3,7 @@ title: rss
 ---
 
 未特别说明情况下请求域名均为 `chat-web-go.jwzhd.com`  
-没写请求/响应项目表示不需要相关参数.  
+没写请求/响应项目表示不需要相关参数.
 
 ## 获取 RSS 推荐大全
 
@@ -11,9 +11,9 @@ GET /v1/rss/recommend-list
 
 响应体：
 
-```JSONC
+```JSON
 {
-  "code": 1, // 请求状态码，1为正常
+  "code": 1,
   "data": {
     "list": [
       {
@@ -39,7 +39,7 @@ GET /v1/rss/recommend-list
     ],
     "total": 28 // RSS 推荐总数
   },
-  "msg": "success" // 返回消息
+  "msg": "success"
 }
 ```
 
@@ -47,9 +47,9 @@ GET /v1/rss/recommend-list
 
 POST /v1/rss/recommend-apply
 
-请求体:  
+请求体:
 
-```JSONC
+```JSON
 {
     "title": "轻雨Purainity的小站", // 网站标题
     "rssUrl": "https://jibukeshi.dpdns.org/rss.xml", // RSS 地址
@@ -60,7 +60,7 @@ POST /v1/rss/recommend-apply
 
 响应体：
 
-```JSONC
+```JSON
 {
   "code": 1, // 请求状态码，1为正常
   "msg": "success" // 返回消息
