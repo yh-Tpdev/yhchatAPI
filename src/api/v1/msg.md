@@ -39,7 +39,7 @@ quote_msg_id: "引用消息的 ID"
 message send_message_send {
     string msg_id = 2; // 信息 ID
     string chat_id = 3; // 欲发送到的信息对象
-    uint64 chat_type = 4; // 欲发送到的信息对象的类别
+    int64 chat_type = 4; // 欲发送到的信息对象的类别
     Data data = 5;
     message Data {
         string text = 1; // 信息文本
@@ -57,27 +57,27 @@ message send_message_send {
         string expression_id = 15; // 个人表情ID(不知道为啥为STR)
         string quote_image_url = 16; // 引用图片直链,https://...
         string quote_image_name = 17; // 引用图片文件名称
-        uint64 file_size = 18; // 欲发送文件大小
+        int64 file_size = 18; // 欲发送文件大小
         string video = 19; // 欲发送视频 key/url(123.mp4)
         string audio = 21; // 语音 key/url(123.m4a)
-        uint64 audio_time = 22; // 语音秒数
+        int64 audio_time = 22; // 语音秒数
         string quote_video_url = 23; // 引用视频直链,https://...
-        uint64 quote_video_time = 24; // 引用视频时长
-        uint64 sticker_item_id = 25; // 表情 ID
-        uint64 sticker_pack_id = 26; // 表情包 ID
+        int64 quote_video_time = 24; // 引用视频时长
+        int64 sticker_item_id = 25; // 表情 ID
+        int64 sticker_pack_id = 26; // 表情包 ID
         string room_name = 29; // 语音房间发送显示信息的文本
     }
-    uint64 content_type = 6; // 信息类别
-    uint64 command_id = 7; // 所使用命令 ID
+    int64 content_type = 6; // 信息类别
+    int64 command_id = 7; // 所使用命令 ID
     string quote_msg_id = 8; // 引用信息 ID
     Media media = 9;
     message Media { // 在 media 发送对象为，图片/音频/视频
         string file_key = 1; // 发送对象 key (就是上传后七牛对象存储给你返回的 file_key)
         string file_hash = 2; // 发送对象上传返回哈希
         string file_type = 3; // 发送对象类别，image/jpeg-图片，video/mp4-音频
-        uint64 image_height = 5; // 图片高度
-        uint64 image_width = 6; // 图片宽度
-        uint64 file_size = 7; // 发送对象大小
+        int64 image_height = 5; // 图片高度
+        int64 image_width = 6; // 图片宽度
+        int64 file_size = 7; // 发送对象大小
         string file_key2 = 8; // 发送对象key,和1一样,据说不写会报错
         string file_suffix = 9; // 发送对象后缀名
     }
@@ -106,7 +106,7 @@ message send_message_send {
 - `quote_msg_id` # 服务端会自动忽略无效的 `msg_id`,部分消息不支持
 - `data.quote_msg_text` # 可以自定义,服务端不校验,格式: `用户名: 消息内容`
 - `data.quote_image_name` # 填写图片 URL(例如说 test.jpg)
-- `data.quote_video_time` # 填写引用视频 URL,示例同上
+- `data.quote_video_url` # 填写引用视频 URL,示例同上
 - `command_id`
 
 ::: tabs
