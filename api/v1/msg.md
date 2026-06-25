@@ -14,76 +14,11 @@ POST /v1/msg/send-message
 | ----- | ---- | ---- |
 | token | 是   | 无   |
 
-请求体:\
-建议参考 proto 文件中的内容.
+请求体:
 
-```ProtoBuf
-msg_id: "abcdef"
-chat_id: "114514"
-chat_type: 2
-data {
-  text: "文本内容"
-  image: "abcdef.jpg"
-}
-content_type: 2 // 内容类型
-quote_msg_id: "引用消息的 ID"
-
-// media 其实没啥用
+```protobuf
+<!-- @include: @src/full.proto#SendMsgRequest -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 发送消息
-message send_message_send {
-    string msg_id = 2; // 信息 ID
-    string chat_id = 3; // 欲发送到的信息对象
-    int64 chat_type = 4; // 欲发送到的信息对象的类别
-    Data data = 5;
-    message Data {
-        string text = 1; // 信息文本
-        string buttons = 2; // 按钮
-        string file_name = 4; // 欲发送文件名称
-        string file_key = 5; // 欲发送文件 key
-        repeated string mentioned_id = 6; // @对象 ID ,可以填写多个
-        string form = 7; // 表单消息
-        string quote_msg_text = 8; // 引用信息文本
-        string image = 9; // 欲发送图片 key/url(expression/abcdef.jpg)
-        string post_id = 10; // 文章ID
-        string post_title = 11; // 文章标题
-        string post_content = 12; // 文章内容
-        string post_type = 13; // 文章类型:1-文本,2-Markdown
-        string expression_id = 15; // 个人表情ID(不知道为啥为STR)
-        string quote_image_url = 16; // 引用图片直链,https://...
-        string quote_image_name = 17; // 引用图片文件名称
-        int64 file_size = 18; // 欲发送文件大小
-        string video = 19; // 欲发送视频 key/url(123.mp4)
-        string audio = 21; // 语音 key/url(123.m4a)
-        int64 audio_time = 22; // 语音秒数
-        string quote_video_url = 23; // 引用视频直链,https://...
-        int64 quote_video_time = 24; // 引用视频时长
-        int64 sticker_item_id = 25; // 表情 ID
-        int64 sticker_pack_id = 26; // 表情包 ID
-        string room_name = 29; // 语音房间发送显示信息的文本
-    }
-    int64 content_type = 6; // 信息类别
-    int64 command_id = 7; // 所使用命令 ID
-    string quote_msg_id = 8; // 引用信息 ID
-    Media media = 9;
-    message Media { // 在 media 发送对象为，图片/音频/视频
-        string file_key = 1; // 发送对象 key (就是上传后七牛对象存储给你返回的 file_key)
-        string file_hash = 2; // 发送对象上传返回哈希
-        string file_type = 3; // 发送对象类别，image/jpeg-图片，video/mp4-音频
-        int64 image_height = 5; // 图片高度
-        int64 image_width = 6; // 图片宽度
-        int64 file_size = 7; // 发送对象大小
-        string file_key2 = 8; // 发送对象key,和1一样,据说不写会报错
-        string file_suffix = 9; // 发送对象后缀名
-    }
-}
-```
-
-:::
 
 :::: details 发送消息指引
 
@@ -100,12 +35,12 @@ message send_message_send {
 
 可选:
 
-* `data.mentioned_id`
-* `data.buttons` # 部分消息填写此项会非常生草
+* `msg_content.mentioned_id`
+* `msg_content.buttons` # 部分消息填写此项会非常生草
 * `quote_msg_id` # 服务端会自动忽略无效的 `msg_id`,部分消息不支持
-* `data.quote_msg_text` # 可以自定义,服务端不校验,格式: `用户名: 消息内容`
-* `data.quote_image_name` # 填写图片 URL(例如说 test.jpg)
-* `data.quote_video_url` # 填写引用视频 URL,示例同上
+* `msg_content.quote_msg_text` # 可以自定义,服务端不校验,格式: `用户名: 消息内容`
+* `msg_content.quote_image_name` # 填写图片 URL(例如说 test.jpg)
+* `msg_content.quote_video_url` # 填写引用视频 URL,示例同上
 * `command_id`
 
 ::: tabs
@@ -114,33 +49,33 @@ message send_message_send {
 此处文本类消息指 `普通文本`,`html 消息`,`markdown 消息`.
 必填:
 
-* `data.text`
+* `msg_content.text`
 
 @tab 图片消息
 
 必填:
 
-* `data.image`
+* `msg_content.image_url`
 
 @tab 文件消息
 
 必填:
 
-* `data.file_key` # 直接填文件 URL,例如 123.bin
-* `data.file_size` # 文件大小,服务端不校验,建议如实填写
+* `msg_content.file_key` # 直接填文件 URL,例如 123.bin
+* `msg_content.file_size` # 文件大小,服务端不校验,建议如实填写
 
 @tab 视频消息
 
 必填:
 
-* `data.video` # 直接填视频 URL,例如 123.mp4
+* `msg_content.video` # 直接填视频 URL,例如 123.mp4
 
 @tab 语音消息
 
 必填:
 
-* `data.audio` # 语音文件 URL(例如说 test.m4a)
-* `data.audio_time` # 语音时长,服务端不校验,建议按照实际填写
+* `msg_content.audio` # 语音文件 URL(例如说 test.m4a)
+* `msg_content.audio_time` # 语音时长,服务端不校验,建议按照实际填写
 
 注: 服务端会忽略引用消息相关的参数.
 
@@ -148,16 +83,16 @@ message send_message_send {
 
 必填:
 
-* `data.image`
-* `data.expression_id` # 注意 proto 中此项为 str 类型,服务端不校验,建议如实填写否则会导致无法添加/添加表情和图片不一致等问题
+* `msg_content.image`
+* `msg_content.expression_id` # 注意 proto 中此项为 str 类型,服务端不校验,建议如实填写否则会导致无法添加/添加表情和图片不一致等问题
 
 @tab 表情包表情
 
 必填:
 
-* `data.image`
-* `data.sticker_item_id` # 表情 ID,服务端不校验,建议如实填写,否则会出现不一致/无法添加等问题
-* `data.sticker_pack_id` # 表情包 ID,服务端不校验,建议如实填写否则会出现不一致/无法预览等问题
+* `msg_content.image`
+* `msg_content.sticker_item_id` # 表情 ID,服务端不校验,建议如实填写,否则会出现不一致/无法添加等问题
+* `msg_content.sticker_pack_id` # 表情包 ID,服务端不校验,建议如实填写否则会出现不一致/无法预览等问题
 
 @tab 文章消息
 
@@ -167,31 +102,16 @@ message send_message_send {
 
 必填:
 
-* `data.form` # 具体内容自己抓包看吧
+* `msg_content.form` # 具体内容自己抓包看吧
 
 :::
 ::::
 
 响应体:
 
-```ProtoBuf
-status {
-  request_id: 123456
-  code: 1
-  msg: "success"
-}
+```protobuf
+<!-- @include: @src/full.proto#StatusResponse -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 信息发送是否成功状态信息
-message send_message {
-    Status status = 1; // 状态码
-}
-```
-
-:::
 
 ## 编辑消息
 
@@ -211,58 +131,16 @@ POST /v1/msg/edit-message
 
 请求体:
 
-```ProtoBuf
-msg_id: "123456" // 要编辑的消息 ID
-chat_id: "big" // 消息所属聊天对象的 ID
-chat_type: 2 // 消息所属聊天对象类型
-content {
-  text: "123" // 文本
-  // 剩下的建议看 proto 文件
-}
-content_type: 1 // 要编辑为的消息类型
-quote_msg_id: "11451419180" // 引用的消息 ID
+```protobuf
+// 懒得改名了,就这样吧
+<!-- @include: @src/full.proto#SendMsgRequest -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 编辑消息
-message edit_message_send {
-    string msg_id = 2;
-    string chat_id = 3;
-    int32 chat_type = 4;
-    Content content = 5;
-    message Content {
-        string text = 1; // 文本
-        string buttons = 2; // 按钮
-        string quote_msg_text = 8; // 引用消息文字
-    }
-    uint64 content_type = 6; // 信息类别
-    string quote_msg_id = 8; // 引用信息 ID
-}
-```
-
-:::
 
 响应体:
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
+```protobuf
+<!-- @include: @src/full.proto#StatusResponse -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message edit_message {
-    Status status = 1;
-}
-```
-
-:::
 
 ## 按消息序列列出消息（不包含指定消息）
 
@@ -280,148 +158,16 @@ POST /v1/msg/list-message-by-seq
 
 请求体:
 
-```ProtoBuf
-msg_start: 1234 // 开始的消息序列
-chat_type: 2 // 对象类型
-chat_id: "big" // 对象 ID
-```
-
-::: details ProtoBuf 数据结构
-
-```proto
+```protobuf
 // 通过消息序列列出消息
-message list_message_by_seq_send {
-    uint64 msg_start = 3; // 从第 N 个消息开始
-    uint64 chat_type = 4; // 对象类型
-    string chat_id = 5; // 对象 ID
-}
+<!-- @include: @src/full.proto#ListMsgBySeqRequest-->
 ```
-
-:::
 
 响应体:
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-msg {
-  msg_id: "abcdef" // 消息 ID
-  sender {
-    chat_id: "7356666" // 发送者 ID
-    chat_type: 1 // 发送者类型。
-    name: "测试" // 发送者名称
-    avatar_url: "https://chat-img.jwznb.com/..." // 头像 URL
-    tag_old: "测试成员" // 标签(旧版显示)
-    // ...
-    tag {
-      id: 114514 // 标签 ID
-      text: "测试成员" // 标签文字
-      color: "#FFFFFFFF" // 颜色
-    }
-    // ...
-  }
-  direction: "left" // 在聊天中的位置(左边/右边)
-  content_type: 1 // 消息类型
-  content {
-    text: "ok" // 消息内容
-    // 剩下的建议看 ProtoBuf 序列文件,太多不写了
-  }
-  send_time: 123456789 // 发送时间(毫秒时间戳)
-  cmd {
-    cmd_id = 123; // 指令ID
-    name: "指令名" // 指令名
-    type: 1 // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
-  }
-  msg_delete_time: 8888 // 消息撤回时间(毫秒时间戳)
-  quote_msg_id: "abcdef" // 引用消息的 ID
-  msg_seq: 6666 // 消息序列
-  edit_time: 1234 // 最后编辑时间
-}
-// ...
-total: 23 // 获取的消息数量,貌似最大31个,实际获取的数量是请求中的数量+1
+```protobuf
+<!-- @include: @src/full.proto#ListMsgResponse-->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message Tag {
-    uint64 id = 1; // 标签 ID (貌似)
-    string text = 3;
-    string color = 4;
-}
-
-message list_message_by_seq {
-    Status status = 1;
-    repeated Msg msg = 2;
-    uint64 msg_count = 3; // 消息数
-
-    message Msg {
-        string msg_id = 1; // 消息 ID
-        Sender sender = 2;
-        string direction = 3; // 消息位置,左边/右边
-        uint64 content_type = 4;
-        Content content = 5;
-        uint64 send_time = 6; // 时间戳(毫秒)
-        Cmd cmd = 7; // 指令
-        uint64 msg_delete_time = 8; // 消息撤回时间
-        string quote_msg_id = 9; // 引用消息 ID
-        uint64 msg_seq = 10;
-        uint64 edit_time = 12; // 最后编辑时间
-
-        message Cmd {
-        uint64 cmd_id = 1; // 指令 ID
-        string name = 2; // 指令名
-        uint64 type = 4; // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
-        }
-        // 消息
-        message Content {
-            string text = 1; // 消息内容
-            string buttons = 2; // 按钮
-            string image_url = 3; // 图像 URL
-            string file_name = 4; // 文件名
-            string file_url = 5; // 文件 URL
-            repeated string at = 6; // 被 @ 对象的 ID
-            string form = 7; // 表单消息
-            string quote_msg_text = 8; // 引用消息文字
-            string sticker_url = 9; // 表情 URL
-            string post_id = 10; // 文章 ID
-            string post_title = 11; // 文章标题
-            string post_content = 12; // 文章内容
-            string post_content_type = 13; // 文章类型
-            string expression_id = 15; // 个人表情 ID (不知道为啥类型为字符串)
-            string quote_image_url = 16; // 引用图片直链,https://...
-            string quote_image_name = 17; // 引用图片文件名称
-            uint64 file_size = 18; // 文件/图片大小(字节)
-            string video_url = 19; // 视频 URL
-            string audio_url = 21; // 语音 URL
-            uint64 audio_time = 22; // 语音时长
-            string quote_video_url = 23; // 引用视频直链,https://...
-            uint64 quote_video_time = 24; // 引用视频时长
-            uint64 sticker_item_id = 25; // 表情 ID
-            uint64 sticker_pack_id = 26; // 表情包 ID
-            string call_text = 29; // 语音通话文字
-            string call_status_text = 32; // 语音通话状态文字
-            uint64 width = 33; // 图片的宽度
-            uint64 height = 34; // 图片的高度
-            string tip = 37; // 提示信息
-        }
-        // 发送者信息
-        message Sender {
-            string chat_id = 1; // 发送者 ID
-            uint64 chat_type = 2; // 发送者类型
-            string name = 3; // 发送者名称
-            string avatar_url = 4; // 头像 URL
-            repeated string tag_old = 6; // 标签(旧版显示)
-            repeated Tag tag = 7; // 标签
-        }
-    }
-}
-```
-
-:::
 
 ## 列出消息
 
@@ -439,150 +185,16 @@ POST /v1/msg/list-message
 
 请求体:
 
-```ProtoBuf
-msg_count: 233 // 获取的消息数
-msg_id: "abcdef" // 从指定消息 id 开始,可不写
-chat_type: 2 // 对象类型
-chat_id: "big" // 对象 ID
+```protobuf
+<!-- @include: @src/full.proto#ListMsgRequest-->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message list_message_send {
-    uint64 msg_count = 2; // 获取消息数
-    string msg_id = 3; // 从指定消息 ID 开始
-    uint64 chat_type = 4; // 对象类型
-    string chat_id = 5; // 对象 ID
-}
-```
-
-:::
 
 响应体:\
 列出的是指定消息 ID 前的消息.
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-msg {
-  msg_id: "abcdef" // 消息 ID
-  sender {
-    chat_id: "7356666" // 发送者 ID
-    chat_type: 1 // 发送者类型。
-    name: "测试" // 发送者名称
-    avatar_url: "https://chat-img.jwznb.com/..." // 头像 URL
-    tag_old: "测试成员" // 标签(旧版显示)
-    // ...
-    tag {
-      id: 114514 // 标签ID
-      text: "测试成员" // 标签文字
-      color: "#FFFFFFFF" // 颜色
-    }
-    // ...
-  }
-  direction: "left" // 在聊天中的位置(左边/右边)
-  content_type: 1 // 消息类型
-  content {
-    text: "ok" // 消息内容
-    // 剩下的建议看 ProtoBuf 序列文件,太多不写了
-  }
-  send_time: 123456789 // 发送时间(毫秒时间戳)
-  cmd {
-    cmd_id = 123; // 指令 ID
-    name: "指令名" // 指令名
-    type: 1 // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
-  }
-  msg_delete_time: 8888 // 消息撤回时间(毫秒时间戳)
-  quote_msg_id: "abcdef" // 引用消息的 ID
-  msg_seq: 6666 // 消息序列
-  edit_time: 1234 // 最后编辑时间
-}
-// ...
+```protobuf
+<!-- @include: @src/full.proto#ListMsgResponse-->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 标签
-message Tag {
-    uint64 id = 1; // 标签 ID (貌似)
-    string text = 3;
-    string color = 4;
-}
-
-message Msg {
-    string msg_id = 1; // 消息 ID
-    Sender sender = 2;
-    string direction = 3; // 消息位置,左边/右边
-    uint64 content_type = 4;
-    Content content = 5;
-    uint64 send_time = 6; // 时间戳(毫秒)
-    Cmd cmd = 7; // 指令
-    uint64 msg_delete_time = 8; // 消息撤回时间
-    string quote_msg_id = 9; // 引用消息 ID
-    uint64 msg_seq = 10;
-    uint64 edit_time = 12; // 最后编辑时间
-
-    message Cmd {
-        uint64 cmd_id = 1; // 指令 ID
-        string name = 2; // 指令名
-        uint64 type = 4; // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
-    }
-    // 消息
-    message Content {
-        string text = 1; // 消息内容
-        string buttons = 2; // 按钮
-        string image_url = 3;
-        string file_name = 4;
-        string file_url = 5;
-        repeated string at = 6; // 被 @ 对象的 ID
-        string form = 7; // 表单消息
-        string quote_msg_text = 8; // 引用消息文字
-        string sticker_url = 9; // 表情 URL
-        string post_id = 10; // 文章 ID
-        string post_title = 11; // 文章标题
-        string post_content = 12; // 文章内容
-        string post_content_type = 13; // 文章类型
-        string expression_id = 15; // 个人表情 ID (不知道为啥为类型为字符串)
-        string quote_image_url = 16; // 引用图片直链,https://...
-        string quote_image_name = 17; // 引用图片文件名称
-        uint64 file_size = 18; // 文件/图片大小(字节)
-        string video_url = 19; // 视频 URL
-        string audio_url = 21; // 语音 URL
-        uint64 audio_time = 22; // 语音时长
-        string quote_video_url = 23; // 引用视频直链,https://...
-        uint64 quote_video_time = 24; // 引用视频时长
-        uint64 sticker_item_id = 25; // 表情 ID
-        uint64 sticker_pack_id = 26; // 表情包 ID
-        string call_text = 29; // 语音通话文字
-        string call_status_text = 32; // 语音通话状态文字
-        uint64 width = 33; // 图片的宽度
-        uint64 height = 34; // 图片的高度
-        string tip = 37; // 提示信息
-    }
-    // 发送者信息
-    message Sender {
-        string chat_id = 1;
-        uint64 chat_type = 2;
-        string name = 3;
-        string avatar_url = 4;
-        repeated string tag_old = 6;
-        repeated Tag tag = 7;
-    }
-}
-
-// 获取消息
-message list_message { // 其实可以和 list-message-by-seq 共用的。
-    Status status = 1;
-    repeated Msg msg = 2;
-}
-```
-
-:::
 
 ## 按消息ID列出消息（包含消息id指定的消息）
 
@@ -604,156 +216,15 @@ POST /v1/msg/list-message-by-mid-seq
 
 请求体:
 
-```ProtoBuf
-msg_seq: 123456 // 开始消息的 seq,不写默认0
-chat_type: 2 // 对象类型
-chat_id: "big" // 对象 ID
-unknown: 0 // 不知道干啥的
-msg_count: 10 // 请求获取消息数量
-msg_id: abcdef // 消息 ID
+```protobuf
+<!-- @include: @src/full.proto#ListMsgByMidSeqRequest-->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 列出包含请求 msg_id 消息
-message list_message_by_mid_seq_send {
-    uint64 msg_seq = 3; // 开始消息的 seq
-    uint64 chat_type = 4;
-    string chat_id = 5;
-    uint64 unknown = 6; // 不知道干啥的
-    uint64 msg_count = 7;
-    string msg_id = 8;
-}
-```
-
-:::
 
 响应体:
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-msg {
-  msg_id: "abcdef" // 消息 ID
-  sender {
-    chat_id: "7356666" // 发送者 ID
-    chat_type: 1 // 发送者类型。
-    name: "测试" // 发送者名称
-    avatar_url: "https://chat-img.jwznb.com/..." // 头像 URL
-    tag_old: "测试成员" // 标签(旧版显示)
-    // ...
-    tag {
-      id: 114514 // 标签 ID
-      text: "测试成员" // 标签文字
-      color: "#FFFFFFFF" // 颜色
-    }
-    // ...
-  }
-  direction: "left" // 在聊天中的位置(左边/右边)
-  content_type: 1 // 消息类型
-  content {
-    text: "ok" // 消息内容
-    // 剩下的建议看 ProtoBuf 序列文件,太多不写了
-  }
-  send_time: 123456789 // 发送时间(毫秒时间戳)
-  cmd {
-    cmd_id = 123; // 指令 ID
-    name: "指令名" // 指令名
-    type: 1 // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
-  }
-  msg_delete_time: 8888 // 消息撤回时间(毫秒时间戳)
-  quote_msg_id: "abcdef" // 引用消息的 ID
-  msg_seq: 6666 // 消息序列
-  edit_time: 1234 // 最后编辑时间
-}
-// ...
-total: 11 // 获取的消息数量
+```protobuf
+<!-- @include: @src/full.proto#ListMsgResponse-->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 标签
-message Tag {
-    uint64 id = 1; // 标签 ID (貌似)
-    string text = 3;
-    string color = 4;
-}
-
-message Msg {
-    string msg_id = 1; // 消息 ID
-    Sender sender = 2;
-    string direction = 3; // 消息位置,左边/右边
-    uint64 content_type = 4;
-    Content content = 5;
-    uint64 send_time = 6; // 时间戳(毫秒)
-    Cmd cmd = 7; // 指令
-    uint64 msg_delete_time = 8; // 消息撤回时间
-    string quote_msg_id = 9; // 引用消息 ID
-    uint64 msg_seq = 10;
-    uint64 edit_time = 12; // 最后编辑时间
-
-    message Cmd {
-        uint64 cmd_id = 1; // 指令 ID
-        string name = 2; // 指令名
-        uint64 type = 4; // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
-    }
-    // 消息
-    message Content {
-        string text = 1; // 消息内容
-        string buttons = 2; // 按钮
-        string image_url = 3;
-        string file_name = 4;
-        string file_url = 5;
-        repeated string at = 6; // 被 @ 对象的 ID
-        string form = 7; // 表单消息
-        string quote_msg_text = 8; // 引用消息文字
-        string sticker_url = 9; // 表情 URL
-        string post_id = 10; // 文章 ID
-        string post_title = 11; // 文章标题
-        string post_content = 12; // 文章内容
-        string post_content_type = 13; // 文章类型
-        string expression_id = 15; // 个人表情 ID (不知道为啥为类型是字符串)
-        string quote_image_url = 16; // 引用图片直链,https://...
-        string quote_image_name = 17; // 引用图片文件名称
-        uint64 file_size = 18; // 文件/图片大小(字节)
-        string video_url = 19; // 视频 URL
-        string audio_url = 21; // 语音 URL
-        uint64 audio_time = 22; // 语音时长
-        string quote_video_url = 23; // 引用视频直链,https://...
-        uint64 quote_video_time = 24; // 引用视频时长
-        uint64 sticker_item_id = 25; // 表情 ID
-        uint64 sticker_pack_id = 26; // 表情包 ID
-        string call_text = 29; // 语音通话文字
-        string call_status_text = 32; // 语音通话状态文字
-        uint64 width = 33; // 图片的宽度
-        uint64 height = 34; // 图片的高度
-        string tip = 37; // 提示信息
-    }
-    // 发送者信息
-    message Sender {
-        string chat_id = 1;
-        uint64 chat_type = 2;
-        string name = 3;
-        string avatar_url = 4;
-        repeated string tag_old = 6;
-        repeated Tag tag = 7;
-    }
-}
-
-message list_message_by_mid_seq {
-    Status status = 1;
-    repeated Msg msg = 2;
-    uint64 total = 3; // 消息数
-}
-
-```
-
-:::
 
 ## 获取信息历史编辑内容
 
@@ -810,47 +281,16 @@ POST /v1/msg/button-report
 
 请求体:
 
-```ProtoBuf
-msg_id: "123123123123123123" // 信息 ID
-chat_type: 2 // 对象类型
-chat_id: "123" // 对象 ID
-user_id: "123" // 按钮事件发送者 ID
-button_value: "测试按钮文本" // 欲点击按钮的值
+```protobuf
+<!-- @include: @src/full.proto#ButtonReportRequest-->
 ```
+
+响应体:
 
 ::: details ProtoBuf 数据结构
 
-```proto
-// 通过按钮事件点击消息
-message button_report_send {
-    string msg_id = 2; // 信息 ID
-    uint64 chat_type = 3; // 对象类型
-    string chat_id = 4; // 对象 ID
-    string user_id = 5; // 按钮事件发送者 ID
-    string button_value = 6; // 欲点击按钮的值
-}
-```
-
-:::
-
-响应体:\
-列出的是指定消息 ID 前的消息.
-
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 按钮事件点击返回状态信息
-message button_report {
-    Status status = 1;
-}
+```protobuf
+<!-- @include: @src/full.proto#StatusResponse -->
 ```
 
 :::
@@ -867,45 +307,15 @@ POST /v1/msg/recall-msg
 
 请求体:
 
-```ProtoBuf
-msg_id: "123123123123123123" // 信息 ID
-chat_id: "123" // 信息所属对象 ID
-chat_type: 2 // 信息所属对象类型
+```protobuf
+<!-- @include: @src/full.proto#RecallMsg -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 通过 msgId 撤回消息
-message recall_msg_send {
-    string msg_id = 2; // 信息 ID
-    string chat_id = 3; // 信息所属对象 ID
-    uint64 chat_type = 4; // 信息所属对象类型
-}
-```
-
-:::
 
 响应体:
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-```
-
-::: details ProtoBuf 数据结构
-
 ```proto
-// 撤回消息返回数据
-message recall_msg {
-    Status status = 1;
-}
+<!-- @include: @src/full.proto#StatusReponse-->
 ```
-
-:::
 
 ## 批量撤回消息
 
@@ -919,46 +329,15 @@ POST /v1/msg/recall-msg-batch
 
 请求体:
 
-```ProtoBuf
-msg_id: "123123123123123123" // 信息 ID
-// ...
-chat_id: "123" // 信息所属对象 ID
-chat_type: 2 // 信息所属对象类型
+```protobuf
+<!-- @include: @src/full.proto#RecallMsg -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 通过 msgId 撤回消息
-message recall_msg_batch_send {
-    repeated string msg_id = 2; // 信息 ID
-    string chat_id = 3; // 信息所属对象 ID
-    uint64 chat_type = 4; // 信息所属对象类型
-}
-```
-
-:::
 
 响应体:
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
+```protobuf
+<!-- @include: @src/full.proto#StatusReponse-->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 批量信息撤回返回状态
-message recall_msg_batch {
-    Status status = 1;
-}
-```
-
-:::
 
 ## 文件消息下载记录
 
@@ -1034,39 +413,23 @@ POST v1/msg/pic-list-message-by-mid-seq
 
 请求体：
 
-```ProtoBuf
-image_id: 110617 // 图片 id
-chat_type: 2 // 会话类型
-chat_id: "418769995" // 会话 id
-earlier_quantities: 10 // 前面（消息时间较早）的图片数量
-latest_quantities: 0 // 后面（消息时间较新）的图片数量
+```protobuf
+<!-- @include: @src/full.proto#PicListMsgByMidSeqRequest -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-meassage pic-list-message-by-mid-seq {
-    uint64 image_id = 3; // 图片 id
-    uint64 chat_type = 4; // 会话类型
-    string chat_id = 5; // 会话 id
-    uint64 earlier_quantities = 6; // 前面（消息时间较早）的图片数量
-    uint64 latest_quantities = 7; // 后面（消息时间较新）的图片数量
-}
-```
-
-:::
 
 响应体：
 
-```proto
-// 和 list-message/list-message-by-seq/list-message-by-mid-seq 的 proto 共用
+```protobuf
+<!-- @include: @src/full.proto#ListMsgResponse-->
 ```
 
-## 删除消息（不是撤回）
+## 删除消息
 
 ```http request
 POST /v1/msg/delete
 ```
+
+此处是长按消息-删除请求的 API,不是撤回消息的 API.
 
 请求头：
 
