@@ -1,0 +1,14 @@
+version: v2
+modules:
+  - path: .  # 表示当前目录（项目根目录）就是一个模块
+lint:
+  use:
+    - STANDARD
+  except:
+    - PACKAGE_DIRECTORY_MATCH
+    # 关闭"枚举值必须加前缀"的检查
+    - ENUM_VALUE_PREFIX
+    # 关闭"枚举值必须全大写下划线"的检查
+    - ENUM_VALUE_UPPER_SNAKE_CASE
+    # 关闭"枚举零值必须加 _UNSPECIFIED 后缀"的检查
+    - ENUM_ZERO_VALUE_SUFFIX

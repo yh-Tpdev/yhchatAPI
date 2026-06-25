@@ -61,51 +61,9 @@ GET /v1/user/info
 
 响应体:
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-data {
-  id: "123" // 用户 id
-  name: "测试用户" // 用户名
-  avatar_url: "https://..." // 头像 URL
-  avatar_id: 123 //头像 ID
-  phone: "12312312300" // 手机号
-  email: "123@123.com" // 邮箱
-  coin: 123 // 金币数
-  is_vip: 0 // 是否为 VIP
-  vip_expired_time: 1231231230 // VIP 过期时间
-  invitation_code: "123" // 邀请码
-}
+```protobuf
+<!-- @include: @src/full.proto#UserInfo -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 用户自身信息
-message info {
-
-    Status status = 1;
-    message Data {
-        // 11是描述手机号长整数的,懒得解析了
-        string id = 1; // 用户 id
-        string name = 2; // 用户名
-        string avatar_url = 4; // 头像 URL
-        uint64 avatar_id = 5; // 头像 ID
-        string phone = 6; // 手机号
-        string email = 7; // 邮箱
-        double coin = 8; // 金币数
-        int32 is_vip = 9; // 是否为 VIP
-        uint64 vip_expired_time = 10; // VIP 过期时间
-        string invitation_code = 12; // 邀请码
-    }
-    Data data = 2;
-}
-```
-
-:::
 
 ## 获取用户信息
 
@@ -119,126 +77,27 @@ POST /v1/user/get-user
 
 请求体:
 
-```ProtoBuf
-id: "用户 id"
+```protobuf
+<!-- @include: @src/full.proto#GetUserRequest -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message get_user_send {
-    string id = 2;
-}
-```
-
-:::
 
 响应体:
 
-```ProtoBuf
-status {
-  request_id: 123456
-  code: 1
-  msg: "success"
-}
-data {
-  id: "123" // 用户 ID
-  name: "测试用户" // 用户名
-  name_id: 123 // 名称 ID
-  avatar_url: "https://..." // 头像 URL
-  avatar_id: 123 // 头像 ID
-  register_time: "1234-12-12 12:12:12" // 注册时间(YYYY-MM-DD hh:mm:ss)
-  online_day: 123 // 在线时长
-  continuous_online_day: 123 // 连续在线时长
-  is_vip: 1 // 是否为 VIP
-  vip_expired_time: 123123123 // VIP 过期时间(时间戳)
-  ban_time: 123123123 // 封禁结束时间(时间戳)
-  medal [
-    {
-      "name": "徽章1", // 徽章名称
-      "icon": "徽章1", // ?徽章图标?
-      "sort": 1, // 徽章顺序（在服务端）
-      "_id": "id", // ?徽章介绍?
-      "level": 100, // 等级
-      "_level": "level" // ?等级介绍?
-     },
-     {
-      "name": "徽章2", // 徽章名称
-      "icon": "徽章2", // ?徽章图标?
-      "sort": 3, // 徽章顺序（在服务端）
-      "_id": "id", // ?徽章介绍?
-      "level": 500, // 等级
-      "_level": "level" // ?等级介绍?
-    }
-  ],
-  "remark_info": {
-    "date": "", // 备注时间
-    "remarks": "" // 备注内容
-  },
-  "profile_info": {
-    "flag": 1, // ？
-    "scoreOrId": 1295971200,
-    "province": "省（自治区）", // IP 归属地
-    "city": "市", // IP 归属地
-    "district": "区（县）", // IP归 属地
-  },
-  "country": "国家或地区" // IP 归属地
-}
-```
-
-::: details ProtoBuf 数据结构
-
-```proto
+```protobuf
 // 勋章信息
-message Medal_info {
-    uint64 id = 1; // 勋章 ID
-    string name = 2; // 勋章名称
-    uint64 sort = 5;  // 勋章顺序
-}
+<!-- @include: @src/full.proto#MedalInfo -->
 
-message Remark_info {
-    string remark_name = 1; // 备注名
-    string phone = 2; // 手机号
-    string extra_remark = 3; // 其他备注（格式为 JSON，示例：'[{"key":"他是","value":"我的朋友"},{"key":"职业","value":"打工人"}]'
-}
+// 备注信息
+<!-- @include: @src/full.proto#RemarkInfo -->
 
-message Profile_info {
-    string last_active_time = 1; // 该用户上次活跃时间
-    string introduction = 2; // 简介
-    int32 gender = 3; // 性别（1-男，2-女，3-其他）
-    uint64 birthday_timestamp = 4; // 生日时间戳
-    string city = 5; // 城市
-    string district = 6; // 地区
-    string address = 7; // 详细地址
-}
+// 个人信息
+<!-- @include: @src/full.proto#ProfileInfo -->
 
-// 获取用户信息
-message get_user {
-    Status status = 1;
-    Data data = 2; // 数据
-    message Data {
-        string id = 1; // 用户 id
-        string name = 2; // 用户名
-        uint64 name_id = 3; // 名称 ID
-        string avatar_url = 4; //头像 URL
-        uint64 avatar_id = 5; // 头像 ID
-        repeated Medal_info medal = 6; // 勋章信息
-        string register_time = 7; // 注册时间,格式: YYYY-MM-DD hh:mm:ss
-        uint64 ban_time = 10; // 封禁结束时间(时间戳)
-        uint64 online_day = 11; // 在线天数
-        uint64 continuous_online_day = 12; // 连续在线天数
-        int32 is_vip = 13; // 是否为 vip
-        uint64 vip_expired_time = 14; // VIP 过期时间(时间戳)
-        Remark_info remark_info = 18; // 备注信息
-        Profile_info profile_info = 19; // 用户资料信息
-        string ip_geo = 20; // IP归属地（国家）
-    }
-}
+// 获取用户响应
+<!-- @include: @src/full.proto#GetUserResponse -->
 ```
 
-:::
-
-## 用户勋章
+## 获取自身勋章
 
 POST /v1/user/medal
 
@@ -250,39 +109,15 @@ POST /v1/user/medal
 
 响应体:
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-medal {
-  id: 1 // 勋章 ID
-  name: "测试勋章" // 勋章名称
-  sort: 100 // 勋章顺序
-}
-```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 勋章
-message medal {
-    Status status = 1;
-    repeated Medal_info medal = 2; // 勋章信息
-}
+```protobuf
+// 获取自身勋章
+<!-- @include: @src/full.proto#GetSelfMedal -->
 
 // 勋章信息
-message Medal_info {
-    uint64 id = 1; // 勋章 ID
-    string name = 2; // 勋章名称
-    uint64 sort = 5;  // 勋章顺序
-}
+<!-- @include: @src/full.proto#MedalInfo -->
 ```
 
-:::
-
-## 更改用户名称
+## 更改自身名称
 
 POST /v1/user/edit-nickname
 
@@ -294,42 +129,18 @@ POST /v1/user/edit-nickname
 
 请求体:
 
-```ProtoBuf
-name: "123" // 用户名称
+```protobuf
+<!-- @include: @src/full.proto#EditNicknameRequest -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message edit_nickname_send {
-    string name = 3;
-}
-```
-
-:::
 
 响应体:
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
+```protobuf
+<!-- @include: @src/full.proto#StatusResponse -->
 ```
 
-::: details ProtoBuf 数据结构
 
-```proto
-// 更改名称状态信息
-message edit_nickname {
-    Status status = 1;
-}
-```
-
-:::
-
-## 更改用户头像
+## 更改自身头像
 
 POST /v1/user/edit-avatar
 
@@ -341,40 +152,16 @@ POST /v1/user/edit-avatar
 
 请求体:
 
-```ProtoBuf
-url: "https://..." // 用户头像 url
+```protobuf
+<!-- @include: @src/full.proto#EditAvatarRequest -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message edit_avatar_send {
-    string url = 2;
-}
-```
-
-:::
 
 响应体:
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
+```protobuf
+<!-- @include: @src/full.proto#StatusResponse -->
 ```
 
-::: details ProtoBuf 数据结构
-
-```proto
-// 更改名称状态信息
-message edit_avatar {
-    Status status = 1;
-}
-```
-
-:::
 
 ## 用户邮箱密码登录
 
@@ -497,7 +284,7 @@ POST /v1/user/recommend-list
   "data": {
     "groupList": [
       {
-        "chatId": "123", // 群聊 id
+        "chatId": "123", // 群聊 ID
         "banId": 0, // 顾名思义
         "nickname": "测试群聊名称", // 群聊名字
         "introduction": "测试群聊简介", // 群聊介绍
@@ -530,7 +317,7 @@ POST /v1/user/recommend
   "data": {
     "botList": [
       {
-        "chatId": "123", // 机器人 id
+        "chatId": "123", // 机器人 ID
         "chatType": "3", // 识别对象类别，1-用户，2-群聊，3-机器人
         "headcount": "123", // 使用人数
         "nickname": "测试机器人名称", // 机器人名称
@@ -573,11 +360,11 @@ POST /v1/user/module-ignore-info
   "code": 1,
   "data": {
     "ignore": {
-      "id": 0, // 可能是模块设置 id
-      "userId": "1234567", // 用户 id
+      "id": 0, // 可能是模块设置 ID
+      "userId": "1234567", // 用户 ID
       "updateTime": 123455660, // 更新时间戳
-      "deviceId": "1234", // 设备 id
-      "ignore": ",30,20,10" // 模块id: 10-隐藏社区页面，20-隐藏发现页面，30-精简我的界面
+      "deviceId": "1234", // 设备 ID
+      "ignore": ",30,20,10" // 模块 ID: 10-隐藏社区页面，20-隐藏发现页面，30-精简我的界面
     }
   },
   "msg": "success"
@@ -599,7 +386,7 @@ POST /v1/user/module-ignore
 ```JSON
 {
  "deviceId": "1234",
- "ignore": ",30,20,10" // 模块id，10-隐藏社区页面，20-隐藏发现页面，30-精简我的界面
+ "ignore": ",30,20,10" // 模块 ID，10-隐藏社区页面，20-隐藏发现页面，30-精简我的界面
 }
 ```
 
@@ -626,8 +413,8 @@ POST /v1/user/notification-status
 
 ```JSON
 {
-  "deviceId": "1114514", // 设备id
-  "registrationId": "114514" // 注册id
+  "deviceId": "1114514", // 设备 ID
+  "registrationId": "114514" // 注册 ID
 }
 ```
 
@@ -637,11 +424,11 @@ POST /v1/user/notification-status
 {
   "code": 1,
   "data": {
-    "notification": { // 通知 json
-      "id": 110061, // 注册 id
-      "userId": "114514", // 用户 id
-      "deviceId": "114514", // 设备 id
-      "registrationId": "114514", // 通知注册 id
+    "notification": { // 通知 JSON
+      "id": 110061, // 注册 ID
+      "userId": "114514", // 用户 ID
+      "deviceId": "114514", // 设备 ID
+      "registrationId": "114514", // 通知注册 ID
       "isOpen": 1, // 是否打开系统消息通知（设置”系统消息通知“选项可控制这个数值，1-打开，0-关闭）
       "type": 2, // 类型
       "delFlag": 0,
@@ -667,8 +454,8 @@ POST /v1/user/notification-info
 
 ```JSON
 {
-  "deviceId": "114514", // 设备 id
-  "registrationId": "114514", // 注册通知 id
+  "deviceId": "114514", // 设备 ID
+  "registrationId": "114514", // 注册通知 ID
   "isOpen": 1, // // 是否打开系统消息通知（设置”系统消息通知“选项可控制这个数值，1-打开，0-关闭）
   "type": 2 // 类型
 }
@@ -697,7 +484,7 @@ POST /v1/user/gold-coin-increase-decrease-record
 
 ```JSON
 {
-  "size": 20, // 尺寸
+  "size": 20, // 单页数目
   "page": 1 // 页数
 }
 ```
@@ -710,8 +497,8 @@ POST /v1/user/gold-coin-increase-decrease-record
   "data": {
     "goldCoinRecord": [
       {
-        "id": 193275, // 金币记录 id
-        "userId": "用户 id",
+        "id": 193275, // 金币记录 ID
+        "userId": "用户 ID",
         "typ": 8, // 类型
         "beforeAmount": 55.01, // 之前金币数量
         "afterAmount": 57.01, // 之后的金币数量

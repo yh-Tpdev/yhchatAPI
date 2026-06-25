@@ -2,6 +2,9 @@ import { hopeTheme } from "vuepress-theme-hope";
 
 import navbar from "./navbar.js";
 import sidebar from "./sidebar.js";
+import { getDirname, path } from "vuepress/utils";
+
+const __dirname = getDirname(import.meta.url);
 
 export default hopeTheme({
   hostname: "https://yh-api.yyyyt.top",
@@ -56,7 +59,14 @@ export default hopeTheme({
     gfm: true,
     imgLazyload: true,
     imgSize: true,
-    include: true,
+    include: {
+      resolvePath: (file) => {
+        if (file.startsWith("@src"))
+          return file.replace("@src", path.resolve(__dirname, ".."));
+        
+        return file;
+      },
+    },
     mark: true,
     plantuml: true,
     spoiler: true,
