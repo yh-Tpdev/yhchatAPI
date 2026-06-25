@@ -32,6 +32,23 @@ GET /v1/misc/configure-distribution
 }
 ```
 
+***
+
+::: tip 七牛 kodo 相关参考文档
+
+\~~如果不在意体积的话可以直接使用七牛云的 SDK,更省事.~~\
+\~~应该没人在意那几百 KB 空间吧.~~
+
+[上传策略](https://developer.qiniu.com/kodo/1206/put-policy)\
+[上传凭证](https://developer.qiniu.com/kodo/1208/upload-token)\
+[直传文件](https://developer.qiniu.com/kodo/1312/upload)\
+[分片上传 v2 版](https://developer.qiniu.com/kodo/6364/multipartupload-interface)
+
+如果你的能力足够推荐使用分片上传 V2 版,支持断点续传,占用更小.\
+\~~或者是直接用七牛 kodo 的 SDK.~~
+
+:::
+
 ## 获取图片上传token
 
 GET /v1/misc/qiniu-token
