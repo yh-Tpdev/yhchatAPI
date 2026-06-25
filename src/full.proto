@@ -16,19 +16,25 @@ enum ChatType {
 }
 
 enum ContentType {
-  unknown = 0;
+  unknown2 = 0;
   text = 1;
   image = 2;
   markdown = 3;
   file = 4;
-  form = 5;
-  sticker = 7;
+  form = 5; // 表单
+  sticker = 7; // 表情
   html = 8;
-  audio = 11;
-  call = 13;
+  audio = 11; // 语音
+  call = 13; // 语音电话
   a2ui = 14;
 }
 
+enum ContentTypeTextOnly {
+  TEXT_UNSPECIFIED = 0;
+  TEXT_text = 1;
+  TEXT_markdown = 2;
+  TEXT_html = 3;
+}
 // 枚举结束
 
 // 响应状态
@@ -121,6 +127,19 @@ message Tag {
   string color = 4;
 }
 // #endregion Tag
+
+// 看板数据
+// #region BoardData
+message BoardData {
+  string bot_id = 1; // 机器人 ID
+  string chat_id = 2; // 对象 ID
+  ChatType chat_type = 3; // 对象类别
+  string content = 4; // 看板内容
+  ContentTypeTextOnly content_type = 5; // 看板内容类别
+  int64 last_update_time = 6; // 最后更新时间戳
+  string bot_name = 7; // 设置看板机器人名称
+}
+// #endregion BoardData
 // 共用区结束
 
 // User 相关
@@ -240,7 +259,7 @@ message ListMsgBySeqRequest {
 // #region ListMsgResponse
 message ListMsgResponse {
   Status status = 1;
-  repeated MsgData msg_data = 2; // 消息
+  repeated MsgData data = 2; // 消息数据
   uint64 total = 3; // 消息数
 
   message MsgData {
@@ -327,3 +346,341 @@ message PicListMsgByMidSeqRequest {
   uint64 latest_quantities = 7; // 后面（消息时间较新）的图片数量
 }
 // #endregion PicListMsgByMidSeqRequest
+
+// Bot
+
+// #region BotInfoRequest
+message BotInfoRequest {
+  string id = 2; // 机器人 ID
+}
+// #endregion BotInfoRequest
+
+// 获取机器人信息返回信息
+// #region BotInfoResponse
+message BotInfoResponse {
+  Status status = 1;
+  BotData data = 2;
+  message BotData {
+    string bot_id = 1; // 机器人 ID
+    string name = 2; // 机器人名称
+    int64 name_id = 3; // 机器人名称 ID
+    string avatar_url = 4; // 机器人头像 URL
+    string avatar_id = 5; // 机器人头像 ID
+    string introduction = 6; // 机器人介绍
+    string create_by = 7; // 机器人创建者 ID
+    int64 create_time = 8; // 机器人创建时间戳
+    int64 headcount = 9; // 使用人数
+    bool private = 10; // 是否为私有: 0-公开，1-私有
+    bool is_stop = 11; // 是否停用: 0-启用，1-停用
+    bool always_agree = 13; // 自动进群: 0-不自动进群，1-自动进群
+    bool do_not_disturb = 15; // 免打扰: 0-不免打扰，1-免打扰
+    bool top = 18; // 置顶: 0-未置顶，1-已置顶
+    bool group_limit = 20; // 限制进群: 0-允许进群，1-限制进群
+  }
+}
+// #endregion BotInfoResponse
+
+// 看板
+// #region BoardRequest
+message BoardRequest {
+  string id = 3; // 对象 ID
+  ChatType chat_type = 4; // 对象类型
+}
+// #endregion BoardRequest
+
+// 获取看板返回
+// #region BoardResponse
+message BoardResponse {
+  Status status = 1;
+  BoardData data = 2;
+}
+// #endregion BoardResponse
+
+// 创建机器人
+// #region CreateBotRequest
+message CreateBotRequest {
+  string name = 2; // 机器人名称
+  string introduction = 3; // 机器人简介
+  string avatar_url = 4; // 头像 URL
+  bool private = 5; // 是否私有(0-公开，1-私有)
+}
+// #endregion CreateBotRequest
+
+// #region CreateBotResponse
+message CreateBotResponse {
+  Status status = 1;
+  BotData data = 2;
+
+  message BotData {
+    string bot_id = 1; // 创建的机器人 ID
+  }
+}
+// #endregion CreateBotResponse
+
+// 获取使用者列表
+// #region ListFollowerRequest
+message ListFollowerRequest {
+  Data data = 2;
+  string bot_id = 3; // 机器人 ID
+  string keywords = 4; // 搜索关键词
+
+  message Data {
+    int32 size = 1; // 分页大小
+    int32 page = 2; // 页数
+  }
+}
+// #endregion ListFollowerRequest
+
+// #region ListFollowerResponse
+message ListFollowerResponse {
+  Status status = 1;
+  repeated User user = 2;
+  int32 totol = 3; // 总数
+
+  message User {
+    string user_id = 1; // 用户 ID
+    string name = 2; // 昵称
+    string avatar_url = 4; // 头像 URL
+    bool is_vip = 6; // 是否 VIP
+  }
+}
+// #endregion ListFollowerResponse
+
+// 获取加入的群列表
+// #region JoinGroupListRequest
+message JoinGroupListRequest {
+  Data data = 2;
+  string bot_id = 3; // 机器人 ID
+  string keywords = 4; // 搜索关键词
+
+  message Data {
+    int32 size = 1; // 分页大小
+    int32 page = 2; // 页数
+  }
+}
+// #endregion JoinGroupListRequest
+
+// #region JoinGroupListResponse
+message JoinGroupListResponse {
+  Status status = 1;
+  repeated Group group = 2;
+  int32 total = 3; // 总数
+
+  message Group {
+    string id = 1; // 群聊 ID
+    string name = 2; // 群聊名称
+    string avatar_url = 3; // 头像 URL
+  }
+}
+// #endregion JoinGroupListResponse
+
+// Conversation
+
+// 获取对话列表
+// #region ConversationListRequest
+message ConversationListRequest {
+  string md5 = 2; // 上次获取对话的 MD5, 如果与服务端一致则返回空列表
+}
+// #endregion ConversationListRequest
+
+// 列出对话
+// #region ConversationListResponse
+message ConversationListResponse {
+  Status status = 1;
+  repeated Data data = 2;
+  uint64 total = 3; // 列表中对话的数量
+  string md5 = 4; // 对话列表的 md5
+
+  message Data {
+    string chat_id = 1; // 对象 ID
+    ChatType chat_type = 2; // 对象类型
+    string remark = 3; // 备注名称
+    string chat_content = 4; // 消息内容
+    uint64 timestamp_ms = 5; // 加入对话列表时间戳(毫秒)
+    int32 unread_msg = 6; // 未读消息数
+    bool at = 7; // 是否被@
+    uint64 avatar_id = 8; // 头像 ID
+    string avatar_url = 9; // 头像 URL
+    bool do_not_disturb = 11; // 免打扰
+    uint64 send_timestamp = 12; // 消息发送时间戳(秒)
+    AtData at_data = 14; // @数据
+    string name = 15; // 用户真实名称
+    int32 certification_level = 16; // 认证,1 是官方 2 是地区
+
+    message AtData {
+      uint64 unknown = 1; // 似乎是名称 ID
+      string mentioned_id = 2; // 被@的 ID,感觉没啥用
+      string mentioned_name = 3; // 被@的名称,感觉也没啥用
+      string mentioned_in = 4; // @消息所属的对话 ID(例如群 ID),感觉还没啥用
+      string mentioner_id = 6; // 发起@的对象 ID
+      string mentioner_name = 7; // 发起@对象的名称
+      uint64 msg_seq = 8; // 发起@的消息序列
+    }
+  }
+}
+// #endregion ConversationListResponse
+
+// Friend
+// #region AddressBookListRequest 
+message AddressBookListRequest {
+  string md5 = 2; // 上一次通讯录的 MD5,如果和服务端一致则返回空列表
+}
+// #endregion AddressBookListRequest
+
+// 聊天对话列表
+// #region AddressBookListResponse
+message AddressBookListResponse {
+  Status status = 1;
+  repeated Data data = 2;
+  string md5 = 3;
+
+  // 列表数据
+  message Data {
+    string list_name = 1; // 聊天对象列表名称，为"用户"，"我加入的群聊"，"机器人"
+    repeated DataList data = 2;
+    ChatType chat_type = 3;
+
+    // 聊天对象数据
+    message DataList {
+      string chat_id = 1; // 聊天对象 ID
+      string remark = 2; // 聊天对象备注名称
+      string avatar_url = 3; // 聊天对象头像 url
+      int32 permisson_level = 4; // 群权限等级(普通用户无此项(数值为 0 或无此项),群主 100,管理员 2),只有群列表才有此项
+      bool no_disturb = 5; // 免打扰
+      //int32 field6 = 6; // 未知
+      string name = 8; // 聊天对象真实名称
+    }
+  }
+}
+// #endregion AddressBookListResponse
+
+// 申请/邀请列表
+// #region RequestListResponse
+message RequestListResponse {
+  Status status = 1;
+  message Request {
+    string receiver_name = 1; // 接收者名称
+    string receiver_avatar = 2; // 接收者头像
+    string name = 3; // 请求方名称
+    string avatar = 4; // 请求方头像
+    string group_name = 5; // 群组名称
+    string group_avatar = 6; // 群组头像
+    string inviter_id = 7; // 邀请者 ID (字段8同此含义)
+    int32 source_type = 9; // 来源类型
+    int32 target_type = 10; // 目标类型
+    string target_id = 11; // 目标 ID
+    string receiver_id = 12; // 接收者 ID
+    int32 result = 13; // 处理结果
+    int64 processed_at = 14; // 处理时间戳
+    int64 invite_at = 16; // 邀请时间戳
+    string invite_at_str = 17; // 邀请时间字符串
+    int32 request_id = 18; // 请求 ID
+    string bot_name = 19; // 机器人名称
+    string bot_avatar = 20; // 机器人头像
+    string processor_name = 22; // 处理者名称
+    string note = 23; // 备注信息
+  }
+  repeated Request requests = 2; // 请求列表
+  int32 total = 3; // 总请求数
+  int32 pending = 4; // 待处理请求数
+}
+// #endregion RequestListResponse
+
+// group-tag
+// #region TagMemberRequest 
+message TagMemberRequest {
+  Data data = 2;
+  message Data {
+    int32 size = 1; // 分页大小
+    int32 page = 2; // 页数
+  }
+  string group_id = 3; // 标签所处群聊 ID
+  int64 tag_id = 4; // 标签 ID
+}
+// #endregion TagMemberRequest
+
+// #region TagMemberResponse
+message TagMemberResponse {
+  Status status = 1;
+  repeated User user = 2;
+  message User {
+    string group_id = 1;
+    UserInfo user_info = 2;
+
+    message UserInfo {
+      string user_id = 1;
+      string name = 2;
+      string avatar_url = 4;
+      bool is_vip = 6;
+    }
+    int32 permission_level = 3; // 权限等级, 群主 100 管理员 2 普通用户无/0
+    int64 gag_time = 4; // 禁言时间戳
+    bool is_gag = 5; // 是否被禁言
+  }
+  int32 total = 3; // 总数
+}
+// #endregion TagMemberResponse
+
+// group
+
+// 获取群聊信息
+// #region GroupInfoRequest 
+message GroupInfoRequest {
+  string group_id = 2; // 群聊 ID
+}
+// #endregion GroupInfoRequest
+
+// #region GroupInfoResponse
+message GroupInfoResponse {
+  Status status = 1;
+  GroupData data = 2;
+  repeated BotData bot = 3;
+
+  // 群聊数据
+  message GroupData {
+    string group_id = 1;
+    string name = 2;
+    string avatar_url = 3;
+    uint64 avatar_id = 4; // 头像 ID
+    string introduction = 5;
+    uint64 member = 6; // 群人数
+    string create_by = 7; // 创建者
+    bool direct_join = 8; // 进群免审核
+    int32 permisson_level = 9; // 权限等级
+    bool history_msg = 10; // 历史消息
+    string category_name = 11; // 分类名
+    uint64 category_id = 12; // 分类 ID
+    bool private = 13; // 是否为私有群聊
+    bool do_not_disturb = 14; // 免打扰
+    uint64 community_id = 15; // 加入的社区 ID
+    string community_name = 16; // 加入的社区名
+    bool top = 19; // 会话置顶
+    repeated string admin = 20; // 管理员列表
+    uint64 create_time = 21; // 群聊创建时间
+    string limited_msg_type = 22; // 被限制的消息类型,例如 1,2,3
+    string owner = 23; // 群主
+    bool recommandation = 24; // 是否加入群推荐
+    repeated string tag_old = 26; // 标签(旧版)
+    repeated Tag tag = 27;
+    string my_group_nickname = 28; // 我的群昵称
+    string group_code = 29; // 群口令
+    bool hide_group_members = 30; // 隐藏群成员（开启时为 1）
+    bool auto_delete_message = 32; // 消息自动销毁时间
+    bool deny_members_upload_to_group_disk = 33; // 禁止群成员上传文件到群云盘（开启时为 1）
+  }
+
+  // 群聊中使用过的机器人数据
+  message BotData {
+    string id = 1;
+    string name = 2;
+    uint64 name_id = 3; // 机器人名称在数据库中序列,包括用户,群聊,机器人
+    string avatar_url = 4;
+    uint64 avatar_id = 5;
+    string introduction = 6;
+    string create_by = 7; // 创建者
+    uint64 create_time = 8;
+    uint64 headcount = 9; // 使用人数
+    bool private = 10; // 是否为私有机器人
+  }
+}
+// #endregion GroupInfoResponse

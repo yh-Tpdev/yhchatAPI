@@ -289,13 +289,9 @@ POST /v1/msg/button-report
 
 响应体:  
 
-::: details ProtoBuf 数据结构
-
 ```protobuf
 <!-- @include: @src/full.proto#StatusResponse -->
 ```
-
-:::
 
 ## 撤回信息
 
@@ -315,8 +311,8 @@ POST /v1/msg/recall-msg
 
 响应体:
 
-```proto
-<!-- @include: @src/full.proto#StatusReponse-->
+```protobuf
+<!-- @include: @src/full.proto#StatusResponse-->
 ```
 
 ## 批量撤回消息
@@ -338,7 +334,7 @@ POST /v1/msg/recall-msg-batch
 响应体:
 
 ```protobuf
-<!-- @include: @src/full.proto#StatusReponse-->
+<!-- @include: @src/full.proto#StatusResponse-->
 ```
 
 ## 文件消息下载记录
