@@ -4,7 +4,7 @@ url: /api/v1/menu.md
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
 没写请求/响应项目表示不需要相关参数.
 
-## 点击消息输入框上面按钮的反馈
+## 触发快捷菜单事件
 
 POST /v1/menu/event
 
@@ -18,7 +18,7 @@ POST /v1/menu/event
 
 ```JSON
 {
-  "id": 338, // 按钮 id
+  "id": 123, // 按钮 id
   "chatId": "114514", // 聊天 id
   "chatType": 2, // 会话类型
   "value": "" // 按钮的值
