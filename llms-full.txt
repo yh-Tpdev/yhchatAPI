@@ -8021,6 +8021,58 @@ POST /v1/msg/delete
 }
 ```
 
+## 触发A2UI表单提交信息
+
+```http request
+POST /v1/msg/a2ui-form-report
+```
+
+请求头：
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体：
+
+```JSON
+{
+  "msgId": "123", // 触发事件的信息ID
+  "chatType": 3, // 触发对象的来源类别，为A2UI信息原来在哪，例如机器人触发则为3
+  "chatId": "123123", // 触发对象的来源ID，为A2UI信息原来在哪，例如机器人ID为123123触发
+  "senderId": "123123123123", // 触发提交信息的原始发送者ID
+  "actionName": "testA2UIName", // A2UI信息中表单提交设置的name名称
+  "sourceComponentId": "testId", // A2UI信息中表单提交设置的id名称
+  "formContext": { // 该项为需要提交的数据
+    "subLink": "https://..." // 例如提交一个为数组名为subLink值为https://...的数据
+  },
+  "interactionJson": "{\"version\":\"v0.9\",\"action\":{\"name\":\"testA2UIName\",\"sourceComponentId\":\"testId\",\"timestamp\":\"1234-12-25T16:28:56.403510\",\"context\":{\"subLink\":\"https://...\"},\"surfaceId\":\"testA2UIName\"}}" // 是触发表单提交A2UI信息的一些基础信息，大部分为原始A2UI信息的部分
+}
+```
+
+响应体：
+
+```JSON
+{
+  "code": 1,
+  "data": {
+    "actionName": "testA2UIName", // A2UI信息中表单提交设置的name名称
+    "chatId": "123123", // 触发对象的来源ID，为A2UI信息原来在哪，例如机器人ID为123123触发
+    "chatType": 3, // 触发对象的来源类别，为A2UI信息原来在哪，例如机器人触发则为3
+    "formContext": { // 该项为提交的数据，服务器返回用于确认提交客户端提交的数据
+      "subLink": "https://..." // 提交一个为数组名为subLink值为https://...的数据
+    },
+    "interactionJson": "{\"version\":\"v0.9\",\"action\":{\"name\":\"testA2UIName\",\"sourceComponentId\":\"testId\",\"timestamp\":\"1234-12-25T16:28:56.403510\",\"context\":{\"subLink\":\"https://...\"},\"surfaceId\":\"testA2UIName\"}}" // 是触发表单提交A2UI信息的一些基础信息，大部分为原始A2UI信息的部分
+    "msgId": "123", // 触发事件的信息ID
+    "senderId": "123123123", // 触发提交信息的原始发送者ID
+    "sourceComponentId": "testId", // A2UI信息中表单提交设置的id名称
+    "timestamp": 123123123123, // 服务器返回触发该时间的事件
+    "uid": "123" // 为触发用户的ID
+  },
+  "msg": "success"
+}
+```
+
 ---
 
 ---
