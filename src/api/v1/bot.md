@@ -293,62 +293,15 @@ POST /v1/bot/board
 
 请求体:
 
-```ProtoBuf
-id: 123 // 群聊 ID
-chat_type: 2 // 对象类型
+```protobuf
+<!-- @include: @src/full.proto#BoardRequest-->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 看板
-message board_send {
-    string id = 3; // 对象 ID
-    int64 chat_type = 4; // 对象类型
-}
-```
-
-:::
 
 响应体:
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-Board_data {
-  bot_id: "123" // 机器人 ID
-  chat_id: "123" // 对象 ID
-  chat_type: 2 // 对象类别
-  content: "测试看板内容" // 看板内容
-  content_type = 5; // 看板内容类别，1-文本，2-markdown，3-html
-  last_update_time: 123123123 // 最后更新时间戳
-  bot_name: "测试机器人名称" // 设置看板机器人名称
-}
+```protobuf
+<!-- @include: @src/full.proto#BoardResponse-->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 获取看板返回
-message board {
-    Status status = 1;
-    Board_data data = 2;
-    message Board_data {
-        string bot_id = 1; // 机器人 ID
-        string chat_id = 2; // 对象 ID
-        int32 chat_type = 3; // 对象类别
-        string content = 4; // 看板内容
-        int32 content_type = 5; // 看板内容类别，1-文本，2-markdown，3-html
-        int64 last_update_time = 6; // 最后更新时间戳
-        string bot_name = 7; // 设置看板机器人名称
-    }
-}
-```
-
-:::
 
 ## 删除用户对机器人的添加
 
@@ -533,43 +486,14 @@ POST /v1/bot/create-bot
 
 请求体：
 
-```ProtoBuf
-name: 2 //机器人名称
-introduction: 3 //机器人简介
-avatar_url：4 // 机器人头像 URL
-private:5 // 是否私有(0-公开，1-私有)
+```protobuf
+<!-- @include: @src/full.proto#CreateBotRequest-->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message CreateBotRequest {
-    string name = 2;                // 机器人名称
-    string introduction = 3;        // 机器人简介
-    string avatar_url = 4;          // 头像 URL
-    int32 private = 5;              // 是否私有(0-公开，1-私有)
-}
-```
-
-:::
 
 响应体：
 
-```proto
-message CreateBotResponse {
-    Status status = 1;
-    BotData data = 2;
-
-    message Status {
-        int64 request_id = 1;
-        int32 code = 2;
-        string msg = 3;
-    }
-
-    message BotData {
-        string bot_id = 1;          // 创建的机器人 ID
-    }
-}
+```protobuf
+<!-- @include: @src/full.proto#CreateBotResponse-->
 ```
 
 ## 设置机器人消息订阅接口
@@ -1033,7 +957,7 @@ POST /v1/bot/group-permission-edit
 }
 ```
 
-## 获取关注者列表
+## 获取使用者列表
 
 ```http request
 POST /v1/bot/follower-list
@@ -1047,69 +971,15 @@ POST /v1/bot/follower-list
 
 请求体：
 
-```ProtoBuf
-data {
-  size: 20 // 分页大小
-  page: 1 // 页数
-}
-bot_id: "123" // 机器人 ID
-keywords: "测试" // 搜索关键词
+```protobuf
+<!-- @include: @src/full.proto#ListFollowerRequest-->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message list_follower {
-    Data data = 2;
-    string bot_id = 3; // 机器人 ID
-    string keywords = 4; // 搜索关键词
-
-    message Data {
-        int32 size = 1; // 分页大小
-        int32 page = 2; // 页数
-    }
-}
-```
-
-:::
 
 响应体：
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-user {
-    user_id: "7356666" // 用户 ID
-    name: "Feng" // 用户名
-    avatar_url: "https://..." // 头像 URL
-    is_vip: 0 // 是否为 vip 用户, 0-不为 vip 用户, 1-vip 用户
-  }
-// 可以有多个
-// ...
-totol: 32 // 关注该机器人的用户总数
+```protobuf
+<!-- @include: @src/full.proto#ListFollowerResponse-->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message list_follower {
-    Status status = 1;
-    repeated User user = 2;
-    int32 totol = 3;
-
-    message User {
-      string user_id = 1;
-      string name = 2;
-      string avatar_url = 4;
-      int32 is_vip = 6;
-    }
-}
-```
-
-:::
 
 ## 获取加入群聊列表
 
@@ -1125,65 +995,13 @@ POST /v1/bot/join-group-list
 
 请求体：
 
-```ProtoBuf
-data {
-  size: 20 // 分页大小
-  page: 1 // 页数
-}
-bot_id: "123" // 机器人 ID
-keywords: "测试用户名" // 搜索关键词
+```protobuf
+<!-- @include: @src/full.proto#JoinGroupListRequest-->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message list_join_group {
-    Data data = 2;
-    string bot_id = 3; // 机器人 ID
-    string keywords = 4; // 搜索关键词
-
-    message Data {
-        int32 size = 1; // 分页大小
-        int32 page = 2; // 页数
-    }
-}
-```
-
-:::
 
 响应体：
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-group {
-    user_id: "123" // 群聊 ID
-    name: "测试群聊名称" // 群聊名字
-    avatar_url: "https://..." // 头像 URL
-}
-// 可以有多个
-// ...
-totol: 32 // 机器人加入的群聊总数
+```protobuf
+<!-- @include: @src/full.proto#JoinGroupListResponse-->
 ```
 
-::: details ProtoBuf 数据结构
-
-```proto
-message list_join_group {
-    Status status = 1;
-    repeated Group group = 2;
-    int32 total = 3;
-
-    message Group {
-        string id = 1;
-        string name = 2;
-        string avatar_url = 3;
-    }
-
-}
-```
-
-:::

@@ -11,156 +11,27 @@ title: group
 POST /v1/group/info
 ```
 
+::: warning
+此处响应数据部分项目需要在打开相应开关后才会出现,例如 private 必须打开群聊私有才能在响应数据中看到.  
+:::
+
 ### 请求头
 
 | 名称  | 必须 | 备注 |
 | ----- | ---- | ---- |
 | token | 是   | 无   |
 
-::: warning
-此处响应数据部分项目需要在打开相应开关后才会出现,例如 private 必须打开群聊私有才能在响应数据中看到.  
-:::
-
 ### 请求体
 
-```ProtoBuf
-group_id: "123123" // 群聊 ID
+```protobuf
+<!-- @include: @src/full.proto#GroupInfoRequest -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message info_send {
-    string group_id = 2;
-}
-```
-
-:::
 
 ### 响应数据
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-data {
-  id: "123" //群聊 ID
-  name: "测试群聊" // 群聊名称
-  avatar_url: "https://..." // 头像 url
-  avatar_id: 123 // 头像 ID
-  introduction: "测试群聊" // 群聊简介
-  member: 123 // 群人数
-  create_by: "123" // 创建者 ID
-  direct_join: 0 // 进群免审核,1为开启
-  permisson_level: 2 // 权限等级(普通用户无此项(数值为0或无此项),群主 100,管理员 2)
-  history_msg: 1 // 历史消息,1为开启
-  category_name: "无" // 分类名
-  category_id: 40 // 分类I D
-  private: 0 // 是否私有,1 为私有
-  do_not_disturb: 1 // 免打扰,1 为开启
-  community_id: 123 // 加入社区的 ID
-  community_name: "云湖" // 加入社区的名称
-  top: 0 // 置顶会话,1 为开启
-  admin: "123" // 管理员 ID,可以有多个
-  create_time: 1231231230 // 群聊创建时间
-  limited_msg_type: "" // 被限制的消息类型,如1,2,3,使用","分格
-  owner: "123" // 群主 ID
-  recommandation: 1 // 是否加入群推荐,1 为开启
-  tag_old: "冲刺一百万用户！" // 标签
-  tag {
-    id: 123 // 标签 id
-    text: "" // 标签文字
-    color: "#FFFFFFFF" // 标签颜色
-  }
-  my_group_nickname: "12345" // 我的群昵称
-  group_code: "test1234" // 群口令
-  hide_group_members: 1 // 隐藏群成员（开启时为 1）
-  auto_delete_message: 730 // 消息自动销毁时间（0-永久不删，90-2个月后删除，365-1年后删除，730-2年后删除）
-  deny_members_upload_to_group_disk: 1 // 禁止群成员上传文件到群云盘（开启时为1）
-
-}
-history_bot {
-  id: "123" // 机器人 ID
-  name: "测试" // 机器人名称
-  name_id: 123 // 机器人名称的序列(数据库中第N个用户/机器人/群组)
-  avatar_url: "https://..." // 头像 URL
-  avatar_id: 123 // 头像 ID
-  introduction: "测试机器人" // 机器人简介
-  create_by: "123" // 创建者 ID
-  create_time: 1231231230 // 创建时间戳
-  user_number: 123 // 使用人数
-  private: 1 // 1 表示私有机器人.
-}
+```protobuf
+<!-- @include: @src/full.proto#GroupInfoResponse -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 群聊信息
-message info {
-    Status status = 1;
-    Group_data data = 2;
-    repeated Bot_data history_bot = 3;
-
-    // 群聊数据
-    message Group_data {
-        string group_id = 1;
-        string name = 2;
-        string avatar_url = 3;
-        uint64 avatar_id = 4; // 头像 ID
-        string introduction = 5;
-        uint64 member = 6; // 群人数
-        string create_by = 7;
-        uint64 direct_join = 8; // 进群免审核
-        uint64 permisson_level = 9; // 权限等级
-        uint64 history_msg = 10; // 历史消息
-        string category_name = 11; // 分类名
-        uint64 category_id = 12; // 分类 ID
-        uint64 private = 13; // 是否为私有群聊
-        uint64 do_not_disturb = 14; // 免打扰
-        uint64 community_id = 15;
-        string community_name = 16;
-        uint64 top = 19; // 会话置顶
-        repeated string admin = 20;
-        uint64 create_time = 21; // 群聊创建时间
-        string limited_msg_type = 22; // 被限制的消息类型,例如 1,2,3
-        string owner = 23;
-        uint64 recommandation = 24; // 是否加入群推荐
-        repeated string tag_old = 26; // 标签(旧版)
-        repeated Tag tag = 27;
-        string my_group_nickname = 28; // 我的群昵称
-        string group_code = 29; // 群口令
-        uint64 hide_group_members = 30; // 隐藏群成员（开启时为 1）
-        uint64 auto_delete_message = 32; // 消息自动销毁时间
-        uint64 deny_members_upload_to_group_disk = 33; // 禁止群成员上传文件到群云盘（开启时为 1）
-
-        // 已使用标签信息,2没啥用不解析了
-        message Tag {
-            uint64 id = 1; // 标签 ID (貌似)
-            string text = 3;
-            string color = 4;
-        }
-    }
-
-    // 群聊中使用过的机器人数据
-    message Bot_data {
-        string id = 1;
-        string name = 2;
-        uint64 name_id = 3; // 机器人名称在数据库中序列,包括用户,群聊,机器人
-        string avatar_url = 4;
-        uint64 avatar_id = 5;
-        string introduction = 6;
-        string create_by = 7;
-        uint64 create_time = 8;
-        uint64 user_number = 9; // 使用人数
-        uint64 private = 10; // 是否为私有机器人
-    }
-}
-```
-
-:::
 
 ## 获取群成员列表
 
