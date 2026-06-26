@@ -214,5 +214,5 @@ POST /v1/group-tag/members
 响应体:
 
 ```protobuf
-<!-- @include: @src/full.proto#TagMemberResponse -->
+<!-- @include: @src/full.proto#ListMemberResponse -->
 ```
