@@ -1004,4 +1004,3 @@ POST /v1/bot/join-group-list
 ```protobuf
 <!-- @include: @src/full.proto#JoinGroupListResponse-->
 ```
-
