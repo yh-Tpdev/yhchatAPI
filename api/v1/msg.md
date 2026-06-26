@@ -104,7 +104,226 @@ POST /v1/msg/send-message
 
 * `msg_content.form` # 具体内容自己抓包看吧
 
+## 表单消息发送小指引
+
+使用 [v1/group/bot-list](group.html#获取群机器人列表) 获取机器人表单
+找到一个你想要调用的机器人，提取其字段3（Instruction\_data）一个数据组内的字段10，这是发送表单消息需要的，示例：
+
+```原Json已压缩成行，示例内是已经格式化后的
+[
+  {
+    "key": 0,
+    "type": "radio",
+    "title": "Radio 单选框",
+    "propsValue": {
+      "label": "Radio 单选框标签",
+      "options": "Radio 单选框选项，全部指令类型的选项使用#分割"
+    },
+    "props": [
+      {
+        "type": "label",
+        "name": "标签",
+        "value": ""
+      },
+      {
+        "type": "options",
+        "name": "选项",
+        "placeholder": "用#分割，如：北京#上海#天津",
+        "value": ""
+      }
+    ],
+    "id": "bodnzx"
+  },
+  {
+    "key": 1,
+    "type": "input",
+    "title": "Input 输入框",
+    "propsValue": {
+      "label": "Input 输入框标签",
+      "defaultValue": "Input 输入框默认内容",
+      "placeholder": "Input 输入框占位文本"
+    },
+    "props": [
+      {
+        "type": "label",
+        "name": "标签",
+        "value": ""
+      },
+      {
+        "type": "defaultValue",
+        "name": "默认内容",
+        "value": ""
+      },
+      {
+        "type": "placeholder",
+        "name": "占位文本",
+        "value": ""
+      }
+    ],
+    "id": "kfumpw"
+  },
+  {
+    "key": 2,
+    "type": "switch",
+    "title": "Switch 开关",
+    "propsValue": {
+      "label": "Switch 开关标签",
+      "defaultValue": "Switch 开关默认状态，0-关闭，1-开启"
+    },
+    "props": [
+      {
+        "type": "label",
+        "name": "标签",
+        "value": ""
+      },
+      {
+        "type": "defaultValue",
+        "name": "默认状态",
+        "placeholder": "1：默认打开，0：默认关闭",
+        "value": ""
+      }
+    ],
+    "id": "rpzjmd"
+  },
+  {
+    "key": 4,
+    "type": "textarea",
+    "title": "textarea 多行输入框",
+    "propsValue": {
+      "label": "textarea 多行输入框标签",
+      "placeholder": "textarea 多行输入框占位文本"
+    },
+    "props": [
+      {
+        "type": "label",
+        "name": "标签",
+        "value": ""
+      },
+      {
+        "type": "placeholder",
+        "name": "占位文本",
+        "value": ""
+      }
+    ],
+    "id": "uqojdl"
+  },
+  {
+    "key": 5,
+    "type": "select",
+    "title": "Select 选择器",
+    "propsValue": {
+      "label": "Select 选择器标签",
+      "options": "Select 选择器选项"
+    },
+    "props": [
+      {
+        "type": "label",
+        "name": "标签",
+        "value": ""
+      },
+      {
+        "type": "options",
+        "name": "选项",
+        "placeholder": "用#分割，如：北京#上海#天津",
+        "value": ""
+      }
+    ],
+    "id": "pqnhhd"
+  }
+]
+```
+
+先来看看第一个，这是Radio单选框，其中有两个选项（options），分别是 "Radio 单选框选项，全部指令类型的选项使用" 和 "分割"，选择其中一种，就用 "分割" 作为表单请求
+
+然后取里面的id（bodnzx），作为代表这一项设置选项（Radio单选框）的id
+
 :::
+
+## 下面是请求表单值内部分属性的解析
+
+::: warning
+
+注意，JSON对象（一个对象把整个属性包起来的，如示例内的bodnzx，不是id内的），就叫JSON对象
+
+:::
+
+::: details type详情
+
+云湖的type分为 "radio" "input" "switch" "textarea" "select" 这几项，
+
+其中 "radio" "select" 是需要 "selectIndex" "selectValue" 这两个键的，不需要value
+
+当使用 "switch"（开关）时，对应value值就为 `true` 或 `false`
+
+:::
+
+::: details label详情
+
+对应项的名称，不填可能会造成一些不良影响
+
+:::
+
+::: details selectIndex详情
+
+这个根据你选择的是第几项，就填第几项-1（第一项对应0，第二项对应1，以此类推）
+
+:::
+
+::: details value详情
+
+这个就是刚才提到的options，在options自行选一个项填入
+
+当使用 "switch"（开关）时，对应value值就为 `true` 或 `false`
+
+:::
+
+::: details selectValue详情
+
+和 value 相同
+
+:::
+
+### 下面是示例完整请求（需压缩成行）：
+
+```
+{
+  "bodnzx": {
+    "id": "bodnzx",
+    "type": "radio",
+    "label": "Radio 单选框标签",
+    "selectIndex": 1,
+    "selectValue": "分割"
+  },
+  "kfumpw": {
+    "id": "kfumpw",
+    "type": "input",
+    "label": "Input 输入框标签",
+    "value": "fdsgg默认内容hhhhhh"
+  },
+  "rpzjmd": {
+    "id": "rpzjmd",
+    "type": "switch",
+    "label": "Switch 开关标签",
+    "value": true
+  },
+  "uqojdl": {
+    "id": "uqojdl",
+    "type": "textarea",
+    "label": "textarea 多行输入框标签",
+    "value": "extrasdad"
+  },
+  "pqnhhd": {
+    "id": "pqnhhd",
+    "type": "select",
+    "label": "Select 选择器标签",
+    "selectIndex": 0,
+    "selectValue": "Select 选择器选项"
+  }
+}
+```
+
+:::
+
 ::::
 
 响应体:
