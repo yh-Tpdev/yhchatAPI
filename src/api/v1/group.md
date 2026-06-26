@@ -47,84 +47,15 @@ POST /v1/group/list-member
 
 ### 请求体
 
-```ProtoBuf
-data {
-  size: 50 // 分页大小
-  page: 1 // 页数
-}
-group_id: "big" // 群聊 ID
-keywords: "测试群成员" // 搜索关键词
+```protobuf
+<!-- @include: @src/full.proto#ListMemberRequest -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message list_member_send {
-    Data data = 2;
-
-    message Data {
-        int32 size = 1; // 分页大小
-        int32 page = 2; // 页数
-    }
-
-    string group_id = 3; // 群聊 ID
-    string keywords = 4; // 搜索关键词
-}
-```
-
-:::
 
 ### 响应数据
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-user {
-  group_id: "big" // 所属群聊 ID
-  user_info {
-    user_id: "7356666" // 用户 ID
-    name: "Feng" // 用户名
-    avatar_url: "https://..." // 头像 URL
-    is_vip: 0 // 是否为 vip 用户,: 0-非 vip 用户, 1-vip 用户
-
-  }
-  permission_level: 100 // 权限等级, 群主 100 管理员 2 普通用户无/0
-  gag_time: 123456 // 禁言时间戳
-  is_gag: 0 // 是否处于禁言状态
-}
-// 可以有多个
-// ...
+```protobuf
+<!-- @include: @src/full.proto#ListMemberResponse -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message list_member {
-    Status status = 1;
-    repeated User user = 2;
-
-    message User {
-      string group_id = 1;
-      User_info user_info = 2;
-
-      message User_info {
-          string user_id = 1;
-          string name = 2;
-          string avatar_url = 4;
-          int32 is_vip = 6;
-      }
-
-      int32 permission_level = 3;
-      int64 gag_time = 4; // 禁言时间
-      int32 is_gag = 5;
-  }
-}
-```
-
-:::
 
 ## 获取群聊语音房间
 
@@ -269,12 +200,44 @@ POST /v1/group/remove-member
 
 ### 响应体
 
+::: tabs
+
+@tab:active 正常
+
 ```JSON
 {
   "code": 1,
   "msg": "success"
 }
 ```
+
+@tab 踢群主
+
+```JSON
+{
+  "code":-1,
+  "msg":"不可以移除群主！"
+}
+```
+
+@tab 非管理员/群主或无效群聊 ID
+
+```JSON
+{
+  "code":-1,
+  "msg":"您无权操作此群聊，请联系群主或者管理员"
+}
+
+@tab 无效用户 ID/不在群聊
+
+```JSON
+{
+  "code":-1,
+  "msg":"该用户不在这个群聊，请重试"
+}
+```
+
+:::
 
 ## 禁言用户
 
@@ -300,12 +263,54 @@ POST /v1/group/gag-member
 
 ### 响应体
 
+::: tabs
+
+@tab:active 正常
+
 ```JSON
 {
   "code": 1,
   "msg": "success"
 }
 ```
+
+@tab 禁言群主
+
+```JSON
+{
+  "code":-1,
+  "msg":"不可以禁言群主！"
+}
+```
+
+@tab 无效用户 ID/不在群聊
+
+```JSON
+{
+  "code":-1,
+  "msg":"该用户不在这个群聊，请重试"
+}
+```
+
+@tab 非特定禁言时长
+
+```JSON
+{
+  "code":-1,
+  "msg":"禁言时长错误，请重试"
+}
+```
+
+@tab 非管理员/群主或无效群聊 ID
+
+```JSON
+{
+  "code":-1,
+  "msg":"您无权操作此群聊，请联系群主或者管理员"
+}
+```
+
+:::
 
 ## 获取群聊推荐分类
 
@@ -573,6 +578,12 @@ POST /v1/group/msg-type-limit
 POST /v1/group/edit-group
 ```
 
+::: tip
+
+此编辑会覆盖原有设置,不是合并!
+
+:::
+
 ### 请求头
 
 | 名称  | 必须 | 备注            |
@@ -581,58 +592,15 @@ POST /v1/group/edit-group
 
 ### 请求体
 
-```ProtoBuf
-group_id: "123" // 目标群聊 ID
-name: "测试群聊名称" // 群聊名称
-introduction: "测试群聊简介" // 群聊简介
-avatarUrl: "https://..." // 群聊头像u rl
-direct_join: 0 // 进群免审核,1 为开启
-history_msg: 1 // 历史消息,1 为开启
-category_name: "无" // 分类名
-category_id: 40 // 分类 ID
-private: 0 // 是否私有,1 为私有
-hide_group_members: 0 // 隐藏群成员
+```protobuf
+<!-- @include: @src/full.proto#EditGroupRequest -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message edit_group_send {
-  string group_id = 2; // 目标群聊 ID
-  string name = 3; // 群聊名称
-  string introduction = 4; // 群聊简介
-  string avatarUrl = 5; // 群聊头像 url
-  uint64 direct_join = 6; // 进群免审核,1 为开启
-  uint64 history_msg = 7; // 历史消息,1 为开启
-  string category_name = 8; // 分类名
-  uint64 category_id = 9; // 分类 ID
-  uint64 private = 10; // 是否私有,1 为私有
-  uint64 hide_group_members = 11; // 隐藏群成员
-
-}
-```
-
-:::
 
 ### 响应体
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
+```protobuf
+<!-- @include: @src/full.proto#StatusResponse -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message edit_group {
-    Status status = 1;
-}
-```
-
-:::
 
 ## 获取群机器人列表
 
