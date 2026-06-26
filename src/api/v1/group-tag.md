@@ -208,77 +208,12 @@ POST /v1/group-tag/members
 
 请求体:
 
-```ProtoBuf
-data {
-  size: 50 // 分页大小
-  page: 1 // 页数
-}
-group_id: "123" // 群聊 ID
-tag_id: 123 // 标签 ID
+```protobuf
+<!-- @include: @src/full.proto#TagMemberRequest -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message tag_member_send {
-    Data data = 2;
-    message Data {
-        int32 size = 1; // 分页大小
-        int32 page = 2; // 页数
-    }
-    string group_id = 3; // 标签所处群聊 ID
-    int64 tag_id = 4; // 标签 ID
-}
-```
-
-:::
 
 响应体:
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-user {
-  group_id: "big" // 所属群聊 ID
-  user_info {
-    user_id: "123" // 用户 ID
-    name: "测试用户名" // 用户名
-    avatar_url: "https://..." // 头像 URL
-    int32 is_vip: 0 // 是否为 vip: 0-非 vip 用户，1-vip 用户
-  }
-    permission_level: 0 // 权限等级, 群主 100 管理员 2 普通用户无/0
-    gag_time: 123 // 禁言时间戳
-    is_gag: 0; // 是否被禁言，0-未被禁言，1-已被禁言
-}
-total: 1 // 总数
+```protobuf
+<!-- @include: @src/full.proto#ListMemberResponse -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 标签绑定的用户列表
-message tag_member {
-    Status status = 1;
-    repeated User user = 2;
-    message User {
-        string group_id = 1;
-        User_info user_info = 2;
-
-        message User_info {
-            string user_id = 1;
-            string name = 2;
-            string avatar_url = 4;
-            int32 is_vip = 6;
-        }
-        int32 permission_level = 3; // 权限等级, 群主 100 管理员 2 普通用户无/0
-        int64 gag_time = 4; // 禁言时间戳
-        int32 is_gag = 5; // 是否被禁言
-    }
-    int64 total = 3; // 总数
-}
-```
-
-:::
