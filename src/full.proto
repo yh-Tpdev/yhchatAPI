@@ -599,28 +599,6 @@ message TagMemberRequest {
 }
 // #endregion TagMemberRequest
 
-// #region TagMemberResponse
-message TagMemberResponse {
-  Status status = 1;
-  repeated User user = 2;
-  message User {
-    string group_id = 1;
-    UserInfo user_info = 2;
-
-    message UserInfo {
-      string user_id = 1;
-      string name = 2;
-      string avatar_url = 4;
-      bool is_vip = 6;
-    }
-    int32 permission_level = 3; // 权限等级, 群主 100 管理员 2 普通用户无/0
-    int64 gag_time = 4; // 禁言时间戳
-    bool is_gag = 5; // 是否被禁言
-  }
-  int32 total = 3; // 总数
-}
-// #endregion TagMemberResponse
-
 // group
 
 // 获取群聊信息
@@ -684,3 +662,56 @@ message GroupInfoResponse {
   }
 }
 // #endregion GroupInfoResponse
+
+// 获取群成员
+// #region ListMemberRequest
+message ListMemberRequest {
+  Data data = 2;
+
+  message Data {
+    int32 size = 1; // 分页大小
+    int32 page = 2; // 页数
+  }
+
+  string group_id = 3; // 群聊 ID
+  string keywords = 4; // 搜索关键词
+}
+// #endregion ListMemberRequest
+
+// #region ListMemberResponse
+message ListMemberResponse {
+  Status status = 1;
+  repeated User user = 2;
+  message User {
+    string group_id = 1;
+    UserInfo user_info = 2;
+
+    message UserInfo {
+      string user_id = 1;
+      string name = 2;
+      string avatar_url = 4;
+      bool is_vip = 6;
+    }
+    int32 permission_level = 3; // 权限等级, 群主 100 管理员 2 普通用户无/0
+    int64 gag_time = 4; // 禁言时间戳
+    bool is_gag = 5; // 是否被禁言
+  }
+  int32 total = 3; // 总数
+}
+// #endregion ListMemberResponse
+
+// 编辑群信息
+// #region EditGroupRequest
+message EditGroupRequest {
+  string group_id = 2; // 目标群聊 ID
+  string name = 3; // 群聊名称
+  string introduction = 4; // 群聊简介
+  string avatar_url = 5; // 群聊头像 url
+  bool direct_join = 6; // 进群免审核,1 为开启
+  bool history_msg = 7; // 历史消息,1 为开启
+  string category_name = 8; // 分类名
+  uint64 category_id = 9; // 分类 ID
+  bool private = 10; // 是否私有,1 为私有
+  bool hide_group_members = 11; // 隐藏群成员
+}
+// #endregion EditGroupRequest
