@@ -139,7 +139,6 @@ POST /v1/user/edit-nickname
 <!-- @include: @src/full.proto#StatusResponse -->
 ```
 
-
 ## 更改自身头像
 
 POST /v1/user/edit-avatar
@@ -161,7 +160,6 @@ POST /v1/user/edit-avatar
 ```protobuf
 <!-- @include: @src/full.proto#StatusResponse -->
 ```
-
 
 ## 用户邮箱密码登录
 

@@ -236,7 +236,6 @@ POST /v1/msg/send-message
 
 先来看看第一个，这是Radio单选框，其中有两个选项（options），分别是 "Radio 单选框选项，全部指令类型的选项使用" 和 "分割"，选择其中一种，就用 "分割" 作为表单请求
 
-
 然后取里面的id（bodnzx），作为代表这一项设置选项（Radio单选框）的id
 
 :::
@@ -285,8 +284,9 @@ POST /v1/msg/send-message
 
 :::
 
-### 下面是示例完整请求（需压缩成行）：
-```
+### 下面是示例完整请求（需压缩成行）
+
+```JSON
 {
   "bodnzx": {
     "id": "bodnzx",
@@ -332,7 +332,6 @@ POST /v1/msg/send-message
 ```protobuf
 <!-- @include: @src/full.proto#StatusResponse -->
 ```
-
 
 ## 编辑消息
 
