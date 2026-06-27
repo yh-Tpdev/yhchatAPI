@@ -60,7 +60,7 @@ message MedalInfo {
 message RemarkInfo {
   string remark_name = 1; // 备注名
   string phone = 2; // 手机号
-  string extra_remark = 3; // 其他备注（格式为 JSON，示例：'[{"key":"他是","value":"我的朋友"},{"key":"职业","value":"打工人"}]'
+  string extra_remark = 3; // 其他备注（格式为 JSON，示例：'[{"key":"他是","value":"我的朋友"},{"key":"职业","value":"打工人"}]'）
 }
 // #endregion RemarkInfo
 
