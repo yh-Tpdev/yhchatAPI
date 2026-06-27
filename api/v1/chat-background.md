@@ -10,13 +10,13 @@ url: /api/v1/chat-background.md
 POST /v1/chat-background/edit
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注 |
 | ----- | ---- | ---- |
 | token | 是   | 无   |
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -26,7 +26,7 @@ POST /v1/chat-background/edit
 }
 ```
 
-### 响应体
+响应体
 
 ```JSON
 {
@@ -41,13 +41,13 @@ POST /v1/chat-background/edit
 POST /v1/chat-background/list
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注 |
 | ----- | ---- | ---- |
 | token | 是   | 无   |
 
-### 响应体
+响应体
 
 ```JSON
 {

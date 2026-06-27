@@ -283,9 +283,9 @@ POST /v1/msg/send-message
 
 :::
 
-### 下面是示例完整请求（需压缩成行）：
+### 下面是示例完整请求（需压缩成行）
 
-```
+```JSON
 {
   "bodnzx": {
     "id": "bodnzx",

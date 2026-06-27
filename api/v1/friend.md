@@ -10,13 +10,13 @@ url: /api/v1/friend.md
 POST /v1/friend/apply
 ```
 
-### 请求头
+请求头
 
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -26,7 +26,7 @@ POST /v1/friend/apply
 }
 ```
 
-### 响应体
+响应体
 
 ::: tabs
 @tab:active 正常添加
@@ -64,13 +64,13 @@ POST /v1/friend/apply
 POST /v1/friend/delete-friend
 ```
 
-### 请求头
+请求头
 
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -79,7 +79,7 @@ POST /v1/friend/delete-friend
 }
 ```
 
-### 响应体
+响应体
 
 ```JSON
 {
@@ -94,13 +94,13 @@ POST /v1/friend/delete-friend
 POST /v1/friend/agree-apply
 ```
 
-### 请求头
+请求头
 
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -109,7 +109,7 @@ POST /v1/friend/agree-apply
 }
 ```
 
-### 响应体
+响应体
 
 ```JSON
 {
@@ -124,13 +124,13 @@ POST /v1/friend/agree-apply
 POST /v1/friend/ignore-apply
 ```
 
-### 请求头
+请求头
 
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -139,7 +139,7 @@ POST /v1/friend/ignore-apply
 }
 ```
 
-### 响应体
+响应体
 
 ```JSON
 {
@@ -154,19 +154,19 @@ POST /v1/friend/ignore-apply
 POST /v1/friend/address-book-list
 ```
 
-### 请求头
+请求头
 
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
-### 请求体
+请求体
 
 ```protobuf
 <!-- @include: @src/full.proto#AddressBookListRequest-->
 ```
 
-### 响应体
+响应体
 
 ```protobuf
 <!-- @include: @src/full.proto#AddressBookListResponse-->
@@ -178,13 +178,13 @@ POST /v1/friend/address-book-list
 POST /v1/friend/request-list
 ```
 
-### 请求头
+请求头
 
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
-### 响应体
+响应体
 
 ```protobuf
 <!-- @include: @src/full.proto#RequestListResponse -->
@@ -196,13 +196,13 @@ POST /v1/friend/request-list
 POST /v1/friend/no-notify
 ```
 
-### 请求头
+请求头
 
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -211,7 +211,7 @@ POST /v1/friend/no-notify
 }
 ```
 
-### 响应体
+响应体
 
 ```JSON
 {
@@ -226,13 +226,13 @@ POST /v1/friend/no-notify
 POST /v1/friend/delete-request
 ```
 
-### 请求头
+请求头
 
 |名称|必须|备注|
 |-----|-----|-----|
 |token|是|无|
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -240,7 +240,7 @@ POST /v1/friend/delete-request
 }
 ```
 
-### 响应体
+响应体
 
 ```JSON
 {

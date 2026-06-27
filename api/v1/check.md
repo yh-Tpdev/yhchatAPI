@@ -15,7 +15,7 @@ POST /v1/check/check-version-mobile
 POST /v1/check/get-latest-version
 ```
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -42,7 +42,7 @@ POST /v1/check/get-latest-version
 
 :::
 
-### 响应体
+响应体
 
 ```JSON
 {
@@ -65,7 +65,7 @@ POST /v1/check/get-latest-version
 POST /v1/check/check-version
 ```
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -127,7 +127,7 @@ POST /v1/check/check-version
 
 :::
 
-### 响应体
+响应体
 
 ```JSON
 {

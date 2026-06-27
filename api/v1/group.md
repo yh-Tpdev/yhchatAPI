@@ -14,13 +14,13 @@ POST /v1/group/info
 此处响应数据部分项目需要在打开相应开关后才会出现,例如 private 必须打开群聊私有才能在响应数据中看到.\
 :::
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注 |
 | ----- | ---- | ---- |
 | token | 是   | 无   |
 
-### 请求体
+请求体
 
 ```protobuf
 <!-- @include: @src/full.proto#GroupInfoRequest -->
@@ -38,13 +38,13 @@ POST /v1/group/info
 POST /v1/group/list-member
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注 |
 | ----- | ---- | ---- |
 | token | 是   | 无   |
 
-### 请求体
+请求体
 
 ```protobuf
 <!-- @include: @src/full.proto#ListMemberRequest -->
@@ -62,13 +62,13 @@ POST /v1/group/list-member
 POST /v1/group/live-room
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注 |
 | ----- | ---- | ---- |
 | token | 是   | 无   |
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -108,13 +108,13 @@ POST /v1/group/live-room
 POST /v1/group/instruction-list
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注 |
 | ----- | ---- | ---- |
 | token | 是   | 无   |
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -151,13 +151,13 @@ POST /v1/group/instruction-list
 POST /v1/group/invite
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注 |
 | ----- | ---- | ---- |
 | token | 是   | 无   |
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -182,13 +182,13 @@ POST /v1/group/invite
 POST /v1/group/remove-member
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注                    |
 | ----- | ---- | ----------------------- |
 | token | 是   | 必须为群主或管理员token |
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -197,7 +197,7 @@ POST /v1/group/remove-member
 }
 ```
 
-### 响应体
+响应体
 
 ::: tabs
 
@@ -244,13 +244,13 @@ POST /v1/group/remove-member
 POST /v1/group/gag-member
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注                    |
 | ----- | ---- | ----------------------- |
 | token | 是   | 必须为群主或管理员token |
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -260,7 +260,7 @@ POST /v1/group/gag-member
 }
 ```
 
-### 响应体
+响应体
 
 ::: tabs
 
@@ -317,7 +317,7 @@ POST /v1/group/gag-member
 GET /v1/group/category
 ```
 
-### 响应体
+响应体
 
 ```JSON
 {
@@ -497,7 +497,7 @@ GET /v1/group/category
 POST /v1/group/recommend/list
 ```
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -506,7 +506,7 @@ POST /v1/group/recommend/list
 }
 ```
 
-### 响应体
+响应体
 
 ```JSON
 {
@@ -547,13 +547,13 @@ POST /v1/group/recommend/list
 POST /v1/group/msg-type-limit
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注                   |
 | ----- | ---- | ---------------------- |
 | token | 是   | 必须是群主/管理员token |
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -562,7 +562,7 @@ POST /v1/group/msg-type-limit
 }
 ```
 
-### 响应体
+响应体
 
 ```JSON
 {
@@ -583,19 +583,19 @@ POST /v1/group/edit-group
 
 :::
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注            |
 | ----- | ---- | --------------- |
 | token | 是   | 群聊管理员token |
 
-### 请求体
+请求体
 
 ```protobuf
 <!-- @include: @src/full.proto#EditGroupRequest -->
 ```
 
-### 响应体
+响应体
 
 ```protobuf
 <!-- @include: @src/full.proto#StatusResponse -->
@@ -607,13 +607,13 @@ POST /v1/group/edit-group
 POST /v1/group/bot-list
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注     |
 | ----- | ---- | -------- |
 | token | 是   | 群内成员 |
 
-### 请求体
+请求体
 
 ```ProtoBuf
 group_id: "123" // 目标群聊 ID
@@ -629,7 +629,7 @@ message edit_group_send {
 
 :::
 
-### 响应体
+响应体
 
 ```ProtoBuf
 status {
@@ -692,13 +692,13 @@ message bot_list {
 POST /v1/group/remove-bot
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注     |
 | ----- | ---- | -------- |
 | token | 是   | 群内成员 |
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -707,7 +707,7 @@ POST /v1/group/remove-bot
 }
 ```
 
-### 响应体
+响应体
 
 ```JSON
 {
@@ -722,13 +722,13 @@ POST /v1/group/remove-bot
 POST /v1/group/edit-my-group-nickname
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注     |
 | ----- | ---- | -------- |
 | token | 是   | 群内成员 |
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -737,7 +737,7 @@ POST /v1/group/edit-my-group-nickname
 }
 ```
 
-### 响应体
+响应体
 
 ```JSON
 {
@@ -757,13 +757,13 @@ POST /v1/group/edit-group-keyword
 也就是在聊天主页列表最顶上的搜索栏搜索指定群口令时会显示设置为该群口令的群聊
 :::
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注                        |
 | ----- | ---- | --------------------------- |
 | token | 是   | 必须为vip用户且是目标群群主 |
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -772,7 +772,7 @@ POST /v1/group/edit-group-keyword
 }
 ```
 
-### 响应体
+响应体
 
 ```JSON
 {
@@ -787,13 +787,13 @@ POST /v1/group/edit-group-keyword
 POST /v1/group/info-add-friend
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注 |
 | ----- | ---- | ---- |
 | token | 是   | 无   |
 
-### 请求体
+请求体
 
 ```ProtoBuf
 keyword: "测试群口令" // 欲要搜索的群口令
@@ -809,7 +809,7 @@ message info_add_friend_send {
 
 :::
 
-### 响应体
+响应体
 
 ```ProtoBuf
 status {
@@ -862,13 +862,13 @@ message info_add_friend {
 POST /v1/group/edit-auto-delete-message
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注            |
 | ----- | ---- | --------------- |
 | token | 是   | 必须是群主token |
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -877,7 +877,7 @@ POST /v1/group/edit-auto-delete-message
 }
 ```
 
-### 响应体
+响应体
 
 ```JSON
 {
@@ -892,13 +892,13 @@ POST /v1/group/edit-auto-delete-message
 POST /v1/group/edit-stop-member-upload-group-file
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注            |
 | ----- | ---- | --------------- |
 | token | 是   | 必须是群主token |
 
-### 请求体
+请求体
 
 ```JSON
 {
@@ -907,7 +907,7 @@ POST /v1/group/edit-stop-member-upload-group-file
 }
 ```
 
-### 响应体
+响应体
 
 ```JSON
 {
@@ -922,13 +922,13 @@ POST /v1/group/edit-stop-member-upload-group-file
 POST /v1/group/create-group
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注 |
 | ----- | ---- | ---- |
 | token | 是   | 无   |
 
-### 请求体
+请求体
 
 ```ProtoBuf
 name: "测试群聊" // 群聊名称
@@ -976,13 +976,13 @@ message dismiss_group {
 POST /v1/group/dismiss-group
 ```
 
-### 请求头
+请求头
 
 | 名称  | 必须 | 备注 |
 | ----- | ---- | ---- |
 | token | 是   | 群主 |
 
-### 请求体
+请求体
 
 ```ProtoBuf
 group_id: "123123" // 群聊 ID
