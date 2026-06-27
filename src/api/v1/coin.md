@@ -34,7 +34,7 @@ POST /v1/coin/shop/product-recommend
       {
         "id": 1, // 商品 ID
         "type": 1, //
-        "cycle": 7, //会员持续时间（持续7天
+        "cycle": 7, //会员持续时间（持续7天）
         "info": "7",
         "name": "【云湖】会员7天", // 商品名
         "imageUrls": "[\"https://chat-img.jwznb.com/999955a351c67b761ed078dc40d28ede.png\"]", // 商品图片 URL，为 json 数组，需转义后才可使用
@@ -73,7 +73,7 @@ POST /v1/coin/task/my-task-info
     "adsWatchNumber": 5,  // 广告观看次数
     "avatarEditNumber": 0, // 判断是否改了头像，0 是未更改，1 是已更改
     "nicknameEditNumber": 1, // 判断是否改了名字，同上
-    "raffleTimes": 1 // 抽奖时间（来自 bing 翻译
+    "raffleTimes": 1 // 抽奖时间（来自 bing 翻译）
   },
   "msg": "success"
 }
@@ -106,7 +106,7 @@ POST /v1/coin/shop/product-detail
     "product": {
       "id": 1, // 商品 ID
       "type": 1,
-      "cycle": 7, //会员持续时间（持续7天
+      "cycle": 7, //会员持续时间（持续7天）
       "info": "7",
       "name": "【云湖】会员7天", // 商品名
       "imageUrls": "[\"https://chat-img.jwznb.com/999955a351c67b761ed078dc40d28ede.png\"]", // 商品图片 URL，为 json 数组，需转义后才可使用
