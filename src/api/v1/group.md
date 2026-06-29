@@ -27,7 +27,7 @@ POST /v1/group/info
 <!-- @include: @src/full.proto#GroupInfoRequest -->
 ```
 
-### 响应数据
+响应数据
 
 ```protobuf
 <!-- @include: @src/full.proto#GroupInfoResponse -->
@@ -51,7 +51,7 @@ POST /v1/group/list-member
 <!-- @include: @src/full.proto#ListMemberRequest -->
 ```
 
-### 响应数据
+响应数据
 
 ```protobuf
 <!-- @include: @src/full.proto#ListMemberResponse -->
@@ -77,7 +77,7 @@ POST /v1/group/live-room
 }
 ```
 
-### 响应数据
+响应数据
 
 ```JSON
 {
@@ -123,7 +123,7 @@ POST /v1/group/instruction-list
 }
 ```
 
-### 响应数据
+响应数据
 
 ```JSON
 {
@@ -168,7 +168,7 @@ POST /v1/group/invite
 }
 ```
 
-### 响应数据
+响应数据
 
 ```JSON
 {
@@ -616,76 +616,15 @@ POST /v1/group/bot-list
 
 请求体
 
-```ProtoBuf
-group_id: "123" // 目标群聊 ID
+```protobuf
+<!-- @include: @src/full.proto#BotListRequest -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message edit_group_send {
-  string group_id = 2; // 目标群聊 ID
-}
-```
-
-:::
 
 响应体
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-// ...
+```protobuf
+<!-- @include: @src/full.proto#BotListResponse -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-// 获取群机器人列表
-message bot_list_send {
-    string group_id = 2;
-}
-
-message bot_list {
-    Status status = 1;
-    repeated Bot_data bot = 2;
-
-    repeated Instruction_data instruction = 3;
-
-    message Instruction_data {
-        int64 id = 1;
-        string bot_id = 2;
-        string name = 3; // 指令名
-        string desc = 4; // 指令描述
-        int32 type = 5; // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
-        string hint_text = 6; // 输入框提示文字
-        string default_text = 7; // 输入框默认文字
-        // int32 hidden/del_flag = 8; // 是否隐藏/删除,猜的,有误欢迎指正
-        int64 sort = 9; // 和排序相关 不确定
-        string form = 10; // 表单
-        string bot_name = 11; // 机器人名称
-    }
-    repeated Menu_data menu = 4; // 快捷菜单相关
-
-    message Menu_data {
-        int64 id = 1;
-        string bot_id = 2;
-        // int32 hidden/del_flag = 3; // 是否隐藏/删除,猜的
-        string name = 4;
-        string content = 5; // 内容
-        int32 menu_type = 6; // 按钮类型: 1-普通按钮 2-选中按钮 3-下拉选择
-        int64 create_time = 7;
-        // 8,9没找到
-        int32 menu_action = 10; // 操作类型
-        string select = 99; // 选择的选项,在选择按钮的时候也作为状态,选中为 1,未选中为 0
-    }
-}
-```
-
-:::
 
 ## 移除群聊内机器人
 
@@ -782,7 +721,7 @@ POST /v1/group/edit-group-keyword
 }
 ```
 
-## 获取指定群口令关联群聊
+## 获取群口令关联群聊
 
 ```http request
 POST /v1/group/info-add-friend
@@ -796,66 +735,15 @@ POST /v1/group/info-add-friend
 
 请求体
 
-```ProtoBuf
-keyword: "测试群口令" // 欲要搜索的群口令
+```protobuf
+<!-- @include: @src/full.proto#InfoAddFriendRequest -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message info_add_friend_send {
-  string keyword = 2; // 欲要搜索的群口令
-}
-```
-
-:::
 
 响应体
 
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-
-Data {
-  id: "123" // 群聊 ID
-  name: "测试群名称" // 群聊名称
-  avatar_url: "https://..." // 群聊头像 url
-  avatar_id: 123; // 群聊头像 ID
-  introduction: "测试群聊简介" // 群聊简介
-  headcount: 123 // 群人数
-  createBy: "123" // 群聊创建者 ID
-  readHistory: 1 // 是否允许阅读历史信息: 0-不允许，1-允许
-  limited_msg_type: "1" // 被限制的消息类型,如1,2,3,使用","分格
-  keyword: "测试群口令" // 群聊设置的群口令
-}
+```protobuf
+<!-- @include: @src/full.proto#InfoAddFriendResponse -->
 ```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message info_add_friend {
-    Status status = 1;
-    Data data = 1;
-
-    message Data {
-      string id = 1; // 群聊 ID
-      string name = 2; // 群聊名称
-      string avatar_url = 3; // 群聊头像 url
-      uint64 avatar_id = 4; // 群聊头像 ID
-      string introduction = 5; // 群聊简介
-      uint64 headcount = 6; // 群人数
-      string createBy = 7; // 群聊创建者 ID
-      uint64 readHistory = 10; // 是否允许阅读历史信息: 0-不允许，1-允许
-      string limited_msg_type = 22; // 被限制的消息类型,如1,2,3,使用","分格
-      string keyword = 29; // 群聊设置的群口令
-  }
-}
-```
-
-:::
 
 ## 设置群聊消息自动销毁时间
 
@@ -931,45 +819,15 @@ POST /v1/group/create-group
 
 请求体
 
-```ProtoBuf
-name: "测试群聊" // 群聊名称
-introduction: "测试群聊" // 群聊简介
-avatar_url: "https://..." // 头像 url
+```protobuf
+<!-- @include: @src/full.proto#CreateGroupRequest -->
 ```
 
-::: details ProtoBuf 数据结构
+响应数据
 
-```proto
-message create_send {
-    string name = 2;
-    string introduction = 3;
-    string avatar_url = 4;
-}
+```protobuf
+<!-- @include: @src/full.proto#CreateGroupResponse -->
 ```
-
-:::
-
-### 响应数据
-
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-group_id: "123" // 新群聊 ID
-```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message dismiss_group {
-    Status status = 1;
-    string group_id = 2;
-}
-```
-
-:::
 
 ## 解散群聊
 
@@ -985,39 +843,15 @@ POST /v1/group/dismiss-group
 
 请求体
 
-```ProtoBuf
-group_id: "123123" // 群聊 ID
+```protobuf
+<!-- @include: @src/full.proto#DismissGroupRequest -->
 ```
 
-::: details ProtoBuf 数据结构
+响应数据
 
-```proto
-message dismiss_send {
-    string group_id = 2;
-}
+```protobuf
+<!-- @include: @src/full.proto#StatusResponse -->
 ```
-
-:::
-
-### 响应数据
-
-```ProtoBuf
-status {
-  request_id: 114514
-  code: 1
-  msg: "success"
-}
-```
-
-::: details ProtoBuf 数据结构
-
-```proto
-message dismiss_group {
-    Status status = 1;
-}
-```
-
-:::
 
 ## 获取语音房间列表
 
