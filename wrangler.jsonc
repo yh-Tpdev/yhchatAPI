@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "yhchatapi",
+  "compatibility_date": "2026-07-02",
+  // 禁用预览 URL 和 works dev 域名
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "src/.vuepress/dist"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
