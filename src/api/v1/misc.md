@@ -48,6 +48,13 @@ GET /v1/misc/configure-distribution
 如果你的能力足够推荐使用分片上传 V2 版,支持断点续传,占用更小.  
 ~~或者是直接用七牛 kodo 的 SDK.~~
 
+通过 access_key 和 bucket 获取上传 Host方法:  
+注意: 这不是七牛官方文档中的内容,但是确实是七牛官方 SDK 在用的 API.
+
+GET `https://api.qiniu.com/v4/query?ak=<access_key>&bucket=<bucket>`
+
+响应中 `up` 下的域名就是上传 Host.
+
 :::
 
 ## 获取图片上传token

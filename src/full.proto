@@ -4,6 +4,8 @@ syntax = "proto3";
 // buf:lint:ignore PACKAGE_VERSION_SUFFIX
 package yh;
 
+import "google/protobuf/any.proto";
+
 // 共用区
 
 // 枚举
@@ -104,7 +106,7 @@ message MsgContent {
   string quote_image_url = 16; // 引用图片直链,https://...
   string quote_image_name = 17; // 引用图片文件名称
   int64 file_size = 18; // 欲发送文件大小
-  string video_url = 19; // 欲发送视频 key/url(123.mp4)
+  string video_url = 19; // 欲发送视频 key/url(123.mp4),也是视频 URL
   string audio_url = 21; // 语音 key/url(123.m4a)
   int64 audio_time = 22; // 语音时长(单位秒)
   string quote_video_url = 23; // 引用视频直链,https://...
@@ -129,8 +131,8 @@ message Tag {
 // #endregion Tag
 
 // 看板数据
-// #region BoardData
-message BoardData {
+// #region BotBoardMessage
+message BotBoardMessage { // 如果要是 WS 的话对应 cmd 为 bot_board_message
   string bot_id = 1; // 机器人 ID
   string chat_id = 2; // 对象 ID
   ChatType chat_type = 3; // 对象类别
@@ -139,7 +141,7 @@ message BoardData {
   int64 last_update_time = 6; // 最后更新时间戳
   string bot_name = 7; // 设置看板机器人名称
 }
-// #endregion BoardData
+// #endregion BotBoardMessage
 
 // 机器人信息
 // #region BotData
@@ -197,6 +199,30 @@ message GroupData {
   bool deny_members_upload_to_group_disk = 33; // 禁止群成员上传文件到群云盘（开启时为 1）
 }
 // #endregion GroupData
+
+// Sender 发送者信息
+// #region Sender
+message Sender {
+  string chat_id = 1; // 发送者 ID
+  ChatType chat_type = 2; // 发送者类型
+  string name = 3; // 发送者名称
+  string avatar_url = 4; // 头像 URL
+  repeated string tag_old = 6; // 标签(旧版显示)
+  repeated Tag tag = 7; // 标签
+}
+// #endregion Sender
+
+// 命令内容
+// #region Cmd
+message Cmd {
+  uint64 cmd_id = 1; // 指令 ID
+  string name = 2; // 指令名
+  uint64 type = 4; // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
+}
+// #endregion Cmd
+
+// 这里不会有 WS 的共用内容
+
 // 共用区结束
 
 // User 相关
@@ -284,7 +310,7 @@ message SendMsgRequest {
   string msg_id = 2; // 信息 ID
   string chat_id = 3; // 欲发送到的信息对象
   ChatType chat_type = 4; // 欲发送到的信息对象的类别
-  MsgContent msg_content = 5; // 消息内容
+  MsgContent content = 5; // 消息内容
   ContentType content_type = 6; // 消息类别
   int64 command_id = 7; // 所使用命令 ID
   string quote_msg_id = 8; // 引用信息 ID
@@ -324,29 +350,13 @@ message ListMsgResponse {
     Sender sender = 2;
     string direction = 3; // 消息位置,左边/右边
     ContentType content_type = 4;
-    MsgContent msg_content = 5;
+    MsgContent content = 5;
     uint64 send_time = 6; // 时间戳(毫秒)
     Cmd cmd = 7; // 指令
     uint64 recall_time = 8; // 消息撤回时间
     string quote_msg_id = 9; // 引用消息 ID
     uint64 msg_seq = 10;
     uint64 edit_time = 12; // 最后编辑时间
-
-    message Cmd {
-      uint64 cmd_id = 1; // 指令 ID
-      string name = 2; // 指令名
-      uint64 type = 4; // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
-    }
-
-    // 发送者信息
-    message Sender {
-      string chat_id = 1; // 发送者 ID
-      ChatType chat_type = 2; // 发送者类型
-      string name = 3; // 发送者名称
-      string avatar_url = 4; // 头像 URL
-      repeated string tag_old = 6; // 标签(旧版显示)
-      repeated Tag tag = 7; // 标签
-    }
   }
 }
 // #endregion ListMsgResponse
@@ -432,7 +442,7 @@ message BoardRequest {
 // #region BoardResponse
 message BoardResponse {
   Status status = 1;
-  BoardData data = 2;
+  BotBoardMessage data = 2;
 }
 // #endregion BoardResponse
 
@@ -786,3 +796,111 @@ message DismissGroupRequest {
   string group_id = 2;
 }
 // #endregion DismissGroupRequest
+
+// instruction
+// 获取私聊指令
+// #region GetBotInstructionRequest
+message GetBotInstructionRequest {
+  string bot_id = 3;
+}
+// #endregion GetBotInstructionRequest
+
+// #region GetBotInstructionResponse
+message GetBotInstructionResponse {
+  Status status = 1;
+  Data data = 2;
+  message Data {
+    uint64 command_id = 1; // 指令 id
+    string bot_id = 2; // 机器人 id
+    string command_name = 3; // 指令名称
+    uint64 instruction_type = 5; // 指令类型: 1-普通指令，2-直发指令，5-自定义输入指令
+    string command_default_text = 7; // 指令输入框默认文本
+    string command_settings_json = 10; // 指令设置 JSON（表单指令，自定义输入指令）
+  }
+}
+// #endregion GetBotInstructionResponse
+
+// chat-ws-go
+
+// chat-ws-go 共用区
+
+// WsInfo
+// #region WsInfo
+message WsInfo {
+  string seq = 1; // 请求标识码,可以不管
+  string cmd = 2; // 操作类型
+}
+// #endregion WsInfo
+
+// WsWrapper
+// 这里是 Ws 消息的外层
+// #region WsWrapper
+message WsWrapper {
+  WsInfo info = 1;
+  google.protobuf.Any data = 2; // Any
+}
+// #endregion WsWrapper
+
+// chat-ws-go 共用区结束
+
+// 心跳包响应
+// #region HeartbeatAckResponse
+message HeartbeatAckResponse {
+  WsInfo info = 1; // 响应数据,info.cmd = heartbeat_ack
+}
+// #endregion HeartbeatAckResponse
+
+// MsgInput 实际上是草稿同步
+// #region MsgInput
+message MsgInput { // 对应的 cmd: draft_input
+  string chat_id = 1; // 对象ID
+  string input = 2; // 草稿内容,注意是覆盖不是合并也不是追加
+}
+// #endregion MsgInput
+
+// PushMessage
+// #region PushMessage
+message PushMessage { // 对应 cmd: push_message, edit_message
+  string msg_id = 1;
+  Sender sender = 2; // 发送者信息,编辑消息无此项
+  string recv_id = 3; // 接收者 ID,不知道为啥到编辑这里就和4一样了
+  string chat_id = 4; // 会话 ID
+  ChatType chat_type = 5; // 会话类型,编辑消息无此项
+  MsgContent content = 6; // 消息内容,注意编辑消息的会话内容和发送消息可以共用但是编辑消息有缺失
+  ContentType content_type = 7;
+  uint64 timestamp = 8; // 时间戳(毫秒),编辑消息无此项
+  Cmd cmd = 9; // 指令,编辑消息无此项(客户端限制不让编辑指令消息)
+  uint64 delete_timestamp = 10; // 撤回消息时间,和8差别不大,编辑消息无此项
+  string quote_msg_id = 11; // 引用消息ID
+  uint64 msg_seq = 12; // 消息序列,在撤回时也是被撤回消息的序列,注意撤回消息存在部分字段缺失
+  uint64 edit_time = 14; // 编辑时间,只有编辑消息有此项
+}
+// #endregion PushMessage
+
+// 有人邀请我
+// #region InviteApplyResponse
+message InviteApplyResponse {
+  WsInfo info = 1; // info.cmd = invite_apply
+}
+// #endregion InviteApplyResponse
+
+// 流式消息
+// #region StreamMessage
+message StreamMessage { // 对应 cmd: stream_message
+  string msg_id = 1; // 消息 ID
+  string recv_id = 2; // 接收者 ID,群聊的时为群聊的 ID,私聊是自己的 ID
+  string chat_id = 3; // 会话 ID
+  string content = 4; // 需要追加的消息内容
+}
+// #endregion StreamMessage
+
+// 语音消息
+// #region LiveMessage
+message LiveMessage { // 对应 cmd: live_video_user_hang_up
+  string msg_id = 1; // 语音消息 ID
+  string cmd = 5; // 指令,例如 live_video_user_hang_up
+}
+// #endregion LiveMessage
+
+// 机器人看板更新推送
+// 和 BotBoardMessage 相同
