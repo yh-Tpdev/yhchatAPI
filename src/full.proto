@@ -107,16 +107,17 @@ message MsgContent {
   string quote_image_name = 17; // 引用图片文件名称
   int64 file_size = 18; // 欲发送文件大小
   string video_url = 19; // 欲发送视频 key/url(123.mp4),也是视频 URL
+  int32 video_time = 20; // 视频时长
   string audio_url = 21; // 语音 key/url(123.m4a)
-  int64 audio_time = 22; // 语音时长(单位秒)
+  int32 audio_time = 22; // 语音时长(单位秒)
   string quote_video_url = 23; // 引用视频直链,https://...
-  int64 quote_video_time = 24; // 引用视频时长
+  int32 quote_video_time = 24; // 引用视频时长
   int64 sticker_item_id = 25; // 表情 ID
   int64 sticker_pack_id = 26; // 表情包 ID
   string room_name = 29; // 语音房间发送显示信息的文本
   string call_status_text = 32; // 语音通话状态文字
-  uint64 width = 33; // 图片的宽度
-  uint64 height = 34; // 图片的高度
+  int32 width = 33; // 图片的宽度
+  int32 height = 34; // 图片的高度
   string tip = 37; // 提示信息
 }
 // #endregion MsgContent
@@ -217,7 +218,7 @@ message Sender {
 message Cmd {
   uint64 cmd_id = 1; // 指令 ID
   string name = 2; // 指令名
-  uint64 type = 4; // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
+  int32 type = 4; // 指令类型（1-普通指令, 2-直发指令, 5-自定义输入指令）
 }
 // #endregion Cmd
 
