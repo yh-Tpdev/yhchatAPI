@@ -55,4 +55,5 @@
 - [user](/api/web/v1/user.md)
 - [WebSocket API](/api/wss/index.md)
 - [chat-ws-go.jwzhd.com](/api/wss/chat-ws-go.jwzhd.com.md)
+- [Awesome 云湖 API](/awesome.md)
 - [贡献指南](/contribution_guide.md)
