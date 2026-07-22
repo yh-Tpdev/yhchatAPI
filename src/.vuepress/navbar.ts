@@ -23,6 +23,14 @@ export default navbar([
         text: "bot",
         link: "bot/",
       },
+      {
+        text: "完整 proto",
+        link: "full_proto",
+      },
+      {
+        text: "url_scheme",
+        link: "url_scheme",
+      }
     ],
   },
   {
@@ -34,5 +42,10 @@ export default navbar([
     text: "贡献指南",
     icon: "book",
     link: "/contribution_guide",
+  },
+  {
+    text: "Awesome 云湖 API",
+    icon: "eye",
+    link: "/awesome",
   },
 ]);
