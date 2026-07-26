@@ -37,6 +37,12 @@ enum ContentTypeTextOnly {
   TEXT_markdown = 2;
   TEXT_html = 3;
 }
+
+enum VipStatus {
+  VIP_STATUS_NONE = 0; // 未开通
+  VIP_STATUS_ACTIVE = 1; // 开通且未过期
+  VIP_STATUS_EXPIRED = 2; // 开通且已过期
+}
 // 枚举结束
 
 // 响应状态
@@ -71,7 +77,7 @@ message RemarkInfo {
 message ProfileInfo {
   string last_active_time = 1; // 该用户上次活跃时间
   string introduction = 2; // 简介
-  int32 gender = 3; // 性别（1-男，2-女，3-其他）
+  int32 gender = 3; // 性别: 1-男，2-女，3-其他
   uint64 birthday_timestamp = 4; // 生日时间戳
   string city = 5; // 城市
   string district = 6; // 地区
@@ -233,7 +239,6 @@ message Cmd {
 message UserInfo {
   Status status = 1;
   message Data {
-    // 11是描述手机号长整数的,懒得解析了
     string id = 1; // 用户 ID
     string name = 2; // 用户名
     string avatar_url = 4; // 头像 URL
@@ -243,6 +248,7 @@ message UserInfo {
     double coin = 8; // 金币数
     bool is_vip = 9; // 是否为 VIP
     int64 vip_expired_time = 10; // VIP 过期时间
+    VipStatus vip_status = 11; // VIP 开通状态
     string invitation_code = 12; // 邀请码
   }
 
@@ -270,8 +276,8 @@ message GetUserResponse {
     repeated MedalInfo medal = 6; // 勋章信息
     string register_time = 7; // 注册时间,格式: YYYY-MM-DD hh:mm:ss
     uint64 ban_time = 10; // 封禁结束时间(时间戳)
-    uint64 online_day = 11; // 在线天数
-    uint64 continuous_online_day = 12; // 连续在线天数
+    int32 online_day = 11; // 在线天数
+    int32 continuous_online_day = 12; // 连续在线天数
     bool is_vip = 13; // 是否为 vip
     uint64 vip_expired_time = 14; // VIP 过期时间(时间戳)
     RemarkInfo remark_info = 18; // 备注信息
@@ -344,12 +350,12 @@ message ListMsgBySeqRequest {
 message ListMsgResponse {
   Status status = 1;
   repeated MsgData data = 2; // 消息数据
-  uint64 total = 3; // 消息数
+  int32 total = 3; // 消息数
 
   message MsgData {
     string msg_id = 1; // 消息 ID
     Sender sender = 2;
-    string direction = 3; // 消息位置,左边/右边
+    string direction = 3; // 消息位置: 左边 left/右边 right
     ContentType content_type = 4;
     MsgContent content = 5;
     uint64 send_time = 6; // 时间戳(毫秒)
@@ -365,7 +371,7 @@ message ListMsgResponse {
 // 通过列出消息
 // #region ListMsgRequest
 message ListMsgRequest {
-  uint64 msg_count = 2; // 获取消息数
+  int32 msg_count = 2; // 获取消息数
   string msg_id = 3; // 从指定消息 ID 开始
   ChatType chat_type = 4; // 对象类型
   string chat_id = 5; // 对象 ID
@@ -379,7 +385,7 @@ message ListMsgByMidSeqRequest {
   ChatType chat_type = 4;
   string chat_id = 5;
   uint64 unknown = 6; // 不知道干啥的
-  uint64 msg_count = 7;
+  int32 msg_count = 7; // 获取的消息数
   string msg_id = 8;
 }
 // #endregion ListMsgByMidSeqRequest
@@ -535,7 +541,7 @@ message ConversationListRequest {
 message ConversationListResponse {
   Status status = 1;
   repeated Data data = 2;
-  uint64 total = 3; // 列表中对话的数量
+  int32 total = 3; // 列表中对话的数量
   string md5 = 4; // 对话列表的 md5
 
   message Data {
@@ -552,7 +558,7 @@ message ConversationListResponse {
     uint64 send_timestamp = 12; // 消息发送时间戳(秒)
     AtData at_data = 14; // @数据
     string name = 15; // 用户真实名称
-    int32 certification_level = 16; // 认证,1 是官方 2 是地区
+    int32 certification_level = 16; // 认证,1-官方, 2-地区
 
     message AtData {
       uint64 unknown = 1; // 似乎是名称 ID
@@ -814,7 +820,7 @@ message GetBotInstructionResponse {
     uint64 command_id = 1; // 指令 id
     string bot_id = 2; // 机器人 id
     string command_name = 3; // 指令名称
-    uint64 instruction_type = 5; // 指令类型: 1-普通指令，2-直发指令，5-自定义输入指令
+    int32 instruction_type = 5; // 指令类型: 1-普通指令，2-直发指令，5-自定义输入指令
     string command_default_text = 7; // 指令输入框默认文本
     string command_settings_json = 10; // 指令设置 JSON（表单指令，自定义输入指令）
   }
