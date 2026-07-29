@@ -867,10 +867,11 @@ message MsgInput { // 对应的 cmd: draft_input
 
 // PushMessage
 // #region PushMessage
-message PushMessage { // 对应 cmd: push_message, edit_message
+message PushMessage { // 对应 cmd: push_message, edit_message, blocked_message
+  // blocked_message 只有 1,3,4 字段
   string msg_id = 1;
   Sender sender = 2; // 发送者信息,编辑消息无此项
-  string recv_id = 3; // 接收者 ID,不知道为啥到编辑这里就和4一样了
+  string recv_id = 3; // 接收者 ID,不知道为啥到编辑这里就和 4 一样了
   string chat_id = 4; // 会话 ID
   ChatType chat_type = 5; // 会话类型,编辑消息无此项
   MsgContent content = 6; // 消息内容,注意编辑消息的会话内容和发送消息可以共用但是编辑消息有缺失
