@@ -115,55 +115,6 @@ title: chat-ws-go.jwzhd.com
 <!-- @include: @src/full.proto#PushMessage -->
 ```
 
-<!-- ## 推送超级文件分享
-
-返回数据
-
-```ProtoBuf
-info {
-  seq: "1234567abcd" // 请求标识码
-  cmd: "file_send_message" // 推送超级文件分享
-}
-
-data {
-  any: "type.googleapis.com/proto.PushMessage" // ProtoBuf 的 any 字段
-  file_send: {
-      send_user_id: "123" // 分享者用户ID
-      user_id: "123" // 接收者用户ID
-      temp_code: 1 // 未知
-      send_type: "candidate" // 分享类别区分文本
-      data: "{}" // 经过转义义的json格式发送数据
-      send_deviceId: "123123123123" // 发送者设备唯一标识符
-    }
-}
-```
-
-::: details ProtoBuf数据结构
-
-```proto
-// 超级文件分享
-message file_send_message {
-  INFO info = 1;
-  Data data = 2;
-
-  message Data {
-    string any = 1;
-    Sender sender = 2;
-
-    message Sender {
-      string send_user_id = 1; // 分享者用户ID
-      string user_id = 2; // 接收者用户ID
-      uint64 temp_code = 3; // 未知
-      string send_type = 4; // 分享类别区分文本
-      string data = 5; // 经过转义后的json格式发送数据
-      string send_deviceId = 6; // 发送者设备唯一标识符
-    }
-  }
-}
-```
-
-::: -->
-
 ## 接受邀请消息
 
 ::: tip 提示
@@ -202,4 +153,16 @@ message file_send_message {
 
 ```protobuf
 <!-- @include: @src/full.proto#BotBoardMessage -->
+```
+
+## 封禁消息推送
+
+老冯啊老冯,你咋写的?啥东西都能往 PushMessage 里面丢,下回要不把你全家也丢进去.
+
+字段 1 大概率是被封禁的消息的 ID.
+
+返回数据
+
+```protobuf
+<!-- @include: @src/full.proto#PushMessage -->
 ```
