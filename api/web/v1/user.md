@@ -84,3 +84,39 @@ GET /v1/user/get-token?token={需要复制的用户token}
   "msg": "success" // 返回消息
 }
 ```
+
+## 金币增减记录
+
+GET /v1/user/gold-coin-increase-decrease-record?size=<条数>\&page=<页数>
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体:
+
+```JSONC
+{
+    "code": 1,
+    "data": {
+        "goldCoinRecord": [
+            {
+                "id": 357401, // 金币记录 ID
+                "userId": "3254340", // 用户 ID
+                "typ": 8, // 类型:  2-打赏/被打赏文章/评论, 3-发文章/评论, 4-首次更换头像/名称, 6-兑换商品, 7-观看广告, 8-抽奖, 9-邀请用户
+                "beforeAmount": 2785.5, // 变动前金币数量
+                "afterAmount": 2793.5, // 变动后金币数量
+                "changeAmount": 8, // 变动数量
+                "reason": "抽奖金币", // 变动原因
+                "remark": "", // 备注
+                "createTime": 1785490150 // 变动时间
+            },
+            /// ...
+        ],
+        "total": 638 // 总条数
+    },
+    "msg": "success"
+}
+```
