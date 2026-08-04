@@ -158,8 +158,6 @@ url: /api/wss/chat-ws-go.jwzhd.com.md
 
 老冯啊老冯,你咋写的?啥东西都能往 PushMessage 里面丢,下回要不把你全家也丢进去.
 
-字段 1 大概率是被封禁的消息的 ID.
-
 返回数据
 
 ```protobuf
