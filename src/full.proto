@@ -562,6 +562,7 @@ message ConversationListResponse {
     string avatar_url = 9; // 头像 URL
     bool do_not_disturb = 11; // 免打扰
     uint64 send_timestamp = 12; // 消息发送时间戳(秒)
+    bool is_vip = 13; // 是否为 VIP
     AtData at_data = 14; // @数据
     string name = 15; // 用户真实名称
     int32 certification_level = 16; // 认证,1-官方, 2-地区
@@ -638,6 +639,7 @@ message RequestListResponse {
     string bot_avatar = 20; // 机器人头像
     string processor_name = 22; // 处理者名称
     string note = 23; // 备注信息
+    bool is_vip = 24; // 是否为 VIP
   }
   repeated Request requests = 2; // 请求列表
   int32 total = 3; // 总请求数
