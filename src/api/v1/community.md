@@ -278,7 +278,7 @@ POST /v1/community/posts/post-list
           "categoryId": 0, // 群聊分类 ID
           "category": "", // 群聊所属分类
           "private": 0, // 是否私有（1为开启，0为关闭）
-          "banId": 0, // 被禁言的 ID
+          "banId": 0, // 封禁 ID
           "gag": 0, // 是否禁言
           "gagBy": "", // 禁言者
           "msgTypeLimit": "" // 消息类型限制
@@ -807,7 +807,7 @@ POST /v1/community/posts/post-detail
         "categoryId": 0, // 群聊类型id
         "category": "", // 群聊类型
         "private": 0, // 是否私有选项，0-关，1-开
-        "banId": 0, // 被ban的id
+        "banId": 0, // 封禁 ID
         "gag": 0, // 被禁言群成员id
         "gagBy": "", // 谁禁言的成员id
         "msgTypeLimit": "" // 群聊消息类型限制
@@ -900,7 +900,7 @@ POST /v1/community/posts/my-post-list
           "categoryId": 0, // 群聊类型id
           "category": "", // 群聊类型
           "private": 0, // 群聊是否私有，0-没有，1-开了
-          "banId": 0, // 被banid
+          "banId": 0, // 封禁 ID
           "gag": 0, // 被禁言者id
           "gagBy": "", // 禁言者id
           "msgTypeLimit": "" // 消息类型限制
@@ -960,7 +960,7 @@ POST /v1/community/ba/group-list
         "categoryId": 21, // 绑定分区的id
         "category": "兴趣爱好-其他", // 群聊分类名称
         "private": 0, // 群聊是否私有（1为开启，0为关闭）
-        "banId": 0, // 被ban者id
+        "banId": 0, // 封禁 ID
         "gag": 0,  // 是否禁言（1为开启，0为关闭）
         "gagBy": "",  // 禁言者id
         "msgTypeLimit": "", // 被限制的消息类型,如1,2,3,使用","分格。1-文本消息，2-图片消息，3-Markdown消息，4-文件消息，6-帖子消息，7-表情消息，8-HTML消息，10-视频消息，11-语音消息，13-语音通话（限制多个消息类型一般是 1,2,3,4··· 之类）
@@ -1247,7 +1247,7 @@ POST /v1/community/posts/get-draft
       "categoryId": 0, // 群聊类型id
       "category": "", // 群聊类型
       "private": 0, // 群聊是否私有，0-没有，1-开了
-      "banId": 0, // 被banid
+      "banId": 0, // 封禁 ID
       "gag": 0, // 被禁言者id
       "gagBy": "", // 禁言者id
       "msgTypeLimit": "" // 消息类型限制

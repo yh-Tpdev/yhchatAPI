@@ -131,7 +131,8 @@ message MsgContent {
 // 标签
 // #region Tag
 message Tag {
-  uint64 id = 1; // 标签 ID (貌似)
+  uint64 id = 1; // 标签 ID
+  string group_id = 2; // 标签所属群聊 ID
   string text = 3;
   string color = 4;
 }
@@ -191,19 +192,23 @@ message GroupData {
   bool do_not_disturb = 14; // 免打扰
   uint64 community_id = 15; // 加入的社区 ID
   string community_name = 16; // 加入的社区名
+  int64 ban_id = 17; // 封禁 ID
   bool top = 19; // 会话置顶
   repeated string admin = 20; // 管理员列表
   uint64 create_time = 21; // 群聊创建时间
   string limited_msg_type = 22; // 被限制的消息类型,例如 1,2,3
   string owner = 23; // 群主
   bool recommandation = 24; // 是否加入群推荐
+  int64 field25 = 25; // 未知
   repeated string tag_old = 26; // 标签(旧版)
   repeated Tag tag = 27;
   string my_group_nickname = 28; // 我的群昵称
   string group_code = 29; // 群口令
   bool hide_group_members = 30; // 隐藏群成员（开启时为 1）
+  int64 field31 = 31; // 未知
   bool auto_delete_message = 32; // 消息自动销毁时间
   bool deny_members_upload_to_group_disk = 33; // 禁止群成员上传文件到群云盘（开启时为 1）
+  string ban_reason = 34; // 封禁原因
 }
 // #endregion GroupData
 
@@ -214,6 +219,7 @@ message Sender {
   ChatType chat_type = 2; // 发送者类型
   string name = 3; // 发送者名称
   string avatar_url = 4; // 头像 URL
+  bool is_vip = 5; // 是否为 VIP
   repeated string tag_old = 6; // 标签(旧版显示)
   repeated Tag tag = 7; // 标签
 }
