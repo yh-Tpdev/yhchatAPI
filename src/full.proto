@@ -193,6 +193,7 @@ message GroupData {
   uint64 community_id = 15; // 加入的社区 ID
   string community_name = 16; // 加入的社区名
   int64 ban_id = 17; // 封禁 ID
+  int64 ban_until_timestamp = 18; // 群聊解禁时间戳,永久无此项,时区 Asia/Shanghai
   bool top = 19; // 会话置顶
   repeated string admin = 20; // 管理员列表
   uint64 create_time = 21; // 群聊创建时间
@@ -271,6 +272,10 @@ message GetUserRequest {
 
 // #region GetUserResponse
 message GetUserResponse {
+  /*
+     4402 该用户不存在
+     7100 因违反相关规定，该用户被封禁
+  */
   Status status = 1;
   Data data = 2; // 数据
   message Data {
@@ -281,14 +286,20 @@ message GetUserResponse {
     uint64 avatar_id = 5; // 头像 ID
     repeated MedalInfo medal = 6; // 勋章信息
     string register_time = 7; // 注册时间,格式: YYYY-MM-DD hh:mm:ss
-    uint64 ban_time = 10; // 封禁结束时间(时间戳)
+    bool do_not_disturb = 8; // 免打扰 ~~别问咋抓出来的.勇敢去猜!~~
+    int64 ban_id = 9; // 封禁 ID
+    int64 ban_until_timestamp = 10; // 封禁结束时间(时间戳),永久无此项
     int32 online_day = 11; // 在线天数
     int32 continuous_online_day = 12; // 连续在线天数
     bool is_vip = 13; // 是否为 vip
-    uint64 vip_expired_time = 14; // VIP 过期时间(时间戳)
+    uint64 vip_expired_timestamp = 14; // VIP 过期时间(时间戳)
+    VipStatus vip_status = 15; // VIP 情况
+    bool is_blocked = 16; // 黑名单
+    bool top = 17; // 置顶会话
     RemarkInfo remark_info = 18; // 备注信息
     ProfileInfo profile_info = 19; // 用户资料信息
     string ip_geo = 20; // IP归属地（国家）
+    string ban_reason = 21; // 封禁原因
   }
 }
 // #endregion GetUserResponse
