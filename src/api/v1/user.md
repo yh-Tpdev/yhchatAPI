@@ -5,6 +5,16 @@ title: user
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
 没写请求/响应项目表示不需要相关参数.
 
+::: caution
+
+需要 token 的请求如未携带符合要求的 token 会返回下面内容:
+
+```json
+{"code":-101,"msg":"未登录"}
+```
+
+:::
+
 ## 获取人机验证图片
 
 POST /v1/user/captcha
