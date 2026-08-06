@@ -110,7 +110,7 @@ POST /v1/msg/send-message
 使用 [v1/group/bot-list](group.html#获取群机器人列表) 获取机器人表单
 找到一个你想要调用的机器人，提取其字段3（Instruction_data）一个数据组内的字段10，这是发送表单消息需要的，示例：
 
-```原Json已压缩成行，示例内是已经格式化后的
+```json
 [
   {
     "key": 0,
