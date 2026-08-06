@@ -1,0 +1,9 @@
+version: v2
+inputs:
+  - directory: .          # 指定输入源，通常和 buf.yaml 里的模块路径一致
+    paths:
+      - src/full.proto              # 只处理这个文件（可选，不写就生成全部）
+plugins:
+  - local: protoc-gen-py
+    out: tests/proto              # 生成的 Python 代码放在这个目录
+    opt: init_files=true
