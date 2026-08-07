@@ -68,7 +68,7 @@ POST /v1/bot/bot-link-reset
 
 ```JSON
 {
-  "botId": "123", // 机器人ID
+  "botId": "123" // 机器人ID
 }
 ```
 
