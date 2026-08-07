@@ -205,11 +205,11 @@ message GroupData {
   int64 ban_until_timestamp = 18; // 群聊解禁时间戳,永久无此项,时区 Asia/Shanghai
   bool top = 19; // 会话置顶
   repeated string admin = 20; // 管理员列表
-  uint64 create_time = 21; // 群聊创建时间
+  int64 gag_until_timestamp = 21; // 禁言截止时间,时区 UTC+8,永久禁言为 int64 最大值~~小心别被 JS 坑了~~
   string limited_msg_type = 22; // 被限制的消息类型,例如 1,2,3
   string owner = 23; // 群主
   bool recommandation = 24; // 是否加入群推荐
-  int64 field25 = 25; // 未知
+  bool is_gag = 25; // 是否被禁言
   repeated string tag_old = 26; // 标签(旧版)
   repeated Tag tag = 27;
   string my_group_nickname = 28; // 我的群昵称
