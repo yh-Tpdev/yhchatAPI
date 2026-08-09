@@ -14,6 +14,15 @@ url: /api/v1/user.md
 
 :::
 
+::: tip 本页 proto 的共用字段
+
+```protobuf
+// VIP 状态
+<!-- @include: @src/full.proto#VipStatus  -->
+```
+
+:::
+
 ## 获取人机验证图片
 
 POST /v1/user/captcha

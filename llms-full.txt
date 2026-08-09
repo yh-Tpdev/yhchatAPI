@@ -102,7 +102,21 @@ url: /api/index.md
 云湖数据床地址需要请求头加上 `Referer: http://myapp.jwznb.com` 才可正常获取内容，否则会403.
 
 chat\_type 聊天对象的类型: 1-用户, 2-群组, 3-机器人\
-content\_type 信息类型: 1-文本，2-图片，3-markdown，4-文件，5-表单，6-文章，7-表情，8-html，11-语音，13-语音通话, 14-A2UI
+对应 proto enum 如下,后续不会单独列出
+
+```protobuf
+<!-- @include: @src/full.proto#ChatType  -->
+```
+
+content\_type 信息类型: 1-文本，2-图片，3-markdown，4-文件，5-表单，6-文章，7-表情，8-html，11-语音，13-语音通话, 14-A2UI,对应 proto enum 如下,后续不会单独列出
+
+```protobuf
+// 正常消息的
+<!-- @include: @src/full.proto#ContentType   -->
+
+// 纯文本的
+<!-- @include: @src/full.proto#ContentTypeTextOnly   -->
+```
 
 **请求类型一定要正确不然后端会直接返回 404!**
 
@@ -815,6 +829,18 @@ url: /api/v1/bot.md
 # bot
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
 没写请求/响应项目表示不需要相关参数.
+
+::: tip 本页 proto 的共用字段
+
+```protobuf
+// 机器人看板消息
+<!-- @include: @src/full.proto#BotBoardMessage   -->
+
+// 机器人数据
+<!-- @include: @src/full.proto#BotData   -->
+```
+
+:::
 
 ## 机器人商店banner
 
@@ -4915,6 +4941,18 @@ url: /api/v1/group.md
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
 没写请求/响应项目表示不需要相关参数.
 
+::: tip 本页 proto 共用字段
+
+```protobuf
+// 群聊数据
+<!-- @include: @src/full.proto#GroupData    -->
+
+// 机器人数据
+<!-- @include: @src/full.proto#BotData     --> 
+```
+
+:::
+
 ## 获取群聊信息
 
 ```http request
@@ -6708,6 +6746,21 @@ url: /api/v1/msg.md
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`\
 没写请求/响应项目表示不需要相关参数.
 
+::: tip 本页 proto 的共用字段
+
+```protobuf
+// 消息内容
+<!-- @include: @src/full.proto#MsgContent  -->
+
+// 发送者信息
+<!-- @include: @src/full.proto#Sender   -->
+
+// 命令信息
+<!-- @include: @src/full.proto#Cmd   -->
+```
+
+:::
+
 ## 发送信息
 
 POST /v1/msg/send-message
@@ -8028,6 +8081,15 @@ url: /api/v1/user.md
 
 ```json
 {"code":-101,"msg":"未登录"}
+```
+
+:::
+
+::: tip 本页 proto 的共用字段
+
+```protobuf
+// VIP 状态
+<!-- @include: @src/full.proto#VipStatus  -->
 ```
 
 :::
@@ -9772,6 +9834,24 @@ url: /api/wss/chat-ws-go.jwzhd.com.md
 ```
 
 下述 ws 的 proto 结构均为均为不带 Wrapper 的结构.
+
+:::
+
+::: tip 本页 proto 的共用内容
+
+```protobuf
+// 命令
+<!-- @include: @src/full.proto#Cmd  -->
+
+// 内容类型
+<!-- @include: @src/full.proto#ContentType  -->
+
+// 消息内容
+<!-- @include: @src/full.proto#MsgContent  -->
+
+// 仅文本的消息内容类型
+<!-- @include: @src/full.proto#ContentTypeTextOnly  -->
+```
 
 :::
 
