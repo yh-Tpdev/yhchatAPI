@@ -10,13 +10,18 @@ import "google/protobuf/any.proto";
 
 // 枚举
 
+// 会话类型
+// #region ChatType
 enum ChatType {
   unknown1 = 0;
   user = 1;
   group = 2;
   bot = 3;
 }
+// #endregion ChatType
 
+// 内容类型
+// #region ContentType
 enum ContentType {
   unknown2 = 0;
   text = 1;
@@ -30,19 +35,26 @@ enum ContentType {
   call = 13; // 语音电话
   a2ui = 14;
 }
+// #endregion ContentType
 
+// 纯文本的内容类型
+// #region ContentTypeTextOnly
 enum ContentTypeTextOnly {
   TEXT_UNSPECIFIED = 0;
   TEXT_text = 1;
   TEXT_markdown = 2;
   TEXT_html = 3;
 }
+// #endregion ContentTypeTextOnly
 
+// VIP 状态
+// #region VipStatus
 enum VipStatus {
   VIP_STATUS_NONE = 0; // 未开通
   VIP_STATUS_ACTIVE = 1; // 开通且未过期
   VIP_STATUS_EXPIRED = 2; // 开通且已过期
 }
+// #endregion VipStatus
 // 枚举结束
 
 // 响应状态
@@ -146,7 +158,7 @@ message BotBoardMessage { // 如果要是 WS 的话对应 cmd 为 bot_board_mess
   ChatType chat_type = 3; // 对象类别
   string content = 4; // 看板内容
   ContentTypeTextOnly content_type = 5; // 看板内容类别
-  int64 last_update_time = 6; // 最后更新时间戳
+  int64 last_update_timestamp = 6; // 最后更新时间戳
   string bot_name = 7; // 设置看板机器人名称
 }
 // #endregion BotBoardMessage
@@ -165,7 +177,7 @@ message BotData {
   int64 avatar_id = 5; // 机器人头像 ID
   string introduction = 6; // 机器人介绍
   string create_by = 7; // 机器人创建者 ID
-  int64 create_time = 8; // 机器人创建时间戳
+  int64 create_timestamp = 8; // 机器人创建时间戳
   int64 headcount = 9; // 使用人数
   bool private = 10; // 是否为私有: 0-公开，1-私有
   bool is_stop = 11; // 是否停用: 0-启用，1-停用
@@ -264,7 +276,7 @@ message UserInfo {
     string email = 7; // 邮箱
     double coin = 8; // 金币数
     bool is_vip = 9; // 是否为 VIP
-    int64 vip_expired_time = 10; // VIP 过期时间
+    int64 vip_expired_timestamp = 10; // VIP 过期时间
     VipStatus vip_status = 11; // VIP 开通状态
     string invitation_code = 12; // 邀请码
   }
@@ -385,12 +397,12 @@ message ListMsgResponse {
     string direction = 3; // 消息位置: 左边 left/右边 right
     ContentType content_type = 4;
     MsgContent content = 5;
-    uint64 send_time = 6; // 时间戳(毫秒)
+    uint64 send_timestamp_ms = 6; // 时间戳(毫秒)
     Cmd cmd = 7; // 指令
-    uint64 recall_time = 8; // 消息撤回时间
+    uint64 recall_timestamp = 8; // 消息撤回时间
     string quote_msg_id = 9; // 引用消息 ID
     uint64 msg_seq = 10;
-    uint64 edit_time = 12; // 最后编辑时间
+    uint64 edit_timestamp = 12; // 最后编辑时间
   }
 }
 // #endregion ListMsgResponse
@@ -728,7 +740,7 @@ message ListMemberResponse {
       bool is_vip = 6;
     }
     int32 permission_level = 3; // 权限等级, 群主 100 管理员 2 普通用户无/0
-    int64 gag_time = 4; // 禁言时间戳
+    int64 gag_timestamp = 4; // 禁言时间戳
     bool is_gag = 5; // 是否被禁言
   }
   int32 total = 3; // 总数
@@ -788,7 +800,7 @@ message BotListResponse {
     string name = 4;
     string content = 5; // 内容
     int32 menu_type = 6; // 按钮类型: 1-普通按钮 2-选中按钮 3-下拉选择
-    int64 create_time = 7;
+    int64 create_timestamp = 7;
     // 8,9没找到
     int32 menu_action = 10; // 操作类型
     string select = 99; // 选择的选项,在选择按钮的时候也作为状态,选中为 1,未选中为 0
@@ -916,7 +928,7 @@ message PushMessage {
   uint64 delete_timestamp = 10; // 撤回消息时间,和8差别不大,编辑消息无此项
   string quote_msg_id = 11; // 引用消息ID
   uint64 msg_seq = 12; // 消息序列,在撤回时也是被撤回消息的序列,注意撤回消息存在部分字段缺失
-  uint64 edit_time = 14; // 编辑时间,只有编辑消息有此项
+  uint64 edit_timestamp = 14; // 编辑时间,只有编辑消息有此项
 }
 // #endregion PushMessage
 
