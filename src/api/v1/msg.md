@@ -5,6 +5,21 @@ title: msg
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
 没写请求/响应项目表示不需要相关参数.
 
+::: tip 本页 proto 的共用字段
+
+```protobuf
+// 消息内容
+<!-- @include: @src/full.proto#MsgContent  -->
+
+// 发送者信息
+<!-- @include: @src/full.proto#Sender   -->
+
+// 命令信息
+<!-- @include: @src/full.proto#Cmd   -->
+```
+
+:::
+
 ## 发送信息
 
 POST /v1/msg/send-message

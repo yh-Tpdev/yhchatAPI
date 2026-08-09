@@ -5,6 +5,18 @@ title: group
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
 没写请求/响应项目表示不需要相关参数.
 
+::: tip 本页 proto 共用字段
+
+```protobuf
+// 群聊数据
+<!-- @include: @src/full.proto#GroupData    -->
+
+// 机器人数据
+<!-- @include: @src/full.proto#BotData     --> 
+```
+
+:::
+
 ## 获取群聊信息
 
 ```http request

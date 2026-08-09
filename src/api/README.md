@@ -28,7 +28,21 @@ title: API
 云湖数据床地址需要请求头加上 `Referer: http://myapp.jwznb.com` 才可正常获取内容，否则会403.  
 
 chat_type 聊天对象的类型: 1-用户, 2-群组, 3-机器人  
-content_type 信息类型: 1-文本，2-图片，3-markdown，4-文件，5-表单，6-文章，7-表情，8-html，11-语音，13-语音通话, 14-A2UI  
+对应 proto enum 如下,后续不会单独列出
+
+```protobuf
+<!-- @include: @src/full.proto#ChatType  -->
+```
+
+content_type 信息类型: 1-文本，2-图片，3-markdown，4-文件，5-表单，6-文章，7-表情，8-html，11-语音，13-语音通话, 14-A2UI,对应 proto enum 如下,后续不会单独列出
+
+```protobuf
+// 正常消息的
+<!-- @include: @src/full.proto#ContentType   -->
+
+// 纯文本的
+<!-- @include: @src/full.proto#ContentTypeTextOnly   -->
+```
 
 **请求类型一定要正确不然后端会直接返回 404!**
 

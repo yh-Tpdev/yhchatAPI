@@ -5,6 +5,18 @@ title: bot
 未特别说明情况下请求域名均为 `https://chat-go.jwzhd.com`  
 没写请求/响应项目表示不需要相关参数.
 
+::: tip 本页 proto 的共用字段
+
+```protobuf
+// 机器人看板消息
+<!-- @include: @src/full.proto#BotBoardMessage   -->
+
+// 机器人数据
+<!-- @include: @src/full.proto#BotData   -->
+```
+
+:::
+
 ## 机器人商店banner
 
 POST /v1/bot/banner

@@ -26,6 +26,24 @@ title: chat-ws-go.jwzhd.com
 
 :::
 
+::: tip 本页 proto 的共用内容
+
+```protobuf
+// 命令
+<!-- @include: @src/full.proto#Cmd  -->
+
+// 内容类型
+<!-- @include: @src/full.proto#ContentType  -->
+
+// 消息内容
+<!-- @include: @src/full.proto#MsgContent  -->
+
+// 仅文本的消息内容类型
+<!-- @include: @src/full.proto#ContentTypeTextOnly  -->
+```
+
+:::
+
 ## 登录云湖账号
 
 发送数据
