@@ -17,6 +17,7 @@
 - [v1 API](/api/v1/index.md)
 - [beta](/api/v1/beta.md)
 - [bot](/api/v1/bot.md)
+- [captcha](/api/v1/captcha.md)
 - [chat-background](/api/v1/chat-background.md)
 - [check](/api/v1/check.md)
 - [coin](/api/v1/coin.md)
