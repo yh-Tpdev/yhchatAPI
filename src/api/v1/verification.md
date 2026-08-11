@@ -14,8 +14,10 @@ POST /v1/verification/get-verification-code
 ```JSON
 {
   "mobile": "12312312300", // 手机号
-  "code": "123123", // 人机验证校验码
+  "code": "123123", // 图像验证码校验码
+  "captcha_type": "slide", // 人机验证码类别，默认/不使用此值为图像验证码，slide-滑动验证码
   "id": "123", // 人机验证 ID
+  "x": 123, // 滑动验证码滑块x轴移动量
   "platform": "windows" // 登录平台名称,一般为 windows,web 等可自定义,后端不校验
 }
 ```
