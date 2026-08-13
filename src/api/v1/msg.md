@@ -16,6 +16,9 @@ title: msg
 
 // 命令信息
 <!-- @include: @src/full.proto#Cmd   -->
+
+// 标签信息
+<!-- @include: @src/full.proto#Tag   -->
 ```
 
 :::
