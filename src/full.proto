@@ -31,6 +31,7 @@ enum ContentType {
   form = 5; // 表单
   sticker = 7; // 表情
   html = 8;
+  tip = 9; // 就是设置管理员/上传群文件的那个 tip
   audio = 11; // 语音
   call = 13; // 语音电话
   a2ui = 14;
