@@ -515,7 +515,7 @@ POST /v1/user/gold-coin-increase-decrease-record
     "goldCoinRecord": [
       {
         "id": 193275, // 金币记录 ID
-        "userId": "用户 ID",
+        "userId": "1234567", // 用户ID（恒为此用户的ID，不是其他人的ID）
         "typ": 8, // 类型
         "beforeAmount": 55.01, // 之前金币数量
         "afterAmount": 57.01, // 之后的金币数量
