@@ -88,7 +88,7 @@ POST /v1/sticker/detail
             "sort": 0, // 分类相关?
             "stickerItems": [
                 {
-                    "id": 18951, // 表情ID
+                    "id": 18951, // 表情 ID
                     "name": "汇总部分", // 表情名称
                     "url": "sticker/4599f91519364bcc2be6718c3915d388.jpg", // 表情 URL,前面需加上 https://chat-img.jwznb.com/
                     "stickerPackId": 894, // 所属表情包 ID
@@ -219,3 +219,214 @@ print(response.text)
   "msg": "success"
 }
 ```
+
+## 创建表情包
+
+POST /v1/sticker/create-pack
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```json
+{
+  "name": "66665" // 欲创建表情包名称
+}
+```
+
+响应体:
+
+```json
+{
+  "code": 1,
+  "data": {
+    "id": 2676 // 创建表情包的 ID
+  },
+  "msg": "success"
+}
+```
+
+***
+
+::: tip
+
+非表情包创建者操作需要表情包创建者权限的 API 的报错如下:
+
+```json
+{
+  "code": -1,
+  "msg": "仅表情包创建者可<action>"
+}
+```
+
+表情包不存在:
+
+```json
+{
+  "code": -1,
+  "msg": "表情包不存在"
+}
+```
+
+表情不存在:
+
+```json
+{
+  "code": -1,
+  "msg": "表情不存在"
+}
+```
+
+:::
+
+## 重命名表情包
+
+POST /v1/sticker/rename-pack
+
+请求头:
+
+| 名称  | 必须 | 备注         |
+| ----- | ---- | ------------ |
+| token | 是   | 表情包创建者 |
+
+请求体:
+
+```json
+{
+  "id": 2652, // 表情包 ID
+  "name": "《战双帕弥什》是活泼可爱治愈的合家欢游戏" // 重命名后的名称
+}
+```
+
+响应体:
+
+```json
+{
+  "code": 1,
+  "msg": "success"
+}
+```
+
+## 添加表情至表情包
+
+POST /v1/sticker/add-sticker
+
+请求头:
+
+| 名称  | 必须 | 备注         |
+| ----- | ---- | ------------ |
+| token | 是   | 表情包创建者 |
+
+请求体:
+
+```json
+{
+  "name": "1730094050", // 表情名称
+  "url": "sticker/abe73b4671e44aa984ab27ba3dda5951.png", // 表情 URL(和七牛云返回的 key 一致)
+  "stickerPackId": 2676 // 所属表情包 ID
+}
+```
+
+响应体:
+
+```json
+{
+  "code": 1,
+  "msg": "success"
+}
+```
+
+## 删除表情包
+
+POST /v1/sticker/delete-pack
+
+请求头:
+
+| 名称  | 必须 | 备注         |
+| ----- | ---- | ------------ |
+| token | 是   | 表情包创建者 |
+
+请求体:
+
+```json
+{
+  "id": 2676 // 欲删除的表情包的 ID
+}
+```
+
+响应体:
+
+```json
+{
+  "code": 1,
+  "msg": "success"
+}
+```
+
+## 导入表情包
+
+POST /v1/sticker/import-pack
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```json
+{
+  "name": "跳过开机引导（先双清再刷入）", // 表情包名称
+  "fileKey": "stickerZip/7f4ac069a32e8482e6e74c19a42b6e95.zip" // 文件 URL(和七牛 key 一样)
+}
+```
+
+响应体:
+
+::: tabs
+
+@tab 存在异常文件
+
+```json
+{
+  "code": -1,
+  "msg": "导入失败。第2个文件格式不正确，支持JPG、JPEG、PNG、GIF、WEBP、TGS；第3个文件格式不正确，支持JPG、JPEG、PNG、GIF、WEBP、TGS；第4个文件格式不正确，支持JPG、JPEG、PNG、GIF、WEBP、TGS；第8个文件格式不正确，支持JPG、JPEG、PNG、GIF、WEBP、TGS；第13个文件格式不正确，支持JPG、JPEG、PNG、GIF、WEBP、TGS；第14个文件格式不正确，支持JPG、JPEG、PNG、GIF、WEBP、TGS；第15个文件格式不正确，支持JPG、JPEG、PNG、GIF、WEBP、TGS；"
+}
+```
+
+:::
+
+## 重命名表情包里的表情
+
+POST /v1/sticker/rename-sticker
+
+请求头:
+
+| 名称  | 必须 | 备注         |
+| ----- | ---- | ------------ |
+| token | 是   | 表情包创建者 |
+
+请求体:
+
+```json
+{
+  "id": 47190, // 表情 ID
+  "name": "173009405055" // 重命名后的名称
+}
+```
+
+响应体:
+
+```json
+{
+  "code": 1,
+  "msg": "success"
+}
+```
+
+\~~删除表情 API 还没写~~
