@@ -57,7 +57,7 @@ GET `https://api.qiniu.com/v4/query?ak=<access_key>&bucket=<bucket>`
 
 :::
 
-## 获取图片上传token
+## 获取图片上传 token
 
 GET /v1/misc/qiniu-token
 
@@ -79,7 +79,7 @@ GET /v1/misc/qiniu-token
 }
 ```
 
-## 获取音频上传token
+## 获取音频上传 token
 
 GET /v1/misc/qiniu-token-audio
 
@@ -101,7 +101,13 @@ GET /v1/misc/qiniu-token-audio
 }
 ```
 
-## 获取文件上传token
+## 获取文件上传 token
+
+::: tip
+
+通过 ZIP 压缩文件导入表情包也是走这个接口上传文件的.需要手动指定 key 的前缀为 `stickerZip/114514.zip"` ~~当然不遵守也可以.不要问为什么这样我也不知道.~~
+
+:::
 
 GET /v1/misc/qiniu-token2
 
@@ -145,7 +151,7 @@ GET /v1/misc/qiniu-token-video
 }
 ```
 
-## 获取群文件上传token
+## 获取群文件上传 token
 
 GET /v1/misc/qiniu-token-group-disk
 
@@ -166,6 +172,40 @@ GET /v1/misc/qiniu-token-group-disk
   "msg": "success"
 }
 ```
+
+## 获取表情上传 token
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应体:
+
+```json
+{
+  "code": 1,
+  "data": {
+    "token": "123:123" // 表情上传 token
+  },
+  "msg": "success"
+}
+```
+
+::: info
+
+七牛云返回的 key 永远带有 `sticker/` 前缀.
+
+```json
+{
+  "key":"sticker/abe73b4671e44aa984ab27ba3dda5951.png",
+  "hash":"FkSXEmuHphV9We5U1ChAFX7qxfLb",
+  "fsize":2063660
+}
+```
+
+:::
 
 ## 获取云端设置
 
