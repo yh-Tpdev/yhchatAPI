@@ -12,7 +12,7 @@ title: group
 <!-- @include: @src/full.proto#GroupData    -->
 
 // 机器人数据
-<!-- @include: @src/full.proto#BotData     --> 
+<!-- @include: @src/full.proto#BotData     -->
 ```
 
 :::
@@ -239,6 +239,7 @@ POST /v1/group/remove-member
   "code":-1,
   "msg":"您无权操作此群聊，请联系群主或者管理员"
 }
+```
 
 @tab 无效用户 ID/不在群聊
 
@@ -998,3 +999,122 @@ POST /v1/group/switch
   "msg": "success"
 }
 ```
+
+## 连接群聊 SSE
+
+GET /v1/group/event-sse?groupId=`<groupId>`
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+响应头:
+
+|               名称               |                                                           内容                                                           |               备注               |
+| :------------------------------: | :----------------------------------------------------------------------------------------------------------------------: | :------------------------------: |
+|           Content-Type           |                                                    text/event-stream                                                     |                无                |
+|          Cache-Control           |                                                         no-cache                                                         |                无                |
+|        Transfer-Encoding         |                                                         chunked                                                          |                无                |
+| Access-Control-Allow-Credentials |                                                           true                                                           | 允许跨域请求携带凭证（如Cookie） |
+|   Access-Control-Allow-Headers   |                                                            \*                                                            |   允许跨域请求携带所有自定义头   |
+|   Access-Control-Allow-Methods   |                                                    POST, GET, OPTIONS                                                    |    允许跨域请求使用的HTTP方法    |
+|   Access-Control-Allow-Origin    |                                                            \*                                                            |    允许所有域名跨域访问该资源    |
+|  Access-Control-Expose-Headers   | Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Cache-Control, Content-Language, Content-Type | 允许前端JavaScript读取这些响应头 |
+
+响应体:
+
+::: tip 此处 data 部分换行只是为了备注方便,实际使用必须遵循 SSE 标准.
+:::
+
+```http
+event: snapshot.shopEntry // 商城入口事件
+data: {
+  "entryPosition":0 // 商城入口位置: 0-关, 1-功能面板, 2-悬浮
+}
+
+event: snapshot.llmParams
+data: {"list":[]}
+
+event: snapshot.liveRoom // 直播房间
+data: {
+  "rooms": [
+    {
+      "userId": "7181558", // 发起者 ID
+      "roomId": "8f5eeb6a82a64e9bb397793966cbea93", // 房间 ID
+      "chatId": "979377289", // 所属会话 ID
+      "title": "", // 标题
+      "chatType": 2, // 会话类型
+      "status": 0, // 状态
+      "createBy": "7181558", // 创建者
+      "createTime": 1787824247, // 创建时间
+      "nickname": "足立零", // 昵称
+      "count": 1, // 人数
+      "avatarUrl": "https://chat-img.jwznb.com/6f14561ea45329e34bde805afb9e7373.jpg" // 发起人头像 URL
+    }
+  ]
+}
+```
+
+## 获取商城入口状态
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```json
+{
+  "groupId": "118738312" // 群聊 ID
+}
+```
+
+响应体:
+
+```json
+{
+  "code": 1,
+  "data": {
+    "entryPosition": 0 // 商城入口位置: 0-关, 1-功能面板, 2-悬浮
+  },
+  "msg": "success"
+}
+```
+
+## 编辑商城入口状态
+
+POST /v1/group/edit-shop-entry
+
+请求头:
+
+| 名称  | 必须 | 备注 |
+| ----- | ---- | ---- |
+| token | 是   | 无   |
+
+请求体:
+
+```json
+{
+  "groupId": "118738312", // 群聊 ID
+  "entryPosition": 1 // 商城入口位置: 0-关, 1-功能面板, 2-悬浮
+}
+```
+
+响应体:
+
+::: tabs
+
+@tab 未加入云湖伙伴计划
+
+```json
+{
+  "code": -1,
+  "msg": "您暂未加入云湖伙伴计划"
+}
+```
+
+:::
