@@ -434,5 +434,29 @@ POST /v1/sticker/rename-sticker
 }
 ```
 
+## 删除表情
 
-~~删除表情 API 还没写~~
+POST /v1/sticker/remove-sticker
+
+请求头:
+
+| 名称  | 必须 | 备注       |
+| ----- | ---- | ---------- |
+| token | 是   | 表情创建者 |
+
+请求体:
+
+```json
+{
+  "id": 47323 // 欲删除的表情 ID
+}
+```
+
+响应体:
+
+```json
+{
+  "code": 1,
+  "msg": "success"
+}
+```
