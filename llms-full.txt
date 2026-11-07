@@ -10547,6 +10547,8 @@ url: /contribution_guide.md
 
 5. commit 提交内容必须有意义.
 
+6. 路由一般用 `<前缀>/v<N>/<第一级 URL>`,例如说 `https://chat-go.jwzhd.com/v1/123/456/789` 则对应路由为 `/v1/123.html`.部分 API 有特殊的前缀.
+
 ## 如何贡献
 
 1. Fork [本仓库](https://github.com/yh-Tpdev/yhchatAPI)到自己账号名下.
